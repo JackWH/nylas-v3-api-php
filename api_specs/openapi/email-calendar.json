@@ -17,6 +17,7 @@
         "/v3/calendars/availability":                                 {
             "post": {
                 "description": "Get Availability for a given account / accounts. All participant emails must be associated with a valid Nylas Grant, and _should_ be unique within their application, including [Virtual Calendar identifiers](/docs/developer-guide/v3-authentication/virtual-calendars/#create-a-new-grant-for-the-virtual-calendar).",
+                "operationId": "getAvailability",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -249,6 +250,7 @@
         "/v3/grants/{grantId}/calendars":                             {
             "get": {
                 "description": "Returns all calendars.",
+                "operationId": "returnAllCalendars",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -365,6 +367,7 @@
         "/v3/grants/{grant_id}/attachments/{attachment_id}":          {
             "get": {
                 "description": "Returns an attachment by ID.",
+                "operationId": "returnMetadataOfAnAttachment",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -494,6 +497,7 @@
         "/v3/grants/{grant_id}/attachments/{attachment_id}/download": {
             "get": {
                 "description": "Returns an attachment by ID.",
+                "operationId": "downloadAnAttachment",
                 "parameters":  [
                     {
                         "example": "application/octet-stream",
@@ -620,6 +624,7 @@
         "/v3/grants/{grant_id}/calendars":                            {
             "post": {
                 "description": "Create a calendar.",
+                "operationId": "createACalendar",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -756,6 +761,7 @@
         "/v3/grants/{grant_id}/calendars/free-busy":                  {
             "post": {
                 "description": "Get the free/busy schedule for a list of email addresses. The Grant ID included in the request must have access to view the provided emails' free/busy data (typically, this is configured by the provider). All email addresses must use the same provider (Google, Microsoft, etc).",
+                "operationId": "getFreeBusySchedule",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -930,6 +936,7 @@
         "/v3/grants/{grant_id}/calendars/{calendar_id}":              {
             "delete": {
                 "description": "Deletes an existing calendar identified by the specific calendar ID. You cannot delete a calendar where `is_primary: true`.",
+                "operationId": "deleteACalendar",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1047,6 +1054,7 @@
             },
             "get":    {
                 "description": "Returns a calendar by ID.",
+                "operationId": "returnACalendar",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1161,6 +1169,7 @@
             },
             "put":    {
                 "description": "Updates an existing calendar by the specific calendar ID.",
+                "operationId": "updateACalendar",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1309,6 +1318,7 @@
         "/v3/grants/{grant_id}/drafts":                               {
             "get":  {
                 "description": "Returns all Drafts.",
+                "operationId": "returnAllDrafts",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1425,6 +1435,7 @@
             },
             "post": {
                 "description": "You can use the Drafts v3 API to create a draft email message. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information.",
+                "operationId": "createADraft",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1575,6 +1586,7 @@
         "/v3/grants/{grant_id}/drafts/{draft_id}":                    {
             "delete": {
                 "description": "Permanently deletes a Draft. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information.",
+                "operationId": "deleteADraft",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1692,6 +1704,7 @@
             },
             "get":    {
                 "description": "Returns a Draft by ID.",
+                "operationId": "returnADraft",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1810,6 +1823,7 @@
             },
             "post":   {
                 "description": "Sends a Draft using the specified ID. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information.",
+                "operationId": "sendADraft",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1928,6 +1942,7 @@
             },
             "put":    {
                 "description": "You can use the Drafts v3 API to update a draft email message using its ID.",
+                "operationId": "updateADraft",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2068,6 +2083,7 @@
         "/v3/grants/{grant_id}/events":                               {
             "get":  {
                 "description": "Returns all events.",
+                "operationId": "returnAllEvents",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2192,6 +2208,7 @@
             },
             "post": {
                 "description": "Creates an event.\n",
+                "operationId": "createAnEvent",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2385,6 +2402,7 @@
         "/v3/grants/{grant_id}/events/{event_id}":                    {
             "delete": {
                 "description": "Deletes an event. For Google, deleted events can still be read for some period of time via the `show_cancelled` query parameter. Microsoft deletes happen immediately.",
+                "operationId": "deleteAnEvent",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2520,6 +2538,7 @@
             },
             "get":    {
                 "description": "Returns an event by ID.",
+                "operationId": "returnAnEvent",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2647,6 +2666,7 @@
             },
             "put":    {
                 "description": "Updates an event, conference, or metadata.\n\n\n## Ready Only and Recurring Events\n\nUpdating and deleting an event is managed in a similar fashion to other endpoints with the restriction that `read_only` events cannot be updated and events cannot be updated or deleted from a `read_only` calendar.",
+                "operationId": "updateAnEvent",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2854,6 +2874,7 @@
         "/v3/grants/{grant_id}/events/{event_id}/send-rsvp":          {
             "post": {
                 "description": "The Send RSVP endpoint allows users to respond to events they have been added to as an attendee.  You cannot directly update events as an invitee, since you are not the owner/organizer.",
+                "operationId": "sendRSVP",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3002,6 +3023,7 @@
         "/v3/grants/{grant_id}/folders":                              {
             "get":  {
                 "description": "Returns all folders.",
+                "operationId": "returnAllFolders",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3109,6 +3131,7 @@
             },
             "post": {
                 "description": "Creates a folder.\n",
+                "operationId": "createAFolder",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3241,6 +3264,7 @@
         "/v3/grants/{grant_id}/folders/{folder_id}":                  {
             "delete": {
                 "description": "Deletes a folder.",
+                "operationId": "deleteAFolder",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3358,6 +3382,7 @@
             },
             "get":    {
                 "description": "Returns a folder by ID.",
+                "operationId": "returnAFolder",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3476,6 +3501,7 @@
             },
             "put":    {
                 "description": "Updates an existing folder.",
+                "operationId": "updateAFolder",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3616,6 +3642,7 @@
         "/v3/grants/{grant_id}/messages":                             {
             "get": {
                 "description": "Returns all messages.",
+                "operationId": "returnAllMessages",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3734,6 +3761,7 @@
         "/v3/grants/{grant_id}/messages/clean":                       {
             "put": {
                 "description": "This endpoint removes extra information from email messages. Instead of needing to parse through images, attachments, and HTML pages,  Nylas removes the information you don't need and returns what you _do_ need.\n**Note**: Nylas removes all the extra information, such as `<script>` and `<style>` tags, regardless of the configuration.",
+                "operationId": "cleanEmailMessages",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3929,6 +3957,7 @@
         "/v3/grants/{grant_id}/messages/schedules":                   {
             "get": {
                 "description": "This API returns the messages that you have scheduled. It returns both messages that have been, sent and messages that are still waiting to be sent.",
+                "operationId": "retrieveYourScheduledMessages",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -4000,6 +4029,7 @@
         "/v3/grants/{grant_id}/messages/schedules/{scheduleId}":      {
             "delete": {
                 "description": "This endpoint prevents a scheduled message that has not yet been sent from being sent. You can only use this endpoint before the message has reached its `send_at` time. You cannot use this endpoint to un-send a message.",
+                "operationId": "stopAScheduledMessage",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -4091,6 +4121,7 @@
             },
             "get":    {
                 "description": "This API returns a scheduled message. It returns both messages that have been sent, and messages that have not yet been sent.",
+                "operationId": "retrieveAScheduledMessage",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -4186,6 +4217,7 @@
         "/v3/grants/{grant_id}/messages/send":                        {
             "post": {
                 "description": "You can use the Send v3 API to send a message now, or schedule it to send later. To\nsend a message now, omit the `send_at` field. To schedule a message, set the `send_at`\nfield to the epoch time when you want to send the message. See the [Messages documentation](/docs/api/v3-beta/ecc/#tag--Messages) for more information.\n",
+                "operationId": "sendAMessage",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -4575,6 +4607,7 @@
         "/v3/grants/{grant_id}/messages/smart-compose":               {
             "post": {
                 "description": "Generates a message based on a prompt.",
+                "operationId": "composeAMessage",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -4772,6 +4805,7 @@
         "/v3/grants/{grant_id}/messages/{message_id}":                {
             "delete": {
                 "description": "Nylas does not currently support hard delete but instead we move the message to the trash folder (soft delete).",
+                "operationId": "deleteAMessage",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -4889,6 +4923,7 @@
             },
             "get":    {
                 "description": "Returns a message by ID.",
+                "operationId": "returnAMessage",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -5016,6 +5051,7 @@
             },
             "put":    {
                 "description": "Updates a message.",
+                "operationId": "updateAMessage",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -5161,6 +5197,7 @@
         "/v3/grants/{grant_id}/messages/{message_id}/smart-compose":  {
             "post": {
                 "description": "Generates a reply to a message based on a prompt.",
+                "operationId": "composeAMessageReply",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -5368,6 +5405,7 @@
         "/v3/grants/{grant_id}/resources":                            {
             "get": {
                 "description": "Returns all room resources.",
+                "operationId": "returnAllRoomResources",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -5545,6 +5583,7 @@
         "/v3/grants/{grant_id}/threads":                              {
             "get": {
                 "description": "Returns all threads. Not available for IMAP.",
+                "operationId": "returnAllThreads",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -5663,6 +5702,7 @@
         "/v3/grants/{grant_id}/threads/{thread_id}":                  {
             "delete": {
                 "description": "Moves the specified thread to the trash. This is considered a \"soft delete\" because the call does not empty the trash. Any messages that belong to the thread are also moved to the trash. Not available for IMAP.",
+                "operationId": "deleteAThread",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -5780,6 +5820,7 @@
             },
             "get":    {
                 "description": "Returns a thread by ID (not available for IMAP).",
+                "operationId": "returnAThread",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -5898,6 +5939,7 @@
             },
             "put":    {
                 "description": "Updates a thread (not available for IMAP).",
+                "operationId": "updateAThread",
                 "parameters":  [
                     {
                         "example": "application/json",

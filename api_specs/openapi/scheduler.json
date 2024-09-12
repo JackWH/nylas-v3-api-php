@@ -17,6 +17,7 @@
         "/v3/grants/{grant_id}/scheduling/configurations":                    {
             "get":  {
                 "description": "Returns all Configuration objects.",
+                "operationId": "returnAllConfigurationObjects",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -192,6 +193,7 @@
             },
             "post": {
                 "description": "Creates a Configuration object that you use to define the settings and preferences for a scheduling session.",
+                "operationId": "createAConfigurationObject",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -490,6 +492,7 @@
         "/v3/grants/{grant_id}/scheduling/configurations/{configuration_id}": {
             "delete": {
                 "description": "Deletes a specific Configuration object. You cannot delete a Configuration object that has active sessions.",
+                "operationId": "deleteAConfigurationObject",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -682,6 +685,7 @@
             },
             "get":    {
                 "description": "Returns a specific Configuration object.",
+                "operationId": "returnAConfigurationObject",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -958,6 +962,7 @@
             },
             "put":    {
                 "description": "Updates a specific Configuration object.",
+                "operationId": "updateAConfigurationObject",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1420,6 +1425,7 @@
         "/v3/scheduling/availability":                                        {
             "get": {
                 "description": "Gets available time slots within the specified time range, using the rules defined in the Configuration object.</br></br>   Nylas validates the provided session ID and uses it to retrieve the related Configuration object. If you created a [public configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't need to include the `Authorization` request header with a session ID, but you must pass the Configuration object ID as a query parameter.",
+                "operationId": "getAvailability",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1631,6 +1637,7 @@
         "/v3/scheduling/bookings":                                            {
             "post": {
                 "description": "Books an event with the participants listed in the session's Configuration object, using the details from the Configuration object. The `start_time` and `end_time` must correspond to a valid time slot returned by the [Scheduling  Availability endpoint](/docs/api/v3/scheduler/#get-/v3/scheduling/availability) using the same configuration.</br></br>\n Nylas validates the session ID and uses it to retrieve the related Configuration object. If you created a [public configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't need to include the `Authorization` request header with a session ID, but you must pass the Configuration object ID as a query parameter.",
+                "operationId": "bookAnEvent",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1865,6 +1872,7 @@
         "/v3/scheduling/bookings/{booking_id}":                               {
             "delete": {
                 "description": "Deletes an specific booking. Nylas also cancels the event linked to the booking on the provider.</br></br>   Nylas validates the provided session ID and uses it to retrieve the related Configuration object. If you created a [public configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't need to include the `Authorization` request header with a session ID, but you must pass the Configuration object ID as a query parameter.",
+                "operationId": "deleteABooking",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2064,6 +2072,7 @@
             },
             "get":    {
                 "description": "Returns a specific booking object.</br></br>   Nylas validates the provided session ID and uses it to retrieve the related Configuration object. If you created a [public configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't need to include the `Authorization` request header with a session ID, but you must pass the Configuration object ID as a query parameter.",
+                "operationId": "returnABookingObject",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2256,6 +2265,7 @@
             },
             "patch":  {
                 "description": "Reschedules a specific booking. Nylas also updates the event linked to the booking on the provider.</br></br>   Nylas validates the provided session ID and uses it to retrieve the related Configuration object. If you created a [public configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't need to include the `Authorization` request header with a session ID, but you must pass the Configuration object ID as a query parameter.",
+                "operationId": "rescheduleABooking",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2468,6 +2478,7 @@
             },
             "put":    {
                 "description": "Confirms or cancels a pending booking. Nylas also updates the event linked to the booking on the provider.</br></br>   Nylas validates the provided session ID and uses it to retrieve the related Configuration object. If you created a [public configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't need to include the `Authorization` request header with a session ID, but you must pass the Configuration object ID as a query parameter.",
+                "operationId": "confirmABooking",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2691,6 +2702,7 @@
         "/v3/scheduling/sessions":                                            {
             "post": {
                 "description": "Creates a new short-lived session that you can pass to the Scheduling Component to enforce end-user authentication. Your request must include the ID of an existing Configuration object.",
+                "operationId": "createASession",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2862,6 +2874,7 @@
         "/v3/scheduling/sessions/{session_id}":                               {
             "delete": {
                 "description": "Deletes a specific session.",
+                "operationId": "deleteASession",
                 "parameters":  [
                     {
                         "example": "application/json",

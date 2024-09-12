@@ -21,6 +21,7 @@
         "/v3/applications":                             {
             "get":   {
                 "description": "Gets the application object",
+                "operationId": "getApplication",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -164,6 +165,7 @@
             },
             "patch": {
                 "description": "Updates an application. Selects the application to update based on the `client_id` associated with the API key.\n<div style=\"padding:24px; background-color: #FFFEE6; border: 1px solid #9E9600; color: #161717\"><b>v3 Beta Note</b>: This API endpoint will be removed in the future when application settings are available in the v3 Dashboard.</div>\n",
+                "operationId": "updateApplication",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -398,6 +400,7 @@
         "/v3/applications/redirect-uris":               {
             "get":  {
                 "description": "Get an application's callback URIs",
+                "operationId": "getAnApplicationsCallbackURIs",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -529,6 +532,7 @@
             },
             "post": {
                 "description": "Add new Callback URI to an existing Application",
+                "operationId": "addCallbackURIToApplication",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -668,6 +672,7 @@
         "/v3/applications/redirect-uris/{callback_id}": {
             "delete": {
                 "description": "Delete existing Callback URI based on it's ID",
+                "operationId": "deleteACallbackURI",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -773,6 +778,7 @@
             },
             "get":    {
                 "description": "Gets a Callback URI based on ID",
+                "operationId": "getCallbackURI",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -891,6 +897,7 @@
             },
             "patch":  {
                 "description": "Update a Callback URI based on ID",
+                "operationId": "updateACallbackURI",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1064,6 +1071,7 @@
         "/v3/channels/pubsub":                          {
             "get":  {
                 "description": "Get the PubSub channels for an application.\n",
+                "operationId": "getPubSubChannelsForAnApplication",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1164,6 +1172,7 @@
             },
             "post": {
                 "description": "Create a PubSub channel in the specified application.\n",
+                "operationId": "createAPubSubChannel",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1279,6 +1288,7 @@
         "/v3/channels/pubsub/{id}":                     {
             "delete": {
                 "description": "Delete a specific PubSub channel from a specific Nylas application.",
+                "operationId": "deleteASpecificPubSubChannel",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1362,6 +1372,7 @@
             },
             "get":    {
                 "description": "Get a specific PubSub channel from a specific Nylas application by id.",
+                "operationId": "getASpecificPubSubChannelById",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1459,6 +1470,7 @@
             },
             "put":    {
                 "description": "Update a specific PubSub channel from a specific Nylas application.",
+                "operationId": "updateASpecificPubSubChannel",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1588,6 +1600,7 @@
         "/v3/connect/auth":                             {
             "get": {
                 "description": "The initial OAuth 2.0 authorization request which supports the authorization code flow in addition to optional PKCE for client side only applications. Learn more:\n- [Hosted OAuth with Access token](/docs/developer-guide/v3-authentication/hosted-oauth-accesstoken/)\n- [Hosted OAuth with Access token _and_ PKCE](/docs/developer-guide/v3-authentication/hosted-oauth-accesstoken/#creating-grants-with-authentication-oauth-20-pkce)\n",
+                "operationId": "hostedOAuthAuthorizationRequest",
                 "parameters":  [
                     {
                         "description": "(Required) Nylas application client_id (or application id)",
@@ -1671,6 +1684,7 @@
         "/v3/connect/custom":                           {
             "post": {
                 "description": "Manually create a grant using a custom authentication flow.\nIf you are handling the OAuth flow in your own application or want to migrate existing users,\nCustom Authentication allows you to provide the user `refresh_token` in order to create a grant.\n\nIf a user previously authenticated with your Nylas application using the same email account, Nylas detects this and re-authenticates the existing grant instead of creating a new one. The API response contains the existing `grant_id` for the user.\n",
+                "operationId": "customAuthentication",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1807,6 +1821,7 @@
         "/v3/connect/revoke":                           {
             "post": {
                 "description": "Revoke a Nylas OAuth access token. Pass the token to be revoked as a query parameter.\nIf you revoke the Nylas OAuth token, it does not revoke the grant or the associated provider token that Nylas uses internally. This means that an end-user can reauthenticate to get a new access token for the existing grant, so the `grant_id` does not change.\nIf you revoke a Nylas access token, Nylas also revokes all child tokens and the parent `refresh_token` attached to the access token.\n",
+                "operationId": "hostedOAuthRevokeOAuthToken",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1880,6 +1895,7 @@
         "/v3/connect/token":                            {
             "post": {
                 "description": "The standard OAuth token endpoint for use with Hosted authentication.\n- `authorization_code`: Exchange `code` returned from OAuth 2.0 authorization with tokens (`access_token` & `refresh_token`).\n- `refresh_token`: Issue a new `access_token` using `refresh_token`\nLearn More:\n  - [Hosted authentication with OAuth and access token](/docs/developer-guide/v3-authentication/hosted-oauth-accesstoken/)\n  - [Hosted OAuth with access token and PKCE](/docs/developer-guide/v3-authentication/hosted-oauth-accesstoken/#creating-grants-with-authentication-oauth-20-pkce)\n\nNote that if you set `grant_type` to `refresh_token` you must include the `client_secret`. The `client_secret` is optional only if you are using PKCE and it's the initial one-time code exchange step (`grant_type` is set to `authorization_code`).\n",
+                "operationId": "hostedOAuthTokenExchange",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -1976,6 +1992,7 @@
         "/v3/connect/tokeninfo":                        {
             "get": {
                 "description": "Get info about a specific token based on the identifier you include. Use _either_ the ID Token or Access Token.</br></br>**Note**: Because Nylas uses the schema outlined in [RFC 9068](https://datatracker.ietf.org/doc/html/rfc9068#name-requesting-a-jwt-access-tok) to ensure that it is compatible with all OAuth libraries in all languages, the format for this endpoint is different from the other OAuth endpoints.\n",
+                "operationId": "tokenInfo",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2068,6 +2085,7 @@
         "/v3/connectors":                               {
             "get":  {
                 "description": "Lists the connectors in your Nylas application",
+                "operationId": "listConnectors",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2185,6 +2203,7 @@
             },
             "post": {
                 "description": "Create a connector in your Nylas application. Connectors are how your Nylas application stores information needed to connect to external services. Creating a connector is the first step in setting up authentication for your project.\n<!-- Customer Developer onboarding setup up OAuth strategy with ClientID/Secrets.-->\n",
+                "operationId": "createAConnector",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2321,6 +2340,7 @@
         "/v3/connectors/{provider}":                    {
             "get":  {
                 "description": "Lists the connectors in your Nylas application",
+                "operationId": "listConnectorsByProvider",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2447,6 +2467,7 @@
             },
             "post": {
                 "description": "Create a connector in your Nylas application. Connectors are how your Nylas application stores information needed to connect to external services. Creating a connector is the first step in setting up authentication for your project.\n<!-- Customer Developer onboarding setup up OAuth strategy with ClientID/Secrets.-->\n",
+                "operationId": "createAConnectorForProvider",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2591,6 +2612,7 @@
         "/v3/connectors/{provider}/creds":              {
             "get":  {
                 "description": "Lists credentials for given provider",
+                "operationId": "listCredentials",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2714,6 +2736,7 @@
             },
             "post": {
                 "description": "Manually create a new credential record.\n",
+                "operationId": "createCredential",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2854,6 +2877,7 @@
         "/v3/connectors/{provider}/creds/{id}":         {
             "delete": {
                 "description": "Delete credential by specified ID",
+                "operationId": "deleteCredentialByID",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -2971,6 +2995,7 @@
             },
             "get":    {
                 "description": "Get credential by specified ID",
+                "operationId": "getCredentialByID",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3094,6 +3119,7 @@
             },
             "patch":  {
                 "description": "Patch credential by specified ID",
+                "operationId": "updateCredentialByID",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3243,6 +3269,7 @@
         "/v3/grants":                                   {
             "get": {
                 "description": "Lists grants for Connector",
+                "operationId": "listGrants",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3376,6 +3403,7 @@
         "/v3/grants/me":                                {
             "get": {
                 "description": "Gets a grant using current access token",
+                "operationId": "getCurrentGrant",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3490,6 +3518,7 @@
         "/v3/grants/{grantId}":                         {
             "delete": {
                 "description": "Delete existing grant based on provided ID",
+                "operationId": "deleteGrant",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3597,6 +3626,7 @@
             },
             "get":    {
                 "description": "Gets a grant with the provided ID",
+                "operationId": "getAGrant",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3719,6 +3749,7 @@
             },
             "patch":  {
                 "description": "Modify existing grant with partial update. Only fields that are included in the payload will be updated.",
+                "operationId": "updateGrant",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3893,6 +3924,7 @@
         "/v3/providers/detect":                         {
             "post": {
                 "description": "Returns detected provider if it is found",
+                "operationId": "detectProvider",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -3990,6 +4022,7 @@
         "/v3/webhooks":                                 {
             "get":  {
                 "description": "Get a list of all webhook destinations for an application id.",
+                "operationId": "getDestinationsForAnApplication",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -4090,6 +4123,7 @@
             },
             "post": {
                 "description": "Create a new Webhook Destination with a callback URL and a set of trigger types to send to the URL.  <br> <i> **Note**: You should limit how many webhook destinations you have for each trigger type. When Nylas retries a webhook, the retry goes to all of the destinations for that trigger type, and can result in a lot of messages. Some webhook testing tools rate limit or block you if your endpoint generates too much traffic. Nylas blocks ngrok connections in v3 for this reason </i>\n",
+                "operationId": "createAWebhookDestination",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -4206,6 +4240,7 @@
         "/v3/webhooks/mock-payload":                    {
             "post": {
                 "description": "The webhook payload that Nylas sends for the corresponding trigger type",
+                "operationId": "getMockWebhookPayload",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -4277,6 +4312,7 @@
         "/v3/webhooks/rotate-secret/{id}":              {
             "post": {
                 "description": "Update the webhook secret value for a destination. The previous value will immediately stop being used and the new value will take over.",
+                "operationId": "rotateAWebhookSecret",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -4374,6 +4410,7 @@
         "/v3/webhooks/send-test-event":                 {
             "post": {
                 "description": "The mock webhook feature sends sample events so you can test your webhook destinations or receivers. Webhooks with mock payloads are sent to the callback URL you provide.\nThe secret used will be \"mock-webhook-secret\"",
+                "operationId": "sendTestEvent",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -4443,6 +4480,7 @@
         "/v3/webhooks/{id}":                            {
             "delete": {
                 "description": "Delete a webhook destination record.",
+                "operationId": "deleteAWebhookDestination",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -4526,6 +4564,7 @@
             },
             "get":    {
                 "description": "Get the webhook destinations for an application ID by webhook ID",
+                "operationId": "getTheDestinationsForAnApplicationByWebhookID",
                 "parameters":  [
                     {
                         "example": "application/json",
@@ -4623,6 +4662,7 @@
             },
             "put":    {
                 "description": "Update the values in a webhook destination.  <br> <i> **Note**: You only need to specify fields that need to change when you call this endpoint. Empty fields in the request do not overwrite existing fields. </i> <br> <i> **Note**: You should limit how many webhook destinations you have for each trigger type. When Nylas retries a webhook, the retry goes to all of the destinations for that trigger type, and can result in a lot of messages. Some webhook testing tools rate limit or block you if your endpoint generates too much traffic. Nylas blocks ngrok connections in v3 for this reason.</i>\n",
+                "operationId": "updateAWebhookDestination",
                 "parameters":  [
                     {
                         "example": "application/json",
