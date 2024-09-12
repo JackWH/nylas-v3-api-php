@@ -71,13 +71,13 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete' => [
+        'deleteAConfigurationObject' => [
             'application/json',
         ],
-        'v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet' => [
+        'returnAConfigurationObject' => [
             'application/json',
         ],
-        'v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut' => [
+        'updateAConfigurationObject' => [
             'application/json',
         ],
     ];
@@ -129,52 +129,52 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete
+     * Operation deleteAConfigurationObject
      *
      * Delete a Configuration object
      *
      * @param  string $grant_id (Required) ID of the grant to access. Use &#x60;/me/&#x60; to refer to the grant associated with an access token. (required)
      * @param  string $configuration_id (Required) The ID of the specific Configuration object you want to work with. (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAConfigurationObject'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object|object|object
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete(
+    public function deleteAConfigurationObject(
         string $grant_id,
         string $configuration_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAConfigurationObject'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDeleteWithHttpInfo($grant_id, $configuration_id, $accept, $contentType);
+        list($response) = $this->deleteAConfigurationObjectWithHttpInfo($grant_id, $configuration_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDeleteWithHttpInfo
+     * Operation deleteAConfigurationObjectWithHttpInfo
      *
      * Delete a Configuration object
      *
      * @param  string $grant_id (Required) ID of the grant to access. Use &#x60;/me/&#x60; to refer to the grant associated with an access token. (required)
      * @param  string $configuration_id (Required) The ID of the specific Configuration object you want to work with. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAConfigurationObject'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDeleteWithHttpInfo(
+    public function deleteAConfigurationObjectWithHttpInfo(
         string $grant_id,
         string $configuration_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAConfigurationObject'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDeleteRequest($grant_id, $configuration_id, $accept, $contentType);
+        $request = $this->deleteAConfigurationObjectRequest($grant_id, $configuration_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -460,26 +460,26 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDeleteAsync
+     * Operation deleteAConfigurationObjectAsync
      *
      * Delete a Configuration object
      *
      * @param  string $grant_id (Required) ID of the grant to access. Use &#x60;/me/&#x60; to refer to the grant associated with an access token. (required)
      * @param  string $configuration_id (Required) The ID of the specific Configuration object you want to work with. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAConfigurationObject'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDeleteAsync(
+    public function deleteAConfigurationObjectAsync(
         string $grant_id,
         string $configuration_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAConfigurationObject'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDeleteAsyncWithHttpInfo($grant_id, $configuration_id, $accept, $contentType)
+        return $this->deleteAConfigurationObjectAsyncWithHttpInfo($grant_id, $configuration_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -488,27 +488,27 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDeleteAsyncWithHttpInfo
+     * Operation deleteAConfigurationObjectAsyncWithHttpInfo
      *
      * Delete a Configuration object
      *
      * @param  string $grant_id (Required) ID of the grant to access. Use &#x60;/me/&#x60; to refer to the grant associated with an access token. (required)
      * @param  string $configuration_id (Required) The ID of the specific Configuration object you want to work with. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAConfigurationObject'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDeleteAsyncWithHttpInfo(
+    public function deleteAConfigurationObjectAsyncWithHttpInfo(
         $grant_id,
         $configuration_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAConfigurationObject'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDeleteRequest($grant_id, $configuration_id, $accept, $contentType);
+        $request = $this->deleteAConfigurationObjectRequest($grant_id, $configuration_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -547,35 +547,35 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete'
+     * Create request for operation 'deleteAConfigurationObject'
      *
      * @param  string $grant_id (Required) ID of the grant to access. Use &#x60;/me/&#x60; to refer to the grant associated with an access token. (required)
      * @param  string $configuration_id (Required) The ID of the specific Configuration object you want to work with. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAConfigurationObject'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDeleteRequest(
+    public function deleteAConfigurationObjectRequest(
         $grant_id,
         $configuration_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAConfigurationObject'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete'
+                'Missing the required parameter $grant_id when calling deleteAConfigurationObject'
             );
         }
 
         // verify the required parameter 'configuration_id' is set
         if ($configuration_id === null || (is_array($configuration_id) && count($configuration_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $configuration_id when calling v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete'
+                'Missing the required parameter $configuration_id when calling deleteAConfigurationObject'
             );
         }
 
@@ -670,52 +670,52 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet
+     * Operation returnAConfigurationObject
      *
      * Return a Configuration object
      *
      * @param  string $grant_id (Required) ID of the grant to access. Use &#x60;/me/&#x60; to refer to the grant associated with an access token. (required)
      * @param  string $configuration_id (Required) The ID of the specific Configuration object you want to work with. (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAConfigurationObject'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object|object|object
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet(
+    public function returnAConfigurationObject(
         string $grant_id,
         string $configuration_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet'][0]
+        string $contentType = self::contentTypes['returnAConfigurationObject'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGetWithHttpInfo($grant_id, $configuration_id, $accept, $contentType);
+        list($response) = $this->returnAConfigurationObjectWithHttpInfo($grant_id, $configuration_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGetWithHttpInfo
+     * Operation returnAConfigurationObjectWithHttpInfo
      *
      * Return a Configuration object
      *
      * @param  string $grant_id (Required) ID of the grant to access. Use &#x60;/me/&#x60; to refer to the grant associated with an access token. (required)
      * @param  string $configuration_id (Required) The ID of the specific Configuration object you want to work with. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAConfigurationObject'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGetWithHttpInfo(
+    public function returnAConfigurationObjectWithHttpInfo(
         string $grant_id,
         string $configuration_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet'][0]
+        string $contentType = self::contentTypes['returnAConfigurationObject'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGetRequest($grant_id, $configuration_id, $accept, $contentType);
+        $request = $this->returnAConfigurationObjectRequest($grant_id, $configuration_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1001,26 +1001,26 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGetAsync
+     * Operation returnAConfigurationObjectAsync
      *
      * Return a Configuration object
      *
      * @param  string $grant_id (Required) ID of the grant to access. Use &#x60;/me/&#x60; to refer to the grant associated with an access token. (required)
      * @param  string $configuration_id (Required) The ID of the specific Configuration object you want to work with. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAConfigurationObject'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGetAsync(
+    public function returnAConfigurationObjectAsync(
         string $grant_id,
         string $configuration_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet'][0]
+        string $contentType = self::contentTypes['returnAConfigurationObject'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGetAsyncWithHttpInfo($grant_id, $configuration_id, $accept, $contentType)
+        return $this->returnAConfigurationObjectAsyncWithHttpInfo($grant_id, $configuration_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1029,27 +1029,27 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGetAsyncWithHttpInfo
+     * Operation returnAConfigurationObjectAsyncWithHttpInfo
      *
      * Return a Configuration object
      *
      * @param  string $grant_id (Required) ID of the grant to access. Use &#x60;/me/&#x60; to refer to the grant associated with an access token. (required)
      * @param  string $configuration_id (Required) The ID of the specific Configuration object you want to work with. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAConfigurationObject'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGetAsyncWithHttpInfo(
+    public function returnAConfigurationObjectAsyncWithHttpInfo(
         $grant_id,
         $configuration_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet'][0]
+        string $contentType = self::contentTypes['returnAConfigurationObject'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGetRequest($grant_id, $configuration_id, $accept, $contentType);
+        $request = $this->returnAConfigurationObjectRequest($grant_id, $configuration_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1088,35 +1088,35 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet'
+     * Create request for operation 'returnAConfigurationObject'
      *
      * @param  string $grant_id (Required) ID of the grant to access. Use &#x60;/me/&#x60; to refer to the grant associated with an access token. (required)
      * @param  string $configuration_id (Required) The ID of the specific Configuration object you want to work with. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAConfigurationObject'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGetRequest(
+    public function returnAConfigurationObjectRequest(
         $grant_id,
         $configuration_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet'][0]
+        string $contentType = self::contentTypes['returnAConfigurationObject'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet'
+                'Missing the required parameter $grant_id when calling returnAConfigurationObject'
             );
         }
 
         // verify the required parameter 'configuration_id' is set
         if ($configuration_id === null || (is_array($configuration_id) && count($configuration_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $configuration_id when calling v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet'
+                'Missing the required parameter $configuration_id when calling returnAConfigurationObject'
             );
         }
 
@@ -1211,7 +1211,7 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut
+     * Operation updateAConfigurationObject
      *
      * Update a Configuration object
      *
@@ -1220,27 +1220,27 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAConfigurationObject'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object|object|object
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut(
+    public function updateAConfigurationObject(
         string $grant_id,
         string $configuration_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut'][0]
+        string $contentType = self::contentTypes['updateAConfigurationObject'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPutWithHttpInfo($grant_id, $configuration_id, $content_type, $accept, $body, $contentType);
+        list($response) = $this->updateAConfigurationObjectWithHttpInfo($grant_id, $configuration_id, $content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPutWithHttpInfo
+     * Operation updateAConfigurationObjectWithHttpInfo
      *
      * Update a Configuration object
      *
@@ -1249,22 +1249,22 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAConfigurationObject'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPutWithHttpInfo(
+    public function updateAConfigurationObjectWithHttpInfo(
         string $grant_id,
         string $configuration_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut'][0]
+        string $contentType = self::contentTypes['updateAConfigurationObject'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPutRequest($grant_id, $configuration_id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateAConfigurationObjectRequest($grant_id, $configuration_id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1550,7 +1550,7 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPutAsync
+     * Operation updateAConfigurationObjectAsync
      *
      * Update a Configuration object
      *
@@ -1559,21 +1559,21 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAConfigurationObject'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPutAsync(
+    public function updateAConfigurationObjectAsync(
         string $grant_id,
         string $configuration_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut'][0]
+        string $contentType = self::contentTypes['updateAConfigurationObject'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPutAsyncWithHttpInfo($grant_id, $configuration_id, $content_type, $accept, $body, $contentType)
+        return $this->updateAConfigurationObjectAsyncWithHttpInfo($grant_id, $configuration_id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1582,7 +1582,7 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPutAsyncWithHttpInfo
+     * Operation updateAConfigurationObjectAsyncWithHttpInfo
      *
      * Update a Configuration object
      *
@@ -1591,22 +1591,22 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAConfigurationObject'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPutAsyncWithHttpInfo(
+    public function updateAConfigurationObjectAsyncWithHttpInfo(
         $grant_id,
         $configuration_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut'][0]
+        string $contentType = self::contentTypes['updateAConfigurationObject'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPutRequest($grant_id, $configuration_id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateAConfigurationObjectRequest($grant_id, $configuration_id, $content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1645,39 +1645,39 @@ class V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut'
+     * Create request for operation 'updateAConfigurationObject'
      *
      * @param  string $grant_id (Required) ID of the grant to access. Use &#x60;/me/&#x60; to refer to the grant associated with an access token. (required)
      * @param  string $configuration_id (Required) The ID of the specific Configuration object you want to work with. (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAConfigurationObject'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPutRequest(
+    public function updateAConfigurationObjectRequest(
         $grant_id,
         $configuration_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut'][0]
+        string $contentType = self::contentTypes['updateAConfigurationObject'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut'
+                'Missing the required parameter $grant_id when calling updateAConfigurationObject'
             );
         }
 
         // verify the required parameter 'configuration_id' is set
         if ($configuration_id === null || (is_array($configuration_id) && count($configuration_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $configuration_id when calling v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut'
+                'Missing the required parameter $configuration_id when calling updateAConfigurationObject'
             );
         }
 

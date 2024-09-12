@@ -71,13 +71,13 @@ class V3GrantsGrantIdFoldersFolderIdApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3GrantsGrantIdFoldersFolderIdDelete' => [
+        'deleteAFolder' => [
             'application/json',
         ],
-        'v3GrantsGrantIdFoldersFolderIdGet' => [
+        'returnAFolder' => [
             'application/json',
         ],
-        'v3GrantsGrantIdFoldersFolderIdPut' => [
+        'updateAFolder' => [
             'application/json',
         ],
     ];
@@ -129,52 +129,52 @@ class V3GrantsGrantIdFoldersFolderIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdFoldersFolderIdDelete
+     * Operation deleteAFolder
      *
      * Delete a Folder
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $folder_id (Required) ID of the folder to act upon. (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAFolder'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdFoldersFolderIdDelete(
+    public function deleteAFolder(
         string $grant_id,
         string $folder_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAFolder'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdFoldersFolderIdDeleteWithHttpInfo($grant_id, $folder_id, $accept, $contentType);
+        list($response) = $this->deleteAFolderWithHttpInfo($grant_id, $folder_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdFoldersFolderIdDeleteWithHttpInfo
+     * Operation deleteAFolderWithHttpInfo
      *
      * Delete a Folder
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $folder_id (Required) ID of the folder to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAFolder'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdFoldersFolderIdDeleteWithHttpInfo(
+    public function deleteAFolderWithHttpInfo(
         string $grant_id,
         string $folder_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAFolder'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdFoldersFolderIdDeleteRequest($grant_id, $folder_id, $accept, $contentType);
+        $request = $this->deleteAFolderRequest($grant_id, $folder_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -355,26 +355,26 @@ class V3GrantsGrantIdFoldersFolderIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdFoldersFolderIdDeleteAsync
+     * Operation deleteAFolderAsync
      *
      * Delete a Folder
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $folder_id (Required) ID of the folder to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAFolder'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdFoldersFolderIdDeleteAsync(
+    public function deleteAFolderAsync(
         string $grant_id,
         string $folder_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAFolder'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdFoldersFolderIdDeleteAsyncWithHttpInfo($grant_id, $folder_id, $accept, $contentType)
+        return $this->deleteAFolderAsyncWithHttpInfo($grant_id, $folder_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -383,27 +383,27 @@ class V3GrantsGrantIdFoldersFolderIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdFoldersFolderIdDeleteAsyncWithHttpInfo
+     * Operation deleteAFolderAsyncWithHttpInfo
      *
      * Delete a Folder
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $folder_id (Required) ID of the folder to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAFolder'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdFoldersFolderIdDeleteAsyncWithHttpInfo(
+    public function deleteAFolderAsyncWithHttpInfo(
         $grant_id,
         $folder_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAFolder'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdFoldersFolderIdDeleteRequest($grant_id, $folder_id, $accept, $contentType);
+        $request = $this->deleteAFolderRequest($grant_id, $folder_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -442,35 +442,35 @@ class V3GrantsGrantIdFoldersFolderIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdFoldersFolderIdDelete'
+     * Create request for operation 'deleteAFolder'
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $folder_id (Required) ID of the folder to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAFolder'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdFoldersFolderIdDeleteRequest(
+    public function deleteAFolderRequest(
         $grant_id,
         $folder_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAFolder'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdFoldersFolderIdDelete'
+                'Missing the required parameter $grant_id when calling deleteAFolder'
             );
         }
 
         // verify the required parameter 'folder_id' is set
         if ($folder_id === null || (is_array($folder_id) && count($folder_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $folder_id when calling v3GrantsGrantIdFoldersFolderIdDelete'
+                'Missing the required parameter $folder_id when calling deleteAFolder'
             );
         }
 
@@ -565,52 +565,52 @@ class V3GrantsGrantIdFoldersFolderIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdFoldersFolderIdGet
+     * Operation returnAFolder
      *
      * Return a Folder
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $folder_id (Required) ID of the folder to act upon. (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAFolder'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdFoldersFolderIdGet(
+    public function returnAFolder(
         string $grant_id,
         string $folder_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdGet'][0]
+        string $contentType = self::contentTypes['returnAFolder'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdFoldersFolderIdGetWithHttpInfo($grant_id, $folder_id, $accept, $contentType);
+        list($response) = $this->returnAFolderWithHttpInfo($grant_id, $folder_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdFoldersFolderIdGetWithHttpInfo
+     * Operation returnAFolderWithHttpInfo
      *
      * Return a Folder
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $folder_id (Required) ID of the folder to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAFolder'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdFoldersFolderIdGetWithHttpInfo(
+    public function returnAFolderWithHttpInfo(
         string $grant_id,
         string $folder_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdGet'][0]
+        string $contentType = self::contentTypes['returnAFolder'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdFoldersFolderIdGetRequest($grant_id, $folder_id, $accept, $contentType);
+        $request = $this->returnAFolderRequest($grant_id, $folder_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -791,26 +791,26 @@ class V3GrantsGrantIdFoldersFolderIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdFoldersFolderIdGetAsync
+     * Operation returnAFolderAsync
      *
      * Return a Folder
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $folder_id (Required) ID of the folder to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAFolder'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdFoldersFolderIdGetAsync(
+    public function returnAFolderAsync(
         string $grant_id,
         string $folder_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdGet'][0]
+        string $contentType = self::contentTypes['returnAFolder'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdFoldersFolderIdGetAsyncWithHttpInfo($grant_id, $folder_id, $accept, $contentType)
+        return $this->returnAFolderAsyncWithHttpInfo($grant_id, $folder_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -819,27 +819,27 @@ class V3GrantsGrantIdFoldersFolderIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdFoldersFolderIdGetAsyncWithHttpInfo
+     * Operation returnAFolderAsyncWithHttpInfo
      *
      * Return a Folder
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $folder_id (Required) ID of the folder to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAFolder'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdFoldersFolderIdGetAsyncWithHttpInfo(
+    public function returnAFolderAsyncWithHttpInfo(
         $grant_id,
         $folder_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdGet'][0]
+        string $contentType = self::contentTypes['returnAFolder'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdFoldersFolderIdGetRequest($grant_id, $folder_id, $accept, $contentType);
+        $request = $this->returnAFolderRequest($grant_id, $folder_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -878,35 +878,35 @@ class V3GrantsGrantIdFoldersFolderIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdFoldersFolderIdGet'
+     * Create request for operation 'returnAFolder'
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $folder_id (Required) ID of the folder to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAFolder'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdFoldersFolderIdGetRequest(
+    public function returnAFolderRequest(
         $grant_id,
         $folder_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdGet'][0]
+        string $contentType = self::contentTypes['returnAFolder'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdFoldersFolderIdGet'
+                'Missing the required parameter $grant_id when calling returnAFolder'
             );
         }
 
         // verify the required parameter 'folder_id' is set
         if ($folder_id === null || (is_array($folder_id) && count($folder_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $folder_id when calling v3GrantsGrantIdFoldersFolderIdGet'
+                'Missing the required parameter $folder_id when calling returnAFolder'
             );
         }
 
@@ -1001,7 +1001,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdFoldersFolderIdPut
+     * Operation updateAFolder
      *
      * Update a Folder
      *
@@ -1010,27 +1010,27 @@ class V3GrantsGrantIdFoldersFolderIdApi
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAFolder'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdFoldersFolderIdPut(
+    public function updateAFolder(
         string $grant_id,
         string $folder_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdPut'][0]
+        string $contentType = self::contentTypes['updateAFolder'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdFoldersFolderIdPutWithHttpInfo($grant_id, $folder_id, $content_type, $accept, $body, $contentType);
+        list($response) = $this->updateAFolderWithHttpInfo($grant_id, $folder_id, $content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdFoldersFolderIdPutWithHttpInfo
+     * Operation updateAFolderWithHttpInfo
      *
      * Update a Folder
      *
@@ -1039,22 +1039,22 @@ class V3GrantsGrantIdFoldersFolderIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAFolder'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdFoldersFolderIdPutWithHttpInfo(
+    public function updateAFolderWithHttpInfo(
         string $grant_id,
         string $folder_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdPut'][0]
+        string $contentType = self::contentTypes['updateAFolder'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdFoldersFolderIdPutRequest($grant_id, $folder_id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateAFolderRequest($grant_id, $folder_id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1235,7 +1235,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdFoldersFolderIdPutAsync
+     * Operation updateAFolderAsync
      *
      * Update a Folder
      *
@@ -1244,21 +1244,21 @@ class V3GrantsGrantIdFoldersFolderIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAFolder'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdFoldersFolderIdPutAsync(
+    public function updateAFolderAsync(
         string $grant_id,
         string $folder_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdPut'][0]
+        string $contentType = self::contentTypes['updateAFolder'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdFoldersFolderIdPutAsyncWithHttpInfo($grant_id, $folder_id, $content_type, $accept, $body, $contentType)
+        return $this->updateAFolderAsyncWithHttpInfo($grant_id, $folder_id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1267,7 +1267,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdFoldersFolderIdPutAsyncWithHttpInfo
+     * Operation updateAFolderAsyncWithHttpInfo
      *
      * Update a Folder
      *
@@ -1276,22 +1276,22 @@ class V3GrantsGrantIdFoldersFolderIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAFolder'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdFoldersFolderIdPutAsyncWithHttpInfo(
+    public function updateAFolderAsyncWithHttpInfo(
         $grant_id,
         $folder_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdPut'][0]
+        string $contentType = self::contentTypes['updateAFolder'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdFoldersFolderIdPutRequest($grant_id, $folder_id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateAFolderRequest($grant_id, $folder_id, $content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1330,39 +1330,39 @@ class V3GrantsGrantIdFoldersFolderIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdFoldersFolderIdPut'
+     * Create request for operation 'updateAFolder'
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $folder_id (Required) ID of the folder to act upon. (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdFoldersFolderIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAFolder'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdFoldersFolderIdPutRequest(
+    public function updateAFolderRequest(
         $grant_id,
         $folder_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdFoldersFolderIdPut'][0]
+        string $contentType = self::contentTypes['updateAFolder'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdFoldersFolderIdPut'
+                'Missing the required parameter $grant_id when calling updateAFolder'
             );
         }
 
         // verify the required parameter 'folder_id' is set
         if ($folder_id === null || (is_array($folder_id) && count($folder_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $folder_id when calling v3GrantsGrantIdFoldersFolderIdPut'
+                'Missing the required parameter $folder_id when calling updateAFolder'
             );
         }
 

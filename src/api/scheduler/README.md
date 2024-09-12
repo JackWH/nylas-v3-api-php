@@ -62,15 +62,15 @@ $apiInstance = new JackWH\NylasV3\Scheduler\Api\V3GrantsGrantIdSchedulingConfigu
     $config
 );
 $grant_id = {{grant_id}}; // string | (Required) ID of the grant to access. Use `/me/` to refer to the grant associated with an access token.
+$content_type = application/json; // string
 $accept = application/json; // string
-$limit = 50; // int | The maximum number of objects to return. See [pagination](/docs/api/v3/ecc/#overview--pagination) for more information.
-$page_token = {{page_token}}; // string | An identifier that specifies which page of data to return. You can get this value from the `next_cursor` response field. See [Pagination](/docs/api/v3/ecc/#overview--pagination) for more information.
+$body = array('key' => new \stdClass); // object
 
 try {
-    $result = $apiInstance->v3GrantsGrantIdSchedulingConfigurationsGet($grant_id, $accept, $limit, $page_token);
+    $result = $apiInstance->createAConfigurationObject($grant_id, $content_type, $accept, $body);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling V3GrantsGrantIdSchedulingConfigurationsApi->v3GrantsGrantIdSchedulingConfigurationsGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling V3GrantsGrantIdSchedulingConfigurationsApi->createAConfigurationObject: ', $e->getMessage(), PHP_EOL;
 }
 
 ```
@@ -81,19 +81,19 @@ All URIs are relative to *https://api.us.nylas.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*V3GrantsGrantIdSchedulingConfigurationsApi* | [**v3GrantsGrantIdSchedulingConfigurationsGet**](docs/Api/V3GrantsGrantIdSchedulingConfigurationsApi.md#v3grantsgrantidschedulingconfigurationsget) | **GET** /v3/grants/{grant_id}/scheduling/configurations | Return all Configuration objects
-*V3GrantsGrantIdSchedulingConfigurationsApi* | [**v3GrantsGrantIdSchedulingConfigurationsPost**](docs/Api/V3GrantsGrantIdSchedulingConfigurationsApi.md#v3grantsgrantidschedulingconfigurationspost) | **POST** /v3/grants/{grant_id}/scheduling/configurations | Create a Configuration object
-*V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi* | [**v3GrantsGrantIdSchedulingConfigurationsConfigurationIdDelete**](docs/Api/V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi.md#v3grantsgrantidschedulingconfigurationsconfigurationiddelete) | **DELETE** /v3/grants/{grant_id}/scheduling/configurations/{configuration_id} | Delete a Configuration object
-*V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi* | [**v3GrantsGrantIdSchedulingConfigurationsConfigurationIdGet**](docs/Api/V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi.md#v3grantsgrantidschedulingconfigurationsconfigurationidget) | **GET** /v3/grants/{grant_id}/scheduling/configurations/{configuration_id} | Return a Configuration object
-*V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi* | [**v3GrantsGrantIdSchedulingConfigurationsConfigurationIdPut**](docs/Api/V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi.md#v3grantsgrantidschedulingconfigurationsconfigurationidput) | **PUT** /v3/grants/{grant_id}/scheduling/configurations/{configuration_id} | Update a Configuration object
-*V3SchedulingApi* | [**v3SchedulingAvailabilityGet**](docs/Api/V3SchedulingApi.md#v3schedulingavailabilityget) | **GET** /v3/scheduling/availability | Get Availability
-*V3SchedulingBookingsApi* | [**v3SchedulingBookingsPost**](docs/Api/V3SchedulingBookingsApi.md#v3schedulingbookingspost) | **POST** /v3/scheduling/bookings | Book an event
-*V3SchedulingBookingsBookingIdApi* | [**v3SchedulingBookingsBookingIdDelete**](docs/Api/V3SchedulingBookingsBookingIdApi.md#v3schedulingbookingsbookingiddelete) | **DELETE** /v3/scheduling/bookings/{booking_id} | Delete a booking
-*V3SchedulingBookingsBookingIdApi* | [**v3SchedulingBookingsBookingIdGet**](docs/Api/V3SchedulingBookingsBookingIdApi.md#v3schedulingbookingsbookingidget) | **GET** /v3/scheduling/bookings/{booking_id} | Return a Booking object
-*V3SchedulingBookingsBookingIdApi* | [**v3SchedulingBookingsBookingIdPatch**](docs/Api/V3SchedulingBookingsBookingIdApi.md#v3schedulingbookingsbookingidpatch) | **PATCH** /v3/scheduling/bookings/{booking_id} | Reschedule a booking
-*V3SchedulingBookingsBookingIdApi* | [**v3SchedulingBookingsBookingIdPut**](docs/Api/V3SchedulingBookingsBookingIdApi.md#v3schedulingbookingsbookingidput) | **PUT** /v3/scheduling/bookings/{booking_id} | Confirm a booking
-*V3SchedulingSessionsApi* | [**v3SchedulingSessionsPost**](docs/Api/V3SchedulingSessionsApi.md#v3schedulingsessionspost) | **POST** /v3/scheduling/sessions | Create a session
-*V3SchedulingSessionsApi* | [**v3SchedulingSessionsSessionIdDelete**](docs/Api/V3SchedulingSessionsApi.md#v3schedulingsessionssessioniddelete) | **DELETE** /v3/scheduling/sessions/{session_id} | Delete a session
+*V3GrantsGrantIdSchedulingConfigurationsApi* | [**createAConfigurationObject**](docs/Api/V3GrantsGrantIdSchedulingConfigurationsApi.md#createaconfigurationobject) | **POST** /v3/grants/{grant_id}/scheduling/configurations | Create a Configuration object
+*V3GrantsGrantIdSchedulingConfigurationsApi* | [**returnAllConfigurationObjects**](docs/Api/V3GrantsGrantIdSchedulingConfigurationsApi.md#returnallconfigurationobjects) | **GET** /v3/grants/{grant_id}/scheduling/configurations | Return all Configuration objects
+*V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi* | [**deleteAConfigurationObject**](docs/Api/V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi.md#deleteaconfigurationobject) | **DELETE** /v3/grants/{grant_id}/scheduling/configurations/{configuration_id} | Delete a Configuration object
+*V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi* | [**returnAConfigurationObject**](docs/Api/V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi.md#returnaconfigurationobject) | **GET** /v3/grants/{grant_id}/scheduling/configurations/{configuration_id} | Return a Configuration object
+*V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi* | [**updateAConfigurationObject**](docs/Api/V3GrantsGrantIdSchedulingConfigurationsConfigurationIdApi.md#updateaconfigurationobject) | **PUT** /v3/grants/{grant_id}/scheduling/configurations/{configuration_id} | Update a Configuration object
+*V3SchedulingApi* | [**getAvailability**](docs/Api/V3SchedulingApi.md#getavailability) | **GET** /v3/scheduling/availability | Get Availability
+*V3SchedulingBookingsApi* | [**bookAnEvent**](docs/Api/V3SchedulingBookingsApi.md#bookanevent) | **POST** /v3/scheduling/bookings | Book an event
+*V3SchedulingBookingsBookingIdApi* | [**confirmABooking**](docs/Api/V3SchedulingBookingsBookingIdApi.md#confirmabooking) | **PUT** /v3/scheduling/bookings/{booking_id} | Confirm a booking
+*V3SchedulingBookingsBookingIdApi* | [**deleteABooking**](docs/Api/V3SchedulingBookingsBookingIdApi.md#deleteabooking) | **DELETE** /v3/scheduling/bookings/{booking_id} | Delete a booking
+*V3SchedulingBookingsBookingIdApi* | [**rescheduleABooking**](docs/Api/V3SchedulingBookingsBookingIdApi.md#rescheduleabooking) | **PATCH** /v3/scheduling/bookings/{booking_id} | Reschedule a booking
+*V3SchedulingBookingsBookingIdApi* | [**returnABookingObject**](docs/Api/V3SchedulingBookingsBookingIdApi.md#returnabookingobject) | **GET** /v3/scheduling/bookings/{booking_id} | Return a Booking object
+*V3SchedulingSessionsApi* | [**createASession**](docs/Api/V3SchedulingSessionsApi.md#createasession) | **POST** /v3/scheduling/sessions | Create a session
+*V3SchedulingSessionsApi* | [**deleteASession**](docs/Api/V3SchedulingSessionsApi.md#deleteasession) | **DELETE** /v3/scheduling/sessions/{session_id} | Delete a session
 
 ## Models
 

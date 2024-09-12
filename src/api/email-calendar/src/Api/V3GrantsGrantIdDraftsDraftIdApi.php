@@ -71,16 +71,16 @@ class V3GrantsGrantIdDraftsDraftIdApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3GrantsGrantIdDraftsDraftIdDelete' => [
+        'deleteADraft' => [
             'application/json',
         ],
-        'v3GrantsGrantIdDraftsDraftIdGet' => [
+        'returnADraft' => [
             'application/json',
         ],
-        'v3GrantsGrantIdDraftsDraftIdPost' => [
+        'sendADraft' => [
             'application/json',
         ],
-        'v3GrantsGrantIdDraftsDraftIdPut' => [
+        'updateADraft' => [
             'application/json',
         ],
     ];
@@ -132,52 +132,52 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdDelete
+     * Operation deleteADraft
      *
      * Delete a Draft
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteADraft'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdDraftsDraftIdDelete(
+    public function deleteADraft(
         string $grant_id,
         string $draft_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdDelete'][0]
+        string $contentType = self::contentTypes['deleteADraft'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdDraftsDraftIdDeleteWithHttpInfo($grant_id, $draft_id, $accept, $contentType);
+        list($response) = $this->deleteADraftWithHttpInfo($grant_id, $draft_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdDeleteWithHttpInfo
+     * Operation deleteADraftWithHttpInfo
      *
      * Delete a Draft
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteADraft'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdDraftsDraftIdDeleteWithHttpInfo(
+    public function deleteADraftWithHttpInfo(
         string $grant_id,
         string $draft_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdDelete'][0]
+        string $contentType = self::contentTypes['deleteADraft'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdDraftsDraftIdDeleteRequest($grant_id, $draft_id, $accept, $contentType);
+        $request = $this->deleteADraftRequest($grant_id, $draft_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -358,26 +358,26 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdDeleteAsync
+     * Operation deleteADraftAsync
      *
      * Delete a Draft
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteADraft'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdDraftsDraftIdDeleteAsync(
+    public function deleteADraftAsync(
         string $grant_id,
         string $draft_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdDelete'][0]
+        string $contentType = self::contentTypes['deleteADraft'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdDraftsDraftIdDeleteAsyncWithHttpInfo($grant_id, $draft_id, $accept, $contentType)
+        return $this->deleteADraftAsyncWithHttpInfo($grant_id, $draft_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -386,27 +386,27 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdDeleteAsyncWithHttpInfo
+     * Operation deleteADraftAsyncWithHttpInfo
      *
      * Delete a Draft
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteADraft'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdDraftsDraftIdDeleteAsyncWithHttpInfo(
+    public function deleteADraftAsyncWithHttpInfo(
         $grant_id,
         $draft_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdDelete'][0]
+        string $contentType = self::contentTypes['deleteADraft'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdDraftsDraftIdDeleteRequest($grant_id, $draft_id, $accept, $contentType);
+        $request = $this->deleteADraftRequest($grant_id, $draft_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -445,35 +445,35 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdDraftsDraftIdDelete'
+     * Create request for operation 'deleteADraft'
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteADraft'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdDraftsDraftIdDeleteRequest(
+    public function deleteADraftRequest(
         $grant_id,
         $draft_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdDelete'][0]
+        string $contentType = self::contentTypes['deleteADraft'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdDraftsDraftIdDelete'
+                'Missing the required parameter $grant_id when calling deleteADraft'
             );
         }
 
         // verify the required parameter 'draft_id' is set
         if ($draft_id === null || (is_array($draft_id) && count($draft_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $draft_id when calling v3GrantsGrantIdDraftsDraftIdDelete'
+                'Missing the required parameter $draft_id when calling deleteADraft'
             );
         }
 
@@ -568,52 +568,52 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdGet
+     * Operation returnADraft
      *
      * Return a Draft
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnADraft'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdDraftsDraftIdGet(
+    public function returnADraft(
         string $grant_id,
         string $draft_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdGet'][0]
+        string $contentType = self::contentTypes['returnADraft'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdDraftsDraftIdGetWithHttpInfo($grant_id, $draft_id, $accept, $contentType);
+        list($response) = $this->returnADraftWithHttpInfo($grant_id, $draft_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdGetWithHttpInfo
+     * Operation returnADraftWithHttpInfo
      *
      * Return a Draft
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnADraft'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdDraftsDraftIdGetWithHttpInfo(
+    public function returnADraftWithHttpInfo(
         string $grant_id,
         string $draft_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdGet'][0]
+        string $contentType = self::contentTypes['returnADraft'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdDraftsDraftIdGetRequest($grant_id, $draft_id, $accept, $contentType);
+        $request = $this->returnADraftRequest($grant_id, $draft_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -794,26 +794,26 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdGetAsync
+     * Operation returnADraftAsync
      *
      * Return a Draft
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnADraft'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdDraftsDraftIdGetAsync(
+    public function returnADraftAsync(
         string $grant_id,
         string $draft_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdGet'][0]
+        string $contentType = self::contentTypes['returnADraft'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdDraftsDraftIdGetAsyncWithHttpInfo($grant_id, $draft_id, $accept, $contentType)
+        return $this->returnADraftAsyncWithHttpInfo($grant_id, $draft_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -822,27 +822,27 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdGetAsyncWithHttpInfo
+     * Operation returnADraftAsyncWithHttpInfo
      *
      * Return a Draft
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnADraft'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdDraftsDraftIdGetAsyncWithHttpInfo(
+    public function returnADraftAsyncWithHttpInfo(
         $grant_id,
         $draft_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdGet'][0]
+        string $contentType = self::contentTypes['returnADraft'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdDraftsDraftIdGetRequest($grant_id, $draft_id, $accept, $contentType);
+        $request = $this->returnADraftRequest($grant_id, $draft_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -881,35 +881,35 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdDraftsDraftIdGet'
+     * Create request for operation 'returnADraft'
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnADraft'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdDraftsDraftIdGetRequest(
+    public function returnADraftRequest(
         $grant_id,
         $draft_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdGet'][0]
+        string $contentType = self::contentTypes['returnADraft'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdDraftsDraftIdGet'
+                'Missing the required parameter $grant_id when calling returnADraft'
             );
         }
 
         // verify the required parameter 'draft_id' is set
         if ($draft_id === null || (is_array($draft_id) && count($draft_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $draft_id when calling v3GrantsGrantIdDraftsDraftIdGet'
+                'Missing the required parameter $draft_id when calling returnADraft'
             );
         }
 
@@ -1004,52 +1004,52 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdPost
+     * Operation sendADraft
      *
      * Send a Draft
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendADraft'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdDraftsDraftIdPost(
+    public function sendADraft(
         string $grant_id,
         string $draft_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdPost'][0]
+        string $contentType = self::contentTypes['sendADraft'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdDraftsDraftIdPostWithHttpInfo($grant_id, $draft_id, $accept, $contentType);
+        list($response) = $this->sendADraftWithHttpInfo($grant_id, $draft_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdPostWithHttpInfo
+     * Operation sendADraftWithHttpInfo
      *
      * Send a Draft
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendADraft'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdDraftsDraftIdPostWithHttpInfo(
+    public function sendADraftWithHttpInfo(
         string $grant_id,
         string $draft_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdPost'][0]
+        string $contentType = self::contentTypes['sendADraft'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdDraftsDraftIdPostRequest($grant_id, $draft_id, $accept, $contentType);
+        $request = $this->sendADraftRequest($grant_id, $draft_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1230,26 +1230,26 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdPostAsync
+     * Operation sendADraftAsync
      *
      * Send a Draft
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendADraft'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdDraftsDraftIdPostAsync(
+    public function sendADraftAsync(
         string $grant_id,
         string $draft_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdPost'][0]
+        string $contentType = self::contentTypes['sendADraft'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdDraftsDraftIdPostAsyncWithHttpInfo($grant_id, $draft_id, $accept, $contentType)
+        return $this->sendADraftAsyncWithHttpInfo($grant_id, $draft_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1258,27 +1258,27 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdPostAsyncWithHttpInfo
+     * Operation sendADraftAsyncWithHttpInfo
      *
      * Send a Draft
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendADraft'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdDraftsDraftIdPostAsyncWithHttpInfo(
+    public function sendADraftAsyncWithHttpInfo(
         $grant_id,
         $draft_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdPost'][0]
+        string $contentType = self::contentTypes['sendADraft'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdDraftsDraftIdPostRequest($grant_id, $draft_id, $accept, $contentType);
+        $request = $this->sendADraftRequest($grant_id, $draft_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1317,35 +1317,35 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdDraftsDraftIdPost'
+     * Create request for operation 'sendADraft'
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendADraft'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdDraftsDraftIdPostRequest(
+    public function sendADraftRequest(
         $grant_id,
         $draft_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdPost'][0]
+        string $contentType = self::contentTypes['sendADraft'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdDraftsDraftIdPost'
+                'Missing the required parameter $grant_id when calling sendADraft'
             );
         }
 
         // verify the required parameter 'draft_id' is set
         if ($draft_id === null || (is_array($draft_id) && count($draft_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $draft_id when calling v3GrantsGrantIdDraftsDraftIdPost'
+                'Missing the required parameter $draft_id when calling sendADraft'
             );
         }
 
@@ -1440,7 +1440,7 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdPut
+     * Operation updateADraft
      *
      * Update a Draft
      *
@@ -1449,27 +1449,27 @@ class V3GrantsGrantIdDraftsDraftIdApi
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateADraft'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdDraftsDraftIdPut(
+    public function updateADraft(
         string $grant_id,
         string $draft_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdPut'][0]
+        string $contentType = self::contentTypes['updateADraft'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdDraftsDraftIdPutWithHttpInfo($grant_id, $draft_id, $content_type, $accept, $body, $contentType);
+        list($response) = $this->updateADraftWithHttpInfo($grant_id, $draft_id, $content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdPutWithHttpInfo
+     * Operation updateADraftWithHttpInfo
      *
      * Update a Draft
      *
@@ -1478,22 +1478,22 @@ class V3GrantsGrantIdDraftsDraftIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateADraft'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdDraftsDraftIdPutWithHttpInfo(
+    public function updateADraftWithHttpInfo(
         string $grant_id,
         string $draft_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdPut'][0]
+        string $contentType = self::contentTypes['updateADraft'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdDraftsDraftIdPutRequest($grant_id, $draft_id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateADraftRequest($grant_id, $draft_id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1674,7 +1674,7 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdPutAsync
+     * Operation updateADraftAsync
      *
      * Update a Draft
      *
@@ -1683,21 +1683,21 @@ class V3GrantsGrantIdDraftsDraftIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateADraft'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdDraftsDraftIdPutAsync(
+    public function updateADraftAsync(
         string $grant_id,
         string $draft_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdPut'][0]
+        string $contentType = self::contentTypes['updateADraft'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdDraftsDraftIdPutAsyncWithHttpInfo($grant_id, $draft_id, $content_type, $accept, $body, $contentType)
+        return $this->updateADraftAsyncWithHttpInfo($grant_id, $draft_id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1706,7 +1706,7 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDraftsDraftIdPutAsyncWithHttpInfo
+     * Operation updateADraftAsyncWithHttpInfo
      *
      * Update a Draft
      *
@@ -1715,22 +1715,22 @@ class V3GrantsGrantIdDraftsDraftIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateADraft'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdDraftsDraftIdPutAsyncWithHttpInfo(
+    public function updateADraftAsyncWithHttpInfo(
         $grant_id,
         $draft_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdPut'][0]
+        string $contentType = self::contentTypes['updateADraft'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdDraftsDraftIdPutRequest($grant_id, $draft_id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateADraftRequest($grant_id, $draft_id, $content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1769,39 +1769,39 @@ class V3GrantsGrantIdDraftsDraftIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdDraftsDraftIdPut'
+     * Create request for operation 'updateADraft'
      *
      * @param  string $grant_id (Required) ID of the Grant to act upon. Use \&quot;me\&quot; to refer to the Grant associated with an access token. See the [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information. (required)
      * @param  string $draft_id (Required) ID of the Draft to act upon. (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDraftsDraftIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateADraft'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdDraftsDraftIdPutRequest(
+    public function updateADraftRequest(
         $grant_id,
         $draft_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDraftsDraftIdPut'][0]
+        string $contentType = self::contentTypes['updateADraft'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdDraftsDraftIdPut'
+                'Missing the required parameter $grant_id when calling updateADraft'
             );
         }
 
         // verify the required parameter 'draft_id' is set
         if ($draft_id === null || (is_array($draft_id) && count($draft_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $draft_id when calling v3GrantsGrantIdDraftsDraftIdPut'
+                'Missing the required parameter $draft_id when calling updateADraft'
             );
         }
 

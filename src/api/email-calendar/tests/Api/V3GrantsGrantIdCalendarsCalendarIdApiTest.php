@@ -70,36 +70,36 @@ class V3GrantsGrantIdCalendarsCalendarIdApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdCalendarsCalendarIdDelete
+     * Test case for deleteACalendar
      *
      * Delete a Calendar.
      *
      */
-    public function testV3GrantsGrantIdCalendarsCalendarIdDelete()
+    public function testDeleteACalendar()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdCalendarsCalendarIdGet
+     * Test case for returnACalendar
      *
      * Return a Calendar.
      *
      */
-    public function testV3GrantsGrantIdCalendarsCalendarIdGet()
+    public function testReturnACalendar()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdCalendarsCalendarIdPut
+     * Test case for updateACalendar
      *
      * Update a Calendar.
      *
      */
-    public function testV3GrantsGrantIdCalendarsCalendarIdPut()
+    public function testUpdateACalendar()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

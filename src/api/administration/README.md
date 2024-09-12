@@ -81,10 +81,10 @@ $email = {{email}}; // string | (Required) Email for detection
 $all_provider_types = false; // bool | Search by all providers regardless of if they have an existing connector
 
 try {
-    $result = $apiInstance->v3ProvidersDetectPost($accept, $email, $all_provider_types);
+    $result = $apiInstance->detectProvider($accept, $email, $all_provider_types);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling V3Api->v3ProvidersDetectPost: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling V3Api->detectProvider: ', $e->getMessage(), PHP_EOL;
 }
 
 ```
@@ -95,46 +95,46 @@ All URIs are relative to *https://api.us.nylas.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*V3Api* | [**v3ProvidersDetectPost**](docs/Api/V3Api.md#v3providersdetectpost) | **POST** /v3/providers/detect | Detect provider
-*V3ApplicationsApi* | [**v3ApplicationsGet**](docs/Api/V3ApplicationsApi.md#v3applicationsget) | **GET** /v3/applications | Get application
-*V3ApplicationsApi* | [**v3ApplicationsPatch**](docs/Api/V3ApplicationsApi.md#v3applicationspatch) | **PATCH** /v3/applications | Update application
-*V3ApplicationsRedirectUrisApi* | [**v3ApplicationsRedirectUrisGet**](docs/Api/V3ApplicationsRedirectUrisApi.md#v3applicationsredirecturisget) | **GET** /v3/applications/redirect-uris | Get an application&#39;s callback URIs
-*V3ApplicationsRedirectUrisApi* | [**v3ApplicationsRedirectUrisPost**](docs/Api/V3ApplicationsRedirectUrisApi.md#v3applicationsredirecturispost) | **POST** /v3/applications/redirect-uris | Add callback URI to application
-*V3ApplicationsRedirectUrisIdApi* | [**v3ApplicationsRedirectUrisCallbackIdDelete**](docs/Api/V3ApplicationsRedirectUrisIdApi.md#v3applicationsredirecturiscallbackiddelete) | **DELETE** /v3/applications/redirect-uris/{callback_id} | Delete a callback URI
-*V3ApplicationsRedirectUrisIdApi* | [**v3ApplicationsRedirectUrisCallbackIdGet**](docs/Api/V3ApplicationsRedirectUrisIdApi.md#v3applicationsredirecturiscallbackidget) | **GET** /v3/applications/redirect-uris/{callback_id} | Get callback URI
-*V3ApplicationsRedirectUrisIdApi* | [**v3ApplicationsRedirectUrisCallbackIdPatch**](docs/Api/V3ApplicationsRedirectUrisIdApi.md#v3applicationsredirecturiscallbackidpatch) | **PATCH** /v3/applications/redirect-uris/{callback_id} | Update a callback URI
-*V3ChannelsPubsubApi* | [**v3ChannelsPubsubGet**](docs/Api/V3ChannelsPubsubApi.md#v3channelspubsubget) | **GET** /v3/channels/pubsub | Get PubSub channels for an application
-*V3ChannelsPubsubApi* | [**v3ChannelsPubsubPost**](docs/Api/V3ChannelsPubsubApi.md#v3channelspubsubpost) | **POST** /v3/channels/pubsub | Create a PubSub channel
-*V3ChannelsPubsubIdApi* | [**v3ChannelsPubsubIdDelete**](docs/Api/V3ChannelsPubsubIdApi.md#v3channelspubsubiddelete) | **DELETE** /v3/channels/pubsub/{id} | Delete a specific PubSub channel
-*V3ChannelsPubsubIdApi* | [**v3ChannelsPubsubIdGet**](docs/Api/V3ChannelsPubsubIdApi.md#v3channelspubsubidget) | **GET** /v3/channels/pubsub/{id} | Get a specific PubSub channel by id
-*V3ChannelsPubsubIdApi* | [**v3ChannelsPubsubIdPut**](docs/Api/V3ChannelsPubsubIdApi.md#v3channelspubsubidput) | **PUT** /v3/channels/pubsub/{id} | Update a specific PubSub channel
-*V3ConnectApi* | [**v3ConnectAuthGet**](docs/Api/V3ConnectApi.md#v3connectauthget) | **GET** /v3/connect/auth | Hosted OAuth - Authorization Request
-*V3ConnectApi* | [**v3ConnectCustomPost**](docs/Api/V3ConnectApi.md#v3connectcustompost) | **POST** /v3/connect/custom | Custom Authentication
-*V3ConnectApi* | [**v3ConnectRevokePost**](docs/Api/V3ConnectApi.md#v3connectrevokepost) | **POST** /v3/connect/revoke | Hosted OAuth - Revoke OAuth token
-*V3ConnectApi* | [**v3ConnectTokenPost**](docs/Api/V3ConnectApi.md#v3connecttokenpost) | **POST** /v3/connect/token | Hosted OAuth - Token exchange
-*V3ConnectApi* | [**v3ConnectTokeninfoGet**](docs/Api/V3ConnectApi.md#v3connecttokeninfoget) | **GET** /v3/connect/tokeninfo | Token Info
-*V3ConnectorsApi* | [**v3ConnectorsGet**](docs/Api/V3ConnectorsApi.md#v3connectorsget) | **GET** /v3/connectors | List connectors
-*V3ConnectorsApi* | [**v3ConnectorsPost**](docs/Api/V3ConnectorsApi.md#v3connectorspost) | **POST** /v3/connectors | Create a connector
-*V3ConnectorsProviderApi* | [**v3ConnectorsProviderGet**](docs/Api/V3ConnectorsProviderApi.md#v3connectorsproviderget) | **GET** /v3/connectors/{provider} | List connectors
-*V3ConnectorsProviderApi* | [**v3ConnectorsProviderPost**](docs/Api/V3ConnectorsProviderApi.md#v3connectorsproviderpost) | **POST** /v3/connectors/{provider} | Create a connector
-*V3ConnectorsProviderCredsApi* | [**v3ConnectorsProviderCredsGet**](docs/Api/V3ConnectorsProviderCredsApi.md#v3connectorsprovidercredsget) | **GET** /v3/connectors/{provider}/creds | List credentials
-*V3ConnectorsProviderCredsApi* | [**v3ConnectorsProviderCredsPost**](docs/Api/V3ConnectorsProviderCredsApi.md#v3connectorsprovidercredspost) | **POST** /v3/connectors/{provider}/creds | Create credential
-*V3ConnectorsProviderCredsIdApi* | [**v3ConnectorsProviderCredsIdDelete**](docs/Api/V3ConnectorsProviderCredsIdApi.md#v3connectorsprovidercredsiddelete) | **DELETE** /v3/connectors/{provider}/creds/{id} | Delete credential by ID
-*V3ConnectorsProviderCredsIdApi* | [**v3ConnectorsProviderCredsIdGet**](docs/Api/V3ConnectorsProviderCredsIdApi.md#v3connectorsprovidercredsidget) | **GET** /v3/connectors/{provider}/creds/{id} | Get credential by ID
-*V3ConnectorsProviderCredsIdApi* | [**v3ConnectorsProviderCredsIdPatch**](docs/Api/V3ConnectorsProviderCredsIdApi.md#v3connectorsprovidercredsidpatch) | **PATCH** /v3/connectors/{provider}/creds/{id} | Update credential by ID
-*V3GrantsApi* | [**v3GrantsGet**](docs/Api/V3GrantsApi.md#v3grantsget) | **GET** /v3/grants | List grants
-*V3GrantsApi* | [**v3GrantsMeGet**](docs/Api/V3GrantsApi.md#v3grantsmeget) | **GET** /v3/grants/me | Get current grant
-*V3GrantsGrantIdApi* | [**v3GrantsGrantIdDelete**](docs/Api/V3GrantsGrantIdApi.md#v3grantsgrantiddelete) | **DELETE** /v3/grants/{grantId} | Delete grant
-*V3GrantsGrantIdApi* | [**v3GrantsGrantIdGet**](docs/Api/V3GrantsGrantIdApi.md#v3grantsgrantidget) | **GET** /v3/grants/{grantId} | Get a grant
-*V3GrantsGrantIdApi* | [**v3GrantsGrantIdPatch**](docs/Api/V3GrantsGrantIdApi.md#v3grantsgrantidpatch) | **PATCH** /v3/grants/{grantId} | Update grant
-*V3WebhooksApi* | [**v3WebhooksGet**](docs/Api/V3WebhooksApi.md#v3webhooksget) | **GET** /v3/webhooks | Get destinations for an application
-*V3WebhooksApi* | [**v3WebhooksMockPayloadPost**](docs/Api/V3WebhooksApi.md#v3webhooksmockpayloadpost) | **POST** /v3/webhooks/mock-payload | Get mock webhook payload
-*V3WebhooksApi* | [**v3WebhooksPost**](docs/Api/V3WebhooksApi.md#v3webhookspost) | **POST** /v3/webhooks | Create a webhook destination
-*V3WebhooksApi* | [**v3WebhooksRotateSecretIdPost**](docs/Api/V3WebhooksApi.md#v3webhooksrotatesecretidpost) | **POST** /v3/webhooks/rotate-secret/{id} | Rotate a webhook secret
-*V3WebhooksApi* | [**v3WebhooksSendTestEventPost**](docs/Api/V3WebhooksApi.md#v3webhookssendtesteventpost) | **POST** /v3/webhooks/send-test-event | Send test event
-*V3WebhooksIdApi* | [**v3WebhooksIdDelete**](docs/Api/V3WebhooksIdApi.md#v3webhooksiddelete) | **DELETE** /v3/webhooks/{id} | Delete a webhook destination
-*V3WebhooksIdApi* | [**v3WebhooksIdGet**](docs/Api/V3WebhooksIdApi.md#v3webhooksidget) | **GET** /v3/webhooks/{id} | Get the destinations for an application by webhook ID
-*V3WebhooksIdApi* | [**v3WebhooksIdPut**](docs/Api/V3WebhooksIdApi.md#v3webhooksidput) | **PUT** /v3/webhooks/{id} | Update a webhook destination
+*V3Api* | [**detectProvider**](docs/Api/V3Api.md#detectprovider) | **POST** /v3/providers/detect | Detect provider
+*V3ApplicationsApi* | [**getApplication**](docs/Api/V3ApplicationsApi.md#getapplication) | **GET** /v3/applications | Get application
+*V3ApplicationsApi* | [**updateApplication**](docs/Api/V3ApplicationsApi.md#updateapplication) | **PATCH** /v3/applications | Update application
+*V3ApplicationsRedirectUrisApi* | [**addCallbackURIToApplication**](docs/Api/V3ApplicationsRedirectUrisApi.md#addcallbackuritoapplication) | **POST** /v3/applications/redirect-uris | Add callback URI to application
+*V3ApplicationsRedirectUrisApi* | [**getAnApplicationsCallbackURIs**](docs/Api/V3ApplicationsRedirectUrisApi.md#getanapplicationscallbackuris) | **GET** /v3/applications/redirect-uris | Get an application&#39;s callback URIs
+*V3ApplicationsRedirectUrisIdApi* | [**deleteACallbackURI**](docs/Api/V3ApplicationsRedirectUrisIdApi.md#deleteacallbackuri) | **DELETE** /v3/applications/redirect-uris/{callback_id} | Delete a callback URI
+*V3ApplicationsRedirectUrisIdApi* | [**getCallbackURI**](docs/Api/V3ApplicationsRedirectUrisIdApi.md#getcallbackuri) | **GET** /v3/applications/redirect-uris/{callback_id} | Get callback URI
+*V3ApplicationsRedirectUrisIdApi* | [**updateACallbackURI**](docs/Api/V3ApplicationsRedirectUrisIdApi.md#updateacallbackuri) | **PATCH** /v3/applications/redirect-uris/{callback_id} | Update a callback URI
+*V3ChannelsPubsubApi* | [**createAPubSubChannel**](docs/Api/V3ChannelsPubsubApi.md#createapubsubchannel) | **POST** /v3/channels/pubsub | Create a PubSub channel
+*V3ChannelsPubsubApi* | [**getPubSubChannelsForAnApplication**](docs/Api/V3ChannelsPubsubApi.md#getpubsubchannelsforanapplication) | **GET** /v3/channels/pubsub | Get PubSub channels for an application
+*V3ChannelsPubsubIdApi* | [**deleteASpecificPubSubChannel**](docs/Api/V3ChannelsPubsubIdApi.md#deleteaspecificpubsubchannel) | **DELETE** /v3/channels/pubsub/{id} | Delete a specific PubSub channel
+*V3ChannelsPubsubIdApi* | [**getASpecificPubSubChannelById**](docs/Api/V3ChannelsPubsubIdApi.md#getaspecificpubsubchannelbyid) | **GET** /v3/channels/pubsub/{id} | Get a specific PubSub channel by id
+*V3ChannelsPubsubIdApi* | [**updateASpecificPubSubChannel**](docs/Api/V3ChannelsPubsubIdApi.md#updateaspecificpubsubchannel) | **PUT** /v3/channels/pubsub/{id} | Update a specific PubSub channel
+*V3ConnectApi* | [**customAuthentication**](docs/Api/V3ConnectApi.md#customauthentication) | **POST** /v3/connect/custom | Custom Authentication
+*V3ConnectApi* | [**hostedOAuthAuthorizationRequest**](docs/Api/V3ConnectApi.md#hostedoauthauthorizationrequest) | **GET** /v3/connect/auth | Hosted OAuth - Authorization Request
+*V3ConnectApi* | [**hostedOAuthRevokeOAuthToken**](docs/Api/V3ConnectApi.md#hostedoauthrevokeoauthtoken) | **POST** /v3/connect/revoke | Hosted OAuth - Revoke OAuth token
+*V3ConnectApi* | [**hostedOAuthTokenExchange**](docs/Api/V3ConnectApi.md#hostedoauthtokenexchange) | **POST** /v3/connect/token | Hosted OAuth - Token exchange
+*V3ConnectApi* | [**tokenInfo**](docs/Api/V3ConnectApi.md#tokeninfo) | **GET** /v3/connect/tokeninfo | Token Info
+*V3ConnectorsApi* | [**createAConnector**](docs/Api/V3ConnectorsApi.md#createaconnector) | **POST** /v3/connectors | Create a connector
+*V3ConnectorsApi* | [**listConnectors**](docs/Api/V3ConnectorsApi.md#listconnectors) | **GET** /v3/connectors | List connectors
+*V3ConnectorsProviderApi* | [**createAConnectorForProvider**](docs/Api/V3ConnectorsProviderApi.md#createaconnectorforprovider) | **POST** /v3/connectors/{provider} | Create a connector
+*V3ConnectorsProviderApi* | [**listConnectorsByProvider**](docs/Api/V3ConnectorsProviderApi.md#listconnectorsbyprovider) | **GET** /v3/connectors/{provider} | List connectors
+*V3ConnectorsProviderCredsApi* | [**createCredential**](docs/Api/V3ConnectorsProviderCredsApi.md#createcredential) | **POST** /v3/connectors/{provider}/creds | Create credential
+*V3ConnectorsProviderCredsApi* | [**listCredentials**](docs/Api/V3ConnectorsProviderCredsApi.md#listcredentials) | **GET** /v3/connectors/{provider}/creds | List credentials
+*V3ConnectorsProviderCredsIdApi* | [**deleteCredentialByID**](docs/Api/V3ConnectorsProviderCredsIdApi.md#deletecredentialbyid) | **DELETE** /v3/connectors/{provider}/creds/{id} | Delete credential by ID
+*V3ConnectorsProviderCredsIdApi* | [**getCredentialByID**](docs/Api/V3ConnectorsProviderCredsIdApi.md#getcredentialbyid) | **GET** /v3/connectors/{provider}/creds/{id} | Get credential by ID
+*V3ConnectorsProviderCredsIdApi* | [**updateCredentialByID**](docs/Api/V3ConnectorsProviderCredsIdApi.md#updatecredentialbyid) | **PATCH** /v3/connectors/{provider}/creds/{id} | Update credential by ID
+*V3GrantsApi* | [**getCurrentGrant**](docs/Api/V3GrantsApi.md#getcurrentgrant) | **GET** /v3/grants/me | Get current grant
+*V3GrantsApi* | [**listGrants**](docs/Api/V3GrantsApi.md#listgrants) | **GET** /v3/grants | List grants
+*V3GrantsGrantIdApi* | [**deleteGrant**](docs/Api/V3GrantsGrantIdApi.md#deletegrant) | **DELETE** /v3/grants/{grantId} | Delete grant
+*V3GrantsGrantIdApi* | [**getAGrant**](docs/Api/V3GrantsGrantIdApi.md#getagrant) | **GET** /v3/grants/{grantId} | Get a grant
+*V3GrantsGrantIdApi* | [**updateGrant**](docs/Api/V3GrantsGrantIdApi.md#updategrant) | **PATCH** /v3/grants/{grantId} | Update grant
+*V3WebhooksApi* | [**createAWebhookDestination**](docs/Api/V3WebhooksApi.md#createawebhookdestination) | **POST** /v3/webhooks | Create a webhook destination
+*V3WebhooksApi* | [**getDestinationsForAnApplication**](docs/Api/V3WebhooksApi.md#getdestinationsforanapplication) | **GET** /v3/webhooks | Get destinations for an application
+*V3WebhooksApi* | [**getMockWebhookPayload**](docs/Api/V3WebhooksApi.md#getmockwebhookpayload) | **POST** /v3/webhooks/mock-payload | Get mock webhook payload
+*V3WebhooksApi* | [**rotateAWebhookSecret**](docs/Api/V3WebhooksApi.md#rotateawebhooksecret) | **POST** /v3/webhooks/rotate-secret/{id} | Rotate a webhook secret
+*V3WebhooksApi* | [**sendTestEvent**](docs/Api/V3WebhooksApi.md#sendtestevent) | **POST** /v3/webhooks/send-test-event | Send test event
+*V3WebhooksIdApi* | [**deleteAWebhookDestination**](docs/Api/V3WebhooksIdApi.md#deleteawebhookdestination) | **DELETE** /v3/webhooks/{id} | Delete a webhook destination
+*V3WebhooksIdApi* | [**getTheDestinationsForAnApplicationByWebhookID**](docs/Api/V3WebhooksIdApi.md#getthedestinationsforanapplicationbywebhookid) | **GET** /v3/webhooks/{id} | Get the destinations for an application by webhook ID
+*V3WebhooksIdApi* | [**updateAWebhookDestination**](docs/Api/V3WebhooksIdApi.md#updateawebhookdestination) | **PUT** /v3/webhooks/{id} | Update a webhook destination
 
 ## Models
 

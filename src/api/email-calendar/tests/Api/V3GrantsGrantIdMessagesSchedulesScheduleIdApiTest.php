@@ -70,24 +70,24 @@ class V3GrantsGrantIdMessagesSchedulesScheduleIdApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdMessagesSchedulesScheduleIdDelete
+     * Test case for retrieveAScheduledMessage
      *
-     * Stop a Scheduled Message.
+     * Retrieve a Scheduled Message.
      *
      */
-    public function testV3GrantsGrantIdMessagesSchedulesScheduleIdDelete()
+    public function testRetrieveAScheduledMessage()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdMessagesSchedulesScheduleIdGet
+     * Test case for stopAScheduledMessage
      *
-     * Retrieve a Scheduled Message.
+     * Stop a Scheduled Message.
      *
      */
-    public function testV3GrantsGrantIdMessagesSchedulesScheduleIdGet()
+    public function testStopAScheduledMessage()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

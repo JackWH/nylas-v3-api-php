@@ -71,7 +71,7 @@ class V3GrantsGrantIdThreadsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3GrantsGrantIdThreadsGet' => [
+        'returnAllThreads' => [
             'application/json',
         ],
     ];
@@ -123,52 +123,52 @@ class V3GrantsGrantIdThreadsApi
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsGet
+     * Operation returnAllThreads
      *
      * Return all Threads
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string|null $accept accept (optional)
      * @param  int|null $limit The number of objects to return. This field defaults to 20. The maximum allowed value for this field is 50. See [pagination](#pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllThreads'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdThreadsGet(
+    public function returnAllThreads(
         string $grant_id,
         ?string $accept = null,
         ?int $limit = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsGet'][0]
+        string $contentType = self::contentTypes['returnAllThreads'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdThreadsGetWithHttpInfo($grant_id, $accept, $limit, $contentType);
+        list($response) = $this->returnAllThreadsWithHttpInfo($grant_id, $accept, $limit, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsGetWithHttpInfo
+     * Operation returnAllThreadsWithHttpInfo
      *
      * Return all Threads
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string|null $accept (optional)
      * @param  int|null $limit The number of objects to return. This field defaults to 20. The maximum allowed value for this field is 50. See [pagination](#pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllThreads'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdThreadsGetWithHttpInfo(
+    public function returnAllThreadsWithHttpInfo(
         string $grant_id,
         ?string $accept = null,
         ?int $limit = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsGet'][0]
+        string $contentType = self::contentTypes['returnAllThreads'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdThreadsGetRequest($grant_id, $accept, $limit, $contentType);
+        $request = $this->returnAllThreadsRequest($grant_id, $accept, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -349,26 +349,26 @@ class V3GrantsGrantIdThreadsApi
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsGetAsync
+     * Operation returnAllThreadsAsync
      *
      * Return all Threads
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string|null $accept (optional)
      * @param  int|null $limit The number of objects to return. This field defaults to 20. The maximum allowed value for this field is 50. See [pagination](#pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllThreads'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdThreadsGetAsync(
+    public function returnAllThreadsAsync(
         string $grant_id,
         ?string $accept = null,
         ?int $limit = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsGet'][0]
+        string $contentType = self::contentTypes['returnAllThreads'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdThreadsGetAsyncWithHttpInfo($grant_id, $accept, $limit, $contentType)
+        return $this->returnAllThreadsAsyncWithHttpInfo($grant_id, $accept, $limit, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -377,27 +377,27 @@ class V3GrantsGrantIdThreadsApi
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsGetAsyncWithHttpInfo
+     * Operation returnAllThreadsAsyncWithHttpInfo
      *
      * Return all Threads
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string|null $accept (optional)
      * @param  int|null $limit The number of objects to return. This field defaults to 20. The maximum allowed value for this field is 50. See [pagination](#pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllThreads'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdThreadsGetAsyncWithHttpInfo(
+    public function returnAllThreadsAsyncWithHttpInfo(
         $grant_id,
         $accept = null,
         $limit = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsGet'][0]
+        string $contentType = self::contentTypes['returnAllThreads'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdThreadsGetRequest($grant_id, $accept, $limit, $contentType);
+        $request = $this->returnAllThreadsRequest($grant_id, $accept, $limit, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -436,28 +436,28 @@ class V3GrantsGrantIdThreadsApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdThreadsGet'
+     * Create request for operation 'returnAllThreads'
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string|null $accept (optional)
      * @param  int|null $limit The number of objects to return. This field defaults to 20. The maximum allowed value for this field is 50. See [pagination](#pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllThreads'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdThreadsGetRequest(
+    public function returnAllThreadsRequest(
         $grant_id,
         $accept = null,
         $limit = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsGet'][0]
+        string $contentType = self::contentTypes['returnAllThreads'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdThreadsGet'
+                'Missing the required parameter $grant_id when calling returnAllThreads'
             );
         }
 

@@ -71,10 +71,10 @@ class V3ConnectorsProviderCredsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3ConnectorsProviderCredsGet' => [
+        'createCredential' => [
             'application/json',
         ],
-        'v3ConnectorsProviderCredsPost' => [
+        'listCredentials' => [
             'application/json',
         ],
     ];
@@ -126,418 +126,7 @@ class V3ConnectorsProviderCredsApi
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsGet
-     *
-     * List credentials
-     *
-     * @param  string $provider (Required) (required)
-     * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsGet'] to see the possible values for this operation
-     *
-     * @throws ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws InvalidArgumentException
-     * @return object|object|object
-     */
-    public function v3ConnectorsProviderCredsGet(
-        string $provider,
-        ?string $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsGet'][0]
-    ): object
-    {
-        list($response) = $this->v3ConnectorsProviderCredsGetWithHttpInfo($provider, $accept, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation v3ConnectorsProviderCredsGetWithHttpInfo
-     *
-     * List credentials
-     *
-     * @param  string $provider (Required) (required)
-     * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsGet'] to see the possible values for this operation
-     *
-     * @throws ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws InvalidArgumentException
-     * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function v3ConnectorsProviderCredsGetWithHttpInfo(
-        string $provider,
-        ?string $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsGet'][0]
-    ): array
-    {
-        $request = $this->v3ConnectorsProviderCredsGetRequest($provider, $accept, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 401:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 404:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation v3ConnectorsProviderCredsGetAsync
-     *
-     * List credentials
-     *
-     * @param  string $provider (Required) (required)
-     * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsGet'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function v3ConnectorsProviderCredsGetAsync(
-        string $provider,
-        ?string $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsGet'][0]
-    ): PromiseInterface
-    {
-        return $this->v3ConnectorsProviderCredsGetAsyncWithHttpInfo($provider, $accept, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation v3ConnectorsProviderCredsGetAsyncWithHttpInfo
-     *
-     * List credentials
-     *
-     * @param  string $provider (Required) (required)
-     * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsGet'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function v3ConnectorsProviderCredsGetAsyncWithHttpInfo(
-        $provider,
-        $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsGet'][0]
-    ): PromiseInterface
-    {
-        $returnType = 'object';
-        $request = $this->v3ConnectorsProviderCredsGetRequest($provider, $accept, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'v3ConnectorsProviderCredsGet'
-     *
-     * @param  string $provider (Required) (required)
-     * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsGet'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function v3ConnectorsProviderCredsGetRequest(
-        $provider,
-        $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsGet'][0]
-    ): Request
-    {
-
-        // verify the required parameter 'provider' is set
-        if ($provider === null || (is_array($provider) && count($provider) === 0)) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter $provider when calling v3ConnectorsProviderCredsGet'
-            );
-        }
-
-
-
-        $resourcePath = '/v3/connectors/{provider}/creds';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($accept !== null) {
-            $headerParams['Accept'] = ObjectSerializer::toHeaderValue($accept);
-        }
-
-        // path params
-        if ($provider !== null) {
-            $resourcePath = str_replace(
-                '{' . 'provider' . '}',
-                ObjectSerializer::toPathValue($provider),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation v3ConnectorsProviderCredsPost
+     * Operation createCredential
      *
      * Create credential
      *
@@ -545,26 +134,26 @@ class V3ConnectorsProviderCredsApi
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createCredential'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3ConnectorsProviderCredsPost(
+    public function createCredential(
         string $provider,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsPost'][0]
+        string $contentType = self::contentTypes['createCredential'][0]
     ): object
     {
-        list($response) = $this->v3ConnectorsProviderCredsPostWithHttpInfo($provider, $content_type, $accept, $body, $contentType);
+        list($response) = $this->createCredentialWithHttpInfo($provider, $content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsPostWithHttpInfo
+     * Operation createCredentialWithHttpInfo
      *
      * Create credential
      *
@@ -572,21 +161,21 @@ class V3ConnectorsProviderCredsApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createCredential'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ConnectorsProviderCredsPostWithHttpInfo(
+    public function createCredentialWithHttpInfo(
         string $provider,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsPost'][0]
+        string $contentType = self::contentTypes['createCredential'][0]
     ): array
     {
-        $request = $this->v3ConnectorsProviderCredsPostRequest($provider, $content_type, $accept, $body, $contentType);
+        $request = $this->createCredentialRequest($provider, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -767,7 +356,7 @@ class V3ConnectorsProviderCredsApi
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsPostAsync
+     * Operation createCredentialAsync
      *
      * Create credential
      *
@@ -775,20 +364,20 @@ class V3ConnectorsProviderCredsApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createCredential'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectorsProviderCredsPostAsync(
+    public function createCredentialAsync(
         string $provider,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsPost'][0]
+        string $contentType = self::contentTypes['createCredential'][0]
     ): PromiseInterface
     {
-        return $this->v3ConnectorsProviderCredsPostAsyncWithHttpInfo($provider, $content_type, $accept, $body, $contentType)
+        return $this->createCredentialAsyncWithHttpInfo($provider, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -797,7 +386,7 @@ class V3ConnectorsProviderCredsApi
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsPostAsyncWithHttpInfo
+     * Operation createCredentialAsyncWithHttpInfo
      *
      * Create credential
      *
@@ -805,21 +394,21 @@ class V3ConnectorsProviderCredsApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createCredential'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectorsProviderCredsPostAsyncWithHttpInfo(
+    public function createCredentialAsyncWithHttpInfo(
         $provider,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsPost'][0]
+        string $contentType = self::contentTypes['createCredential'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ConnectorsProviderCredsPostRequest($provider, $content_type, $accept, $body, $contentType);
+        $request = $this->createCredentialRequest($provider, $content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -858,30 +447,30 @@ class V3ConnectorsProviderCredsApi
     }
 
     /**
-     * Create request for operation 'v3ConnectorsProviderCredsPost'
+     * Create request for operation 'createCredential'
      *
      * @param  string $provider (Required) (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createCredential'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ConnectorsProviderCredsPostRequest(
+    public function createCredentialRequest(
         $provider,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsPost'][0]
+        string $contentType = self::contentTypes['createCredential'][0]
     ): Request
     {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $provider when calling v3ConnectorsProviderCredsPost'
+                'Missing the required parameter $provider when calling createCredential'
             );
         }
 
@@ -974,6 +563,417 @@ class V3ConnectorsProviderCredsApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listCredentials
+     *
+     * List credentials
+     *
+     * @param  string $provider (Required) (required)
+     * @param  string|null $accept accept (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCredentials'] to see the possible values for this operation
+     *
+     * @throws ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws InvalidArgumentException
+     * @return object|object|object
+     */
+    public function listCredentials(
+        string $provider,
+        ?string $accept = null,
+        string $contentType = self::contentTypes['listCredentials'][0]
+    ): object
+    {
+        list($response) = $this->listCredentialsWithHttpInfo($provider, $accept, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listCredentialsWithHttpInfo
+     *
+     * List credentials
+     *
+     * @param  string $provider (Required) (required)
+     * @param  string|null $accept (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCredentials'] to see the possible values for this operation
+     *
+     * @throws ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws InvalidArgumentException
+     * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listCredentialsWithHttpInfo(
+        string $provider,
+        ?string $accept = null,
+        string $contentType = self::contentTypes['listCredentials'][0]
+    ): array
+    {
+        $request = $this->listCredentialsRequest($provider, $accept, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listCredentialsAsync
+     *
+     * List credentials
+     *
+     * @param  string $provider (Required) (required)
+     * @param  string|null $accept (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCredentials'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
+     */
+    public function listCredentialsAsync(
+        string $provider,
+        ?string $accept = null,
+        string $contentType = self::contentTypes['listCredentials'][0]
+    ): PromiseInterface
+    {
+        return $this->listCredentialsAsyncWithHttpInfo($provider, $accept, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listCredentialsAsyncWithHttpInfo
+     *
+     * List credentials
+     *
+     * @param  string $provider (Required) (required)
+     * @param  string|null $accept (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCredentials'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
+     */
+    public function listCredentialsAsyncWithHttpInfo(
+        $provider,
+        $accept = null,
+        string $contentType = self::contentTypes['listCredentials'][0]
+    ): PromiseInterface
+    {
+        $returnType = 'object';
+        $request = $this->listCredentialsRequest($provider, $accept, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listCredentials'
+     *
+     * @param  string $provider (Required) (required)
+     * @param  string|null $accept (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listCredentials'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listCredentialsRequest(
+        $provider,
+        $accept = null,
+        string $contentType = self::contentTypes['listCredentials'][0]
+    ): Request
+    {
+
+        // verify the required parameter 'provider' is set
+        if ($provider === null || (is_array($provider) && count($provider) === 0)) {
+            throw new InvalidArgumentException(
+                'Missing the required parameter $provider when calling listCredentials'
+            );
+        }
+
+
+
+        $resourcePath = '/v3/connectors/{provider}/creds';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($accept !== null) {
+            $headerParams['Accept'] = ObjectSerializer::toHeaderValue($accept);
+        }
+
+        // path params
+        if ($provider !== null) {
+            $resourcePath = str_replace(
+                '{' . 'provider' . '}',
+                ObjectSerializer::toPathValue($provider),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

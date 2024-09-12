@@ -71,7 +71,7 @@ class V3GrantsGrantIdApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3GrantsGrantIdResourcesGet' => [
+        'returnAllRoomResources' => [
             'application/json',
         ],
     ];
@@ -123,7 +123,7 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdResourcesGet
+     * Operation returnAllRoomResources
      *
      * Return all room resources
      *
@@ -131,26 +131,26 @@ class V3GrantsGrantIdApi
      * @param  string|null $accept accept (optional)
      * @param  int|null $limit The maximum number of objects to return. See [pagination](/docs/api/v3/ecc/#overview--pagination) for more information. (optional)
      * @param  string|null $page_token An identifier that specifies which page of data to return. You can get this value from the &#x60;next_cursor&#x60; response field. See [Pagination](/docs/api/v3/ecc/#overview--pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdResourcesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllRoomResources'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object|object
      */
-    public function v3GrantsGrantIdResourcesGet(
+    public function returnAllRoomResources(
         string $grant_id,
         ?string $accept = null,
         ?int $limit = null,
         ?string $page_token = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdResourcesGet'][0]
+        string $contentType = self::contentTypes['returnAllRoomResources'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdResourcesGetWithHttpInfo($grant_id, $accept, $limit, $page_token, $contentType);
+        list($response) = $this->returnAllRoomResourcesWithHttpInfo($grant_id, $accept, $limit, $page_token, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdResourcesGetWithHttpInfo
+     * Operation returnAllRoomResourcesWithHttpInfo
      *
      * Return all room resources
      *
@@ -158,21 +158,21 @@ class V3GrantsGrantIdApi
      * @param  string|null $accept (optional)
      * @param  int|null $limit The maximum number of objects to return. See [pagination](/docs/api/v3/ecc/#overview--pagination) for more information. (optional)
      * @param  string|null $page_token An identifier that specifies which page of data to return. You can get this value from the &#x60;next_cursor&#x60; response field. See [Pagination](/docs/api/v3/ecc/#overview--pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdResourcesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllRoomResources'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdResourcesGetWithHttpInfo(
+    public function returnAllRoomResourcesWithHttpInfo(
         string $grant_id,
         ?string $accept = null,
         ?int $limit = null,
         ?string $page_token = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdResourcesGet'][0]
+        string $contentType = self::contentTypes['returnAllRoomResources'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdResourcesGetRequest($grant_id, $accept, $limit, $page_token, $contentType);
+        $request = $this->returnAllRoomResourcesRequest($grant_id, $accept, $limit, $page_token, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -423,7 +423,7 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdResourcesGetAsync
+     * Operation returnAllRoomResourcesAsync
      *
      * Return all room resources
      *
@@ -431,20 +431,20 @@ class V3GrantsGrantIdApi
      * @param  string|null $accept (optional)
      * @param  int|null $limit The maximum number of objects to return. See [pagination](/docs/api/v3/ecc/#overview--pagination) for more information. (optional)
      * @param  string|null $page_token An identifier that specifies which page of data to return. You can get this value from the &#x60;next_cursor&#x60; response field. See [Pagination](/docs/api/v3/ecc/#overview--pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdResourcesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllRoomResources'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdResourcesGetAsync(
+    public function returnAllRoomResourcesAsync(
         string $grant_id,
         ?string $accept = null,
         ?int $limit = null,
         ?string $page_token = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdResourcesGet'][0]
+        string $contentType = self::contentTypes['returnAllRoomResources'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdResourcesGetAsyncWithHttpInfo($grant_id, $accept, $limit, $page_token, $contentType)
+        return $this->returnAllRoomResourcesAsyncWithHttpInfo($grant_id, $accept, $limit, $page_token, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -453,7 +453,7 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdResourcesGetAsyncWithHttpInfo
+     * Operation returnAllRoomResourcesAsyncWithHttpInfo
      *
      * Return all room resources
      *
@@ -461,21 +461,21 @@ class V3GrantsGrantIdApi
      * @param  string|null $accept (optional)
      * @param  int|null $limit The maximum number of objects to return. See [pagination](/docs/api/v3/ecc/#overview--pagination) for more information. (optional)
      * @param  string|null $page_token An identifier that specifies which page of data to return. You can get this value from the &#x60;next_cursor&#x60; response field. See [Pagination](/docs/api/v3/ecc/#overview--pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdResourcesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllRoomResources'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdResourcesGetAsyncWithHttpInfo(
+    public function returnAllRoomResourcesAsyncWithHttpInfo(
         $grant_id,
         $accept = null,
         $limit = null,
         $page_token = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdResourcesGet'][0]
+        string $contentType = self::contentTypes['returnAllRoomResources'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdResourcesGetRequest($grant_id, $accept, $limit, $page_token, $contentType);
+        $request = $this->returnAllRoomResourcesRequest($grant_id, $accept, $limit, $page_token, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -514,30 +514,30 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdResourcesGet'
+     * Create request for operation 'returnAllRoomResources'
      *
      * @param  string $grant_id (Required) ID of the grant to access. Use &#x60;/me/&#x60; to refer to the grant associated with an access token. (required)
      * @param  string|null $accept (optional)
      * @param  int|null $limit The maximum number of objects to return. See [pagination](/docs/api/v3/ecc/#overview--pagination) for more information. (optional)
      * @param  string|null $page_token An identifier that specifies which page of data to return. You can get this value from the &#x60;next_cursor&#x60; response field. See [Pagination](/docs/api/v3/ecc/#overview--pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdResourcesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllRoomResources'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdResourcesGetRequest(
+    public function returnAllRoomResourcesRequest(
         $grant_id,
         $accept = null,
         $limit = null,
         $page_token = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdResourcesGet'][0]
+        string $contentType = self::contentTypes['returnAllRoomResources'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdResourcesGet'
+                'Missing the required parameter $grant_id when calling returnAllRoomResources'
             );
         }
 

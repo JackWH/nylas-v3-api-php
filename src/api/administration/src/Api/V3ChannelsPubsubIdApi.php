@@ -71,13 +71,13 @@ class V3ChannelsPubsubIdApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3ChannelsPubsubIdDelete' => [
+        'deleteASpecificPubSubChannel' => [
             'application/json',
         ],
-        'v3ChannelsPubsubIdGet' => [
+        'getASpecificPubSubChannelById' => [
             'application/json',
         ],
-        'v3ChannelsPubsubIdPut' => [
+        'updateASpecificPubSubChannel' => [
             'application/json',
         ],
     ];
@@ -129,48 +129,48 @@ class V3ChannelsPubsubIdApi
     }
 
     /**
-     * Operation v3ChannelsPubsubIdDelete
+     * Operation deleteASpecificPubSubChannel
      *
      * Delete a specific PubSub channel
      *
      * @param  string $id (Required) The ID of the PubSub channel to retrieve. (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteASpecificPubSubChannel'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object
      */
-    public function v3ChannelsPubsubIdDelete(
+    public function deleteASpecificPubSubChannel(
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdDelete'][0]
+        string $contentType = self::contentTypes['deleteASpecificPubSubChannel'][0]
     ): object
     {
-        list($response) = $this->v3ChannelsPubsubIdDeleteWithHttpInfo($id, $accept, $contentType);
+        list($response) = $this->deleteASpecificPubSubChannelWithHttpInfo($id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ChannelsPubsubIdDeleteWithHttpInfo
+     * Operation deleteASpecificPubSubChannelWithHttpInfo
      *
      * Delete a specific PubSub channel
      *
      * @param  string $id (Required) The ID of the PubSub channel to retrieve. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteASpecificPubSubChannel'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ChannelsPubsubIdDeleteWithHttpInfo(
+    public function deleteASpecificPubSubChannelWithHttpInfo(
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdDelete'][0]
+        string $contentType = self::contentTypes['deleteASpecificPubSubChannel'][0]
     ): array
     {
-        $request = $this->v3ChannelsPubsubIdDeleteRequest($id, $accept, $contentType);
+        $request = $this->deleteASpecificPubSubChannelRequest($id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -316,24 +316,24 @@ class V3ChannelsPubsubIdApi
     }
 
     /**
-     * Operation v3ChannelsPubsubIdDeleteAsync
+     * Operation deleteASpecificPubSubChannelAsync
      *
      * Delete a specific PubSub channel
      *
      * @param  string $id (Required) The ID of the PubSub channel to retrieve. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteASpecificPubSubChannel'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ChannelsPubsubIdDeleteAsync(
+    public function deleteASpecificPubSubChannelAsync(
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdDelete'][0]
+        string $contentType = self::contentTypes['deleteASpecificPubSubChannel'][0]
     ): PromiseInterface
     {
-        return $this->v3ChannelsPubsubIdDeleteAsyncWithHttpInfo($id, $accept, $contentType)
+        return $this->deleteASpecificPubSubChannelAsyncWithHttpInfo($id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -342,25 +342,25 @@ class V3ChannelsPubsubIdApi
     }
 
     /**
-     * Operation v3ChannelsPubsubIdDeleteAsyncWithHttpInfo
+     * Operation deleteASpecificPubSubChannelAsyncWithHttpInfo
      *
      * Delete a specific PubSub channel
      *
      * @param  string $id (Required) The ID of the PubSub channel to retrieve. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteASpecificPubSubChannel'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ChannelsPubsubIdDeleteAsyncWithHttpInfo(
+    public function deleteASpecificPubSubChannelAsyncWithHttpInfo(
         $id,
         $accept = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdDelete'][0]
+        string $contentType = self::contentTypes['deleteASpecificPubSubChannel'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ChannelsPubsubIdDeleteRequest($id, $accept, $contentType);
+        $request = $this->deleteASpecificPubSubChannelRequest($id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -399,26 +399,26 @@ class V3ChannelsPubsubIdApi
     }
 
     /**
-     * Create request for operation 'v3ChannelsPubsubIdDelete'
+     * Create request for operation 'deleteASpecificPubSubChannel'
      *
      * @param  string $id (Required) The ID of the PubSub channel to retrieve. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteASpecificPubSubChannel'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ChannelsPubsubIdDeleteRequest(
+    public function deleteASpecificPubSubChannelRequest(
         $id,
         $accept = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdDelete'][0]
+        string $contentType = self::contentTypes['deleteASpecificPubSubChannel'][0]
     ): Request
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $id when calling v3ChannelsPubsubIdDelete'
+                'Missing the required parameter $id when calling deleteASpecificPubSubChannel'
             );
         }
 
@@ -505,48 +505,48 @@ class V3ChannelsPubsubIdApi
     }
 
     /**
-     * Operation v3ChannelsPubsubIdGet
+     * Operation getASpecificPubSubChannelById
      *
      * Get a specific PubSub channel by id
      *
      * @param  string $id (Required) The ID of the PubSub channel to retrieve. (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getASpecificPubSubChannelById'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object
      */
-    public function v3ChannelsPubsubIdGet(
+    public function getASpecificPubSubChannelById(
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdGet'][0]
+        string $contentType = self::contentTypes['getASpecificPubSubChannelById'][0]
     ): object
     {
-        list($response) = $this->v3ChannelsPubsubIdGetWithHttpInfo($id, $accept, $contentType);
+        list($response) = $this->getASpecificPubSubChannelByIdWithHttpInfo($id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ChannelsPubsubIdGetWithHttpInfo
+     * Operation getASpecificPubSubChannelByIdWithHttpInfo
      *
      * Get a specific PubSub channel by id
      *
      * @param  string $id (Required) The ID of the PubSub channel to retrieve. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getASpecificPubSubChannelById'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ChannelsPubsubIdGetWithHttpInfo(
+    public function getASpecificPubSubChannelByIdWithHttpInfo(
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdGet'][0]
+        string $contentType = self::contentTypes['getASpecificPubSubChannelById'][0]
     ): array
     {
-        $request = $this->v3ChannelsPubsubIdGetRequest($id, $accept, $contentType);
+        $request = $this->getASpecificPubSubChannelByIdRequest($id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -692,24 +692,24 @@ class V3ChannelsPubsubIdApi
     }
 
     /**
-     * Operation v3ChannelsPubsubIdGetAsync
+     * Operation getASpecificPubSubChannelByIdAsync
      *
      * Get a specific PubSub channel by id
      *
      * @param  string $id (Required) The ID of the PubSub channel to retrieve. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getASpecificPubSubChannelById'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ChannelsPubsubIdGetAsync(
+    public function getASpecificPubSubChannelByIdAsync(
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdGet'][0]
+        string $contentType = self::contentTypes['getASpecificPubSubChannelById'][0]
     ): PromiseInterface
     {
-        return $this->v3ChannelsPubsubIdGetAsyncWithHttpInfo($id, $accept, $contentType)
+        return $this->getASpecificPubSubChannelByIdAsyncWithHttpInfo($id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -718,25 +718,25 @@ class V3ChannelsPubsubIdApi
     }
 
     /**
-     * Operation v3ChannelsPubsubIdGetAsyncWithHttpInfo
+     * Operation getASpecificPubSubChannelByIdAsyncWithHttpInfo
      *
      * Get a specific PubSub channel by id
      *
      * @param  string $id (Required) The ID of the PubSub channel to retrieve. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getASpecificPubSubChannelById'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ChannelsPubsubIdGetAsyncWithHttpInfo(
+    public function getASpecificPubSubChannelByIdAsyncWithHttpInfo(
         $id,
         $accept = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdGet'][0]
+        string $contentType = self::contentTypes['getASpecificPubSubChannelById'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ChannelsPubsubIdGetRequest($id, $accept, $contentType);
+        $request = $this->getASpecificPubSubChannelByIdRequest($id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -775,26 +775,26 @@ class V3ChannelsPubsubIdApi
     }
 
     /**
-     * Create request for operation 'v3ChannelsPubsubIdGet'
+     * Create request for operation 'getASpecificPubSubChannelById'
      *
      * @param  string $id (Required) The ID of the PubSub channel to retrieve. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getASpecificPubSubChannelById'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ChannelsPubsubIdGetRequest(
+    public function getASpecificPubSubChannelByIdRequest(
         $id,
         $accept = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdGet'][0]
+        string $contentType = self::contentTypes['getASpecificPubSubChannelById'][0]
     ): Request
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $id when calling v3ChannelsPubsubIdGet'
+                'Missing the required parameter $id when calling getASpecificPubSubChannelById'
             );
         }
 
@@ -881,7 +881,7 @@ class V3ChannelsPubsubIdApi
     }
 
     /**
-     * Operation v3ChannelsPubsubIdPut
+     * Operation updateASpecificPubSubChannel
      *
      * Update a specific PubSub channel
      *
@@ -889,26 +889,26 @@ class V3ChannelsPubsubIdApi
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateASpecificPubSubChannel'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object
      */
-    public function v3ChannelsPubsubIdPut(
+    public function updateASpecificPubSubChannel(
         string $id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdPut'][0]
+        string $contentType = self::contentTypes['updateASpecificPubSubChannel'][0]
     ): object
     {
-        list($response) = $this->v3ChannelsPubsubIdPutWithHttpInfo($id, $content_type, $accept, $body, $contentType);
+        list($response) = $this->updateASpecificPubSubChannelWithHttpInfo($id, $content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ChannelsPubsubIdPutWithHttpInfo
+     * Operation updateASpecificPubSubChannelWithHttpInfo
      *
      * Update a specific PubSub channel
      *
@@ -916,21 +916,21 @@ class V3ChannelsPubsubIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateASpecificPubSubChannel'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ChannelsPubsubIdPutWithHttpInfo(
+    public function updateASpecificPubSubChannelWithHttpInfo(
         string $id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdPut'][0]
+        string $contentType = self::contentTypes['updateASpecificPubSubChannel'][0]
     ): array
     {
-        $request = $this->v3ChannelsPubsubIdPutRequest($id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateASpecificPubSubChannelRequest($id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1076,7 +1076,7 @@ class V3ChannelsPubsubIdApi
     }
 
     /**
-     * Operation v3ChannelsPubsubIdPutAsync
+     * Operation updateASpecificPubSubChannelAsync
      *
      * Update a specific PubSub channel
      *
@@ -1084,20 +1084,20 @@ class V3ChannelsPubsubIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateASpecificPubSubChannel'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ChannelsPubsubIdPutAsync(
+    public function updateASpecificPubSubChannelAsync(
         string $id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdPut'][0]
+        string $contentType = self::contentTypes['updateASpecificPubSubChannel'][0]
     ): PromiseInterface
     {
-        return $this->v3ChannelsPubsubIdPutAsyncWithHttpInfo($id, $content_type, $accept, $body, $contentType)
+        return $this->updateASpecificPubSubChannelAsyncWithHttpInfo($id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1106,7 +1106,7 @@ class V3ChannelsPubsubIdApi
     }
 
     /**
-     * Operation v3ChannelsPubsubIdPutAsyncWithHttpInfo
+     * Operation updateASpecificPubSubChannelAsyncWithHttpInfo
      *
      * Update a specific PubSub channel
      *
@@ -1114,21 +1114,21 @@ class V3ChannelsPubsubIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateASpecificPubSubChannel'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ChannelsPubsubIdPutAsyncWithHttpInfo(
+    public function updateASpecificPubSubChannelAsyncWithHttpInfo(
         $id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdPut'][0]
+        string $contentType = self::contentTypes['updateASpecificPubSubChannel'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ChannelsPubsubIdPutRequest($id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateASpecificPubSubChannelRequest($id, $content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1167,30 +1167,30 @@ class V3ChannelsPubsubIdApi
     }
 
     /**
-     * Create request for operation 'v3ChannelsPubsubIdPut'
+     * Create request for operation 'updateASpecificPubSubChannel'
      *
      * @param  string $id (Required) The ID of the PubSub channel to retrieve. (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ChannelsPubsubIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateASpecificPubSubChannel'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ChannelsPubsubIdPutRequest(
+    public function updateASpecificPubSubChannelRequest(
         $id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3ChannelsPubsubIdPut'][0]
+        string $contentType = self::contentTypes['updateASpecificPubSubChannel'][0]
     ): Request
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $id when calling v3ChannelsPubsubIdPut'
+                'Missing the required parameter $id when calling updateASpecificPubSubChannel'
             );
         }
 

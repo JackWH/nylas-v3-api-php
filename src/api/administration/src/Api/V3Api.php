@@ -71,7 +71,7 @@ class V3Api
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3ProvidersDetectPost' => [
+        'detectProvider' => [
             'application/json',
         ],
     ];
@@ -123,52 +123,52 @@ class V3Api
     }
 
     /**
-     * Operation v3ProvidersDetectPost
+     * Operation detectProvider
      *
      * Detect provider
      *
      * @param  string|null $accept accept (optional)
      * @param  string|null $email (Required) Email for detection (optional)
      * @param  bool|null $all_provider_types Search by all providers regardless of if they have an existing connector (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ProvidersDetectPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['detectProvider'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object
      */
-    public function v3ProvidersDetectPost(
+    public function detectProvider(
         ?string $accept = null,
         ?string $email = null,
         ?bool $all_provider_types = null,
-        string $contentType = self::contentTypes['v3ProvidersDetectPost'][0]
+        string $contentType = self::contentTypes['detectProvider'][0]
     ): object
     {
-        list($response) = $this->v3ProvidersDetectPostWithHttpInfo($accept, $email, $all_provider_types, $contentType);
+        list($response) = $this->detectProviderWithHttpInfo($accept, $email, $all_provider_types, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ProvidersDetectPostWithHttpInfo
+     * Operation detectProviderWithHttpInfo
      *
      * Detect provider
      *
      * @param  string|null $accept (optional)
      * @param  string|null $email (Required) Email for detection (optional)
      * @param  bool|null $all_provider_types Search by all providers regardless of if they have an existing connector (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ProvidersDetectPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['detectProvider'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ProvidersDetectPostWithHttpInfo(
+    public function detectProviderWithHttpInfo(
         ?string $accept = null,
         ?string $email = null,
         ?bool $all_provider_types = null,
-        string $contentType = self::contentTypes['v3ProvidersDetectPost'][0]
+        string $contentType = self::contentTypes['detectProvider'][0]
     ): array
     {
-        $request = $this->v3ProvidersDetectPostRequest($accept, $email, $all_provider_types, $contentType);
+        $request = $this->detectProviderRequest($accept, $email, $all_provider_types, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -314,26 +314,26 @@ class V3Api
     }
 
     /**
-     * Operation v3ProvidersDetectPostAsync
+     * Operation detectProviderAsync
      *
      * Detect provider
      *
      * @param  string|null $accept (optional)
      * @param  string|null $email (Required) Email for detection (optional)
      * @param  bool|null $all_provider_types Search by all providers regardless of if they have an existing connector (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ProvidersDetectPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['detectProvider'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ProvidersDetectPostAsync(
+    public function detectProviderAsync(
         ?string $accept = null,
         ?string $email = null,
         ?bool $all_provider_types = null,
-        string $contentType = self::contentTypes['v3ProvidersDetectPost'][0]
+        string $contentType = self::contentTypes['detectProvider'][0]
     ): PromiseInterface
     {
-        return $this->v3ProvidersDetectPostAsyncWithHttpInfo($accept, $email, $all_provider_types, $contentType)
+        return $this->detectProviderAsyncWithHttpInfo($accept, $email, $all_provider_types, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -342,27 +342,27 @@ class V3Api
     }
 
     /**
-     * Operation v3ProvidersDetectPostAsyncWithHttpInfo
+     * Operation detectProviderAsyncWithHttpInfo
      *
      * Detect provider
      *
      * @param  string|null $accept (optional)
      * @param  string|null $email (Required) Email for detection (optional)
      * @param  bool|null $all_provider_types Search by all providers regardless of if they have an existing connector (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ProvidersDetectPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['detectProvider'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ProvidersDetectPostAsyncWithHttpInfo(
+    public function detectProviderAsyncWithHttpInfo(
         $accept = null,
         $email = null,
         $all_provider_types = null,
-        string $contentType = self::contentTypes['v3ProvidersDetectPost'][0]
+        string $contentType = self::contentTypes['detectProvider'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ProvidersDetectPostRequest($accept, $email, $all_provider_types, $contentType);
+        $request = $this->detectProviderRequest($accept, $email, $all_provider_types, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -401,21 +401,21 @@ class V3Api
     }
 
     /**
-     * Create request for operation 'v3ProvidersDetectPost'
+     * Create request for operation 'detectProvider'
      *
      * @param  string|null $accept (optional)
      * @param  string|null $email (Required) Email for detection (optional)
      * @param  bool|null $all_provider_types Search by all providers regardless of if they have an existing connector (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ProvidersDetectPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['detectProvider'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ProvidersDetectPostRequest(
+    public function detectProviderRequest(
         $accept = null,
         $email = null,
         $all_provider_types = null,
-        string $contentType = self::contentTypes['v3ProvidersDetectPost'][0]
+        string $contentType = self::contentTypes['detectProvider'][0]
     ): Request
     {
 

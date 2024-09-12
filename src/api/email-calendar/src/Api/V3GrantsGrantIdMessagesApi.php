@@ -71,16 +71,16 @@ class V3GrantsGrantIdMessagesApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3GrantsGrantIdMessagesCleanPut' => [
+        'cleanEmailMessages' => [
             'application/json',
         ],
-        'v3GrantsGrantIdMessagesGet' => [
+        'composeAMessage' => [
             'application/json',
         ],
-        'v3GrantsGrantIdMessagesSendPost' => [
+        'returnAllMessages' => [
             'application/json',
         ],
-        'v3GrantsGrantIdMessagesSmartComposePost' => [
+        'sendAMessage' => [
             'application/json',
         ],
     ];
@@ -132,7 +132,7 @@ class V3GrantsGrantIdMessagesApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesCleanPut
+     * Operation cleanEmailMessages
      *
      * Clean email messages
      *
@@ -141,27 +141,27 @@ class V3GrantsGrantIdMessagesApi
      * @param  string|null $accept accept (optional)
      * @param  string|null $select Specify fields that you want Nylas to return, as a comma-separated list (for example, &#x60;select&#x3D;id,updated_at&#x60;). This allows you to receive only the portion of object data that you&#39;re interested in. You can use &#x60;select&#x60; to optimize response size and reduce latency by limiting queries to only the information that you need. (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesCleanPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cleanEmailMessages'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object|object
      */
-    public function v3GrantsGrantIdMessagesCleanPut(
+    public function cleanEmailMessages(
         string $grant_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?string $select = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesCleanPut'][0]
+        string $contentType = self::contentTypes['cleanEmailMessages'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdMessagesCleanPutWithHttpInfo($grant_id, $content_type, $accept, $select, $body, $contentType);
+        list($response) = $this->cleanEmailMessagesWithHttpInfo($grant_id, $content_type, $accept, $select, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesCleanPutWithHttpInfo
+     * Operation cleanEmailMessagesWithHttpInfo
      *
      * Clean email messages
      *
@@ -170,22 +170,22 @@ class V3GrantsGrantIdMessagesApi
      * @param  string|null $accept (optional)
      * @param  string|null $select Specify fields that you want Nylas to return, as a comma-separated list (for example, &#x60;select&#x3D;id,updated_at&#x60;). This allows you to receive only the portion of object data that you&#39;re interested in. You can use &#x60;select&#x60; to optimize response size and reduce latency by limiting queries to only the information that you need. (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesCleanPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cleanEmailMessages'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdMessagesCleanPutWithHttpInfo(
+    public function cleanEmailMessagesWithHttpInfo(
         string $grant_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?string $select = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesCleanPut'][0]
+        string $contentType = self::contentTypes['cleanEmailMessages'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdMessagesCleanPutRequest($grant_id, $content_type, $accept, $select, $body, $contentType);
+        $request = $this->cleanEmailMessagesRequest($grant_id, $content_type, $accept, $select, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -436,7 +436,7 @@ class V3GrantsGrantIdMessagesApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesCleanPutAsync
+     * Operation cleanEmailMessagesAsync
      *
      * Clean email messages
      *
@@ -445,21 +445,21 @@ class V3GrantsGrantIdMessagesApi
      * @param  string|null $accept (optional)
      * @param  string|null $select Specify fields that you want Nylas to return, as a comma-separated list (for example, &#x60;select&#x3D;id,updated_at&#x60;). This allows you to receive only the portion of object data that you&#39;re interested in. You can use &#x60;select&#x60; to optimize response size and reduce latency by limiting queries to only the information that you need. (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesCleanPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cleanEmailMessages'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdMessagesCleanPutAsync(
+    public function cleanEmailMessagesAsync(
         string $grant_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?string $select = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesCleanPut'][0]
+        string $contentType = self::contentTypes['cleanEmailMessages'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdMessagesCleanPutAsyncWithHttpInfo($grant_id, $content_type, $accept, $select, $body, $contentType)
+        return $this->cleanEmailMessagesAsyncWithHttpInfo($grant_id, $content_type, $accept, $select, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -468,7 +468,7 @@ class V3GrantsGrantIdMessagesApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesCleanPutAsyncWithHttpInfo
+     * Operation cleanEmailMessagesAsyncWithHttpInfo
      *
      * Clean email messages
      *
@@ -477,22 +477,22 @@ class V3GrantsGrantIdMessagesApi
      * @param  string|null $accept (optional)
      * @param  string|null $select Specify fields that you want Nylas to return, as a comma-separated list (for example, &#x60;select&#x3D;id,updated_at&#x60;). This allows you to receive only the portion of object data that you&#39;re interested in. You can use &#x60;select&#x60; to optimize response size and reduce latency by limiting queries to only the information that you need. (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesCleanPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cleanEmailMessages'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdMessagesCleanPutAsyncWithHttpInfo(
+    public function cleanEmailMessagesAsyncWithHttpInfo(
         $grant_id,
         $content_type = null,
         $accept = null,
         $select = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesCleanPut'][0]
+        string $contentType = self::contentTypes['cleanEmailMessages'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdMessagesCleanPutRequest($grant_id, $content_type, $accept, $select, $body, $contentType);
+        $request = $this->cleanEmailMessagesRequest($grant_id, $content_type, $accept, $select, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -531,32 +531,32 @@ class V3GrantsGrantIdMessagesApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdMessagesCleanPut'
+     * Create request for operation 'cleanEmailMessages'
      *
      * @param  string $grant_id (Required) ID of the grant to access. Use &#x60;/me/&#x60; to refer to the grant associated with an access token. (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  string|null $select Specify fields that you want Nylas to return, as a comma-separated list (for example, &#x60;select&#x3D;id,updated_at&#x60;). This allows you to receive only the portion of object data that you&#39;re interested in. You can use &#x60;select&#x60; to optimize response size and reduce latency by limiting queries to only the information that you need. (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesCleanPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cleanEmailMessages'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdMessagesCleanPutRequest(
+    public function cleanEmailMessagesRequest(
         $grant_id,
         $content_type = null,
         $accept = null,
         $select = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesCleanPut'][0]
+        string $contentType = self::contentTypes['cleanEmailMessages'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdMessagesCleanPut'
+                'Missing the required parameter $grant_id when calling cleanEmailMessages'
             );
         }
 
@@ -666,52 +666,566 @@ class V3GrantsGrantIdMessagesApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesGet
+     * Operation composeAMessage
+     *
+     * Compose a message
+     *
+     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
+     * @param  string|null $content_type content_type (optional)
+     * @param  string|null $accept accept (optional)
+     * @param  object|null $body body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['composeAMessage'] to see the possible values for this operation
+     *
+     * @throws ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws InvalidArgumentException
+     * @return object|object|object|object|object
+     */
+    public function composeAMessage(
+        string $grant_id,
+        ?string $content_type = null,
+        ?string $accept = null,
+        ?array $body = null,
+        string $contentType = self::contentTypes['composeAMessage'][0]
+    ): object
+    {
+        list($response) = $this->composeAMessageWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation composeAMessageWithHttpInfo
+     *
+     * Compose a message
+     *
+     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
+     * @param  string|null $content_type (optional)
+     * @param  string|null $accept (optional)
+     * @param  object|null $body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['composeAMessage'] to see the possible values for this operation
+     *
+     * @throws ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws InvalidArgumentException
+     * @return array of object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function composeAMessageWithHttpInfo(
+        string $grant_id,
+        ?string $content_type = null,
+        ?string $accept = null,
+        ?array $body = null,
+        string $contentType = self::contentTypes['composeAMessage'][0]
+    ): array
+    {
+        $request = $this->composeAMessageRequest($grant_id, $content_type, $accept, $body, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation composeAMessageAsync
+     *
+     * Compose a message
+     *
+     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
+     * @param  string|null $content_type (optional)
+     * @param  string|null $accept (optional)
+     * @param  object|null $body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['composeAMessage'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
+     */
+    public function composeAMessageAsync(
+        string $grant_id,
+        ?string $content_type = null,
+        ?string $accept = null,
+        ?array $body = null,
+        string $contentType = self::contentTypes['composeAMessage'][0]
+    ): PromiseInterface
+    {
+        return $this->composeAMessageAsyncWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation composeAMessageAsyncWithHttpInfo
+     *
+     * Compose a message
+     *
+     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
+     * @param  string|null $content_type (optional)
+     * @param  string|null $accept (optional)
+     * @param  object|null $body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['composeAMessage'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
+     */
+    public function composeAMessageAsyncWithHttpInfo(
+        $grant_id,
+        $content_type = null,
+        $accept = null,
+        $body = null,
+        string $contentType = self::contentTypes['composeAMessage'][0]
+    ): PromiseInterface
+    {
+        $returnType = 'object';
+        $request = $this->composeAMessageRequest($grant_id, $content_type, $accept, $body, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'composeAMessage'
+     *
+     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
+     * @param  string|null $content_type (optional)
+     * @param  string|null $accept (optional)
+     * @param  object|null $body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['composeAMessage'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function composeAMessageRequest(
+        $grant_id,
+        $content_type = null,
+        $accept = null,
+        $body = null,
+        string $contentType = self::contentTypes['composeAMessage'][0]
+    ): Request
+    {
+
+        // verify the required parameter 'grant_id' is set
+        if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
+            throw new InvalidArgumentException(
+                'Missing the required parameter $grant_id when calling composeAMessage'
+            );
+        }
+
+
+
+
+
+        $resourcePath = '/v3/grants/{grant_id}/messages/smart-compose';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($content_type !== null) {
+            $headerParams['Content-Type'] = ObjectSerializer::toHeaderValue($content_type);
+        }
+        // header params
+        if ($accept !== null) {
+            $headerParams['Accept'] = ObjectSerializer::toHeaderValue($accept);
+        }
+
+        // path params
+        if ($grant_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'grant_id' . '}',
+                ObjectSerializer::toPathValue($grant_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($body)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($body));
+            } else {
+                $httpBody = $body;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation returnAllMessages
      *
      * Return all Messages
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string|null $accept accept (optional)
      * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllMessages'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdMessagesGet(
+    public function returnAllMessages(
         string $grant_id,
         ?string $accept = null,
         ?int $limit = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesGet'][0]
+        string $contentType = self::contentTypes['returnAllMessages'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdMessagesGetWithHttpInfo($grant_id, $accept, $limit, $contentType);
+        list($response) = $this->returnAllMessagesWithHttpInfo($grant_id, $accept, $limit, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesGetWithHttpInfo
+     * Operation returnAllMessagesWithHttpInfo
      *
      * Return all Messages
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string|null $accept (optional)
      * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllMessages'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdMessagesGetWithHttpInfo(
+    public function returnAllMessagesWithHttpInfo(
         string $grant_id,
         ?string $accept = null,
         ?int $limit = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesGet'][0]
+        string $contentType = self::contentTypes['returnAllMessages'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdMessagesGetRequest($grant_id, $accept, $limit, $contentType);
+        $request = $this->returnAllMessagesRequest($grant_id, $accept, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -892,26 +1406,26 @@ class V3GrantsGrantIdMessagesApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesGetAsync
+     * Operation returnAllMessagesAsync
      *
      * Return all Messages
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string|null $accept (optional)
      * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllMessages'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdMessagesGetAsync(
+    public function returnAllMessagesAsync(
         string $grant_id,
         ?string $accept = null,
         ?int $limit = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesGet'][0]
+        string $contentType = self::contentTypes['returnAllMessages'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdMessagesGetAsyncWithHttpInfo($grant_id, $accept, $limit, $contentType)
+        return $this->returnAllMessagesAsyncWithHttpInfo($grant_id, $accept, $limit, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -920,27 +1434,27 @@ class V3GrantsGrantIdMessagesApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesGetAsyncWithHttpInfo
+     * Operation returnAllMessagesAsyncWithHttpInfo
      *
      * Return all Messages
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string|null $accept (optional)
      * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllMessages'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdMessagesGetAsyncWithHttpInfo(
+    public function returnAllMessagesAsyncWithHttpInfo(
         $grant_id,
         $accept = null,
         $limit = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesGet'][0]
+        string $contentType = self::contentTypes['returnAllMessages'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdMessagesGetRequest($grant_id, $accept, $limit, $contentType);
+        $request = $this->returnAllMessagesRequest($grant_id, $accept, $limit, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -979,28 +1493,28 @@ class V3GrantsGrantIdMessagesApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdMessagesGet'
+     * Create request for operation 'returnAllMessages'
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string|null $accept (optional)
      * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllMessages'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdMessagesGetRequest(
+    public function returnAllMessagesRequest(
         $grant_id,
         $accept = null,
         $limit = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesGet'][0]
+        string $contentType = self::contentTypes['returnAllMessages'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdMessagesGet'
+                'Missing the required parameter $grant_id when calling returnAllMessages'
             );
         }
 
@@ -1097,7 +1611,7 @@ class V3GrantsGrantIdMessagesApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesSendPost
+     * Operation sendAMessage
      *
      * Send a message
      *
@@ -1105,26 +1619,26 @@ class V3GrantsGrantIdMessagesApi
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSendPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendAMessage'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object|object|object
      */
-    public function v3GrantsGrantIdMessagesSendPost(
+    public function sendAMessage(
         string $grant_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSendPost'][0]
+        string $contentType = self::contentTypes['sendAMessage'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdMessagesSendPostWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType);
+        list($response) = $this->sendAMessageWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesSendPostWithHttpInfo
+     * Operation sendAMessageWithHttpInfo
      *
      * Send a message
      *
@@ -1132,21 +1646,21 @@ class V3GrantsGrantIdMessagesApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSendPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendAMessage'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdMessagesSendPostWithHttpInfo(
+    public function sendAMessageWithHttpInfo(
         string $grant_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSendPost'][0]
+        string $contentType = self::contentTypes['sendAMessage'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdMessagesSendPostRequest($grant_id, $content_type, $accept, $body, $contentType);
+        $request = $this->sendAMessageRequest($grant_id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1432,7 +1946,7 @@ class V3GrantsGrantIdMessagesApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesSendPostAsync
+     * Operation sendAMessageAsync
      *
      * Send a message
      *
@@ -1440,20 +1954,20 @@ class V3GrantsGrantIdMessagesApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSendPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendAMessage'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdMessagesSendPostAsync(
+    public function sendAMessageAsync(
         string $grant_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSendPost'][0]
+        string $contentType = self::contentTypes['sendAMessage'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdMessagesSendPostAsyncWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType)
+        return $this->sendAMessageAsyncWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1462,7 +1976,7 @@ class V3GrantsGrantIdMessagesApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesSendPostAsyncWithHttpInfo
+     * Operation sendAMessageAsyncWithHttpInfo
      *
      * Send a message
      *
@@ -1470,21 +1984,21 @@ class V3GrantsGrantIdMessagesApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSendPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendAMessage'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdMessagesSendPostAsyncWithHttpInfo(
+    public function sendAMessageAsyncWithHttpInfo(
         $grant_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSendPost'][0]
+        string $contentType = self::contentTypes['sendAMessage'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdMessagesSendPostRequest($grant_id, $content_type, $accept, $body, $contentType);
+        $request = $this->sendAMessageRequest($grant_id, $content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1523,30 +2037,30 @@ class V3GrantsGrantIdMessagesApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdMessagesSendPost'
+     * Create request for operation 'sendAMessage'
      *
      * @param  string $grant_id (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSendPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['sendAMessage'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdMessagesSendPostRequest(
+    public function sendAMessageRequest(
         $grant_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSendPost'][0]
+        string $contentType = self::contentTypes['sendAMessage'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdMessagesSendPost'
+                'Missing the required parameter $grant_id when calling sendAMessage'
             );
         }
 
@@ -1555,520 +2069,6 @@ class V3GrantsGrantIdMessagesApi
 
 
         $resourcePath = '/v3/grants/{grant_id}/messages/send';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($content_type !== null) {
-            $headerParams['Content-Type'] = ObjectSerializer::toHeaderValue($content_type);
-        }
-        // header params
-        if ($accept !== null) {
-            $headerParams['Accept'] = ObjectSerializer::toHeaderValue($accept);
-        }
-
-        // path params
-        if ($grant_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'grant_id' . '}',
-                ObjectSerializer::toPathValue($grant_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($body)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($body));
-            } else {
-                $httpBody = $body;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation v3GrantsGrantIdMessagesSmartComposePost
-     *
-     * Compose a message
-     *
-     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
-     * @param  string|null $content_type content_type (optional)
-     * @param  string|null $accept accept (optional)
-     * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSmartComposePost'] to see the possible values for this operation
-     *
-     * @throws ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws InvalidArgumentException
-     * @return object|object|object|object|object
-     */
-    public function v3GrantsGrantIdMessagesSmartComposePost(
-        string $grant_id,
-        ?string $content_type = null,
-        ?string $accept = null,
-        ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSmartComposePost'][0]
-    ): object
-    {
-        list($response) = $this->v3GrantsGrantIdMessagesSmartComposePostWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation v3GrantsGrantIdMessagesSmartComposePostWithHttpInfo
-     *
-     * Compose a message
-     *
-     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
-     * @param  string|null $content_type (optional)
-     * @param  string|null $accept (optional)
-     * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSmartComposePost'] to see the possible values for this operation
-     *
-     * @throws ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws InvalidArgumentException
-     * @return array of object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function v3GrantsGrantIdMessagesSmartComposePostWithHttpInfo(
-        string $grant_id,
-        ?string $content_type = null,
-        ?string $accept = null,
-        ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSmartComposePost'][0]
-    ): array
-    {
-        $request = $this->v3GrantsGrantIdMessagesSmartComposePostRequest($grant_id, $content_type, $accept, $body, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 400:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 401:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 422:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 500:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 422:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 500:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation v3GrantsGrantIdMessagesSmartComposePostAsync
-     *
-     * Compose a message
-     *
-     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
-     * @param  string|null $content_type (optional)
-     * @param  string|null $accept (optional)
-     * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSmartComposePost'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function v3GrantsGrantIdMessagesSmartComposePostAsync(
-        string $grant_id,
-        ?string $content_type = null,
-        ?string $accept = null,
-        ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSmartComposePost'][0]
-    ): PromiseInterface
-    {
-        return $this->v3GrantsGrantIdMessagesSmartComposePostAsyncWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation v3GrantsGrantIdMessagesSmartComposePostAsyncWithHttpInfo
-     *
-     * Compose a message
-     *
-     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
-     * @param  string|null $content_type (optional)
-     * @param  string|null $accept (optional)
-     * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSmartComposePost'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function v3GrantsGrantIdMessagesSmartComposePostAsyncWithHttpInfo(
-        $grant_id,
-        $content_type = null,
-        $accept = null,
-        $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSmartComposePost'][0]
-    ): PromiseInterface
-    {
-        $returnType = 'object';
-        $request = $this->v3GrantsGrantIdMessagesSmartComposePostRequest($grant_id, $content_type, $accept, $body, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'v3GrantsGrantIdMessagesSmartComposePost'
-     *
-     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
-     * @param  string|null $content_type (optional)
-     * @param  string|null $accept (optional)
-     * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSmartComposePost'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function v3GrantsGrantIdMessagesSmartComposePostRequest(
-        $grant_id,
-        $content_type = null,
-        $accept = null,
-        $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSmartComposePost'][0]
-    ): Request
-    {
-
-        // verify the required parameter 'grant_id' is set
-        if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdMessagesSmartComposePost'
-            );
-        }
-
-
-
-
-
-        $resourcePath = '/v3/grants/{grant_id}/messages/smart-compose';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

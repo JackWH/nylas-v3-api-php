@@ -71,13 +71,13 @@ class V3GrantsGrantIdApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3GrantsGrantIdDelete' => [
+        'deleteGrant' => [
             'application/json',
         ],
-        'v3GrantsGrantIdGet' => [
+        'getAGrant' => [
             'application/json',
         ],
-        'v3GrantsGrantIdPatch' => [
+        'updateGrant' => [
             'application/json',
         ],
     ];
@@ -129,48 +129,48 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDelete
+     * Operation deleteGrant
      *
      * Delete grant
      *
      * @param  string $grant_id (Required) (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGrant'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdDelete(
+    public function deleteGrant(
         string $grant_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDelete'][0]
+        string $contentType = self::contentTypes['deleteGrant'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdDeleteWithHttpInfo($grant_id, $accept, $contentType);
+        list($response) = $this->deleteGrantWithHttpInfo($grant_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdDeleteWithHttpInfo
+     * Operation deleteGrantWithHttpInfo
      *
      * Delete grant
      *
      * @param  string $grant_id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGrant'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdDeleteWithHttpInfo(
+    public function deleteGrantWithHttpInfo(
         string $grant_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDelete'][0]
+        string $contentType = self::contentTypes['deleteGrant'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdDeleteRequest($grant_id, $accept, $contentType);
+        $request = $this->deleteGrantRequest($grant_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -351,24 +351,24 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDeleteAsync
+     * Operation deleteGrantAsync
      *
      * Delete grant
      *
      * @param  string $grant_id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGrant'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdDeleteAsync(
+    public function deleteGrantAsync(
         string $grant_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDelete'][0]
+        string $contentType = self::contentTypes['deleteGrant'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdDeleteAsyncWithHttpInfo($grant_id, $accept, $contentType)
+        return $this->deleteGrantAsyncWithHttpInfo($grant_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -377,25 +377,25 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdDeleteAsyncWithHttpInfo
+     * Operation deleteGrantAsyncWithHttpInfo
      *
      * Delete grant
      *
      * @param  string $grant_id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGrant'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdDeleteAsyncWithHttpInfo(
+    public function deleteGrantAsyncWithHttpInfo(
         $grant_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDelete'][0]
+        string $contentType = self::contentTypes['deleteGrant'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdDeleteRequest($grant_id, $accept, $contentType);
+        $request = $this->deleteGrantRequest($grant_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -434,26 +434,26 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdDelete'
+     * Create request for operation 'deleteGrant'
      *
      * @param  string $grant_id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteGrant'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdDeleteRequest(
+    public function deleteGrantRequest(
         $grant_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdDelete'][0]
+        string $contentType = self::contentTypes['deleteGrant'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdDelete'
+                'Missing the required parameter $grant_id when calling deleteGrant'
             );
         }
 
@@ -540,48 +540,48 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdGet
+     * Operation getAGrant
      *
      * Get a grant
      *
      * @param  string $grant_id (Required) (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAGrant'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdGet(
+    public function getAGrant(
         string $grant_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdGet'][0]
+        string $contentType = self::contentTypes['getAGrant'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdGetWithHttpInfo($grant_id, $accept, $contentType);
+        list($response) = $this->getAGrantWithHttpInfo($grant_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdGetWithHttpInfo
+     * Operation getAGrantWithHttpInfo
      *
      * Get a grant
      *
      * @param  string $grant_id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAGrant'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdGetWithHttpInfo(
+    public function getAGrantWithHttpInfo(
         string $grant_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdGet'][0]
+        string $contentType = self::contentTypes['getAGrant'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdGetRequest($grant_id, $accept, $contentType);
+        $request = $this->getAGrantRequest($grant_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -762,24 +762,24 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdGetAsync
+     * Operation getAGrantAsync
      *
      * Get a grant
      *
      * @param  string $grant_id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAGrant'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdGetAsync(
+    public function getAGrantAsync(
         string $grant_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdGet'][0]
+        string $contentType = self::contentTypes['getAGrant'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdGetAsyncWithHttpInfo($grant_id, $accept, $contentType)
+        return $this->getAGrantAsyncWithHttpInfo($grant_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -788,25 +788,25 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdGetAsyncWithHttpInfo
+     * Operation getAGrantAsyncWithHttpInfo
      *
      * Get a grant
      *
      * @param  string $grant_id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAGrant'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdGetAsyncWithHttpInfo(
+    public function getAGrantAsyncWithHttpInfo(
         $grant_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdGet'][0]
+        string $contentType = self::contentTypes['getAGrant'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdGetRequest($grant_id, $accept, $contentType);
+        $request = $this->getAGrantRequest($grant_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -845,26 +845,26 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdGet'
+     * Create request for operation 'getAGrant'
      *
      * @param  string $grant_id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAGrant'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdGetRequest(
+    public function getAGrantRequest(
         $grant_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdGet'][0]
+        string $contentType = self::contentTypes['getAGrant'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdGet'
+                'Missing the required parameter $grant_id when calling getAGrant'
             );
         }
 
@@ -951,7 +951,7 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdPatch
+     * Operation updateGrant
      *
      * Update grant
      *
@@ -959,26 +959,26 @@ class V3GrantsGrantIdApi
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGrant'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object
      */
-    public function v3GrantsGrantIdPatch(
+    public function updateGrant(
         string $grant_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdPatch'][0]
+        string $contentType = self::contentTypes['updateGrant'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdPatchWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType);
+        list($response) = $this->updateGrantWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdPatchWithHttpInfo
+     * Operation updateGrantWithHttpInfo
      *
      * Update grant
      *
@@ -986,21 +986,21 @@ class V3GrantsGrantIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGrant'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdPatchWithHttpInfo(
+    public function updateGrantWithHttpInfo(
         string $grant_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdPatch'][0]
+        string $contentType = self::contentTypes['updateGrant'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdPatchRequest($grant_id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateGrantRequest($grant_id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1216,7 +1216,7 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdPatchAsync
+     * Operation updateGrantAsync
      *
      * Update grant
      *
@@ -1224,20 +1224,20 @@ class V3GrantsGrantIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGrant'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdPatchAsync(
+    public function updateGrantAsync(
         string $grant_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdPatch'][0]
+        string $contentType = self::contentTypes['updateGrant'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdPatchAsyncWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType)
+        return $this->updateGrantAsyncWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1246,7 +1246,7 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdPatchAsyncWithHttpInfo
+     * Operation updateGrantAsyncWithHttpInfo
      *
      * Update grant
      *
@@ -1254,21 +1254,21 @@ class V3GrantsGrantIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGrant'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdPatchAsyncWithHttpInfo(
+    public function updateGrantAsyncWithHttpInfo(
         $grant_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdPatch'][0]
+        string $contentType = self::contentTypes['updateGrant'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdPatchRequest($grant_id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateGrantRequest($grant_id, $content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1307,30 +1307,30 @@ class V3GrantsGrantIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdPatch'
+     * Create request for operation 'updateGrant'
      *
      * @param  string $grant_id (Required) (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateGrant'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdPatchRequest(
+    public function updateGrantRequest(
         $grant_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdPatch'][0]
+        string $contentType = self::contentTypes['updateGrant'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdPatch'
+                'Missing the required parameter $grant_id when calling updateGrant'
             );
         }
 

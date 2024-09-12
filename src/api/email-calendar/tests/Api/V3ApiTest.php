@@ -70,12 +70,12 @@ class V3ApiTest extends TestCase
     }
 
     /**
-     * Test case for v3CalendarsAvailabilityPost
+     * Test case for getAvailability
      *
      * Get Availability.
      *
      */
-    public function testV3CalendarsAvailabilityPost()
+    public function testGetAvailability()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

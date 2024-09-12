@@ -71,7 +71,7 @@ class V3Api
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3CalendarsAvailabilityPost' => [
+        'getAvailability' => [
             'application/json',
         ],
     ];
@@ -123,52 +123,52 @@ class V3Api
     }
 
     /**
-     * Operation v3CalendarsAvailabilityPost
+     * Operation getAvailability
      *
      * Get Availability
      *
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3CalendarsAvailabilityPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAvailability'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3CalendarsAvailabilityPost(
+    public function getAvailability(
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3CalendarsAvailabilityPost'][0]
+        string $contentType = self::contentTypes['getAvailability'][0]
     ): object
     {
-        list($response) = $this->v3CalendarsAvailabilityPostWithHttpInfo($content_type, $accept, $body, $contentType);
+        list($response) = $this->getAvailabilityWithHttpInfo($content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3CalendarsAvailabilityPostWithHttpInfo
+     * Operation getAvailabilityWithHttpInfo
      *
      * Get Availability
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3CalendarsAvailabilityPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAvailability'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3CalendarsAvailabilityPostWithHttpInfo(
+    public function getAvailabilityWithHttpInfo(
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3CalendarsAvailabilityPost'][0]
+        string $contentType = self::contentTypes['getAvailability'][0]
     ): array
     {
-        $request = $this->v3CalendarsAvailabilityPostRequest($content_type, $accept, $body, $contentType);
+        $request = $this->getAvailabilityRequest($content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -349,26 +349,26 @@ class V3Api
     }
 
     /**
-     * Operation v3CalendarsAvailabilityPostAsync
+     * Operation getAvailabilityAsync
      *
      * Get Availability
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3CalendarsAvailabilityPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAvailability'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3CalendarsAvailabilityPostAsync(
+    public function getAvailabilityAsync(
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3CalendarsAvailabilityPost'][0]
+        string $contentType = self::contentTypes['getAvailability'][0]
     ): PromiseInterface
     {
-        return $this->v3CalendarsAvailabilityPostAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
+        return $this->getAvailabilityAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -377,27 +377,27 @@ class V3Api
     }
 
     /**
-     * Operation v3CalendarsAvailabilityPostAsyncWithHttpInfo
+     * Operation getAvailabilityAsyncWithHttpInfo
      *
      * Get Availability
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3CalendarsAvailabilityPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAvailability'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3CalendarsAvailabilityPostAsyncWithHttpInfo(
+    public function getAvailabilityAsyncWithHttpInfo(
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3CalendarsAvailabilityPost'][0]
+        string $contentType = self::contentTypes['getAvailability'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3CalendarsAvailabilityPostRequest($content_type, $accept, $body, $contentType);
+        $request = $this->getAvailabilityRequest($content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -436,21 +436,21 @@ class V3Api
     }
 
     /**
-     * Create request for operation 'v3CalendarsAvailabilityPost'
+     * Create request for operation 'getAvailability'
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3CalendarsAvailabilityPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAvailability'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3CalendarsAvailabilityPostRequest(
+    public function getAvailabilityRequest(
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3CalendarsAvailabilityPost'][0]
+        string $contentType = self::contentTypes['getAvailability'][0]
     ): Request
     {
 

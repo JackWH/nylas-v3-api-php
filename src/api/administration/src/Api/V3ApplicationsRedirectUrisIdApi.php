@@ -71,13 +71,13 @@ class V3ApplicationsRedirectUrisIdApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3ApplicationsRedirectUrisCallbackIdDelete' => [
+        'deleteACallbackURI' => [
             'application/json',
         ],
-        'v3ApplicationsRedirectUrisCallbackIdGet' => [
+        'getCallbackURI' => [
             'application/json',
         ],
-        'v3ApplicationsRedirectUrisCallbackIdPatch' => [
+        'updateACallbackURI' => [
             'application/json',
         ],
     ];
@@ -129,48 +129,48 @@ class V3ApplicationsRedirectUrisIdApi
     }
 
     /**
-     * Operation v3ApplicationsRedirectUrisCallbackIdDelete
+     * Operation deleteACallbackURI
      *
      * Delete a callback URI
      *
      * @param  string $callback_id callback_id (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteACallbackURI'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3ApplicationsRedirectUrisCallbackIdDelete(
+    public function deleteACallbackURI(
         string $callback_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdDelete'][0]
+        string $contentType = self::contentTypes['deleteACallbackURI'][0]
     ): object
     {
-        list($response) = $this->v3ApplicationsRedirectUrisCallbackIdDeleteWithHttpInfo($callback_id, $accept, $contentType);
+        list($response) = $this->deleteACallbackURIWithHttpInfo($callback_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ApplicationsRedirectUrisCallbackIdDeleteWithHttpInfo
+     * Operation deleteACallbackURIWithHttpInfo
      *
      * Delete a callback URI
      *
      * @param  string $callback_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteACallbackURI'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ApplicationsRedirectUrisCallbackIdDeleteWithHttpInfo(
+    public function deleteACallbackURIWithHttpInfo(
         string $callback_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdDelete'][0]
+        string $contentType = self::contentTypes['deleteACallbackURI'][0]
     ): array
     {
-        $request = $this->v3ApplicationsRedirectUrisCallbackIdDeleteRequest($callback_id, $accept, $contentType);
+        $request = $this->deleteACallbackURIRequest($callback_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -351,24 +351,24 @@ class V3ApplicationsRedirectUrisIdApi
     }
 
     /**
-     * Operation v3ApplicationsRedirectUrisCallbackIdDeleteAsync
+     * Operation deleteACallbackURIAsync
      *
      * Delete a callback URI
      *
      * @param  string $callback_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteACallbackURI'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ApplicationsRedirectUrisCallbackIdDeleteAsync(
+    public function deleteACallbackURIAsync(
         string $callback_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdDelete'][0]
+        string $contentType = self::contentTypes['deleteACallbackURI'][0]
     ): PromiseInterface
     {
-        return $this->v3ApplicationsRedirectUrisCallbackIdDeleteAsyncWithHttpInfo($callback_id, $accept, $contentType)
+        return $this->deleteACallbackURIAsyncWithHttpInfo($callback_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -377,25 +377,25 @@ class V3ApplicationsRedirectUrisIdApi
     }
 
     /**
-     * Operation v3ApplicationsRedirectUrisCallbackIdDeleteAsyncWithHttpInfo
+     * Operation deleteACallbackURIAsyncWithHttpInfo
      *
      * Delete a callback URI
      *
      * @param  string $callback_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteACallbackURI'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ApplicationsRedirectUrisCallbackIdDeleteAsyncWithHttpInfo(
+    public function deleteACallbackURIAsyncWithHttpInfo(
         $callback_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdDelete'][0]
+        string $contentType = self::contentTypes['deleteACallbackURI'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ApplicationsRedirectUrisCallbackIdDeleteRequest($callback_id, $accept, $contentType);
+        $request = $this->deleteACallbackURIRequest($callback_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -434,26 +434,26 @@ class V3ApplicationsRedirectUrisIdApi
     }
 
     /**
-     * Create request for operation 'v3ApplicationsRedirectUrisCallbackIdDelete'
+     * Create request for operation 'deleteACallbackURI'
      *
      * @param  string $callback_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteACallbackURI'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ApplicationsRedirectUrisCallbackIdDeleteRequest(
+    public function deleteACallbackURIRequest(
         $callback_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdDelete'][0]
+        string $contentType = self::contentTypes['deleteACallbackURI'][0]
     ): Request
     {
 
         // verify the required parameter 'callback_id' is set
         if ($callback_id === null || (is_array($callback_id) && count($callback_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $callback_id when calling v3ApplicationsRedirectUrisCallbackIdDelete'
+                'Missing the required parameter $callback_id when calling deleteACallbackURI'
             );
         }
 
@@ -540,48 +540,48 @@ class V3ApplicationsRedirectUrisIdApi
     }
 
     /**
-     * Operation v3ApplicationsRedirectUrisCallbackIdGet
+     * Operation getCallbackURI
      *
      * Get callback URI
      *
      * @param  string $callback_id callback_id (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCallbackURI'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3ApplicationsRedirectUrisCallbackIdGet(
+    public function getCallbackURI(
         string $callback_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdGet'][0]
+        string $contentType = self::contentTypes['getCallbackURI'][0]
     ): object
     {
-        list($response) = $this->v3ApplicationsRedirectUrisCallbackIdGetWithHttpInfo($callback_id, $accept, $contentType);
+        list($response) = $this->getCallbackURIWithHttpInfo($callback_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ApplicationsRedirectUrisCallbackIdGetWithHttpInfo
+     * Operation getCallbackURIWithHttpInfo
      *
      * Get callback URI
      *
      * @param  string $callback_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCallbackURI'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ApplicationsRedirectUrisCallbackIdGetWithHttpInfo(
+    public function getCallbackURIWithHttpInfo(
         string $callback_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdGet'][0]
+        string $contentType = self::contentTypes['getCallbackURI'][0]
     ): array
     {
-        $request = $this->v3ApplicationsRedirectUrisCallbackIdGetRequest($callback_id, $accept, $contentType);
+        $request = $this->getCallbackURIRequest($callback_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -762,24 +762,24 @@ class V3ApplicationsRedirectUrisIdApi
     }
 
     /**
-     * Operation v3ApplicationsRedirectUrisCallbackIdGetAsync
+     * Operation getCallbackURIAsync
      *
      * Get callback URI
      *
      * @param  string $callback_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCallbackURI'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ApplicationsRedirectUrisCallbackIdGetAsync(
+    public function getCallbackURIAsync(
         string $callback_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdGet'][0]
+        string $contentType = self::contentTypes['getCallbackURI'][0]
     ): PromiseInterface
     {
-        return $this->v3ApplicationsRedirectUrisCallbackIdGetAsyncWithHttpInfo($callback_id, $accept, $contentType)
+        return $this->getCallbackURIAsyncWithHttpInfo($callback_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -788,25 +788,25 @@ class V3ApplicationsRedirectUrisIdApi
     }
 
     /**
-     * Operation v3ApplicationsRedirectUrisCallbackIdGetAsyncWithHttpInfo
+     * Operation getCallbackURIAsyncWithHttpInfo
      *
      * Get callback URI
      *
      * @param  string $callback_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCallbackURI'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ApplicationsRedirectUrisCallbackIdGetAsyncWithHttpInfo(
+    public function getCallbackURIAsyncWithHttpInfo(
         $callback_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdGet'][0]
+        string $contentType = self::contentTypes['getCallbackURI'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ApplicationsRedirectUrisCallbackIdGetRequest($callback_id, $accept, $contentType);
+        $request = $this->getCallbackURIRequest($callback_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -845,26 +845,26 @@ class V3ApplicationsRedirectUrisIdApi
     }
 
     /**
-     * Create request for operation 'v3ApplicationsRedirectUrisCallbackIdGet'
+     * Create request for operation 'getCallbackURI'
      *
      * @param  string $callback_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCallbackURI'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ApplicationsRedirectUrisCallbackIdGetRequest(
+    public function getCallbackURIRequest(
         $callback_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdGet'][0]
+        string $contentType = self::contentTypes['getCallbackURI'][0]
     ): Request
     {
 
         // verify the required parameter 'callback_id' is set
         if ($callback_id === null || (is_array($callback_id) && count($callback_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $callback_id when calling v3ApplicationsRedirectUrisCallbackIdGet'
+                'Missing the required parameter $callback_id when calling getCallbackURI'
             );
         }
 
@@ -951,7 +951,7 @@ class V3ApplicationsRedirectUrisIdApi
     }
 
     /**
-     * Operation v3ApplicationsRedirectUrisCallbackIdPatch
+     * Operation updateACallbackURI
      *
      * Update a callback URI
      *
@@ -959,26 +959,26 @@ class V3ApplicationsRedirectUrisIdApi
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateACallbackURI'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object
      */
-    public function v3ApplicationsRedirectUrisCallbackIdPatch(
+    public function updateACallbackURI(
         string $callback_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdPatch'][0]
+        string $contentType = self::contentTypes['updateACallbackURI'][0]
     ): object
     {
-        list($response) = $this->v3ApplicationsRedirectUrisCallbackIdPatchWithHttpInfo($callback_id, $content_type, $accept, $body, $contentType);
+        list($response) = $this->updateACallbackURIWithHttpInfo($callback_id, $content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ApplicationsRedirectUrisCallbackIdPatchWithHttpInfo
+     * Operation updateACallbackURIWithHttpInfo
      *
      * Update a callback URI
      *
@@ -986,21 +986,21 @@ class V3ApplicationsRedirectUrisIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateACallbackURI'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ApplicationsRedirectUrisCallbackIdPatchWithHttpInfo(
+    public function updateACallbackURIWithHttpInfo(
         string $callback_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdPatch'][0]
+        string $contentType = self::contentTypes['updateACallbackURI'][0]
     ): array
     {
-        $request = $this->v3ApplicationsRedirectUrisCallbackIdPatchRequest($callback_id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateACallbackURIRequest($callback_id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1216,7 +1216,7 @@ class V3ApplicationsRedirectUrisIdApi
     }
 
     /**
-     * Operation v3ApplicationsRedirectUrisCallbackIdPatchAsync
+     * Operation updateACallbackURIAsync
      *
      * Update a callback URI
      *
@@ -1224,20 +1224,20 @@ class V3ApplicationsRedirectUrisIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateACallbackURI'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ApplicationsRedirectUrisCallbackIdPatchAsync(
+    public function updateACallbackURIAsync(
         string $callback_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdPatch'][0]
+        string $contentType = self::contentTypes['updateACallbackURI'][0]
     ): PromiseInterface
     {
-        return $this->v3ApplicationsRedirectUrisCallbackIdPatchAsyncWithHttpInfo($callback_id, $content_type, $accept, $body, $contentType)
+        return $this->updateACallbackURIAsyncWithHttpInfo($callback_id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1246,7 +1246,7 @@ class V3ApplicationsRedirectUrisIdApi
     }
 
     /**
-     * Operation v3ApplicationsRedirectUrisCallbackIdPatchAsyncWithHttpInfo
+     * Operation updateACallbackURIAsyncWithHttpInfo
      *
      * Update a callback URI
      *
@@ -1254,21 +1254,21 @@ class V3ApplicationsRedirectUrisIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateACallbackURI'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ApplicationsRedirectUrisCallbackIdPatchAsyncWithHttpInfo(
+    public function updateACallbackURIAsyncWithHttpInfo(
         $callback_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdPatch'][0]
+        string $contentType = self::contentTypes['updateACallbackURI'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ApplicationsRedirectUrisCallbackIdPatchRequest($callback_id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateACallbackURIRequest($callback_id, $content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1307,30 +1307,30 @@ class V3ApplicationsRedirectUrisIdApi
     }
 
     /**
-     * Create request for operation 'v3ApplicationsRedirectUrisCallbackIdPatch'
+     * Create request for operation 'updateACallbackURI'
      *
      * @param  string $callback_id (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsRedirectUrisCallbackIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateACallbackURI'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ApplicationsRedirectUrisCallbackIdPatchRequest(
+    public function updateACallbackURIRequest(
         $callback_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3ApplicationsRedirectUrisCallbackIdPatch'][0]
+        string $contentType = self::contentTypes['updateACallbackURI'][0]
     ): Request
     {
 
         // verify the required parameter 'callback_id' is set
         if ($callback_id === null || (is_array($callback_id) && count($callback_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $callback_id when calling v3ApplicationsRedirectUrisCallbackIdPatch'
+                'Missing the required parameter $callback_id when calling updateACallbackURI'
             );
         }
 

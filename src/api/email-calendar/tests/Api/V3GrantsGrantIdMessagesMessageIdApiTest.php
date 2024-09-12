@@ -70,48 +70,48 @@ class V3GrantsGrantIdMessagesMessageIdApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdMessagesMessageIdDelete
-     *
-     * Delete a Message.
-     *
-     */
-    public function testV3GrantsGrantIdMessagesMessageIdDelete()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for v3GrantsGrantIdMessagesMessageIdGet
-     *
-     * Return a Message.
-     *
-     */
-    public function testV3GrantsGrantIdMessagesMessageIdGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for v3GrantsGrantIdMessagesMessageIdPut
-     *
-     * Update a Message.
-     *
-     */
-    public function testV3GrantsGrantIdMessagesMessageIdPut()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for v3GrantsGrantIdMessagesMessageIdSmartComposePost
+     * Test case for composeAMessageReply
      *
      * Compose a message reply.
      *
      */
-    public function testV3GrantsGrantIdMessagesMessageIdSmartComposePost()
+    public function testComposeAMessageReply()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteAMessage
+     *
+     * Delete a Message.
+     *
+     */
+    public function testDeleteAMessage()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for returnAMessage
+     *
+     * Return a Message.
+     *
+     */
+    public function testReturnAMessage()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAMessage
+     *
+     * Update a Message.
+     *
+     */
+    public function testUpdateAMessage()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

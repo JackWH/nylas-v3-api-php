@@ -70,12 +70,12 @@ class V3GrantsGrantIdThreadsApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdThreadsGet
+     * Test case for returnAllThreads
      *
      * Return all Threads.
      *
      */
-    public function testV3GrantsGrantIdThreadsGet()
+    public function testReturnAllThreads()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

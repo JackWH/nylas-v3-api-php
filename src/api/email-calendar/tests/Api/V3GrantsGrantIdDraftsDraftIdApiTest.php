@@ -70,48 +70,48 @@ class V3GrantsGrantIdDraftsDraftIdApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdDraftsDraftIdDelete
+     * Test case for deleteADraft
      *
      * Delete a Draft.
      *
      */
-    public function testV3GrantsGrantIdDraftsDraftIdDelete()
+    public function testDeleteADraft()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdDraftsDraftIdGet
+     * Test case for returnADraft
      *
      * Return a Draft.
      *
      */
-    public function testV3GrantsGrantIdDraftsDraftIdGet()
+    public function testReturnADraft()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdDraftsDraftIdPost
+     * Test case for sendADraft
      *
      * Send a Draft.
      *
      */
-    public function testV3GrantsGrantIdDraftsDraftIdPost()
+    public function testSendADraft()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdDraftsDraftIdPut
+     * Test case for updateADraft
      *
      * Update a Draft.
      *
      */
-    public function testV3GrantsGrantIdDraftsDraftIdPut()
+    public function testUpdateADraft()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

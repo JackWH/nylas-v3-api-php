@@ -202,10 +202,10 @@ $accept = application/json; // string
 $body = array('key' => new \stdClass); // object
 
 try {
-    $result = $apiInstance->v3CalendarsAvailabilityPost($content_type, $accept, $body);
+    $result = $apiInstance->getAvailability($content_type, $accept, $body);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling V3Api->v3CalendarsAvailabilityPost: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling V3Api->getAvailability: ', $e->getMessage(), PHP_EOL;
 }
 
 ```
@@ -216,48 +216,48 @@ All URIs are relative to *https://api.us.nylas.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*V3Api* | [**v3CalendarsAvailabilityPost**](docs/Api/V3Api.md#v3calendarsavailabilitypost) | **POST** /v3/calendars/availability | Get Availability
-*V3GrantsGrantIdApi* | [**v3GrantsGrantIdResourcesGet**](docs/Api/V3GrantsGrantIdApi.md#v3grantsgrantidresourcesget) | **GET** /v3/grants/{grant_id}/resources | Return all room resources
-*V3GrantsGrantIdAttachmentsAttachmentIdApi* | [**v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet**](docs/Api/V3GrantsGrantIdAttachmentsAttachmentIdApi.md#v3grantsgrantidattachmentsattachmentiddownloadget) | **GET** /v3/grants/{grant_id}/attachments/{attachment_id}/download | Download an Attachment
-*V3GrantsGrantIdAttachmentsAttachmentIdApi* | [**v3GrantsGrantIdAttachmentsAttachmentIdGet**](docs/Api/V3GrantsGrantIdAttachmentsAttachmentIdApi.md#v3grantsgrantidattachmentsattachmentidget) | **GET** /v3/grants/{grant_id}/attachments/{attachment_id} | Return metadata of an Attachment
-*V3GrantsGrantIdCalendarsApi* | [**v3GrantsGrantIdCalendarsFreeBusyPost**](docs/Api/V3GrantsGrantIdCalendarsApi.md#v3grantsgrantidcalendarsfreebusypost) | **POST** /v3/grants/{grant_id}/calendars/free-busy | Get Free/Busy Schedule
-*V3GrantsGrantIdCalendarsApi* | [**v3GrantsGrantIdCalendarsGet**](docs/Api/V3GrantsGrantIdCalendarsApi.md#v3grantsgrantidcalendarsget) | **GET** /v3/grants/{grantId}/calendars | Return all Calendars
-*V3GrantsGrantIdCalendarsApi* | [**v3GrantsGrantIdCalendarsPost**](docs/Api/V3GrantsGrantIdCalendarsApi.md#v3grantsgrantidcalendarspost) | **POST** /v3/grants/{grant_id}/calendars | Create a Calendar
-*V3GrantsGrantIdCalendarsCalendarIdApi* | [**v3GrantsGrantIdCalendarsCalendarIdDelete**](docs/Api/V3GrantsGrantIdCalendarsCalendarIdApi.md#v3grantsgrantidcalendarscalendariddelete) | **DELETE** /v3/grants/{grant_id}/calendars/{calendar_id} | Delete a Calendar
-*V3GrantsGrantIdCalendarsCalendarIdApi* | [**v3GrantsGrantIdCalendarsCalendarIdGet**](docs/Api/V3GrantsGrantIdCalendarsCalendarIdApi.md#v3grantsgrantidcalendarscalendaridget) | **GET** /v3/grants/{grant_id}/calendars/{calendar_id} | Return a Calendar
-*V3GrantsGrantIdCalendarsCalendarIdApi* | [**v3GrantsGrantIdCalendarsCalendarIdPut**](docs/Api/V3GrantsGrantIdCalendarsCalendarIdApi.md#v3grantsgrantidcalendarscalendaridput) | **PUT** /v3/grants/{grant_id}/calendars/{calendar_id} | Update a Calendar
-*V3GrantsGrantIdDraftsApi* | [**v3GrantsGrantIdDraftsGet**](docs/Api/V3GrantsGrantIdDraftsApi.md#v3grantsgrantiddraftsget) | **GET** /v3/grants/{grant_id}/drafts | Return all Drafts
-*V3GrantsGrantIdDraftsApi* | [**v3GrantsGrantIdDraftsPost**](docs/Api/V3GrantsGrantIdDraftsApi.md#v3grantsgrantiddraftspost) | **POST** /v3/grants/{grant_id}/drafts | Create a Draft
-*V3GrantsGrantIdDraftsDraftIdApi* | [**v3GrantsGrantIdDraftsDraftIdDelete**](docs/Api/V3GrantsGrantIdDraftsDraftIdApi.md#v3grantsgrantiddraftsdraftiddelete) | **DELETE** /v3/grants/{grant_id}/drafts/{draft_id} | Delete a Draft
-*V3GrantsGrantIdDraftsDraftIdApi* | [**v3GrantsGrantIdDraftsDraftIdGet**](docs/Api/V3GrantsGrantIdDraftsDraftIdApi.md#v3grantsgrantiddraftsdraftidget) | **GET** /v3/grants/{grant_id}/drafts/{draft_id} | Return a Draft
-*V3GrantsGrantIdDraftsDraftIdApi* | [**v3GrantsGrantIdDraftsDraftIdPost**](docs/Api/V3GrantsGrantIdDraftsDraftIdApi.md#v3grantsgrantiddraftsdraftidpost) | **POST** /v3/grants/{grant_id}/drafts/{draft_id} | Send a Draft
-*V3GrantsGrantIdDraftsDraftIdApi* | [**v3GrantsGrantIdDraftsDraftIdPut**](docs/Api/V3GrantsGrantIdDraftsDraftIdApi.md#v3grantsgrantiddraftsdraftidput) | **PUT** /v3/grants/{grant_id}/drafts/{draft_id} | Update a Draft
-*V3GrantsGrantIdEventsApi* | [**v3GrantsGrantIdEventsGet**](docs/Api/V3GrantsGrantIdEventsApi.md#v3grantsgrantideventsget) | **GET** /v3/grants/{grant_id}/events | Return all Events
-*V3GrantsGrantIdEventsApi* | [**v3GrantsGrantIdEventsPost**](docs/Api/V3GrantsGrantIdEventsApi.md#v3grantsgrantideventspost) | **POST** /v3/grants/{grant_id}/events | Create an Event
-*V3GrantsGrantIdEventsEventIdApi* | [**v3GrantsGrantIdEventsEventIdDelete**](docs/Api/V3GrantsGrantIdEventsEventIdApi.md#v3grantsgrantideventseventiddelete) | **DELETE** /v3/grants/{grant_id}/events/{event_id} | Delete an Event
-*V3GrantsGrantIdEventsEventIdApi* | [**v3GrantsGrantIdEventsEventIdGet**](docs/Api/V3GrantsGrantIdEventsEventIdApi.md#v3grantsgrantideventseventidget) | **GET** /v3/grants/{grant_id}/events/{event_id} | Return an Event
-*V3GrantsGrantIdEventsEventIdApi* | [**v3GrantsGrantIdEventsEventIdPut**](docs/Api/V3GrantsGrantIdEventsEventIdApi.md#v3grantsgrantideventseventidput) | **PUT** /v3/grants/{grant_id}/events/{event_id} | Update an Event
-*V3GrantsGrantIdEventsEventIdApi* | [**v3GrantsGrantIdEventsEventIdSendRsvpPost**](docs/Api/V3GrantsGrantIdEventsEventIdApi.md#v3grantsgrantideventseventidsendrsvppost) | **POST** /v3/grants/{grant_id}/events/{event_id}/send-rsvp | Send RSVP
-*V3GrantsGrantIdFoldersApi* | [**v3GrantsGrantIdFoldersGet**](docs/Api/V3GrantsGrantIdFoldersApi.md#v3grantsgrantidfoldersget) | **GET** /v3/grants/{grant_id}/folders | Return all Folders
-*V3GrantsGrantIdFoldersApi* | [**v3GrantsGrantIdFoldersPost**](docs/Api/V3GrantsGrantIdFoldersApi.md#v3grantsgrantidfolderspost) | **POST** /v3/grants/{grant_id}/folders | Create a Folder
-*V3GrantsGrantIdFoldersFolderIdApi* | [**v3GrantsGrantIdFoldersFolderIdDelete**](docs/Api/V3GrantsGrantIdFoldersFolderIdApi.md#v3grantsgrantidfoldersfolderiddelete) | **DELETE** /v3/grants/{grant_id}/folders/{folder_id} | Delete a Folder
-*V3GrantsGrantIdFoldersFolderIdApi* | [**v3GrantsGrantIdFoldersFolderIdGet**](docs/Api/V3GrantsGrantIdFoldersFolderIdApi.md#v3grantsgrantidfoldersfolderidget) | **GET** /v3/grants/{grant_id}/folders/{folder_id} | Return a Folder
-*V3GrantsGrantIdFoldersFolderIdApi* | [**v3GrantsGrantIdFoldersFolderIdPut**](docs/Api/V3GrantsGrantIdFoldersFolderIdApi.md#v3grantsgrantidfoldersfolderidput) | **PUT** /v3/grants/{grant_id}/folders/{folder_id} | Update a Folder
-*V3GrantsGrantIdMessagesApi* | [**v3GrantsGrantIdMessagesCleanPut**](docs/Api/V3GrantsGrantIdMessagesApi.md#v3grantsgrantidmessagescleanput) | **PUT** /v3/grants/{grant_id}/messages/clean | Clean email messages
-*V3GrantsGrantIdMessagesApi* | [**v3GrantsGrantIdMessagesGet**](docs/Api/V3GrantsGrantIdMessagesApi.md#v3grantsgrantidmessagesget) | **GET** /v3/grants/{grant_id}/messages | Return all Messages
-*V3GrantsGrantIdMessagesApi* | [**v3GrantsGrantIdMessagesSendPost**](docs/Api/V3GrantsGrantIdMessagesApi.md#v3grantsgrantidmessagessendpost) | **POST** /v3/grants/{grant_id}/messages/send | Send a message
-*V3GrantsGrantIdMessagesApi* | [**v3GrantsGrantIdMessagesSmartComposePost**](docs/Api/V3GrantsGrantIdMessagesApi.md#v3grantsgrantidmessagessmartcomposepost) | **POST** /v3/grants/{grant_id}/messages/smart-compose | Compose a message
-*V3GrantsGrantIdMessagesMessageIdApi* | [**v3GrantsGrantIdMessagesMessageIdDelete**](docs/Api/V3GrantsGrantIdMessagesMessageIdApi.md#v3grantsgrantidmessagesmessageiddelete) | **DELETE** /v3/grants/{grant_id}/messages/{message_id} | Delete a Message
-*V3GrantsGrantIdMessagesMessageIdApi* | [**v3GrantsGrantIdMessagesMessageIdGet**](docs/Api/V3GrantsGrantIdMessagesMessageIdApi.md#v3grantsgrantidmessagesmessageidget) | **GET** /v3/grants/{grant_id}/messages/{message_id} | Return a Message
-*V3GrantsGrantIdMessagesMessageIdApi* | [**v3GrantsGrantIdMessagesMessageIdPut**](docs/Api/V3GrantsGrantIdMessagesMessageIdApi.md#v3grantsgrantidmessagesmessageidput) | **PUT** /v3/grants/{grant_id}/messages/{message_id} | Update a Message
-*V3GrantsGrantIdMessagesMessageIdApi* | [**v3GrantsGrantIdMessagesMessageIdSmartComposePost**](docs/Api/V3GrantsGrantIdMessagesMessageIdApi.md#v3grantsgrantidmessagesmessageidsmartcomposepost) | **POST** /v3/grants/{grant_id}/messages/{message_id}/smart-compose | Compose a message reply
-*V3GrantsGrantIdMessagesSchedulesApi* | [**v3GrantsGrantIdMessagesSchedulesGet**](docs/Api/V3GrantsGrantIdMessagesSchedulesApi.md#v3grantsgrantidmessagesschedulesget) | **GET** /v3/grants/{grant_id}/messages/schedules | Retrieve Your Scheduled Messages
-*V3GrantsGrantIdMessagesSchedulesScheduleIdApi* | [**v3GrantsGrantIdMessagesSchedulesScheduleIdDelete**](docs/Api/V3GrantsGrantIdMessagesSchedulesScheduleIdApi.md#v3grantsgrantidmessagesschedulesscheduleiddelete) | **DELETE** /v3/grants/{grant_id}/messages/schedules/{scheduleId} | Stop a Scheduled Message
-*V3GrantsGrantIdMessagesSchedulesScheduleIdApi* | [**v3GrantsGrantIdMessagesSchedulesScheduleIdGet**](docs/Api/V3GrantsGrantIdMessagesSchedulesScheduleIdApi.md#v3grantsgrantidmessagesschedulesscheduleidget) | **GET** /v3/grants/{grant_id}/messages/schedules/{scheduleId} | Retrieve a Scheduled Message
-*V3GrantsGrantIdThreadsApi* | [**v3GrantsGrantIdThreadsGet**](docs/Api/V3GrantsGrantIdThreadsApi.md#v3grantsgrantidthreadsget) | **GET** /v3/grants/{grant_id}/threads | Return all Threads
-*V3GrantsGrantIdThreadsThreadIdApi* | [**v3GrantsGrantIdThreadsThreadIdDelete**](docs/Api/V3GrantsGrantIdThreadsThreadIdApi.md#v3grantsgrantidthreadsthreadiddelete) | **DELETE** /v3/grants/{grant_id}/threads/{thread_id} | Delete a Thread
-*V3GrantsGrantIdThreadsThreadIdApi* | [**v3GrantsGrantIdThreadsThreadIdGet**](docs/Api/V3GrantsGrantIdThreadsThreadIdApi.md#v3grantsgrantidthreadsthreadidget) | **GET** /v3/grants/{grant_id}/threads/{thread_id} | Return a Thread
-*V3GrantsGrantIdThreadsThreadIdApi* | [**v3GrantsGrantIdThreadsThreadIdPut**](docs/Api/V3GrantsGrantIdThreadsThreadIdApi.md#v3grantsgrantidthreadsthreadidput) | **PUT** /v3/grants/{grant_id}/threads/{thread_id} | Update a Thread
+*V3Api* | [**getAvailability**](docs/Api/V3Api.md#getavailability) | **POST** /v3/calendars/availability | Get Availability
+*V3GrantsGrantIdApi* | [**returnAllRoomResources**](docs/Api/V3GrantsGrantIdApi.md#returnallroomresources) | **GET** /v3/grants/{grant_id}/resources | Return all room resources
+*V3GrantsGrantIdAttachmentsAttachmentIdApi* | [**downloadAnAttachment**](docs/Api/V3GrantsGrantIdAttachmentsAttachmentIdApi.md#downloadanattachment) | **GET** /v3/grants/{grant_id}/attachments/{attachment_id}/download | Download an Attachment
+*V3GrantsGrantIdAttachmentsAttachmentIdApi* | [**returnMetadataOfAnAttachment**](docs/Api/V3GrantsGrantIdAttachmentsAttachmentIdApi.md#returnmetadataofanattachment) | **GET** /v3/grants/{grant_id}/attachments/{attachment_id} | Return metadata of an Attachment
+*V3GrantsGrantIdCalendarsApi* | [**createACalendar**](docs/Api/V3GrantsGrantIdCalendarsApi.md#createacalendar) | **POST** /v3/grants/{grant_id}/calendars | Create a Calendar
+*V3GrantsGrantIdCalendarsApi* | [**getFreeBusySchedule**](docs/Api/V3GrantsGrantIdCalendarsApi.md#getfreebusyschedule) | **POST** /v3/grants/{grant_id}/calendars/free-busy | Get Free/Busy Schedule
+*V3GrantsGrantIdCalendarsApi* | [**returnAllCalendars**](docs/Api/V3GrantsGrantIdCalendarsApi.md#returnallcalendars) | **GET** /v3/grants/{grantId}/calendars | Return all Calendars
+*V3GrantsGrantIdCalendarsCalendarIdApi* | [**deleteACalendar**](docs/Api/V3GrantsGrantIdCalendarsCalendarIdApi.md#deleteacalendar) | **DELETE** /v3/grants/{grant_id}/calendars/{calendar_id} | Delete a Calendar
+*V3GrantsGrantIdCalendarsCalendarIdApi* | [**returnACalendar**](docs/Api/V3GrantsGrantIdCalendarsCalendarIdApi.md#returnacalendar) | **GET** /v3/grants/{grant_id}/calendars/{calendar_id} | Return a Calendar
+*V3GrantsGrantIdCalendarsCalendarIdApi* | [**updateACalendar**](docs/Api/V3GrantsGrantIdCalendarsCalendarIdApi.md#updateacalendar) | **PUT** /v3/grants/{grant_id}/calendars/{calendar_id} | Update a Calendar
+*V3GrantsGrantIdDraftsApi* | [**createADraft**](docs/Api/V3GrantsGrantIdDraftsApi.md#createadraft) | **POST** /v3/grants/{grant_id}/drafts | Create a Draft
+*V3GrantsGrantIdDraftsApi* | [**returnAllDrafts**](docs/Api/V3GrantsGrantIdDraftsApi.md#returnalldrafts) | **GET** /v3/grants/{grant_id}/drafts | Return all Drafts
+*V3GrantsGrantIdDraftsDraftIdApi* | [**deleteADraft**](docs/Api/V3GrantsGrantIdDraftsDraftIdApi.md#deleteadraft) | **DELETE** /v3/grants/{grant_id}/drafts/{draft_id} | Delete a Draft
+*V3GrantsGrantIdDraftsDraftIdApi* | [**returnADraft**](docs/Api/V3GrantsGrantIdDraftsDraftIdApi.md#returnadraft) | **GET** /v3/grants/{grant_id}/drafts/{draft_id} | Return a Draft
+*V3GrantsGrantIdDraftsDraftIdApi* | [**sendADraft**](docs/Api/V3GrantsGrantIdDraftsDraftIdApi.md#sendadraft) | **POST** /v3/grants/{grant_id}/drafts/{draft_id} | Send a Draft
+*V3GrantsGrantIdDraftsDraftIdApi* | [**updateADraft**](docs/Api/V3GrantsGrantIdDraftsDraftIdApi.md#updateadraft) | **PUT** /v3/grants/{grant_id}/drafts/{draft_id} | Update a Draft
+*V3GrantsGrantIdEventsApi* | [**createAnEvent**](docs/Api/V3GrantsGrantIdEventsApi.md#createanevent) | **POST** /v3/grants/{grant_id}/events | Create an Event
+*V3GrantsGrantIdEventsApi* | [**returnAllEvents**](docs/Api/V3GrantsGrantIdEventsApi.md#returnallevents) | **GET** /v3/grants/{grant_id}/events | Return all Events
+*V3GrantsGrantIdEventsEventIdApi* | [**deleteAnEvent**](docs/Api/V3GrantsGrantIdEventsEventIdApi.md#deleteanevent) | **DELETE** /v3/grants/{grant_id}/events/{event_id} | Delete an Event
+*V3GrantsGrantIdEventsEventIdApi* | [**returnAnEvent**](docs/Api/V3GrantsGrantIdEventsEventIdApi.md#returnanevent) | **GET** /v3/grants/{grant_id}/events/{event_id} | Return an Event
+*V3GrantsGrantIdEventsEventIdApi* | [**sendRSVP**](docs/Api/V3GrantsGrantIdEventsEventIdApi.md#sendrsvp) | **POST** /v3/grants/{grant_id}/events/{event_id}/send-rsvp | Send RSVP
+*V3GrantsGrantIdEventsEventIdApi* | [**updateAnEvent**](docs/Api/V3GrantsGrantIdEventsEventIdApi.md#updateanevent) | **PUT** /v3/grants/{grant_id}/events/{event_id} | Update an Event
+*V3GrantsGrantIdFoldersApi* | [**createAFolder**](docs/Api/V3GrantsGrantIdFoldersApi.md#createafolder) | **POST** /v3/grants/{grant_id}/folders | Create a Folder
+*V3GrantsGrantIdFoldersApi* | [**returnAllFolders**](docs/Api/V3GrantsGrantIdFoldersApi.md#returnallfolders) | **GET** /v3/grants/{grant_id}/folders | Return all Folders
+*V3GrantsGrantIdFoldersFolderIdApi* | [**deleteAFolder**](docs/Api/V3GrantsGrantIdFoldersFolderIdApi.md#deleteafolder) | **DELETE** /v3/grants/{grant_id}/folders/{folder_id} | Delete a Folder
+*V3GrantsGrantIdFoldersFolderIdApi* | [**returnAFolder**](docs/Api/V3GrantsGrantIdFoldersFolderIdApi.md#returnafolder) | **GET** /v3/grants/{grant_id}/folders/{folder_id} | Return a Folder
+*V3GrantsGrantIdFoldersFolderIdApi* | [**updateAFolder**](docs/Api/V3GrantsGrantIdFoldersFolderIdApi.md#updateafolder) | **PUT** /v3/grants/{grant_id}/folders/{folder_id} | Update a Folder
+*V3GrantsGrantIdMessagesApi* | [**cleanEmailMessages**](docs/Api/V3GrantsGrantIdMessagesApi.md#cleanemailmessages) | **PUT** /v3/grants/{grant_id}/messages/clean | Clean email messages
+*V3GrantsGrantIdMessagesApi* | [**composeAMessage**](docs/Api/V3GrantsGrantIdMessagesApi.md#composeamessage) | **POST** /v3/grants/{grant_id}/messages/smart-compose | Compose a message
+*V3GrantsGrantIdMessagesApi* | [**returnAllMessages**](docs/Api/V3GrantsGrantIdMessagesApi.md#returnallmessages) | **GET** /v3/grants/{grant_id}/messages | Return all Messages
+*V3GrantsGrantIdMessagesApi* | [**sendAMessage**](docs/Api/V3GrantsGrantIdMessagesApi.md#sendamessage) | **POST** /v3/grants/{grant_id}/messages/send | Send a message
+*V3GrantsGrantIdMessagesMessageIdApi* | [**composeAMessageReply**](docs/Api/V3GrantsGrantIdMessagesMessageIdApi.md#composeamessagereply) | **POST** /v3/grants/{grant_id}/messages/{message_id}/smart-compose | Compose a message reply
+*V3GrantsGrantIdMessagesMessageIdApi* | [**deleteAMessage**](docs/Api/V3GrantsGrantIdMessagesMessageIdApi.md#deleteamessage) | **DELETE** /v3/grants/{grant_id}/messages/{message_id} | Delete a Message
+*V3GrantsGrantIdMessagesMessageIdApi* | [**returnAMessage**](docs/Api/V3GrantsGrantIdMessagesMessageIdApi.md#returnamessage) | **GET** /v3/grants/{grant_id}/messages/{message_id} | Return a Message
+*V3GrantsGrantIdMessagesMessageIdApi* | [**updateAMessage**](docs/Api/V3GrantsGrantIdMessagesMessageIdApi.md#updateamessage) | **PUT** /v3/grants/{grant_id}/messages/{message_id} | Update a Message
+*V3GrantsGrantIdMessagesSchedulesApi* | [**retrieveYourScheduledMessages**](docs/Api/V3GrantsGrantIdMessagesSchedulesApi.md#retrieveyourscheduledmessages) | **GET** /v3/grants/{grant_id}/messages/schedules | Retrieve Your Scheduled Messages
+*V3GrantsGrantIdMessagesSchedulesScheduleIdApi* | [**retrieveAScheduledMessage**](docs/Api/V3GrantsGrantIdMessagesSchedulesScheduleIdApi.md#retrieveascheduledmessage) | **GET** /v3/grants/{grant_id}/messages/schedules/{scheduleId} | Retrieve a Scheduled Message
+*V3GrantsGrantIdMessagesSchedulesScheduleIdApi* | [**stopAScheduledMessage**](docs/Api/V3GrantsGrantIdMessagesSchedulesScheduleIdApi.md#stopascheduledmessage) | **DELETE** /v3/grants/{grant_id}/messages/schedules/{scheduleId} | Stop a Scheduled Message
+*V3GrantsGrantIdThreadsApi* | [**returnAllThreads**](docs/Api/V3GrantsGrantIdThreadsApi.md#returnallthreads) | **GET** /v3/grants/{grant_id}/threads | Return all Threads
+*V3GrantsGrantIdThreadsThreadIdApi* | [**deleteAThread**](docs/Api/V3GrantsGrantIdThreadsThreadIdApi.md#deleteathread) | **DELETE** /v3/grants/{grant_id}/threads/{thread_id} | Delete a Thread
+*V3GrantsGrantIdThreadsThreadIdApi* | [**returnAThread**](docs/Api/V3GrantsGrantIdThreadsThreadIdApi.md#returnathread) | **GET** /v3/grants/{grant_id}/threads/{thread_id} | Return a Thread
+*V3GrantsGrantIdThreadsThreadIdApi* | [**updateAThread**](docs/Api/V3GrantsGrantIdThreadsThreadIdApi.md#updateathread) | **PUT** /v3/grants/{grant_id}/threads/{thread_id} | Update a Thread
 
 ## Models
 

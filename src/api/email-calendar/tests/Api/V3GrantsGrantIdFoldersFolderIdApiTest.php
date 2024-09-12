@@ -70,36 +70,36 @@ class V3GrantsGrantIdFoldersFolderIdApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdFoldersFolderIdDelete
+     * Test case for deleteAFolder
      *
      * Delete a Folder.
      *
      */
-    public function testV3GrantsGrantIdFoldersFolderIdDelete()
+    public function testDeleteAFolder()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdFoldersFolderIdGet
+     * Test case for returnAFolder
      *
      * Return a Folder.
      *
      */
-    public function testV3GrantsGrantIdFoldersFolderIdGet()
+    public function testReturnAFolder()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdFoldersFolderIdPut
+     * Test case for updateAFolder
      *
      * Update a Folder.
      *
      */
-    public function testV3GrantsGrantIdFoldersFolderIdPut()
+    public function testUpdateAFolder()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

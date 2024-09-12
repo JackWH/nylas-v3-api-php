@@ -71,13 +71,13 @@ class V3ConnectorsProviderCredsIdApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3ConnectorsProviderCredsIdDelete' => [
+        'deleteCredentialByID' => [
             'application/json',
         ],
-        'v3ConnectorsProviderCredsIdGet' => [
+        'getCredentialByID' => [
             'application/json',
         ],
-        'v3ConnectorsProviderCredsIdPatch' => [
+        'updateCredentialByID' => [
             'application/json',
         ],
     ];
@@ -129,52 +129,52 @@ class V3ConnectorsProviderCredsIdApi
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsIdDelete
+     * Operation deleteCredentialByID
      *
      * Delete credential by ID
      *
      * @param  string $provider (Required) (required)
      * @param  string $id (Required) (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteCredentialByID'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3ConnectorsProviderCredsIdDelete(
+    public function deleteCredentialByID(
         string $provider,
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdDelete'][0]
+        string $contentType = self::contentTypes['deleteCredentialByID'][0]
     ): object
     {
-        list($response) = $this->v3ConnectorsProviderCredsIdDeleteWithHttpInfo($provider, $id, $accept, $contentType);
+        list($response) = $this->deleteCredentialByIDWithHttpInfo($provider, $id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsIdDeleteWithHttpInfo
+     * Operation deleteCredentialByIDWithHttpInfo
      *
      * Delete credential by ID
      *
      * @param  string $provider (Required) (required)
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteCredentialByID'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ConnectorsProviderCredsIdDeleteWithHttpInfo(
+    public function deleteCredentialByIDWithHttpInfo(
         string $provider,
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdDelete'][0]
+        string $contentType = self::contentTypes['deleteCredentialByID'][0]
     ): array
     {
-        $request = $this->v3ConnectorsProviderCredsIdDeleteRequest($provider, $id, $accept, $contentType);
+        $request = $this->deleteCredentialByIDRequest($provider, $id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -355,26 +355,26 @@ class V3ConnectorsProviderCredsIdApi
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsIdDeleteAsync
+     * Operation deleteCredentialByIDAsync
      *
      * Delete credential by ID
      *
      * @param  string $provider (Required) (required)
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteCredentialByID'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectorsProviderCredsIdDeleteAsync(
+    public function deleteCredentialByIDAsync(
         string $provider,
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdDelete'][0]
+        string $contentType = self::contentTypes['deleteCredentialByID'][0]
     ): PromiseInterface
     {
-        return $this->v3ConnectorsProviderCredsIdDeleteAsyncWithHttpInfo($provider, $id, $accept, $contentType)
+        return $this->deleteCredentialByIDAsyncWithHttpInfo($provider, $id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -383,27 +383,27 @@ class V3ConnectorsProviderCredsIdApi
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsIdDeleteAsyncWithHttpInfo
+     * Operation deleteCredentialByIDAsyncWithHttpInfo
      *
      * Delete credential by ID
      *
      * @param  string $provider (Required) (required)
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteCredentialByID'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectorsProviderCredsIdDeleteAsyncWithHttpInfo(
+    public function deleteCredentialByIDAsyncWithHttpInfo(
         $provider,
         $id,
         $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdDelete'][0]
+        string $contentType = self::contentTypes['deleteCredentialByID'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ConnectorsProviderCredsIdDeleteRequest($provider, $id, $accept, $contentType);
+        $request = $this->deleteCredentialByIDRequest($provider, $id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -442,35 +442,35 @@ class V3ConnectorsProviderCredsIdApi
     }
 
     /**
-     * Create request for operation 'v3ConnectorsProviderCredsIdDelete'
+     * Create request for operation 'deleteCredentialByID'
      *
      * @param  string $provider (Required) (required)
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteCredentialByID'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ConnectorsProviderCredsIdDeleteRequest(
+    public function deleteCredentialByIDRequest(
         $provider,
         $id,
         $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdDelete'][0]
+        string $contentType = self::contentTypes['deleteCredentialByID'][0]
     ): Request
     {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $provider when calling v3ConnectorsProviderCredsIdDelete'
+                'Missing the required parameter $provider when calling deleteCredentialByID'
             );
         }
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $id when calling v3ConnectorsProviderCredsIdDelete'
+                'Missing the required parameter $id when calling deleteCredentialByID'
             );
         }
 
@@ -565,52 +565,52 @@ class V3ConnectorsProviderCredsIdApi
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsIdGet
+     * Operation getCredentialByID
      *
      * Get credential by ID
      *
      * @param  string $provider (Required) (required)
      * @param  string $id (Required) (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCredentialByID'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3ConnectorsProviderCredsIdGet(
+    public function getCredentialByID(
         string $provider,
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdGet'][0]
+        string $contentType = self::contentTypes['getCredentialByID'][0]
     ): object
     {
-        list($response) = $this->v3ConnectorsProviderCredsIdGetWithHttpInfo($provider, $id, $accept, $contentType);
+        list($response) = $this->getCredentialByIDWithHttpInfo($provider, $id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsIdGetWithHttpInfo
+     * Operation getCredentialByIDWithHttpInfo
      *
      * Get credential by ID
      *
      * @param  string $provider (Required) (required)
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCredentialByID'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ConnectorsProviderCredsIdGetWithHttpInfo(
+    public function getCredentialByIDWithHttpInfo(
         string $provider,
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdGet'][0]
+        string $contentType = self::contentTypes['getCredentialByID'][0]
     ): array
     {
-        $request = $this->v3ConnectorsProviderCredsIdGetRequest($provider, $id, $accept, $contentType);
+        $request = $this->getCredentialByIDRequest($provider, $id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -791,26 +791,26 @@ class V3ConnectorsProviderCredsIdApi
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsIdGetAsync
+     * Operation getCredentialByIDAsync
      *
      * Get credential by ID
      *
      * @param  string $provider (Required) (required)
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCredentialByID'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectorsProviderCredsIdGetAsync(
+    public function getCredentialByIDAsync(
         string $provider,
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdGet'][0]
+        string $contentType = self::contentTypes['getCredentialByID'][0]
     ): PromiseInterface
     {
-        return $this->v3ConnectorsProviderCredsIdGetAsyncWithHttpInfo($provider, $id, $accept, $contentType)
+        return $this->getCredentialByIDAsyncWithHttpInfo($provider, $id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -819,27 +819,27 @@ class V3ConnectorsProviderCredsIdApi
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsIdGetAsyncWithHttpInfo
+     * Operation getCredentialByIDAsyncWithHttpInfo
      *
      * Get credential by ID
      *
      * @param  string $provider (Required) (required)
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCredentialByID'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectorsProviderCredsIdGetAsyncWithHttpInfo(
+    public function getCredentialByIDAsyncWithHttpInfo(
         $provider,
         $id,
         $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdGet'][0]
+        string $contentType = self::contentTypes['getCredentialByID'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ConnectorsProviderCredsIdGetRequest($provider, $id, $accept, $contentType);
+        $request = $this->getCredentialByIDRequest($provider, $id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -878,35 +878,35 @@ class V3ConnectorsProviderCredsIdApi
     }
 
     /**
-     * Create request for operation 'v3ConnectorsProviderCredsIdGet'
+     * Create request for operation 'getCredentialByID'
      *
      * @param  string $provider (Required) (required)
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCredentialByID'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ConnectorsProviderCredsIdGetRequest(
+    public function getCredentialByIDRequest(
         $provider,
         $id,
         $accept = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdGet'][0]
+        string $contentType = self::contentTypes['getCredentialByID'][0]
     ): Request
     {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $provider when calling v3ConnectorsProviderCredsIdGet'
+                'Missing the required parameter $provider when calling getCredentialByID'
             );
         }
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $id when calling v3ConnectorsProviderCredsIdGet'
+                'Missing the required parameter $id when calling getCredentialByID'
             );
         }
 
@@ -1001,7 +1001,7 @@ class V3ConnectorsProviderCredsIdApi
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsIdPatch
+     * Operation updateCredentialByID
      *
      * Update credential by ID
      *
@@ -1010,27 +1010,27 @@ class V3ConnectorsProviderCredsIdApi
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateCredentialByID'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3ConnectorsProviderCredsIdPatch(
+    public function updateCredentialByID(
         string $provider,
         string $id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdPatch'][0]
+        string $contentType = self::contentTypes['updateCredentialByID'][0]
     ): object
     {
-        list($response) = $this->v3ConnectorsProviderCredsIdPatchWithHttpInfo($provider, $id, $content_type, $accept, $body, $contentType);
+        list($response) = $this->updateCredentialByIDWithHttpInfo($provider, $id, $content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsIdPatchWithHttpInfo
+     * Operation updateCredentialByIDWithHttpInfo
      *
      * Update credential by ID
      *
@@ -1039,22 +1039,22 @@ class V3ConnectorsProviderCredsIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateCredentialByID'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ConnectorsProviderCredsIdPatchWithHttpInfo(
+    public function updateCredentialByIDWithHttpInfo(
         string $provider,
         string $id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdPatch'][0]
+        string $contentType = self::contentTypes['updateCredentialByID'][0]
     ): array
     {
-        $request = $this->v3ConnectorsProviderCredsIdPatchRequest($provider, $id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateCredentialByIDRequest($provider, $id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1235,7 +1235,7 @@ class V3ConnectorsProviderCredsIdApi
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsIdPatchAsync
+     * Operation updateCredentialByIDAsync
      *
      * Update credential by ID
      *
@@ -1244,21 +1244,21 @@ class V3ConnectorsProviderCredsIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateCredentialByID'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectorsProviderCredsIdPatchAsync(
+    public function updateCredentialByIDAsync(
         string $provider,
         string $id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdPatch'][0]
+        string $contentType = self::contentTypes['updateCredentialByID'][0]
     ): PromiseInterface
     {
-        return $this->v3ConnectorsProviderCredsIdPatchAsyncWithHttpInfo($provider, $id, $content_type, $accept, $body, $contentType)
+        return $this->updateCredentialByIDAsyncWithHttpInfo($provider, $id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1267,7 +1267,7 @@ class V3ConnectorsProviderCredsIdApi
     }
 
     /**
-     * Operation v3ConnectorsProviderCredsIdPatchAsyncWithHttpInfo
+     * Operation updateCredentialByIDAsyncWithHttpInfo
      *
      * Update credential by ID
      *
@@ -1276,22 +1276,22 @@ class V3ConnectorsProviderCredsIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateCredentialByID'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectorsProviderCredsIdPatchAsyncWithHttpInfo(
+    public function updateCredentialByIDAsyncWithHttpInfo(
         $provider,
         $id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdPatch'][0]
+        string $contentType = self::contentTypes['updateCredentialByID'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ConnectorsProviderCredsIdPatchRequest($provider, $id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateCredentialByIDRequest($provider, $id, $content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1330,39 +1330,39 @@ class V3ConnectorsProviderCredsIdApi
     }
 
     /**
-     * Create request for operation 'v3ConnectorsProviderCredsIdPatch'
+     * Create request for operation 'updateCredentialByID'
      *
      * @param  string $provider (Required) (required)
      * @param  string $id (Required) (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectorsProviderCredsIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateCredentialByID'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ConnectorsProviderCredsIdPatchRequest(
+    public function updateCredentialByIDRequest(
         $provider,
         $id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3ConnectorsProviderCredsIdPatch'][0]
+        string $contentType = self::contentTypes['updateCredentialByID'][0]
     ): Request
     {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $provider when calling v3ConnectorsProviderCredsIdPatch'
+                'Missing the required parameter $provider when calling updateCredentialByID'
             );
         }
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $id when calling v3ConnectorsProviderCredsIdPatch'
+                'Missing the required parameter $id when calling updateCredentialByID'
             );
         }
 

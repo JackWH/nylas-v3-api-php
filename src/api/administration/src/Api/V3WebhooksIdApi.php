@@ -71,13 +71,13 @@ class V3WebhooksIdApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3WebhooksIdDelete' => [
+        'deleteAWebhookDestination' => [
             'application/json',
         ],
-        'v3WebhooksIdGet' => [
+        'getTheDestinationsForAnApplicationByWebhookID' => [
             'application/json',
         ],
-        'v3WebhooksIdPut' => [
+        'updateAWebhookDestination' => [
             'application/json',
         ],
     ];
@@ -129,48 +129,48 @@ class V3WebhooksIdApi
     }
 
     /**
-     * Operation v3WebhooksIdDelete
+     * Operation deleteAWebhookDestination
      *
      * Delete a webhook destination
      *
      * @param  string $id (Required) (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAWebhookDestination'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object
      */
-    public function v3WebhooksIdDelete(
+    public function deleteAWebhookDestination(
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3WebhooksIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAWebhookDestination'][0]
     ): object
     {
-        list($response) = $this->v3WebhooksIdDeleteWithHttpInfo($id, $accept, $contentType);
+        list($response) = $this->deleteAWebhookDestinationWithHttpInfo($id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3WebhooksIdDeleteWithHttpInfo
+     * Operation deleteAWebhookDestinationWithHttpInfo
      *
      * Delete a webhook destination
      *
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAWebhookDestination'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3WebhooksIdDeleteWithHttpInfo(
+    public function deleteAWebhookDestinationWithHttpInfo(
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3WebhooksIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAWebhookDestination'][0]
     ): array
     {
-        $request = $this->v3WebhooksIdDeleteRequest($id, $accept, $contentType);
+        $request = $this->deleteAWebhookDestinationRequest($id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -316,24 +316,24 @@ class V3WebhooksIdApi
     }
 
     /**
-     * Operation v3WebhooksIdDeleteAsync
+     * Operation deleteAWebhookDestinationAsync
      *
      * Delete a webhook destination
      *
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAWebhookDestination'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3WebhooksIdDeleteAsync(
+    public function deleteAWebhookDestinationAsync(
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3WebhooksIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAWebhookDestination'][0]
     ): PromiseInterface
     {
-        return $this->v3WebhooksIdDeleteAsyncWithHttpInfo($id, $accept, $contentType)
+        return $this->deleteAWebhookDestinationAsyncWithHttpInfo($id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -342,25 +342,25 @@ class V3WebhooksIdApi
     }
 
     /**
-     * Operation v3WebhooksIdDeleteAsyncWithHttpInfo
+     * Operation deleteAWebhookDestinationAsyncWithHttpInfo
      *
      * Delete a webhook destination
      *
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAWebhookDestination'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3WebhooksIdDeleteAsyncWithHttpInfo(
+    public function deleteAWebhookDestinationAsyncWithHttpInfo(
         $id,
         $accept = null,
-        string $contentType = self::contentTypes['v3WebhooksIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAWebhookDestination'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3WebhooksIdDeleteRequest($id, $accept, $contentType);
+        $request = $this->deleteAWebhookDestinationRequest($id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -399,26 +399,26 @@ class V3WebhooksIdApi
     }
 
     /**
-     * Create request for operation 'v3WebhooksIdDelete'
+     * Create request for operation 'deleteAWebhookDestination'
      *
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAWebhookDestination'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3WebhooksIdDeleteRequest(
+    public function deleteAWebhookDestinationRequest(
         $id,
         $accept = null,
-        string $contentType = self::contentTypes['v3WebhooksIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAWebhookDestination'][0]
     ): Request
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $id when calling v3WebhooksIdDelete'
+                'Missing the required parameter $id when calling deleteAWebhookDestination'
             );
         }
 
@@ -505,48 +505,48 @@ class V3WebhooksIdApi
     }
 
     /**
-     * Operation v3WebhooksIdGet
+     * Operation getTheDestinationsForAnApplicationByWebhookID
      *
      * Get the destinations for an application by webhook ID
      *
      * @param  string $id (Required) (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTheDestinationsForAnApplicationByWebhookID'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object
      */
-    public function v3WebhooksIdGet(
+    public function getTheDestinationsForAnApplicationByWebhookID(
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3WebhooksIdGet'][0]
+        string $contentType = self::contentTypes['getTheDestinationsForAnApplicationByWebhookID'][0]
     ): object
     {
-        list($response) = $this->v3WebhooksIdGetWithHttpInfo($id, $accept, $contentType);
+        list($response) = $this->getTheDestinationsForAnApplicationByWebhookIDWithHttpInfo($id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3WebhooksIdGetWithHttpInfo
+     * Operation getTheDestinationsForAnApplicationByWebhookIDWithHttpInfo
      *
      * Get the destinations for an application by webhook ID
      *
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTheDestinationsForAnApplicationByWebhookID'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3WebhooksIdGetWithHttpInfo(
+    public function getTheDestinationsForAnApplicationByWebhookIDWithHttpInfo(
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3WebhooksIdGet'][0]
+        string $contentType = self::contentTypes['getTheDestinationsForAnApplicationByWebhookID'][0]
     ): array
     {
-        $request = $this->v3WebhooksIdGetRequest($id, $accept, $contentType);
+        $request = $this->getTheDestinationsForAnApplicationByWebhookIDRequest($id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -692,24 +692,24 @@ class V3WebhooksIdApi
     }
 
     /**
-     * Operation v3WebhooksIdGetAsync
+     * Operation getTheDestinationsForAnApplicationByWebhookIDAsync
      *
      * Get the destinations for an application by webhook ID
      *
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTheDestinationsForAnApplicationByWebhookID'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3WebhooksIdGetAsync(
+    public function getTheDestinationsForAnApplicationByWebhookIDAsync(
         string $id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3WebhooksIdGet'][0]
+        string $contentType = self::contentTypes['getTheDestinationsForAnApplicationByWebhookID'][0]
     ): PromiseInterface
     {
-        return $this->v3WebhooksIdGetAsyncWithHttpInfo($id, $accept, $contentType)
+        return $this->getTheDestinationsForAnApplicationByWebhookIDAsyncWithHttpInfo($id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -718,25 +718,25 @@ class V3WebhooksIdApi
     }
 
     /**
-     * Operation v3WebhooksIdGetAsyncWithHttpInfo
+     * Operation getTheDestinationsForAnApplicationByWebhookIDAsyncWithHttpInfo
      *
      * Get the destinations for an application by webhook ID
      *
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTheDestinationsForAnApplicationByWebhookID'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3WebhooksIdGetAsyncWithHttpInfo(
+    public function getTheDestinationsForAnApplicationByWebhookIDAsyncWithHttpInfo(
         $id,
         $accept = null,
-        string $contentType = self::contentTypes['v3WebhooksIdGet'][0]
+        string $contentType = self::contentTypes['getTheDestinationsForAnApplicationByWebhookID'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3WebhooksIdGetRequest($id, $accept, $contentType);
+        $request = $this->getTheDestinationsForAnApplicationByWebhookIDRequest($id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -775,26 +775,26 @@ class V3WebhooksIdApi
     }
 
     /**
-     * Create request for operation 'v3WebhooksIdGet'
+     * Create request for operation 'getTheDestinationsForAnApplicationByWebhookID'
      *
      * @param  string $id (Required) (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTheDestinationsForAnApplicationByWebhookID'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3WebhooksIdGetRequest(
+    public function getTheDestinationsForAnApplicationByWebhookIDRequest(
         $id,
         $accept = null,
-        string $contentType = self::contentTypes['v3WebhooksIdGet'][0]
+        string $contentType = self::contentTypes['getTheDestinationsForAnApplicationByWebhookID'][0]
     ): Request
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $id when calling v3WebhooksIdGet'
+                'Missing the required parameter $id when calling getTheDestinationsForAnApplicationByWebhookID'
             );
         }
 
@@ -881,7 +881,7 @@ class V3WebhooksIdApi
     }
 
     /**
-     * Operation v3WebhooksIdPut
+     * Operation updateAWebhookDestination
      *
      * Update a webhook destination
      *
@@ -889,26 +889,26 @@ class V3WebhooksIdApi
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAWebhookDestination'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object
      */
-    public function v3WebhooksIdPut(
+    public function updateAWebhookDestination(
         string $id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3WebhooksIdPut'][0]
+        string $contentType = self::contentTypes['updateAWebhookDestination'][0]
     ): object
     {
-        list($response) = $this->v3WebhooksIdPutWithHttpInfo($id, $content_type, $accept, $body, $contentType);
+        list($response) = $this->updateAWebhookDestinationWithHttpInfo($id, $content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3WebhooksIdPutWithHttpInfo
+     * Operation updateAWebhookDestinationWithHttpInfo
      *
      * Update a webhook destination
      *
@@ -916,21 +916,21 @@ class V3WebhooksIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAWebhookDestination'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3WebhooksIdPutWithHttpInfo(
+    public function updateAWebhookDestinationWithHttpInfo(
         string $id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3WebhooksIdPut'][0]
+        string $contentType = self::contentTypes['updateAWebhookDestination'][0]
     ): array
     {
-        $request = $this->v3WebhooksIdPutRequest($id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateAWebhookDestinationRequest($id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1076,7 +1076,7 @@ class V3WebhooksIdApi
     }
 
     /**
-     * Operation v3WebhooksIdPutAsync
+     * Operation updateAWebhookDestinationAsync
      *
      * Update a webhook destination
      *
@@ -1084,20 +1084,20 @@ class V3WebhooksIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAWebhookDestination'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3WebhooksIdPutAsync(
+    public function updateAWebhookDestinationAsync(
         string $id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3WebhooksIdPut'][0]
+        string $contentType = self::contentTypes['updateAWebhookDestination'][0]
     ): PromiseInterface
     {
-        return $this->v3WebhooksIdPutAsyncWithHttpInfo($id, $content_type, $accept, $body, $contentType)
+        return $this->updateAWebhookDestinationAsyncWithHttpInfo($id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1106,7 +1106,7 @@ class V3WebhooksIdApi
     }
 
     /**
-     * Operation v3WebhooksIdPutAsyncWithHttpInfo
+     * Operation updateAWebhookDestinationAsyncWithHttpInfo
      *
      * Update a webhook destination
      *
@@ -1114,21 +1114,21 @@ class V3WebhooksIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAWebhookDestination'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3WebhooksIdPutAsyncWithHttpInfo(
+    public function updateAWebhookDestinationAsyncWithHttpInfo(
         $id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3WebhooksIdPut'][0]
+        string $contentType = self::contentTypes['updateAWebhookDestination'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3WebhooksIdPutRequest($id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateAWebhookDestinationRequest($id, $content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1167,30 +1167,30 @@ class V3WebhooksIdApi
     }
 
     /**
-     * Create request for operation 'v3WebhooksIdPut'
+     * Create request for operation 'updateAWebhookDestination'
      *
      * @param  string $id (Required) (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3WebhooksIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAWebhookDestination'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3WebhooksIdPutRequest(
+    public function updateAWebhookDestinationRequest(
         $id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3WebhooksIdPut'][0]
+        string $contentType = self::contentTypes['updateAWebhookDestination'][0]
     ): Request
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $id when calling v3WebhooksIdPut'
+                'Missing the required parameter $id when calling updateAWebhookDestination'
             );
         }
 

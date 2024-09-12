@@ -70,24 +70,24 @@ class V3GrantsGrantIdEventsApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdEventsGet
+     * Test case for createAnEvent
      *
-     * Return all Events.
+     * Create an Event.
      *
      */
-    public function testV3GrantsGrantIdEventsGet()
+    public function testCreateAnEvent()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdEventsPost
+     * Test case for returnAllEvents
      *
-     * Create an Event.
+     * Return all Events.
      *
      */
-    public function testV3GrantsGrantIdEventsPost()
+    public function testReturnAllEvents()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

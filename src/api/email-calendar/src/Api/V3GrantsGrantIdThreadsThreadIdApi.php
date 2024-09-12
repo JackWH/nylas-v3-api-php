@@ -71,13 +71,13 @@ class V3GrantsGrantIdThreadsThreadIdApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3GrantsGrantIdThreadsThreadIdDelete' => [
+        'deleteAThread' => [
             'application/json',
         ],
-        'v3GrantsGrantIdThreadsThreadIdGet' => [
+        'returnAThread' => [
             'application/json',
         ],
-        'v3GrantsGrantIdThreadsThreadIdPut' => [
+        'updateAThread' => [
             'application/json',
         ],
     ];
@@ -129,52 +129,52 @@ class V3GrantsGrantIdThreadsThreadIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsThreadIdDelete
+     * Operation deleteAThread
      *
      * Delete a Thread
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $thread_id (Required) ID of the thread to act upon. (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAThread'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdThreadsThreadIdDelete(
+    public function deleteAThread(
         string $grant_id,
         string $thread_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAThread'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdThreadsThreadIdDeleteWithHttpInfo($grant_id, $thread_id, $accept, $contentType);
+        list($response) = $this->deleteAThreadWithHttpInfo($grant_id, $thread_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsThreadIdDeleteWithHttpInfo
+     * Operation deleteAThreadWithHttpInfo
      *
      * Delete a Thread
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $thread_id (Required) ID of the thread to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAThread'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdThreadsThreadIdDeleteWithHttpInfo(
+    public function deleteAThreadWithHttpInfo(
         string $grant_id,
         string $thread_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAThread'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdThreadsThreadIdDeleteRequest($grant_id, $thread_id, $accept, $contentType);
+        $request = $this->deleteAThreadRequest($grant_id, $thread_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -355,26 +355,26 @@ class V3GrantsGrantIdThreadsThreadIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsThreadIdDeleteAsync
+     * Operation deleteAThreadAsync
      *
      * Delete a Thread
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $thread_id (Required) ID of the thread to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAThread'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdThreadsThreadIdDeleteAsync(
+    public function deleteAThreadAsync(
         string $grant_id,
         string $thread_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAThread'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdThreadsThreadIdDeleteAsyncWithHttpInfo($grant_id, $thread_id, $accept, $contentType)
+        return $this->deleteAThreadAsyncWithHttpInfo($grant_id, $thread_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -383,27 +383,27 @@ class V3GrantsGrantIdThreadsThreadIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsThreadIdDeleteAsyncWithHttpInfo
+     * Operation deleteAThreadAsyncWithHttpInfo
      *
      * Delete a Thread
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $thread_id (Required) ID of the thread to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAThread'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdThreadsThreadIdDeleteAsyncWithHttpInfo(
+    public function deleteAThreadAsyncWithHttpInfo(
         $grant_id,
         $thread_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAThread'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdThreadsThreadIdDeleteRequest($grant_id, $thread_id, $accept, $contentType);
+        $request = $this->deleteAThreadRequest($grant_id, $thread_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -442,35 +442,35 @@ class V3GrantsGrantIdThreadsThreadIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdThreadsThreadIdDelete'
+     * Create request for operation 'deleteAThread'
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $thread_id (Required) ID of the thread to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAThread'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdThreadsThreadIdDeleteRequest(
+    public function deleteAThreadRequest(
         $grant_id,
         $thread_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdDelete'][0]
+        string $contentType = self::contentTypes['deleteAThread'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdThreadsThreadIdDelete'
+                'Missing the required parameter $grant_id when calling deleteAThread'
             );
         }
 
         // verify the required parameter 'thread_id' is set
         if ($thread_id === null || (is_array($thread_id) && count($thread_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $thread_id when calling v3GrantsGrantIdThreadsThreadIdDelete'
+                'Missing the required parameter $thread_id when calling deleteAThread'
             );
         }
 
@@ -565,52 +565,52 @@ class V3GrantsGrantIdThreadsThreadIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsThreadIdGet
+     * Operation returnAThread
      *
      * Return a Thread
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $thread_id (Required) ID of the thread to act upon. (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAThread'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdThreadsThreadIdGet(
+    public function returnAThread(
         string $grant_id,
         string $thread_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdGet'][0]
+        string $contentType = self::contentTypes['returnAThread'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdThreadsThreadIdGetWithHttpInfo($grant_id, $thread_id, $accept, $contentType);
+        list($response) = $this->returnAThreadWithHttpInfo($grant_id, $thread_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsThreadIdGetWithHttpInfo
+     * Operation returnAThreadWithHttpInfo
      *
      * Return a Thread
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $thread_id (Required) ID of the thread to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAThread'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdThreadsThreadIdGetWithHttpInfo(
+    public function returnAThreadWithHttpInfo(
         string $grant_id,
         string $thread_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdGet'][0]
+        string $contentType = self::contentTypes['returnAThread'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdThreadsThreadIdGetRequest($grant_id, $thread_id, $accept, $contentType);
+        $request = $this->returnAThreadRequest($grant_id, $thread_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -791,26 +791,26 @@ class V3GrantsGrantIdThreadsThreadIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsThreadIdGetAsync
+     * Operation returnAThreadAsync
      *
      * Return a Thread
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $thread_id (Required) ID of the thread to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAThread'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdThreadsThreadIdGetAsync(
+    public function returnAThreadAsync(
         string $grant_id,
         string $thread_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdGet'][0]
+        string $contentType = self::contentTypes['returnAThread'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdThreadsThreadIdGetAsyncWithHttpInfo($grant_id, $thread_id, $accept, $contentType)
+        return $this->returnAThreadAsyncWithHttpInfo($grant_id, $thread_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -819,27 +819,27 @@ class V3GrantsGrantIdThreadsThreadIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsThreadIdGetAsyncWithHttpInfo
+     * Operation returnAThreadAsyncWithHttpInfo
      *
      * Return a Thread
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $thread_id (Required) ID of the thread to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAThread'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdThreadsThreadIdGetAsyncWithHttpInfo(
+    public function returnAThreadAsyncWithHttpInfo(
         $grant_id,
         $thread_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdGet'][0]
+        string $contentType = self::contentTypes['returnAThread'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdThreadsThreadIdGetRequest($grant_id, $thread_id, $accept, $contentType);
+        $request = $this->returnAThreadRequest($grant_id, $thread_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -878,35 +878,35 @@ class V3GrantsGrantIdThreadsThreadIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdThreadsThreadIdGet'
+     * Create request for operation 'returnAThread'
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $thread_id (Required) ID of the thread to act upon. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAThread'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdThreadsThreadIdGetRequest(
+    public function returnAThreadRequest(
         $grant_id,
         $thread_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdGet'][0]
+        string $contentType = self::contentTypes['returnAThread'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdThreadsThreadIdGet'
+                'Missing the required parameter $grant_id when calling returnAThread'
             );
         }
 
         // verify the required parameter 'thread_id' is set
         if ($thread_id === null || (is_array($thread_id) && count($thread_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $thread_id when calling v3GrantsGrantIdThreadsThreadIdGet'
+                'Missing the required parameter $thread_id when calling returnAThread'
             );
         }
 
@@ -1001,7 +1001,7 @@ class V3GrantsGrantIdThreadsThreadIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsThreadIdPut
+     * Operation updateAThread
      *
      * Update a Thread
      *
@@ -1010,27 +1010,27 @@ class V3GrantsGrantIdThreadsThreadIdApi
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAThread'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdThreadsThreadIdPut(
+    public function updateAThread(
         string $grant_id,
         string $thread_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdPut'][0]
+        string $contentType = self::contentTypes['updateAThread'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdThreadsThreadIdPutWithHttpInfo($grant_id, $thread_id, $content_type, $accept, $body, $contentType);
+        list($response) = $this->updateAThreadWithHttpInfo($grant_id, $thread_id, $content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsThreadIdPutWithHttpInfo
+     * Operation updateAThreadWithHttpInfo
      *
      * Update a Thread
      *
@@ -1039,22 +1039,22 @@ class V3GrantsGrantIdThreadsThreadIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAThread'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdThreadsThreadIdPutWithHttpInfo(
+    public function updateAThreadWithHttpInfo(
         string $grant_id,
         string $thread_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdPut'][0]
+        string $contentType = self::contentTypes['updateAThread'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdThreadsThreadIdPutRequest($grant_id, $thread_id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateAThreadRequest($grant_id, $thread_id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1235,7 +1235,7 @@ class V3GrantsGrantIdThreadsThreadIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsThreadIdPutAsync
+     * Operation updateAThreadAsync
      *
      * Update a Thread
      *
@@ -1244,21 +1244,21 @@ class V3GrantsGrantIdThreadsThreadIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAThread'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdThreadsThreadIdPutAsync(
+    public function updateAThreadAsync(
         string $grant_id,
         string $thread_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdPut'][0]
+        string $contentType = self::contentTypes['updateAThread'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdThreadsThreadIdPutAsyncWithHttpInfo($grant_id, $thread_id, $content_type, $accept, $body, $contentType)
+        return $this->updateAThreadAsyncWithHttpInfo($grant_id, $thread_id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1267,7 +1267,7 @@ class V3GrantsGrantIdThreadsThreadIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdThreadsThreadIdPutAsyncWithHttpInfo
+     * Operation updateAThreadAsyncWithHttpInfo
      *
      * Update a Thread
      *
@@ -1276,22 +1276,22 @@ class V3GrantsGrantIdThreadsThreadIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAThread'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdThreadsThreadIdPutAsyncWithHttpInfo(
+    public function updateAThreadAsyncWithHttpInfo(
         $grant_id,
         $thread_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdPut'][0]
+        string $contentType = self::contentTypes['updateAThread'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdThreadsThreadIdPutRequest($grant_id, $thread_id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateAThreadRequest($grant_id, $thread_id, $content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1330,39 +1330,39 @@ class V3GrantsGrantIdThreadsThreadIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdThreadsThreadIdPut'
+     * Create request for operation 'updateAThread'
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $thread_id (Required) ID of the thread to act upon. (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdThreadsThreadIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAThread'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdThreadsThreadIdPutRequest(
+    public function updateAThreadRequest(
         $grant_id,
         $thread_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdThreadsThreadIdPut'][0]
+        string $contentType = self::contentTypes['updateAThread'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdThreadsThreadIdPut'
+                'Missing the required parameter $grant_id when calling updateAThread'
             );
         }
 
         // verify the required parameter 'thread_id' is set
         if ($thread_id === null || (is_array($thread_id) && count($thread_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $thread_id when calling v3GrantsGrantIdThreadsThreadIdPut'
+                'Missing the required parameter $thread_id when calling updateAThread'
             );
         }
 

@@ -70,24 +70,24 @@ class V3GrantsGrantIdDraftsApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdDraftsGet
+     * Test case for createADraft
      *
-     * Return all Drafts.
+     * Create a Draft.
      *
      */
-    public function testV3GrantsGrantIdDraftsGet()
+    public function testCreateADraft()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdDraftsPost
+     * Test case for returnAllDrafts
      *
-     * Create a Draft.
+     * Return all Drafts.
      *
      */
-    public function testV3GrantsGrantIdDraftsPost()
+    public function testReturnAllDrafts()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

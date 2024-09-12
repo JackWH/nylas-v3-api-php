@@ -70,48 +70,48 @@ class V3GrantsGrantIdEventsEventIdApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdEventsEventIdDelete
+     * Test case for deleteAnEvent
      *
      * Delete an Event.
      *
      */
-    public function testV3GrantsGrantIdEventsEventIdDelete()
+    public function testDeleteAnEvent()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdEventsEventIdGet
+     * Test case for returnAnEvent
      *
      * Return an Event.
      *
      */
-    public function testV3GrantsGrantIdEventsEventIdGet()
+    public function testReturnAnEvent()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdEventsEventIdPut
-     *
-     * Update an Event.
-     *
-     */
-    public function testV3GrantsGrantIdEventsEventIdPut()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for v3GrantsGrantIdEventsEventIdSendRsvpPost
+     * Test case for sendRSVP
      *
      * Send RSVP.
      *
      */
-    public function testV3GrantsGrantIdEventsEventIdSendRsvpPost()
+    public function testSendRSVP()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAnEvent
+     *
+     * Update an Event.
+     *
+     */
+    public function testUpdateAnEvent()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -70,48 +70,48 @@ class V3GrantsGrantIdMessagesApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdMessagesCleanPut
+     * Test case for cleanEmailMessages
      *
      * Clean email messages.
      *
      */
-    public function testV3GrantsGrantIdMessagesCleanPut()
+    public function testCleanEmailMessages()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdMessagesGet
-     *
-     * Return all Messages.
-     *
-     */
-    public function testV3GrantsGrantIdMessagesGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for v3GrantsGrantIdMessagesSendPost
-     *
-     * Send a message.
-     *
-     */
-    public function testV3GrantsGrantIdMessagesSendPost()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for v3GrantsGrantIdMessagesSmartComposePost
+     * Test case for composeAMessage
      *
      * Compose a message.
      *
      */
-    public function testV3GrantsGrantIdMessagesSmartComposePost()
+    public function testComposeAMessage()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for returnAllMessages
+     *
+     * Return all Messages.
+     *
+     */
+    public function testReturnAllMessages()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for sendAMessage
+     *
+     * Send a message.
+     *
+     */
+    public function testSendAMessage()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

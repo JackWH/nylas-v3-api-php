@@ -70,24 +70,24 @@ class V3GrantsGrantIdFoldersApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdFoldersGet
+     * Test case for createAFolder
      *
-     * Return all Folders.
+     * Create a Folder.
      *
      */
-    public function testV3GrantsGrantIdFoldersGet()
+    public function testCreateAFolder()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdFoldersPost
+     * Test case for returnAllFolders
      *
-     * Create a Folder.
+     * Return all Folders.
      *
      */
-    public function testV3GrantsGrantIdFoldersPost()
+    public function testReturnAllFolders()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

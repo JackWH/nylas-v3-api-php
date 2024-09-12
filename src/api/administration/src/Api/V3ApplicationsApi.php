@@ -71,10 +71,10 @@ class V3ApplicationsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3ApplicationsGet' => [
+        'getApplication' => [
             'application/json',
         ],
-        'v3ApplicationsPatch' => [
+        'updateApplication' => [
             'application/json',
         ],
     ];
@@ -126,44 +126,44 @@ class V3ApplicationsApi
     }
 
     /**
-     * Operation v3ApplicationsGet
+     * Operation getApplication
      *
      * Get application
      *
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getApplication'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3ApplicationsGet(
+    public function getApplication(
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsGet'][0]
+        string $contentType = self::contentTypes['getApplication'][0]
     ): object
     {
-        list($response) = $this->v3ApplicationsGetWithHttpInfo($accept, $contentType);
+        list($response) = $this->getApplicationWithHttpInfo($accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ApplicationsGetWithHttpInfo
+     * Operation getApplicationWithHttpInfo
      *
      * Get application
      *
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getApplication'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ApplicationsGetWithHttpInfo(
+    public function getApplicationWithHttpInfo(
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsGet'][0]
+        string $contentType = self::contentTypes['getApplication'][0]
     ): array
     {
-        $request = $this->v3ApplicationsGetRequest($accept, $contentType);
+        $request = $this->getApplicationRequest($accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -344,22 +344,22 @@ class V3ApplicationsApi
     }
 
     /**
-     * Operation v3ApplicationsGetAsync
+     * Operation getApplicationAsync
      *
      * Get application
      *
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getApplication'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ApplicationsGetAsync(
+    public function getApplicationAsync(
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsGet'][0]
+        string $contentType = self::contentTypes['getApplication'][0]
     ): PromiseInterface
     {
-        return $this->v3ApplicationsGetAsyncWithHttpInfo($accept, $contentType)
+        return $this->getApplicationAsyncWithHttpInfo($accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -368,23 +368,23 @@ class V3ApplicationsApi
     }
 
     /**
-     * Operation v3ApplicationsGetAsyncWithHttpInfo
+     * Operation getApplicationAsyncWithHttpInfo
      *
      * Get application
      *
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getApplication'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ApplicationsGetAsyncWithHttpInfo(
+    public function getApplicationAsyncWithHttpInfo(
         $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsGet'][0]
+        string $contentType = self::contentTypes['getApplication'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ApplicationsGetRequest($accept, $contentType);
+        $request = $this->getApplicationRequest($accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -423,17 +423,17 @@ class V3ApplicationsApi
     }
 
     /**
-     * Create request for operation 'v3ApplicationsGet'
+     * Create request for operation 'getApplication'
      *
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getApplication'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ApplicationsGetRequest(
+    public function getApplicationRequest(
         $accept = null,
-        string $contentType = self::contentTypes['v3ApplicationsGet'][0]
+        string $contentType = self::contentTypes['getApplication'][0]
     ): Request
     {
 
@@ -512,52 +512,52 @@ class V3ApplicationsApi
     }
 
     /**
-     * Operation v3ApplicationsPatch
+     * Operation updateApplication
      *
      * Update application
      *
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateApplication'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object
      */
-    public function v3ApplicationsPatch(
+    public function updateApplication(
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ApplicationsPatch'][0]
+        string $contentType = self::contentTypes['updateApplication'][0]
     ): object
     {
-        list($response) = $this->v3ApplicationsPatchWithHttpInfo($content_type, $accept, $body, $contentType);
+        list($response) = $this->updateApplicationWithHttpInfo($content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ApplicationsPatchWithHttpInfo
+     * Operation updateApplicationWithHttpInfo
      *
      * Update application
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateApplication'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ApplicationsPatchWithHttpInfo(
+    public function updateApplicationWithHttpInfo(
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ApplicationsPatch'][0]
+        string $contentType = self::contentTypes['updateApplication'][0]
     ): array
     {
-        $request = $this->v3ApplicationsPatchRequest($content_type, $accept, $body, $contentType);
+        $request = $this->updateApplicationRequest($content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -773,26 +773,26 @@ class V3ApplicationsApi
     }
 
     /**
-     * Operation v3ApplicationsPatchAsync
+     * Operation updateApplicationAsync
      *
      * Update application
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateApplication'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ApplicationsPatchAsync(
+    public function updateApplicationAsync(
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ApplicationsPatch'][0]
+        string $contentType = self::contentTypes['updateApplication'][0]
     ): PromiseInterface
     {
-        return $this->v3ApplicationsPatchAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
+        return $this->updateApplicationAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -801,27 +801,27 @@ class V3ApplicationsApi
     }
 
     /**
-     * Operation v3ApplicationsPatchAsyncWithHttpInfo
+     * Operation updateApplicationAsyncWithHttpInfo
      *
      * Update application
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateApplication'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ApplicationsPatchAsyncWithHttpInfo(
+    public function updateApplicationAsyncWithHttpInfo(
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3ApplicationsPatch'][0]
+        string $contentType = self::contentTypes['updateApplication'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ApplicationsPatchRequest($content_type, $accept, $body, $contentType);
+        $request = $this->updateApplicationRequest($content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -860,21 +860,21 @@ class V3ApplicationsApi
     }
 
     /**
-     * Create request for operation 'v3ApplicationsPatch'
+     * Create request for operation 'updateApplication'
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ApplicationsPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateApplication'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ApplicationsPatchRequest(
+    public function updateApplicationRequest(
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3ApplicationsPatch'][0]
+        string $contentType = self::contentTypes['updateApplication'][0]
     ): Request
     {
 

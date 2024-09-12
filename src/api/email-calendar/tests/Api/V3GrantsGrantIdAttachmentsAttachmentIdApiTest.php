@@ -70,24 +70,24 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet
+     * Test case for downloadAnAttachment
      *
      * Download an Attachment.
      *
      */
-    public function testV3GrantsGrantIdAttachmentsAttachmentIdDownloadGet()
+    public function testDownloadAnAttachment()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdAttachmentsAttachmentIdGet
+     * Test case for returnMetadataOfAnAttachment
      *
      * Return metadata of an Attachment.
      *
      */
-    public function testV3GrantsGrantIdAttachmentsAttachmentIdGet()
+    public function testReturnMetadataOfAnAttachment()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -71,10 +71,10 @@ class V3GrantsGrantIdEventsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3GrantsGrantIdEventsGet' => [
+        'createAnEvent' => [
             'application/json',
         ],
-        'v3GrantsGrantIdEventsPost' => [
+        'returnAllEvents' => [
             'application/json',
         ],
     ];
@@ -126,458 +126,7 @@ class V3GrantsGrantIdEventsApi
     }
 
     /**
-     * Operation v3GrantsGrantIdEventsGet
-     *
-     * Return all Events
-     *
-     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
-     * @param  string|null $accept accept (optional)
-     * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
-     * @param  string|null $calendar_id calendar_id (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdEventsGet'] to see the possible values for this operation
-     *
-     * @throws ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws InvalidArgumentException
-     * @return object|object|object
-     */
-    public function v3GrantsGrantIdEventsGet(
-        string $grant_id,
-        ?string $accept = null,
-        ?int $limit = null,
-        ?string $calendar_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdEventsGet'][0]
-    ): object
-    {
-        list($response) = $this->v3GrantsGrantIdEventsGetWithHttpInfo($grant_id, $accept, $limit, $calendar_id, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation v3GrantsGrantIdEventsGetWithHttpInfo
-     *
-     * Return all Events
-     *
-     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
-     * @param  string|null $accept (optional)
-     * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
-     * @param  string|null $calendar_id (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdEventsGet'] to see the possible values for this operation
-     *
-     * @throws ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws InvalidArgumentException
-     * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function v3GrantsGrantIdEventsGetWithHttpInfo(
-        string $grant_id,
-        ?string $accept = null,
-        ?int $limit = null,
-        ?string $calendar_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdEventsGet'][0]
-    ): array
-    {
-        $request = $this->v3GrantsGrantIdEventsGetRequest($grant_id, $accept, $limit, $calendar_id, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 400:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 401:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation v3GrantsGrantIdEventsGetAsync
-     *
-     * Return all Events
-     *
-     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
-     * @param  string|null $accept (optional)
-     * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
-     * @param  string|null $calendar_id (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdEventsGet'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function v3GrantsGrantIdEventsGetAsync(
-        string $grant_id,
-        ?string $accept = null,
-        ?int $limit = null,
-        ?string $calendar_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdEventsGet'][0]
-    ): PromiseInterface
-    {
-        return $this->v3GrantsGrantIdEventsGetAsyncWithHttpInfo($grant_id, $accept, $limit, $calendar_id, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation v3GrantsGrantIdEventsGetAsyncWithHttpInfo
-     *
-     * Return all Events
-     *
-     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
-     * @param  string|null $accept (optional)
-     * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
-     * @param  string|null $calendar_id (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdEventsGet'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function v3GrantsGrantIdEventsGetAsyncWithHttpInfo(
-        $grant_id,
-        $accept = null,
-        $limit = null,
-        $calendar_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdEventsGet'][0]
-    ): PromiseInterface
-    {
-        $returnType = 'object';
-        $request = $this->v3GrantsGrantIdEventsGetRequest($grant_id, $accept, $limit, $calendar_id, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'v3GrantsGrantIdEventsGet'
-     *
-     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
-     * @param  string|null $accept (optional)
-     * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
-     * @param  string|null $calendar_id (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdEventsGet'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function v3GrantsGrantIdEventsGetRequest(
-        $grant_id,
-        $accept = null,
-        $limit = null,
-        $calendar_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdEventsGet'][0]
-    ): Request
-    {
-
-        // verify the required parameter 'grant_id' is set
-        if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdEventsGet'
-            );
-        }
-
-
-
-
-
-        $resourcePath = '/v3/grants/{grant_id}/events';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $limit,
-            'limit', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $calendar_id,
-            'calendar_id', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-
-        // header params
-        if ($accept !== null) {
-            $headerParams['Accept'] = ObjectSerializer::toHeaderValue($accept);
-        }
-
-        // path params
-        if ($grant_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'grant_id' . '}',
-                ObjectSerializer::toPathValue($grant_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation v3GrantsGrantIdEventsPost
+     * Operation createAnEvent
      *
      * Create an Event
      *
@@ -586,27 +135,27 @@ class V3GrantsGrantIdEventsApi
      * @param  string|null $accept accept (optional)
      * @param  string|null $calendar_id (Required) Specify calendar ID of the event.  \&quot;primary\&quot; is a supported value indicating the user&#39;s primary calendar. (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdEventsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAnEvent'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdEventsPost(
+    public function createAnEvent(
         string $grant_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?string $calendar_id = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdEventsPost'][0]
+        string $contentType = self::contentTypes['createAnEvent'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdEventsPostWithHttpInfo($grant_id, $content_type, $accept, $calendar_id, $body, $contentType);
+        list($response) = $this->createAnEventWithHttpInfo($grant_id, $content_type, $accept, $calendar_id, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdEventsPostWithHttpInfo
+     * Operation createAnEventWithHttpInfo
      *
      * Create an Event
      *
@@ -615,22 +164,22 @@ class V3GrantsGrantIdEventsApi
      * @param  string|null $accept (optional)
      * @param  string|null $calendar_id (Required) Specify calendar ID of the event.  \&quot;primary\&quot; is a supported value indicating the user&#39;s primary calendar. (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdEventsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAnEvent'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdEventsPostWithHttpInfo(
+    public function createAnEventWithHttpInfo(
         string $grant_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?string $calendar_id = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdEventsPost'][0]
+        string $contentType = self::contentTypes['createAnEvent'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdEventsPostRequest($grant_id, $content_type, $accept, $calendar_id, $body, $contentType);
+        $request = $this->createAnEventRequest($grant_id, $content_type, $accept, $calendar_id, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -811,7 +360,7 @@ class V3GrantsGrantIdEventsApi
     }
 
     /**
-     * Operation v3GrantsGrantIdEventsPostAsync
+     * Operation createAnEventAsync
      *
      * Create an Event
      *
@@ -820,21 +369,21 @@ class V3GrantsGrantIdEventsApi
      * @param  string|null $accept (optional)
      * @param  string|null $calendar_id (Required) Specify calendar ID of the event.  \&quot;primary\&quot; is a supported value indicating the user&#39;s primary calendar. (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdEventsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAnEvent'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdEventsPostAsync(
+    public function createAnEventAsync(
         string $grant_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?string $calendar_id = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdEventsPost'][0]
+        string $contentType = self::contentTypes['createAnEvent'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdEventsPostAsyncWithHttpInfo($grant_id, $content_type, $accept, $calendar_id, $body, $contentType)
+        return $this->createAnEventAsyncWithHttpInfo($grant_id, $content_type, $accept, $calendar_id, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -843,7 +392,7 @@ class V3GrantsGrantIdEventsApi
     }
 
     /**
-     * Operation v3GrantsGrantIdEventsPostAsyncWithHttpInfo
+     * Operation createAnEventAsyncWithHttpInfo
      *
      * Create an Event
      *
@@ -852,22 +401,22 @@ class V3GrantsGrantIdEventsApi
      * @param  string|null $accept (optional)
      * @param  string|null $calendar_id (Required) Specify calendar ID of the event.  \&quot;primary\&quot; is a supported value indicating the user&#39;s primary calendar. (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdEventsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAnEvent'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdEventsPostAsyncWithHttpInfo(
+    public function createAnEventAsyncWithHttpInfo(
         $grant_id,
         $content_type = null,
         $accept = null,
         $calendar_id = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdEventsPost'][0]
+        string $contentType = self::contentTypes['createAnEvent'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdEventsPostRequest($grant_id, $content_type, $accept, $calendar_id, $body, $contentType);
+        $request = $this->createAnEventRequest($grant_id, $content_type, $accept, $calendar_id, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -906,32 +455,32 @@ class V3GrantsGrantIdEventsApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdEventsPost'
+     * Create request for operation 'createAnEvent'
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  string|null $calendar_id (Required) Specify calendar ID of the event.  \&quot;primary\&quot; is a supported value indicating the user&#39;s primary calendar. (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdEventsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAnEvent'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdEventsPostRequest(
+    public function createAnEventRequest(
         $grant_id,
         $content_type = null,
         $accept = null,
         $calendar_id = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdEventsPost'][0]
+        string $contentType = self::contentTypes['createAnEvent'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdEventsPost'
+                'Missing the required parameter $grant_id when calling createAnEvent'
             );
         }
 
@@ -1034,6 +583,457 @@ class V3GrantsGrantIdEventsApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation returnAllEvents
+     *
+     * Return all Events
+     *
+     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
+     * @param  string|null $accept accept (optional)
+     * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
+     * @param  string|null $calendar_id calendar_id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllEvents'] to see the possible values for this operation
+     *
+     * @throws ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws InvalidArgumentException
+     * @return object|object|object
+     */
+    public function returnAllEvents(
+        string $grant_id,
+        ?string $accept = null,
+        ?int $limit = null,
+        ?string $calendar_id = null,
+        string $contentType = self::contentTypes['returnAllEvents'][0]
+    ): object
+    {
+        list($response) = $this->returnAllEventsWithHttpInfo($grant_id, $accept, $limit, $calendar_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation returnAllEventsWithHttpInfo
+     *
+     * Return all Events
+     *
+     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
+     * @param  string|null $accept (optional)
+     * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
+     * @param  string|null $calendar_id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllEvents'] to see the possible values for this operation
+     *
+     * @throws ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws InvalidArgumentException
+     * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function returnAllEventsWithHttpInfo(
+        string $grant_id,
+        ?string $accept = null,
+        ?int $limit = null,
+        ?string $calendar_id = null,
+        string $contentType = self::contentTypes['returnAllEvents'][0]
+    ): array
+    {
+        $request = $this->returnAllEventsRequest($grant_id, $accept, $limit, $calendar_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation returnAllEventsAsync
+     *
+     * Return all Events
+     *
+     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
+     * @param  string|null $accept (optional)
+     * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
+     * @param  string|null $calendar_id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllEvents'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
+     */
+    public function returnAllEventsAsync(
+        string $grant_id,
+        ?string $accept = null,
+        ?int $limit = null,
+        ?string $calendar_id = null,
+        string $contentType = self::contentTypes['returnAllEvents'][0]
+    ): PromiseInterface
+    {
+        return $this->returnAllEventsAsyncWithHttpInfo($grant_id, $accept, $limit, $calendar_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation returnAllEventsAsyncWithHttpInfo
+     *
+     * Return all Events
+     *
+     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
+     * @param  string|null $accept (optional)
+     * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
+     * @param  string|null $calendar_id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllEvents'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
+     */
+    public function returnAllEventsAsyncWithHttpInfo(
+        $grant_id,
+        $accept = null,
+        $limit = null,
+        $calendar_id = null,
+        string $contentType = self::contentTypes['returnAllEvents'][0]
+    ): PromiseInterface
+    {
+        $returnType = 'object';
+        $request = $this->returnAllEventsRequest($grant_id, $accept, $limit, $calendar_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'returnAllEvents'
+     *
+     * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
+     * @param  string|null $accept (optional)
+     * @param  int|null $limit The number of objects to return. This field defaults to 50. The maximum allowed value for this field is 200.  See [pagination](#section/Pagination) for more information. (optional)
+     * @param  string|null $calendar_id (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnAllEvents'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function returnAllEventsRequest(
+        $grant_id,
+        $accept = null,
+        $limit = null,
+        $calendar_id = null,
+        string $contentType = self::contentTypes['returnAllEvents'][0]
+    ): Request
+    {
+
+        // verify the required parameter 'grant_id' is set
+        if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
+            throw new InvalidArgumentException(
+                'Missing the required parameter $grant_id when calling returnAllEvents'
+            );
+        }
+
+
+
+
+
+        $resourcePath = '/v3/grants/{grant_id}/events';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $limit,
+            'limit', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $calendar_id,
+            'calendar_id', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+        // header params
+        if ($accept !== null) {
+            $headerParams['Accept'] = ObjectSerializer::toHeaderValue($accept);
+        }
+
+        // path params
+        if ($grant_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'grant_id' . '}',
+                ObjectSerializer::toPathValue($grant_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

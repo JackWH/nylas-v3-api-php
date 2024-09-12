@@ -71,13 +71,13 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3GrantsGrantIdCalendarsCalendarIdDelete' => [
+        'deleteACalendar' => [
             'application/json',
         ],
-        'v3GrantsGrantIdCalendarsCalendarIdGet' => [
+        'returnACalendar' => [
             'application/json',
         ],
-        'v3GrantsGrantIdCalendarsCalendarIdPut' => [
+        'updateACalendar' => [
             'application/json',
         ],
     ];
@@ -129,52 +129,52 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdCalendarsCalendarIdDelete
+     * Operation deleteACalendar
      *
      * Delete a Calendar
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $calendar_id (Required) ID of the calendar to act upon. Use \&quot;primary\&quot; to refer to the primary calendar associated with grant. (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteACalendar'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdDelete(
+    public function deleteACalendar(
         string $grant_id,
         string $calendar_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdDelete'][0]
+        string $contentType = self::contentTypes['deleteACalendar'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdCalendarsCalendarIdDeleteWithHttpInfo($grant_id, $calendar_id, $accept, $contentType);
+        list($response) = $this->deleteACalendarWithHttpInfo($grant_id, $calendar_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdCalendarsCalendarIdDeleteWithHttpInfo
+     * Operation deleteACalendarWithHttpInfo
      *
      * Delete a Calendar
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $calendar_id (Required) ID of the calendar to act upon. Use \&quot;primary\&quot; to refer to the primary calendar associated with grant. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteACalendar'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdDeleteWithHttpInfo(
+    public function deleteACalendarWithHttpInfo(
         string $grant_id,
         string $calendar_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdDelete'][0]
+        string $contentType = self::contentTypes['deleteACalendar'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdCalendarsCalendarIdDeleteRequest($grant_id, $calendar_id, $accept, $contentType);
+        $request = $this->deleteACalendarRequest($grant_id, $calendar_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -355,26 +355,26 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdCalendarsCalendarIdDeleteAsync
+     * Operation deleteACalendarAsync
      *
      * Delete a Calendar
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $calendar_id (Required) ID of the calendar to act upon. Use \&quot;primary\&quot; to refer to the primary calendar associated with grant. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteACalendar'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdDeleteAsync(
+    public function deleteACalendarAsync(
         string $grant_id,
         string $calendar_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdDelete'][0]
+        string $contentType = self::contentTypes['deleteACalendar'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdCalendarsCalendarIdDeleteAsyncWithHttpInfo($grant_id, $calendar_id, $accept, $contentType)
+        return $this->deleteACalendarAsyncWithHttpInfo($grant_id, $calendar_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -383,27 +383,27 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdCalendarsCalendarIdDeleteAsyncWithHttpInfo
+     * Operation deleteACalendarAsyncWithHttpInfo
      *
      * Delete a Calendar
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $calendar_id (Required) ID of the calendar to act upon. Use \&quot;primary\&quot; to refer to the primary calendar associated with grant. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteACalendar'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdDeleteAsyncWithHttpInfo(
+    public function deleteACalendarAsyncWithHttpInfo(
         $grant_id,
         $calendar_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdDelete'][0]
+        string $contentType = self::contentTypes['deleteACalendar'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdCalendarsCalendarIdDeleteRequest($grant_id, $calendar_id, $accept, $contentType);
+        $request = $this->deleteACalendarRequest($grant_id, $calendar_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -442,35 +442,35 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdCalendarsCalendarIdDelete'
+     * Create request for operation 'deleteACalendar'
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $calendar_id (Required) ID of the calendar to act upon. Use \&quot;primary\&quot; to refer to the primary calendar associated with grant. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteACalendar'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdDeleteRequest(
+    public function deleteACalendarRequest(
         $grant_id,
         $calendar_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdDelete'][0]
+        string $contentType = self::contentTypes['deleteACalendar'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdCalendarsCalendarIdDelete'
+                'Missing the required parameter $grant_id when calling deleteACalendar'
             );
         }
 
         // verify the required parameter 'calendar_id' is set
         if ($calendar_id === null || (is_array($calendar_id) && count($calendar_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $calendar_id when calling v3GrantsGrantIdCalendarsCalendarIdDelete'
+                'Missing the required parameter $calendar_id when calling deleteACalendar'
             );
         }
 
@@ -565,52 +565,52 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdCalendarsCalendarIdGet
+     * Operation returnACalendar
      *
      * Return a Calendar
      *
      * @param  string $grant_id grant_id (required)
      * @param  string $calendar_id calendar_id (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnACalendar'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdGet(
+    public function returnACalendar(
         string $grant_id,
         string $calendar_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdGet'][0]
+        string $contentType = self::contentTypes['returnACalendar'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdCalendarsCalendarIdGetWithHttpInfo($grant_id, $calendar_id, $accept, $contentType);
+        list($response) = $this->returnACalendarWithHttpInfo($grant_id, $calendar_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdCalendarsCalendarIdGetWithHttpInfo
+     * Operation returnACalendarWithHttpInfo
      *
      * Return a Calendar
      *
      * @param  string $grant_id (required)
      * @param  string $calendar_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnACalendar'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdGetWithHttpInfo(
+    public function returnACalendarWithHttpInfo(
         string $grant_id,
         string $calendar_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdGet'][0]
+        string $contentType = self::contentTypes['returnACalendar'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdCalendarsCalendarIdGetRequest($grant_id, $calendar_id, $accept, $contentType);
+        $request = $this->returnACalendarRequest($grant_id, $calendar_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -791,26 +791,26 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdCalendarsCalendarIdGetAsync
+     * Operation returnACalendarAsync
      *
      * Return a Calendar
      *
      * @param  string $grant_id (required)
      * @param  string $calendar_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnACalendar'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdGetAsync(
+    public function returnACalendarAsync(
         string $grant_id,
         string $calendar_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdGet'][0]
+        string $contentType = self::contentTypes['returnACalendar'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdCalendarsCalendarIdGetAsyncWithHttpInfo($grant_id, $calendar_id, $accept, $contentType)
+        return $this->returnACalendarAsyncWithHttpInfo($grant_id, $calendar_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -819,27 +819,27 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdCalendarsCalendarIdGetAsyncWithHttpInfo
+     * Operation returnACalendarAsyncWithHttpInfo
      *
      * Return a Calendar
      *
      * @param  string $grant_id (required)
      * @param  string $calendar_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnACalendar'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdGetAsyncWithHttpInfo(
+    public function returnACalendarAsyncWithHttpInfo(
         $grant_id,
         $calendar_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdGet'][0]
+        string $contentType = self::contentTypes['returnACalendar'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdCalendarsCalendarIdGetRequest($grant_id, $calendar_id, $accept, $contentType);
+        $request = $this->returnACalendarRequest($grant_id, $calendar_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -878,35 +878,35 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdCalendarsCalendarIdGet'
+     * Create request for operation 'returnACalendar'
      *
      * @param  string $grant_id (required)
      * @param  string $calendar_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnACalendar'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdGetRequest(
+    public function returnACalendarRequest(
         $grant_id,
         $calendar_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdGet'][0]
+        string $contentType = self::contentTypes['returnACalendar'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdCalendarsCalendarIdGet'
+                'Missing the required parameter $grant_id when calling returnACalendar'
             );
         }
 
         // verify the required parameter 'calendar_id' is set
         if ($calendar_id === null || (is_array($calendar_id) && count($calendar_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $calendar_id when calling v3GrantsGrantIdCalendarsCalendarIdGet'
+                'Missing the required parameter $calendar_id when calling returnACalendar'
             );
         }
 
@@ -1001,7 +1001,7 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdCalendarsCalendarIdPut
+     * Operation updateACalendar
      *
      * Update a Calendar
      *
@@ -1010,27 +1010,27 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateACalendar'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdPut(
+    public function updateACalendar(
         string $grant_id,
         string $calendar_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdPut'][0]
+        string $contentType = self::contentTypes['updateACalendar'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdCalendarsCalendarIdPutWithHttpInfo($grant_id, $calendar_id, $content_type, $accept, $body, $contentType);
+        list($response) = $this->updateACalendarWithHttpInfo($grant_id, $calendar_id, $content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdCalendarsCalendarIdPutWithHttpInfo
+     * Operation updateACalendarWithHttpInfo
      *
      * Update a Calendar
      *
@@ -1039,22 +1039,22 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateACalendar'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdPutWithHttpInfo(
+    public function updateACalendarWithHttpInfo(
         string $grant_id,
         string $calendar_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdPut'][0]
+        string $contentType = self::contentTypes['updateACalendar'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdCalendarsCalendarIdPutRequest($grant_id, $calendar_id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateACalendarRequest($grant_id, $calendar_id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1235,7 +1235,7 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdCalendarsCalendarIdPutAsync
+     * Operation updateACalendarAsync
      *
      * Update a Calendar
      *
@@ -1244,21 +1244,21 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateACalendar'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdPutAsync(
+    public function updateACalendarAsync(
         string $grant_id,
         string $calendar_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdPut'][0]
+        string $contentType = self::contentTypes['updateACalendar'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdCalendarsCalendarIdPutAsyncWithHttpInfo($grant_id, $calendar_id, $content_type, $accept, $body, $contentType)
+        return $this->updateACalendarAsyncWithHttpInfo($grant_id, $calendar_id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1267,7 +1267,7 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdCalendarsCalendarIdPutAsyncWithHttpInfo
+     * Operation updateACalendarAsyncWithHttpInfo
      *
      * Update a Calendar
      *
@@ -1276,22 +1276,22 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateACalendar'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdPutAsyncWithHttpInfo(
+    public function updateACalendarAsyncWithHttpInfo(
         $grant_id,
         $calendar_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdPut'][0]
+        string $contentType = self::contentTypes['updateACalendar'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdCalendarsCalendarIdPutRequest($grant_id, $calendar_id, $content_type, $accept, $body, $contentType);
+        $request = $this->updateACalendarRequest($grant_id, $calendar_id, $content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1330,39 +1330,39 @@ class V3GrantsGrantIdCalendarsCalendarIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdCalendarsCalendarIdPut'
+     * Create request for operation 'updateACalendar'
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $calendar_id (Required) ID of the calendar to act upon. Use \&quot;primary\&quot; to refer to the primary calendar associated with grant. (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateACalendar'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdCalendarsCalendarIdPutRequest(
+    public function updateACalendarRequest(
         $grant_id,
         $calendar_id,
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdCalendarsCalendarIdPut'][0]
+        string $contentType = self::contentTypes['updateACalendar'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdCalendarsCalendarIdPut'
+                'Missing the required parameter $grant_id when calling updateACalendar'
             );
         }
 
         // verify the required parameter 'calendar_id' is set
         if ($calendar_id === null || (is_array($calendar_id) && count($calendar_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $calendar_id when calling v3GrantsGrantIdCalendarsCalendarIdPut'
+                'Missing the required parameter $calendar_id when calling updateACalendar'
             );
         }
 

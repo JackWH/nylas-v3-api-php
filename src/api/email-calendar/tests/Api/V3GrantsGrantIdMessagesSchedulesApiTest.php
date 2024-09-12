@@ -70,12 +70,12 @@ class V3GrantsGrantIdMessagesSchedulesApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdMessagesSchedulesGet
+     * Test case for retrieveYourScheduledMessages
      *
      * Retrieve Your Scheduled Messages.
      *
      */
-    public function testV3GrantsGrantIdMessagesSchedulesGet()
+    public function testRetrieveYourScheduledMessages()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

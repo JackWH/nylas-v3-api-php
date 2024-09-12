@@ -71,10 +71,10 @@ class V3GrantsGrantIdMessagesSchedulesScheduleIdApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3GrantsGrantIdMessagesSchedulesScheduleIdDelete' => [
+        'retrieveAScheduledMessage' => [
             'application/json',
         ],
-        'v3GrantsGrantIdMessagesSchedulesScheduleIdGet' => [
+        'stopAScheduledMessage' => [
             'application/json',
         ],
     ];
@@ -126,453 +126,52 @@ class V3GrantsGrantIdMessagesSchedulesScheduleIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesSchedulesScheduleIdDelete
-     *
-     * Stop a Scheduled Message
-     *
-     * @param  string $grant_id grant_id (required)
-     * @param  string $schedule_id (Required) ID of the schedule to retrieve. (required)
-     * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdDelete'] to see the possible values for this operation
-     *
-     * @throws ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws InvalidArgumentException
-     * @return object|object
-     */
-    public function v3GrantsGrantIdMessagesSchedulesScheduleIdDelete(
-        string $grant_id,
-        string $schedule_id,
-        ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdDelete'][0]
-    ): object
-    {
-        list($response) = $this->v3GrantsGrantIdMessagesSchedulesScheduleIdDeleteWithHttpInfo($grant_id, $schedule_id, $accept, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation v3GrantsGrantIdMessagesSchedulesScheduleIdDeleteWithHttpInfo
-     *
-     * Stop a Scheduled Message
-     *
-     * @param  string $grant_id (required)
-     * @param  string $schedule_id (Required) ID of the schedule to retrieve. (required)
-     * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdDelete'] to see the possible values for this operation
-     *
-     * @throws ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws InvalidArgumentException
-     * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function v3GrantsGrantIdMessagesSchedulesScheduleIdDeleteWithHttpInfo(
-        string $grant_id,
-        string $schedule_id,
-        ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdDelete'][0]
-    ): array
-    {
-        $request = $this->v3GrantsGrantIdMessagesSchedulesScheduleIdDeleteRequest($grant_id, $schedule_id, $accept, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 202:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 404:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 202:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation v3GrantsGrantIdMessagesSchedulesScheduleIdDeleteAsync
-     *
-     * Stop a Scheduled Message
-     *
-     * @param  string $grant_id (required)
-     * @param  string $schedule_id (Required) ID of the schedule to retrieve. (required)
-     * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdDelete'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function v3GrantsGrantIdMessagesSchedulesScheduleIdDeleteAsync(
-        string $grant_id,
-        string $schedule_id,
-        ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdDelete'][0]
-    ): PromiseInterface
-    {
-        return $this->v3GrantsGrantIdMessagesSchedulesScheduleIdDeleteAsyncWithHttpInfo($grant_id, $schedule_id, $accept, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation v3GrantsGrantIdMessagesSchedulesScheduleIdDeleteAsyncWithHttpInfo
-     *
-     * Stop a Scheduled Message
-     *
-     * @param  string $grant_id (required)
-     * @param  string $schedule_id (Required) ID of the schedule to retrieve. (required)
-     * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdDelete'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function v3GrantsGrantIdMessagesSchedulesScheduleIdDeleteAsyncWithHttpInfo(
-        $grant_id,
-        $schedule_id,
-        $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdDelete'][0]
-    ): PromiseInterface
-    {
-        $returnType = 'object';
-        $request = $this->v3GrantsGrantIdMessagesSchedulesScheduleIdDeleteRequest($grant_id, $schedule_id, $accept, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'v3GrantsGrantIdMessagesSchedulesScheduleIdDelete'
-     *
-     * @param  string $grant_id (required)
-     * @param  string $schedule_id (Required) ID of the schedule to retrieve. (required)
-     * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdDelete'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function v3GrantsGrantIdMessagesSchedulesScheduleIdDeleteRequest(
-        $grant_id,
-        $schedule_id,
-        $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdDelete'][0]
-    ): Request
-    {
-
-        // verify the required parameter 'grant_id' is set
-        if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdMessagesSchedulesScheduleIdDelete'
-            );
-        }
-
-        // verify the required parameter 'schedule_id' is set
-        if ($schedule_id === null || (is_array($schedule_id) && count($schedule_id) === 0)) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter $schedule_id when calling v3GrantsGrantIdMessagesSchedulesScheduleIdDelete'
-            );
-        }
-
-
-
-        $resourcePath = '/v3/grants/{grant_id}/messages/schedules/{scheduleId}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($accept !== null) {
-            $headerParams['Accept'] = ObjectSerializer::toHeaderValue($accept);
-        }
-
-        // path params
-        if ($grant_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'grant_id' . '}',
-                ObjectSerializer::toPathValue($grant_id),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($schedule_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'scheduleId' . '}',
-                ObjectSerializer::toPathValue($schedule_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'DELETE',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation v3GrantsGrantIdMessagesSchedulesScheduleIdGet
+     * Operation retrieveAScheduledMessage
      *
      * Retrieve a Scheduled Message
      *
      * @param  string $grant_id grant_id (required)
      * @param  string $schedule_id (Required) The ID of the schedule to retrieve. (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrieveAScheduledMessage'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object
      */
-    public function v3GrantsGrantIdMessagesSchedulesScheduleIdGet(
+    public function retrieveAScheduledMessage(
         string $grant_id,
         string $schedule_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdGet'][0]
+        string $contentType = self::contentTypes['retrieveAScheduledMessage'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdMessagesSchedulesScheduleIdGetWithHttpInfo($grant_id, $schedule_id, $accept, $contentType);
+        list($response) = $this->retrieveAScheduledMessageWithHttpInfo($grant_id, $schedule_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesSchedulesScheduleIdGetWithHttpInfo
+     * Operation retrieveAScheduledMessageWithHttpInfo
      *
      * Retrieve a Scheduled Message
      *
      * @param  string $grant_id (required)
      * @param  string $schedule_id (Required) The ID of the schedule to retrieve. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrieveAScheduledMessage'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdMessagesSchedulesScheduleIdGetWithHttpInfo(
+    public function retrieveAScheduledMessageWithHttpInfo(
         string $grant_id,
         string $schedule_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdGet'][0]
+        string $contentType = self::contentTypes['retrieveAScheduledMessage'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdMessagesSchedulesScheduleIdGetRequest($grant_id, $schedule_id, $accept, $contentType);
+        $request = $this->retrieveAScheduledMessageRequest($grant_id, $schedule_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -718,26 +317,26 @@ class V3GrantsGrantIdMessagesSchedulesScheduleIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesSchedulesScheduleIdGetAsync
+     * Operation retrieveAScheduledMessageAsync
      *
      * Retrieve a Scheduled Message
      *
      * @param  string $grant_id (required)
      * @param  string $schedule_id (Required) The ID of the schedule to retrieve. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrieveAScheduledMessage'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdMessagesSchedulesScheduleIdGetAsync(
+    public function retrieveAScheduledMessageAsync(
         string $grant_id,
         string $schedule_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdGet'][0]
+        string $contentType = self::contentTypes['retrieveAScheduledMessage'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdMessagesSchedulesScheduleIdGetAsyncWithHttpInfo($grant_id, $schedule_id, $accept, $contentType)
+        return $this->retrieveAScheduledMessageAsyncWithHttpInfo($grant_id, $schedule_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -746,27 +345,27 @@ class V3GrantsGrantIdMessagesSchedulesScheduleIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesSchedulesScheduleIdGetAsyncWithHttpInfo
+     * Operation retrieveAScheduledMessageAsyncWithHttpInfo
      *
      * Retrieve a Scheduled Message
      *
      * @param  string $grant_id (required)
      * @param  string $schedule_id (Required) The ID of the schedule to retrieve. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrieveAScheduledMessage'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdMessagesSchedulesScheduleIdGetAsyncWithHttpInfo(
+    public function retrieveAScheduledMessageAsyncWithHttpInfo(
         $grant_id,
         $schedule_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdGet'][0]
+        string $contentType = self::contentTypes['retrieveAScheduledMessage'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdMessagesSchedulesScheduleIdGetRequest($grant_id, $schedule_id, $accept, $contentType);
+        $request = $this->retrieveAScheduledMessageRequest($grant_id, $schedule_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -805,35 +404,35 @@ class V3GrantsGrantIdMessagesSchedulesScheduleIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdMessagesSchedulesScheduleIdGet'
+     * Create request for operation 'retrieveAScheduledMessage'
      *
      * @param  string $grant_id (required)
      * @param  string $schedule_id (Required) The ID of the schedule to retrieve. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrieveAScheduledMessage'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdMessagesSchedulesScheduleIdGetRequest(
+    public function retrieveAScheduledMessageRequest(
         $grant_id,
         $schedule_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesScheduleIdGet'][0]
+        string $contentType = self::contentTypes['retrieveAScheduledMessage'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdMessagesSchedulesScheduleIdGet'
+                'Missing the required parameter $grant_id when calling retrieveAScheduledMessage'
             );
         }
 
         // verify the required parameter 'schedule_id' is set
         if ($schedule_id === null || (is_array($schedule_id) && count($schedule_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $schedule_id when calling v3GrantsGrantIdMessagesSchedulesScheduleIdGet'
+                'Missing the required parameter $schedule_id when calling retrieveAScheduledMessage'
             );
         }
 
@@ -921,6 +520,407 @@ class V3GrantsGrantIdMessagesSchedulesScheduleIdApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation stopAScheduledMessage
+     *
+     * Stop a Scheduled Message
+     *
+     * @param  string $grant_id grant_id (required)
+     * @param  string $schedule_id (Required) ID of the schedule to retrieve. (required)
+     * @param  string|null $accept accept (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['stopAScheduledMessage'] to see the possible values for this operation
+     *
+     * @throws ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws InvalidArgumentException
+     * @return object|object
+     */
+    public function stopAScheduledMessage(
+        string $grant_id,
+        string $schedule_id,
+        ?string $accept = null,
+        string $contentType = self::contentTypes['stopAScheduledMessage'][0]
+    ): object
+    {
+        list($response) = $this->stopAScheduledMessageWithHttpInfo($grant_id, $schedule_id, $accept, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation stopAScheduledMessageWithHttpInfo
+     *
+     * Stop a Scheduled Message
+     *
+     * @param  string $grant_id (required)
+     * @param  string $schedule_id (Required) ID of the schedule to retrieve. (required)
+     * @param  string|null $accept (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['stopAScheduledMessage'] to see the possible values for this operation
+     *
+     * @throws ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws InvalidArgumentException
+     * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function stopAScheduledMessageWithHttpInfo(
+        string $grant_id,
+        string $schedule_id,
+        ?string $accept = null,
+        string $contentType = self::contentTypes['stopAScheduledMessage'][0]
+    ): array
+    {
+        $request = $this->stopAScheduledMessageRequest($grant_id, $schedule_id, $accept, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 202:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 202:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation stopAScheduledMessageAsync
+     *
+     * Stop a Scheduled Message
+     *
+     * @param  string $grant_id (required)
+     * @param  string $schedule_id (Required) ID of the schedule to retrieve. (required)
+     * @param  string|null $accept (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['stopAScheduledMessage'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
+     */
+    public function stopAScheduledMessageAsync(
+        string $grant_id,
+        string $schedule_id,
+        ?string $accept = null,
+        string $contentType = self::contentTypes['stopAScheduledMessage'][0]
+    ): PromiseInterface
+    {
+        return $this->stopAScheduledMessageAsyncWithHttpInfo($grant_id, $schedule_id, $accept, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation stopAScheduledMessageAsyncWithHttpInfo
+     *
+     * Stop a Scheduled Message
+     *
+     * @param  string $grant_id (required)
+     * @param  string $schedule_id (Required) ID of the schedule to retrieve. (required)
+     * @param  string|null $accept (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['stopAScheduledMessage'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
+     */
+    public function stopAScheduledMessageAsyncWithHttpInfo(
+        $grant_id,
+        $schedule_id,
+        $accept = null,
+        string $contentType = self::contentTypes['stopAScheduledMessage'][0]
+    ): PromiseInterface
+    {
+        $returnType = 'object';
+        $request = $this->stopAScheduledMessageRequest($grant_id, $schedule_id, $accept, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'stopAScheduledMessage'
+     *
+     * @param  string $grant_id (required)
+     * @param  string $schedule_id (Required) ID of the schedule to retrieve. (required)
+     * @param  string|null $accept (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['stopAScheduledMessage'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function stopAScheduledMessageRequest(
+        $grant_id,
+        $schedule_id,
+        $accept = null,
+        string $contentType = self::contentTypes['stopAScheduledMessage'][0]
+    ): Request
+    {
+
+        // verify the required parameter 'grant_id' is set
+        if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
+            throw new InvalidArgumentException(
+                'Missing the required parameter $grant_id when calling stopAScheduledMessage'
+            );
+        }
+
+        // verify the required parameter 'schedule_id' is set
+        if ($schedule_id === null || (is_array($schedule_id) && count($schedule_id) === 0)) {
+            throw new InvalidArgumentException(
+                'Missing the required parameter $schedule_id when calling stopAScheduledMessage'
+            );
+        }
+
+
+
+        $resourcePath = '/v3/grants/{grant_id}/messages/schedules/{scheduleId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($accept !== null) {
+            $headerParams['Accept'] = ObjectSerializer::toHeaderValue($accept);
+        }
+
+        // path params
+        if ($grant_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'grant_id' . '}',
+                ObjectSerializer::toPathValue($grant_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($schedule_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'scheduleId' . '}',
+                ObjectSerializer::toPathValue($schedule_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

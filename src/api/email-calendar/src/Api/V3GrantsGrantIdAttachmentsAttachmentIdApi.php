@@ -71,10 +71,10 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet' => [
+        'downloadAnAttachment' => [
             'application/json',
         ],
-        'v3GrantsGrantIdAttachmentsAttachmentIdGet' => [
+        'returnMetadataOfAnAttachment' => [
             'application/json',
         ],
     ];
@@ -126,7 +126,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet
+     * Operation downloadAnAttachment
      *
      * Download an Attachment
      *
@@ -134,26 +134,26 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
      * @param  string $attachment_id (Required) ID of the attachment to act upon. (required)
      * @param  string|null $accept accept (optional)
      * @param  string|null $message_id (Required) ID of the message the attachment belongs to. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadAnAttachment'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return string|object|object
      */
-    public function v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet(
+    public function downloadAnAttachment(
         string $grant_id,
         string $attachment_id,
         ?string $accept = null,
         ?string $message_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet'][0]
+        string $contentType = self::contentTypes['downloadAnAttachment'][0]
     ): string
     {
-        list($response) = $this->v3GrantsGrantIdAttachmentsAttachmentIdDownloadGetWithHttpInfo($grant_id, $attachment_id, $accept, $message_id, $contentType);
+        list($response) = $this->downloadAnAttachmentWithHttpInfo($grant_id, $attachment_id, $accept, $message_id, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdAttachmentsAttachmentIdDownloadGetWithHttpInfo
+     * Operation downloadAnAttachmentWithHttpInfo
      *
      * Download an Attachment
      *
@@ -161,21 +161,21 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
      * @param  string $attachment_id (Required) ID of the attachment to act upon. (required)
      * @param  string|null $accept (optional)
      * @param  string|null $message_id (Required) ID of the message the attachment belongs to. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadAnAttachment'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of string|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdAttachmentsAttachmentIdDownloadGetWithHttpInfo(
+    public function downloadAnAttachmentWithHttpInfo(
         string $grant_id,
         string $attachment_id,
         ?string $accept = null,
         ?string $message_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet'][0]
+        string $contentType = self::contentTypes['downloadAnAttachment'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdAttachmentsAttachmentIdDownloadGetRequest($grant_id, $attachment_id, $accept, $message_id, $contentType);
+        $request = $this->downloadAnAttachmentRequest($grant_id, $attachment_id, $accept, $message_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -356,7 +356,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdAttachmentsAttachmentIdDownloadGetAsync
+     * Operation downloadAnAttachmentAsync
      *
      * Download an Attachment
      *
@@ -364,20 +364,20 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
      * @param  string $attachment_id (Required) ID of the attachment to act upon. (required)
      * @param  string|null $accept (optional)
      * @param  string|null $message_id (Required) ID of the message the attachment belongs to. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadAnAttachment'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdAttachmentsAttachmentIdDownloadGetAsync(
+    public function downloadAnAttachmentAsync(
         string $grant_id,
         string $attachment_id,
         ?string $accept = null,
         ?string $message_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet'][0]
+        string $contentType = self::contentTypes['downloadAnAttachment'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdAttachmentsAttachmentIdDownloadGetAsyncWithHttpInfo($grant_id, $attachment_id, $accept, $message_id, $contentType)
+        return $this->downloadAnAttachmentAsyncWithHttpInfo($grant_id, $attachment_id, $accept, $message_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -386,7 +386,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdAttachmentsAttachmentIdDownloadGetAsyncWithHttpInfo
+     * Operation downloadAnAttachmentAsyncWithHttpInfo
      *
      * Download an Attachment
      *
@@ -394,21 +394,21 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
      * @param  string $attachment_id (Required) ID of the attachment to act upon. (required)
      * @param  string|null $accept (optional)
      * @param  string|null $message_id (Required) ID of the message the attachment belongs to. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadAnAttachment'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdAttachmentsAttachmentIdDownloadGetAsyncWithHttpInfo(
+    public function downloadAnAttachmentAsyncWithHttpInfo(
         $grant_id,
         $attachment_id,
         $accept = null,
         $message_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet'][0]
+        string $contentType = self::contentTypes['downloadAnAttachment'][0]
     ): PromiseInterface
     {
         $returnType = 'string';
-        $request = $this->v3GrantsGrantIdAttachmentsAttachmentIdDownloadGetRequest($grant_id, $attachment_id, $accept, $message_id, $contentType);
+        $request = $this->downloadAnAttachmentRequest($grant_id, $attachment_id, $accept, $message_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -447,37 +447,37 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet'
+     * Create request for operation 'downloadAnAttachment'
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $attachment_id (Required) ID of the attachment to act upon. (required)
      * @param  string|null $accept (optional)
      * @param  string|null $message_id (Required) ID of the message the attachment belongs to. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['downloadAnAttachment'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdAttachmentsAttachmentIdDownloadGetRequest(
+    public function downloadAnAttachmentRequest(
         $grant_id,
         $attachment_id,
         $accept = null,
         $message_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet'][0]
+        string $contentType = self::contentTypes['downloadAnAttachment'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet'
+                'Missing the required parameter $grant_id when calling downloadAnAttachment'
             );
         }
 
         // verify the required parameter 'attachment_id' is set
         if ($attachment_id === null || (is_array($attachment_id) && count($attachment_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $attachment_id when calling v3GrantsGrantIdAttachmentsAttachmentIdDownloadGet'
+                'Missing the required parameter $attachment_id when calling downloadAnAttachment'
             );
         }
 
@@ -582,7 +582,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdAttachmentsAttachmentIdGet
+     * Operation returnMetadataOfAnAttachment
      *
      * Return metadata of an Attachment
      *
@@ -590,26 +590,26 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
      * @param  string $attachment_id (Required) ID of the attachment to act upon. (required)
      * @param  string|null $accept accept (optional)
      * @param  string|null $message_id (Required) ID of the message the attachment belongs to. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnMetadataOfAnAttachment'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGrantIdAttachmentsAttachmentIdGet(
+    public function returnMetadataOfAnAttachment(
         string $grant_id,
         string $attachment_id,
         ?string $accept = null,
         ?string $message_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdGet'][0]
+        string $contentType = self::contentTypes['returnMetadataOfAnAttachment'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdAttachmentsAttachmentIdGetWithHttpInfo($grant_id, $attachment_id, $accept, $message_id, $contentType);
+        list($response) = $this->returnMetadataOfAnAttachmentWithHttpInfo($grant_id, $attachment_id, $accept, $message_id, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdAttachmentsAttachmentIdGetWithHttpInfo
+     * Operation returnMetadataOfAnAttachmentWithHttpInfo
      *
      * Return metadata of an Attachment
      *
@@ -617,21 +617,21 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
      * @param  string $attachment_id (Required) ID of the attachment to act upon. (required)
      * @param  string|null $accept (optional)
      * @param  string|null $message_id (Required) ID of the message the attachment belongs to. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnMetadataOfAnAttachment'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdAttachmentsAttachmentIdGetWithHttpInfo(
+    public function returnMetadataOfAnAttachmentWithHttpInfo(
         string $grant_id,
         string $attachment_id,
         ?string $accept = null,
         ?string $message_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdGet'][0]
+        string $contentType = self::contentTypes['returnMetadataOfAnAttachment'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdAttachmentsAttachmentIdGetRequest($grant_id, $attachment_id, $accept, $message_id, $contentType);
+        $request = $this->returnMetadataOfAnAttachmentRequest($grant_id, $attachment_id, $accept, $message_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -812,7 +812,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdAttachmentsAttachmentIdGetAsync
+     * Operation returnMetadataOfAnAttachmentAsync
      *
      * Return metadata of an Attachment
      *
@@ -820,20 +820,20 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
      * @param  string $attachment_id (Required) ID of the attachment to act upon. (required)
      * @param  string|null $accept (optional)
      * @param  string|null $message_id (Required) ID of the message the attachment belongs to. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnMetadataOfAnAttachment'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdAttachmentsAttachmentIdGetAsync(
+    public function returnMetadataOfAnAttachmentAsync(
         string $grant_id,
         string $attachment_id,
         ?string $accept = null,
         ?string $message_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdGet'][0]
+        string $contentType = self::contentTypes['returnMetadataOfAnAttachment'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdAttachmentsAttachmentIdGetAsyncWithHttpInfo($grant_id, $attachment_id, $accept, $message_id, $contentType)
+        return $this->returnMetadataOfAnAttachmentAsyncWithHttpInfo($grant_id, $attachment_id, $accept, $message_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -842,7 +842,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
     }
 
     /**
-     * Operation v3GrantsGrantIdAttachmentsAttachmentIdGetAsyncWithHttpInfo
+     * Operation returnMetadataOfAnAttachmentAsyncWithHttpInfo
      *
      * Return metadata of an Attachment
      *
@@ -850,21 +850,21 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
      * @param  string $attachment_id (Required) ID of the attachment to act upon. (required)
      * @param  string|null $accept (optional)
      * @param  string|null $message_id (Required) ID of the message the attachment belongs to. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnMetadataOfAnAttachment'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdAttachmentsAttachmentIdGetAsyncWithHttpInfo(
+    public function returnMetadataOfAnAttachmentAsyncWithHttpInfo(
         $grant_id,
         $attachment_id,
         $accept = null,
         $message_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdGet'][0]
+        string $contentType = self::contentTypes['returnMetadataOfAnAttachment'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdAttachmentsAttachmentIdGetRequest($grant_id, $attachment_id, $accept, $message_id, $contentType);
+        $request = $this->returnMetadataOfAnAttachmentRequest($grant_id, $attachment_id, $accept, $message_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -903,37 +903,37 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdAttachmentsAttachmentIdGet'
+     * Create request for operation 'returnMetadataOfAnAttachment'
      *
      * @param  string $grant_id (Required) ID of the grant to act upon. Use \&quot;me\&quot; to refer to the grant associated with an access token. (required)
      * @param  string $attachment_id (Required) ID of the attachment to act upon. (required)
      * @param  string|null $accept (optional)
      * @param  string|null $message_id (Required) ID of the message the attachment belongs to. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnMetadataOfAnAttachment'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdAttachmentsAttachmentIdGetRequest(
+    public function returnMetadataOfAnAttachmentRequest(
         $grant_id,
         $attachment_id,
         $accept = null,
         $message_id = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdAttachmentsAttachmentIdGet'][0]
+        string $contentType = self::contentTypes['returnMetadataOfAnAttachment'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdAttachmentsAttachmentIdGet'
+                'Missing the required parameter $grant_id when calling returnMetadataOfAnAttachment'
             );
         }
 
         // verify the required parameter 'attachment_id' is set
         if ($attachment_id === null || (is_array($attachment_id) && count($attachment_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $attachment_id when calling v3GrantsGrantIdAttachmentsAttachmentIdGet'
+                'Missing the required parameter $attachment_id when calling returnMetadataOfAnAttachment'
             );
         }
 

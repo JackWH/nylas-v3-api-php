@@ -71,19 +71,19 @@ class V3ConnectApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3ConnectAuthGet' => [
+        'customAuthentication' => [
             'application/json',
         ],
-        'v3ConnectCustomPost' => [
+        'hostedOAuthAuthorizationRequest' => [
             'application/json',
         ],
-        'v3ConnectRevokePost' => [
+        'hostedOAuthRevokeOAuthToken' => [
             'application/json',
         ],
-        'v3ConnectTokenPost' => [
+        'hostedOAuthTokenExchange' => [
             'application/json',
         ],
-        'v3ConnectTokeninfoGet' => [
+        'tokenInfo' => [
             'application/json',
         ],
     ];
@@ -135,7 +135,426 @@ class V3ConnectApi
     }
 
     /**
-     * Operation v3ConnectAuthGet
+     * Operation customAuthentication
+     *
+     * Custom Authentication
+     *
+     * @param  string|null $content_type content_type (optional)
+     * @param  string|null $accept accept (optional)
+     * @param  object|null $body body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customAuthentication'] to see the possible values for this operation
+     *
+     * @throws ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws InvalidArgumentException
+     * @return object|object|object
+     */
+    public function customAuthentication(
+        ?string $content_type = null,
+        ?string $accept = null,
+        ?array $body = null,
+        string $contentType = self::contentTypes['customAuthentication'][0]
+    ): object
+    {
+        list($response) = $this->customAuthenticationWithHttpInfo($content_type, $accept, $body, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation customAuthenticationWithHttpInfo
+     *
+     * Custom Authentication
+     *
+     * @param  string|null $content_type (optional)
+     * @param  string|null $accept (optional)
+     * @param  object|null $body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customAuthentication'] to see the possible values for this operation
+     *
+     * @throws ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws InvalidArgumentException
+     * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function customAuthenticationWithHttpInfo(
+        ?string $content_type = null,
+        ?string $accept = null,
+        ?array $body = null,
+        string $contentType = self::contentTypes['customAuthentication'][0]
+    ): array
+    {
+        $request = $this->customAuthenticationRequest($content_type, $accept, $body, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 201:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation customAuthenticationAsync
+     *
+     * Custom Authentication
+     *
+     * @param  string|null $content_type (optional)
+     * @param  string|null $accept (optional)
+     * @param  object|null $body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customAuthentication'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
+     */
+    public function customAuthenticationAsync(
+        ?string $content_type = null,
+        ?string $accept = null,
+        ?array $body = null,
+        string $contentType = self::contentTypes['customAuthentication'][0]
+    ): PromiseInterface
+    {
+        return $this->customAuthenticationAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation customAuthenticationAsyncWithHttpInfo
+     *
+     * Custom Authentication
+     *
+     * @param  string|null $content_type (optional)
+     * @param  string|null $accept (optional)
+     * @param  object|null $body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customAuthentication'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
+     */
+    public function customAuthenticationAsyncWithHttpInfo(
+        $content_type = null,
+        $accept = null,
+        $body = null,
+        string $contentType = self::contentTypes['customAuthentication'][0]
+    ): PromiseInterface
+    {
+        $returnType = 'object';
+        $request = $this->customAuthenticationRequest($content_type, $accept, $body, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'customAuthentication'
+     *
+     * @param  string|null $content_type (optional)
+     * @param  string|null $accept (optional)
+     * @param  object|null $body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['customAuthentication'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function customAuthenticationRequest(
+        $content_type = null,
+        $accept = null,
+        $body = null,
+        string $contentType = self::contentTypes['customAuthentication'][0]
+    ): Request
+    {
+
+
+
+
+
+        $resourcePath = '/v3/connect/custom';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($content_type !== null) {
+            $headerParams['Content-Type'] = ObjectSerializer::toHeaderValue($content_type);
+        }
+        // header params
+        if ($accept !== null) {
+            $headerParams['Accept'] = ObjectSerializer::toHeaderValue($accept);
+        }
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($body)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($body));
+            } else {
+                $httpBody = $body;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation hostedOAuthAuthorizationRequest
      *
      * Hosted OAuth - Authorization Request
      *
@@ -144,26 +563,26 @@ class V3ConnectApi
      * @param  string|null $redirect_uri (Required) Redirect URI (aka callback URI) of the application (optional)
      * @param  string|null $response_type (Required) Should be set to &#x60;code&#x60; for Nylas OAuth2.0 flow, and set to &#39;adminconsent&#39; for Microsoft admin consent service account flow. (optional)
      * @param  string|null $login_hint Prefill the login name (usually email) during authorization flow. If a Grant for the provided email already exists, a Grant&#39;s re-auth will automatically be initiated. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectAuthGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthAuthorizationRequest'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return void
      */
-    public function v3ConnectAuthGet(
+    public function hostedOAuthAuthorizationRequest(
         ?string $client_id = null,
         ?string $provider = null,
         ?string $redirect_uri = null,
         ?string $response_type = null,
         ?string $login_hint = null,
-        string $contentType = self::contentTypes['v3ConnectAuthGet'][0]
+        string $contentType = self::contentTypes['hostedOAuthAuthorizationRequest'][0]
     ): void
     {
-        $this->v3ConnectAuthGetWithHttpInfo($client_id, $provider, $redirect_uri, $response_type, $login_hint, $contentType);
+        $this->hostedOAuthAuthorizationRequestWithHttpInfo($client_id, $provider, $redirect_uri, $response_type, $login_hint, $contentType);
     }
 
     /**
-     * Operation v3ConnectAuthGetWithHttpInfo
+     * Operation hostedOAuthAuthorizationRequestWithHttpInfo
      *
      * Hosted OAuth - Authorization Request
      *
@@ -172,22 +591,22 @@ class V3ConnectApi
      * @param  string|null $redirect_uri (Required) Redirect URI (aka callback URI) of the application (optional)
      * @param  string|null $response_type (Required) Should be set to &#x60;code&#x60; for Nylas OAuth2.0 flow, and set to &#39;adminconsent&#39; for Microsoft admin consent service account flow. (optional)
      * @param  string|null $login_hint Prefill the login name (usually email) during authorization flow. If a Grant for the provided email already exists, a Grant&#39;s re-auth will automatically be initiated. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectAuthGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthAuthorizationRequest'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ConnectAuthGetWithHttpInfo(
+    public function hostedOAuthAuthorizationRequestWithHttpInfo(
         ?string $client_id = null,
         ?string $provider = null,
         ?string $redirect_uri = null,
         ?string $response_type = null,
         ?string $login_hint = null,
-        string $contentType = self::contentTypes['v3ConnectAuthGet'][0]
+        string $contentType = self::contentTypes['hostedOAuthAuthorizationRequest'][0]
     ): array
     {
-        $request = $this->v3ConnectAuthGetRequest($client_id, $provider, $redirect_uri, $response_type, $login_hint, $contentType);
+        $request = $this->hostedOAuthAuthorizationRequestRequest($client_id, $provider, $redirect_uri, $response_type, $login_hint, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -242,7 +661,7 @@ class V3ConnectApi
     }
 
     /**
-     * Operation v3ConnectAuthGetAsync
+     * Operation hostedOAuthAuthorizationRequestAsync
      *
      * Hosted OAuth - Authorization Request
      *
@@ -251,21 +670,21 @@ class V3ConnectApi
      * @param  string|null $redirect_uri (Required) Redirect URI (aka callback URI) of the application (optional)
      * @param  string|null $response_type (Required) Should be set to &#x60;code&#x60; for Nylas OAuth2.0 flow, and set to &#39;adminconsent&#39; for Microsoft admin consent service account flow. (optional)
      * @param  string|null $login_hint Prefill the login name (usually email) during authorization flow. If a Grant for the provided email already exists, a Grant&#39;s re-auth will automatically be initiated. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectAuthGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthAuthorizationRequest'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectAuthGetAsync(
+    public function hostedOAuthAuthorizationRequestAsync(
         ?string $client_id = null,
         ?string $provider = null,
         ?string $redirect_uri = null,
         ?string $response_type = null,
         ?string $login_hint = null,
-        string $contentType = self::contentTypes['v3ConnectAuthGet'][0]
+        string $contentType = self::contentTypes['hostedOAuthAuthorizationRequest'][0]
     ): PromiseInterface
     {
-        return $this->v3ConnectAuthGetAsyncWithHttpInfo($client_id, $provider, $redirect_uri, $response_type, $login_hint, $contentType)
+        return $this->hostedOAuthAuthorizationRequestAsyncWithHttpInfo($client_id, $provider, $redirect_uri, $response_type, $login_hint, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -274,7 +693,7 @@ class V3ConnectApi
     }
 
     /**
-     * Operation v3ConnectAuthGetAsyncWithHttpInfo
+     * Operation hostedOAuthAuthorizationRequestAsyncWithHttpInfo
      *
      * Hosted OAuth - Authorization Request
      *
@@ -283,22 +702,22 @@ class V3ConnectApi
      * @param  string|null $redirect_uri (Required) Redirect URI (aka callback URI) of the application (optional)
      * @param  string|null $response_type (Required) Should be set to &#x60;code&#x60; for Nylas OAuth2.0 flow, and set to &#39;adminconsent&#39; for Microsoft admin consent service account flow. (optional)
      * @param  string|null $login_hint Prefill the login name (usually email) during authorization flow. If a Grant for the provided email already exists, a Grant&#39;s re-auth will automatically be initiated. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectAuthGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthAuthorizationRequest'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectAuthGetAsyncWithHttpInfo(
+    public function hostedOAuthAuthorizationRequestAsyncWithHttpInfo(
         $client_id = null,
         $provider = null,
         $redirect_uri = null,
         $response_type = null,
         $login_hint = null,
-        string $contentType = self::contentTypes['v3ConnectAuthGet'][0]
+        string $contentType = self::contentTypes['hostedOAuthAuthorizationRequest'][0]
     ): PromiseInterface
     {
         $returnType = '';
-        $request = $this->v3ConnectAuthGetRequest($client_id, $provider, $redirect_uri, $response_type, $login_hint, $contentType);
+        $request = $this->hostedOAuthAuthorizationRequestRequest($client_id, $provider, $redirect_uri, $response_type, $login_hint, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -324,25 +743,25 @@ class V3ConnectApi
     }
 
     /**
-     * Create request for operation 'v3ConnectAuthGet'
+     * Create request for operation 'hostedOAuthAuthorizationRequest'
      *
      * @param  string|null $client_id (Required) Nylas application client_id (or application id) (optional)
      * @param  string|null $provider The Connector provider type that you already had set up with Nylas for this application. If not set, the user is directed to the Hosted Login screen and prompted to select a provider. (optional)
      * @param  string|null $redirect_uri (Required) Redirect URI (aka callback URI) of the application (optional)
      * @param  string|null $response_type (Required) Should be set to &#x60;code&#x60; for Nylas OAuth2.0 flow, and set to &#39;adminconsent&#39; for Microsoft admin consent service account flow. (optional)
      * @param  string|null $login_hint Prefill the login name (usually email) during authorization flow. If a Grant for the provided email already exists, a Grant&#39;s re-auth will automatically be initiated. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectAuthGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthAuthorizationRequest'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ConnectAuthGetRequest(
+    public function hostedOAuthAuthorizationRequestRequest(
         $client_id = null,
         $provider = null,
         $redirect_uri = null,
         $response_type = null,
         $login_hint = null,
-        string $contentType = self::contentTypes['v3ConnectAuthGet'][0]
+        string $contentType = self::contentTypes['hostedOAuthAuthorizationRequest'][0]
     ): Request
     {
 
@@ -466,467 +885,48 @@ class V3ConnectApi
     }
 
     /**
-     * Operation v3ConnectCustomPost
-     *
-     * Custom Authentication
-     *
-     * @param  string|null $content_type content_type (optional)
-     * @param  string|null $accept accept (optional)
-     * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectCustomPost'] to see the possible values for this operation
-     *
-     * @throws ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws InvalidArgumentException
-     * @return object|object|object
-     */
-    public function v3ConnectCustomPost(
-        ?string $content_type = null,
-        ?string $accept = null,
-        ?array $body = null,
-        string $contentType = self::contentTypes['v3ConnectCustomPost'][0]
-    ): object
-    {
-        list($response) = $this->v3ConnectCustomPostWithHttpInfo($content_type, $accept, $body, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation v3ConnectCustomPostWithHttpInfo
-     *
-     * Custom Authentication
-     *
-     * @param  string|null $content_type (optional)
-     * @param  string|null $accept (optional)
-     * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectCustomPost'] to see the possible values for this operation
-     *
-     * @throws ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws InvalidArgumentException
-     * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function v3ConnectCustomPostWithHttpInfo(
-        ?string $content_type = null,
-        ?string $accept = null,
-        ?array $body = null,
-        string $contentType = self::contentTypes['v3ConnectCustomPost'][0]
-    ): array
-    {
-        $request = $this->v3ConnectCustomPostRequest($content_type, $accept, $body, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 201:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 400:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 401:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 201:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation v3ConnectCustomPostAsync
-     *
-     * Custom Authentication
-     *
-     * @param  string|null $content_type (optional)
-     * @param  string|null $accept (optional)
-     * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectCustomPost'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function v3ConnectCustomPostAsync(
-        ?string $content_type = null,
-        ?string $accept = null,
-        ?array $body = null,
-        string $contentType = self::contentTypes['v3ConnectCustomPost'][0]
-    ): PromiseInterface
-    {
-        return $this->v3ConnectCustomPostAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation v3ConnectCustomPostAsyncWithHttpInfo
-     *
-     * Custom Authentication
-     *
-     * @param  string|null $content_type (optional)
-     * @param  string|null $accept (optional)
-     * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectCustomPost'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function v3ConnectCustomPostAsyncWithHttpInfo(
-        $content_type = null,
-        $accept = null,
-        $body = null,
-        string $contentType = self::contentTypes['v3ConnectCustomPost'][0]
-    ): PromiseInterface
-    {
-        $returnType = 'object';
-        $request = $this->v3ConnectCustomPostRequest($content_type, $accept, $body, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'v3ConnectCustomPost'
-     *
-     * @param  string|null $content_type (optional)
-     * @param  string|null $accept (optional)
-     * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectCustomPost'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function v3ConnectCustomPostRequest(
-        $content_type = null,
-        $accept = null,
-        $body = null,
-        string $contentType = self::contentTypes['v3ConnectCustomPost'][0]
-    ): Request
-    {
-
-
-
-
-
-        $resourcePath = '/v3/connect/custom';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // header params
-        if ($content_type !== null) {
-            $headerParams['Content-Type'] = ObjectSerializer::toHeaderValue($content_type);
-        }
-        // header params
-        if ($accept !== null) {
-            $headerParams['Accept'] = ObjectSerializer::toHeaderValue($accept);
-        }
-
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($body)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($body));
-            } else {
-                $httpBody = $body;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation v3ConnectRevokePost
+     * Operation hostedOAuthRevokeOAuthToken
      *
      * Hosted OAuth - Revoke OAuth token
      *
      * @param  string|null $accept accept (optional)
      * @param  string|null $token (Required) The token to revoke (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectRevokePost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthRevokeOAuthToken'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object
      */
-    public function v3ConnectRevokePost(
+    public function hostedOAuthRevokeOAuthToken(
         ?string $accept = null,
         ?string $token = null,
-        string $contentType = self::contentTypes['v3ConnectRevokePost'][0]
+        string $contentType = self::contentTypes['hostedOAuthRevokeOAuthToken'][0]
     ): object
     {
-        list($response) = $this->v3ConnectRevokePostWithHttpInfo($accept, $token, $contentType);
+        list($response) = $this->hostedOAuthRevokeOAuthTokenWithHttpInfo($accept, $token, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ConnectRevokePostWithHttpInfo
+     * Operation hostedOAuthRevokeOAuthTokenWithHttpInfo
      *
      * Hosted OAuth - Revoke OAuth token
      *
      * @param  string|null $accept (optional)
      * @param  string|null $token (Required) The token to revoke (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectRevokePost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthRevokeOAuthToken'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ConnectRevokePostWithHttpInfo(
+    public function hostedOAuthRevokeOAuthTokenWithHttpInfo(
         ?string $accept = null,
         ?string $token = null,
-        string $contentType = self::contentTypes['v3ConnectRevokePost'][0]
+        string $contentType = self::contentTypes['hostedOAuthRevokeOAuthToken'][0]
     ): array
     {
-        $request = $this->v3ConnectRevokePostRequest($accept, $token, $contentType);
+        $request = $this->hostedOAuthRevokeOAuthTokenRequest($accept, $token, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1072,24 +1072,24 @@ class V3ConnectApi
     }
 
     /**
-     * Operation v3ConnectRevokePostAsync
+     * Operation hostedOAuthRevokeOAuthTokenAsync
      *
      * Hosted OAuth - Revoke OAuth token
      *
      * @param  string|null $accept (optional)
      * @param  string|null $token (Required) The token to revoke (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectRevokePost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthRevokeOAuthToken'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectRevokePostAsync(
+    public function hostedOAuthRevokeOAuthTokenAsync(
         ?string $accept = null,
         ?string $token = null,
-        string $contentType = self::contentTypes['v3ConnectRevokePost'][0]
+        string $contentType = self::contentTypes['hostedOAuthRevokeOAuthToken'][0]
     ): PromiseInterface
     {
-        return $this->v3ConnectRevokePostAsyncWithHttpInfo($accept, $token, $contentType)
+        return $this->hostedOAuthRevokeOAuthTokenAsyncWithHttpInfo($accept, $token, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1098,25 +1098,25 @@ class V3ConnectApi
     }
 
     /**
-     * Operation v3ConnectRevokePostAsyncWithHttpInfo
+     * Operation hostedOAuthRevokeOAuthTokenAsyncWithHttpInfo
      *
      * Hosted OAuth - Revoke OAuth token
      *
      * @param  string|null $accept (optional)
      * @param  string|null $token (Required) The token to revoke (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectRevokePost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthRevokeOAuthToken'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectRevokePostAsyncWithHttpInfo(
+    public function hostedOAuthRevokeOAuthTokenAsyncWithHttpInfo(
         $accept = null,
         $token = null,
-        string $contentType = self::contentTypes['v3ConnectRevokePost'][0]
+        string $contentType = self::contentTypes['hostedOAuthRevokeOAuthToken'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ConnectRevokePostRequest($accept, $token, $contentType);
+        $request = $this->hostedOAuthRevokeOAuthTokenRequest($accept, $token, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1155,19 +1155,19 @@ class V3ConnectApi
     }
 
     /**
-     * Create request for operation 'v3ConnectRevokePost'
+     * Create request for operation 'hostedOAuthRevokeOAuthToken'
      *
      * @param  string|null $accept (optional)
      * @param  string|null $token (Required) The token to revoke (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectRevokePost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthRevokeOAuthToken'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ConnectRevokePostRequest(
+    public function hostedOAuthRevokeOAuthTokenRequest(
         $accept = null,
         $token = null,
-        string $contentType = self::contentTypes['v3ConnectRevokePost'][0]
+        string $contentType = self::contentTypes['hostedOAuthRevokeOAuthToken'][0]
     ): Request
     {
 
@@ -1256,52 +1256,52 @@ class V3ConnectApi
     }
 
     /**
-     * Operation v3ConnectTokenPost
+     * Operation hostedOAuthTokenExchange
      *
      * Hosted OAuth - Token exchange
      *
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectTokenPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthTokenExchange'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object
      */
-    public function v3ConnectTokenPost(
+    public function hostedOAuthTokenExchange(
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ConnectTokenPost'][0]
+        string $contentType = self::contentTypes['hostedOAuthTokenExchange'][0]
     ): object
     {
-        list($response) = $this->v3ConnectTokenPostWithHttpInfo($content_type, $accept, $body, $contentType);
+        list($response) = $this->hostedOAuthTokenExchangeWithHttpInfo($content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ConnectTokenPostWithHttpInfo
+     * Operation hostedOAuthTokenExchangeWithHttpInfo
      *
      * Hosted OAuth - Token exchange
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectTokenPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthTokenExchange'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ConnectTokenPostWithHttpInfo(
+    public function hostedOAuthTokenExchangeWithHttpInfo(
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ConnectTokenPost'][0]
+        string $contentType = self::contentTypes['hostedOAuthTokenExchange'][0]
     ): array
     {
-        $request = $this->v3ConnectTokenPostRequest($content_type, $accept, $body, $contentType);
+        $request = $this->hostedOAuthTokenExchangeRequest($content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1447,26 +1447,26 @@ class V3ConnectApi
     }
 
     /**
-     * Operation v3ConnectTokenPostAsync
+     * Operation hostedOAuthTokenExchangeAsync
      *
      * Hosted OAuth - Token exchange
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectTokenPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthTokenExchange'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectTokenPostAsync(
+    public function hostedOAuthTokenExchangeAsync(
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3ConnectTokenPost'][0]
+        string $contentType = self::contentTypes['hostedOAuthTokenExchange'][0]
     ): PromiseInterface
     {
-        return $this->v3ConnectTokenPostAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
+        return $this->hostedOAuthTokenExchangeAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1475,27 +1475,27 @@ class V3ConnectApi
     }
 
     /**
-     * Operation v3ConnectTokenPostAsyncWithHttpInfo
+     * Operation hostedOAuthTokenExchangeAsyncWithHttpInfo
      *
      * Hosted OAuth - Token exchange
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectTokenPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthTokenExchange'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectTokenPostAsyncWithHttpInfo(
+    public function hostedOAuthTokenExchangeAsyncWithHttpInfo(
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3ConnectTokenPost'][0]
+        string $contentType = self::contentTypes['hostedOAuthTokenExchange'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ConnectTokenPostRequest($content_type, $accept, $body, $contentType);
+        $request = $this->hostedOAuthTokenExchangeRequest($content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1534,21 +1534,21 @@ class V3ConnectApi
     }
 
     /**
-     * Create request for operation 'v3ConnectTokenPost'
+     * Create request for operation 'hostedOAuthTokenExchange'
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectTokenPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['hostedOAuthTokenExchange'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ConnectTokenPostRequest(
+    public function hostedOAuthTokenExchangeRequest(
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3ConnectTokenPost'][0]
+        string $contentType = self::contentTypes['hostedOAuthTokenExchange'][0]
     ): Request
     {
 
@@ -1640,52 +1640,52 @@ class V3ConnectApi
     }
 
     /**
-     * Operation v3ConnectTokeninfoGet
+     * Operation tokenInfo
      *
      * Token Info
      *
      * @param  string|null $accept accept (optional)
      * @param  string|null $id_token ID token (optional)
      * @param  string|null $access_token Access token (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectTokeninfoGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tokenInfo'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object
      */
-    public function v3ConnectTokeninfoGet(
+    public function tokenInfo(
         ?string $accept = null,
         ?string $id_token = null,
         ?string $access_token = null,
-        string $contentType = self::contentTypes['v3ConnectTokeninfoGet'][0]
+        string $contentType = self::contentTypes['tokenInfo'][0]
     ): object
     {
-        list($response) = $this->v3ConnectTokeninfoGetWithHttpInfo($accept, $id_token, $access_token, $contentType);
+        list($response) = $this->tokenInfoWithHttpInfo($accept, $id_token, $access_token, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3ConnectTokeninfoGetWithHttpInfo
+     * Operation tokenInfoWithHttpInfo
      *
      * Token Info
      *
      * @param  string|null $accept (optional)
      * @param  string|null $id_token ID token (optional)
      * @param  string|null $access_token Access token (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectTokeninfoGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tokenInfo'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3ConnectTokeninfoGetWithHttpInfo(
+    public function tokenInfoWithHttpInfo(
         ?string $accept = null,
         ?string $id_token = null,
         ?string $access_token = null,
-        string $contentType = self::contentTypes['v3ConnectTokeninfoGet'][0]
+        string $contentType = self::contentTypes['tokenInfo'][0]
     ): array
     {
-        $request = $this->v3ConnectTokeninfoGetRequest($accept, $id_token, $access_token, $contentType);
+        $request = $this->tokenInfoRequest($accept, $id_token, $access_token, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1831,26 +1831,26 @@ class V3ConnectApi
     }
 
     /**
-     * Operation v3ConnectTokeninfoGetAsync
+     * Operation tokenInfoAsync
      *
      * Token Info
      *
      * @param  string|null $accept (optional)
      * @param  string|null $id_token ID token (optional)
      * @param  string|null $access_token Access token (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectTokeninfoGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tokenInfo'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectTokeninfoGetAsync(
+    public function tokenInfoAsync(
         ?string $accept = null,
         ?string $id_token = null,
         ?string $access_token = null,
-        string $contentType = self::contentTypes['v3ConnectTokeninfoGet'][0]
+        string $contentType = self::contentTypes['tokenInfo'][0]
     ): PromiseInterface
     {
-        return $this->v3ConnectTokeninfoGetAsyncWithHttpInfo($accept, $id_token, $access_token, $contentType)
+        return $this->tokenInfoAsyncWithHttpInfo($accept, $id_token, $access_token, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1859,27 +1859,27 @@ class V3ConnectApi
     }
 
     /**
-     * Operation v3ConnectTokeninfoGetAsyncWithHttpInfo
+     * Operation tokenInfoAsyncWithHttpInfo
      *
      * Token Info
      *
      * @param  string|null $accept (optional)
      * @param  string|null $id_token ID token (optional)
      * @param  string|null $access_token Access token (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectTokeninfoGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tokenInfo'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3ConnectTokeninfoGetAsyncWithHttpInfo(
+    public function tokenInfoAsyncWithHttpInfo(
         $accept = null,
         $id_token = null,
         $access_token = null,
-        string $contentType = self::contentTypes['v3ConnectTokeninfoGet'][0]
+        string $contentType = self::contentTypes['tokenInfo'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3ConnectTokeninfoGetRequest($accept, $id_token, $access_token, $contentType);
+        $request = $this->tokenInfoRequest($accept, $id_token, $access_token, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1918,21 +1918,21 @@ class V3ConnectApi
     }
 
     /**
-     * Create request for operation 'v3ConnectTokeninfoGet'
+     * Create request for operation 'tokenInfo'
      *
      * @param  string|null $accept (optional)
      * @param  string|null $id_token ID token (optional)
      * @param  string|null $access_token Access token (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3ConnectTokeninfoGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tokenInfo'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3ConnectTokeninfoGetRequest(
+    public function tokenInfoRequest(
         $accept = null,
         $id_token = null,
         $access_token = null,
-        string $contentType = self::contentTypes['v3ConnectTokeninfoGet'][0]
+        string $contentType = self::contentTypes['tokenInfo'][0]
     ): Request
     {
 

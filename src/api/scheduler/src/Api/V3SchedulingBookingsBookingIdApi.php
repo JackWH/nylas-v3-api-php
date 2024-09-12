@@ -71,16 +71,16 @@ class V3SchedulingBookingsBookingIdApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3SchedulingBookingsBookingIdDelete' => [
+        'confirmABooking' => [
             'application/json',
         ],
-        'v3SchedulingBookingsBookingIdGet' => [
+        'deleteABooking' => [
             'application/json',
         ],
-        'v3SchedulingBookingsBookingIdPatch' => [
+        'rescheduleABooking' => [
             'application/json',
         ],
-        'v3SchedulingBookingsBookingIdPut' => [
+        'returnABookingObject' => [
             'application/json',
         ],
     ];
@@ -132,56 +132,60 @@ class V3SchedulingBookingsBookingIdApi
     }
 
     /**
-     * Operation v3SchedulingBookingsBookingIdDelete
+     * Operation confirmABooking
      *
-     * Delete a booking
+     * Confirm a booking
      *
      * @param  string $booking_id (Required) ID of the booking object to access. (required)
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdDelete'] to see the possible values for this operation
+     * @param  object|null $body body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['confirmABooking'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object|object|object
      */
-    public function v3SchedulingBookingsBookingIdDelete(
+    public function confirmABooking(
         string $booking_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?string $configuration_id = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdDelete'][0]
+        ?array $body = null,
+        string $contentType = self::contentTypes['confirmABooking'][0]
     ): object
     {
-        list($response) = $this->v3SchedulingBookingsBookingIdDeleteWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $contentType);
+        list($response) = $this->confirmABookingWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3SchedulingBookingsBookingIdDeleteWithHttpInfo
+     * Operation confirmABookingWithHttpInfo
      *
-     * Delete a booking
+     * Confirm a booking
      *
      * @param  string $booking_id (Required) ID of the booking object to access. (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdDelete'] to see the possible values for this operation
+     * @param  object|null $body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['confirmABooking'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3SchedulingBookingsBookingIdDeleteWithHttpInfo(
+    public function confirmABookingWithHttpInfo(
         string $booking_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?string $configuration_id = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdDelete'][0]
+        ?array $body = null,
+        string $contentType = self::contentTypes['confirmABooking'][0]
     ): array
     {
-        $request = $this->v3SchedulingBookingsBookingIdDeleteRequest($booking_id, $content_type, $accept, $configuration_id, $contentType);
+        $request = $this->confirmABookingRequest($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -467,28 +471,30 @@ class V3SchedulingBookingsBookingIdApi
     }
 
     /**
-     * Operation v3SchedulingBookingsBookingIdDeleteAsync
+     * Operation confirmABookingAsync
      *
-     * Delete a booking
+     * Confirm a booking
      *
      * @param  string $booking_id (Required) ID of the booking object to access. (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdDelete'] to see the possible values for this operation
+     * @param  object|null $body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['confirmABooking'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3SchedulingBookingsBookingIdDeleteAsync(
+    public function confirmABookingAsync(
         string $booking_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?string $configuration_id = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdDelete'][0]
+        ?array $body = null,
+        string $contentType = self::contentTypes['confirmABooking'][0]
     ): PromiseInterface
     {
-        return $this->v3SchedulingBookingsBookingIdDeleteAsyncWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $contentType)
+        return $this->confirmABookingAsyncWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -497,29 +503,31 @@ class V3SchedulingBookingsBookingIdApi
     }
 
     /**
-     * Operation v3SchedulingBookingsBookingIdDeleteAsyncWithHttpInfo
+     * Operation confirmABookingAsyncWithHttpInfo
      *
-     * Delete a booking
+     * Confirm a booking
      *
      * @param  string $booking_id (Required) ID of the booking object to access. (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdDelete'] to see the possible values for this operation
+     * @param  object|null $body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['confirmABooking'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3SchedulingBookingsBookingIdDeleteAsyncWithHttpInfo(
+    public function confirmABookingAsyncWithHttpInfo(
         $booking_id,
         $content_type = null,
         $accept = null,
         $configuration_id = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdDelete'][0]
+        $body = null,
+        string $contentType = self::contentTypes['confirmABooking'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3SchedulingBookingsBookingIdDeleteRequest($booking_id, $content_type, $accept, $configuration_id, $contentType);
+        $request = $this->confirmABookingRequest($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -558,30 +566,591 @@ class V3SchedulingBookingsBookingIdApi
     }
 
     /**
-     * Create request for operation 'v3SchedulingBookingsBookingIdDelete'
+     * Create request for operation 'confirmABooking'
      *
      * @param  string $booking_id (Required) ID of the booking object to access. (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdDelete'] to see the possible values for this operation
+     * @param  object|null $body (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['confirmABooking'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3SchedulingBookingsBookingIdDeleteRequest(
+    public function confirmABookingRequest(
         $booking_id,
         $content_type = null,
         $accept = null,
         $configuration_id = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdDelete'][0]
+        $body = null,
+        string $contentType = self::contentTypes['confirmABooking'][0]
     ): Request
     {
 
         // verify the required parameter 'booking_id' is set
         if ($booking_id === null || (is_array($booking_id) && count($booking_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $booking_id when calling v3SchedulingBookingsBookingIdDelete'
+                'Missing the required parameter $booking_id when calling confirmABooking'
+            );
+        }
+
+
+
+
+
+
+        $resourcePath = '/v3/scheduling/bookings/{booking_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $configuration_id,
+            'configuration_id', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+        // header params
+        if ($content_type !== null) {
+            $headerParams['Content-Type'] = ObjectSerializer::toHeaderValue($content_type);
+        }
+        // header params
+        if ($accept !== null) {
+            $headerParams['Accept'] = ObjectSerializer::toHeaderValue($accept);
+        }
+
+        // path params
+        if ($booking_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'booking_id' . '}',
+                ObjectSerializer::toPathValue($booking_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($body)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($body));
+            } else {
+                $httpBody = $body;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PUT',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation deleteABooking
+     *
+     * Delete a booking
+     *
+     * @param  string $booking_id (Required) ID of the booking object to access. (required)
+     * @param  string|null $content_type content_type (optional)
+     * @param  string|null $accept accept (optional)
+     * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteABooking'] to see the possible values for this operation
+     *
+     * @throws ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws InvalidArgumentException
+     * @return object|object|object|object|object|object
+     */
+    public function deleteABooking(
+        string $booking_id,
+        ?string $content_type = null,
+        ?string $accept = null,
+        ?string $configuration_id = null,
+        string $contentType = self::contentTypes['deleteABooking'][0]
+    ): object
+    {
+        list($response) = $this->deleteABookingWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation deleteABookingWithHttpInfo
+     *
+     * Delete a booking
+     *
+     * @param  string $booking_id (Required) ID of the booking object to access. (required)
+     * @param  string|null $content_type (optional)
+     * @param  string|null $accept (optional)
+     * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteABooking'] to see the possible values for this operation
+     *
+     * @throws ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws InvalidArgumentException
+     * @return array of object|object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteABookingWithHttpInfo(
+        string $booking_id,
+        ?string $content_type = null,
+        ?string $accept = null,
+        ?string $configuration_id = null,
+        string $contentType = self::contentTypes['deleteABooking'][0]
+    ): array
+    {
+        $request = $this->deleteABookingRequest($booking_id, $content_type, $accept, $configuration_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 504:
+                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('object' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'object';
+            if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 504:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'object',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteABookingAsync
+     *
+     * Delete a booking
+     *
+     * @param  string $booking_id (Required) ID of the booking object to access. (required)
+     * @param  string|null $content_type (optional)
+     * @param  string|null $accept (optional)
+     * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteABooking'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
+     */
+    public function deleteABookingAsync(
+        string $booking_id,
+        ?string $content_type = null,
+        ?string $accept = null,
+        ?string $configuration_id = null,
+        string $contentType = self::contentTypes['deleteABooking'][0]
+    ): PromiseInterface
+    {
+        return $this->deleteABookingAsyncWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteABookingAsyncWithHttpInfo
+     *
+     * Delete a booking
+     *
+     * @param  string $booking_id (Required) ID of the booking object to access. (required)
+     * @param  string|null $content_type (optional)
+     * @param  string|null $accept (optional)
+     * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteABooking'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return PromiseInterface
+     */
+    public function deleteABookingAsyncWithHttpInfo(
+        $booking_id,
+        $content_type = null,
+        $accept = null,
+        $configuration_id = null,
+        string $contentType = self::contentTypes['deleteABooking'][0]
+    ): PromiseInterface
+    {
+        $returnType = 'object';
+        $request = $this->deleteABookingRequest($booking_id, $content_type, $accept, $configuration_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteABooking'
+     *
+     * @param  string $booking_id (Required) ID of the booking object to access. (required)
+     * @param  string|null $content_type (optional)
+     * @param  string|null $accept (optional)
+     * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteABooking'] to see the possible values for this operation
+     *
+     * @throws InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function deleteABookingRequest(
+        $booking_id,
+        $content_type = null,
+        $accept = null,
+        $configuration_id = null,
+        string $contentType = self::contentTypes['deleteABooking'][0]
+    ): Request
+    {
+
+        // verify the required parameter 'booking_id' is set
+        if ($booking_id === null || (is_array($booking_id) && count($booking_id) === 0)) {
+            throw new InvalidArgumentException(
+                'Missing the required parameter $booking_id when calling deleteABooking'
             );
         }
 
@@ -683,543 +1252,7 @@ class V3SchedulingBookingsBookingIdApi
     }
 
     /**
-     * Operation v3SchedulingBookingsBookingIdGet
-     *
-     * Return a Booking object
-     *
-     * @param  string $booking_id (Required) ID of the booking object to access. (required)
-     * @param  string|null $accept accept (optional)
-     * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdGet'] to see the possible values for this operation
-     *
-     * @throws ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws InvalidArgumentException
-     * @return object|object|object|object|object|object
-     */
-    public function v3SchedulingBookingsBookingIdGet(
-        string $booking_id,
-        ?string $accept = null,
-        ?string $configuration_id = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdGet'][0]
-    ): object
-    {
-        list($response) = $this->v3SchedulingBookingsBookingIdGetWithHttpInfo($booking_id, $accept, $configuration_id, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation v3SchedulingBookingsBookingIdGetWithHttpInfo
-     *
-     * Return a Booking object
-     *
-     * @param  string $booking_id (Required) ID of the booking object to access. (required)
-     * @param  string|null $accept (optional)
-     * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdGet'] to see the possible values for this operation
-     *
-     * @throws ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws InvalidArgumentException
-     * @return array of object|object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function v3SchedulingBookingsBookingIdGetWithHttpInfo(
-        string $booking_id,
-        ?string $accept = null,
-        ?string $configuration_id = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdGet'][0]
-    ): array
-    {
-        $request = $this->v3SchedulingBookingsBookingIdGetRequest($booking_id, $accept, $configuration_id, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                case 200:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 400:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 401:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 404:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 429:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 504:
-                    if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('object' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'object', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'object';
-            if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 429:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 504:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'object',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation v3SchedulingBookingsBookingIdGetAsync
-     *
-     * Return a Booking object
-     *
-     * @param  string $booking_id (Required) ID of the booking object to access. (required)
-     * @param  string|null $accept (optional)
-     * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdGet'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function v3SchedulingBookingsBookingIdGetAsync(
-        string $booking_id,
-        ?string $accept = null,
-        ?string $configuration_id = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdGet'][0]
-    ): PromiseInterface
-    {
-        return $this->v3SchedulingBookingsBookingIdGetAsyncWithHttpInfo($booking_id, $accept, $configuration_id, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation v3SchedulingBookingsBookingIdGetAsyncWithHttpInfo
-     *
-     * Return a Booking object
-     *
-     * @param  string $booking_id (Required) ID of the booking object to access. (required)
-     * @param  string|null $accept (optional)
-     * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdGet'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return PromiseInterface
-     */
-    public function v3SchedulingBookingsBookingIdGetAsyncWithHttpInfo(
-        $booking_id,
-        $accept = null,
-        $configuration_id = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdGet'][0]
-    ): PromiseInterface
-    {
-        $returnType = 'object';
-        $request = $this->v3SchedulingBookingsBookingIdGetRequest($booking_id, $accept, $configuration_id, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if (in_array($returnType, ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'v3SchedulingBookingsBookingIdGet'
-     *
-     * @param  string $booking_id (Required) ID of the booking object to access. (required)
-     * @param  string|null $accept (optional)
-     * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdGet'] to see the possible values for this operation
-     *
-     * @throws InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function v3SchedulingBookingsBookingIdGetRequest(
-        $booking_id,
-        $accept = null,
-        $configuration_id = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdGet'][0]
-    ): Request
-    {
-
-        // verify the required parameter 'booking_id' is set
-        if ($booking_id === null || (is_array($booking_id) && count($booking_id) === 0)) {
-            throw new InvalidArgumentException(
-                'Missing the required parameter $booking_id when calling v3SchedulingBookingsBookingIdGet'
-            );
-        }
-
-
-
-
-        $resourcePath = '/v3/scheduling/bookings/{booking_id}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $configuration_id,
-            'configuration_id', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-
-        // header params
-        if ($accept !== null) {
-            $headerParams['Accept'] = ObjectSerializer::toHeaderValue($accept);
-        }
-
-        // path params
-        if ($booking_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'booking_id' . '}',
-                ObjectSerializer::toPathValue($booking_id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation v3SchedulingBookingsBookingIdPatch
+     * Operation rescheduleABooking
      *
      * Reschedule a booking
      *
@@ -1228,27 +1261,27 @@ class V3SchedulingBookingsBookingIdApi
      * @param  string|null $accept accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rescheduleABooking'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object|object|object
      */
-    public function v3SchedulingBookingsBookingIdPatch(
+    public function rescheduleABooking(
         string $booking_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?string $configuration_id = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdPatch'][0]
+        string $contentType = self::contentTypes['rescheduleABooking'][0]
     ): object
     {
-        list($response) = $this->v3SchedulingBookingsBookingIdPatchWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
+        list($response) = $this->rescheduleABookingWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3SchedulingBookingsBookingIdPatchWithHttpInfo
+     * Operation rescheduleABookingWithHttpInfo
      *
      * Reschedule a booking
      *
@@ -1257,22 +1290,22 @@ class V3SchedulingBookingsBookingIdApi
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rescheduleABooking'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3SchedulingBookingsBookingIdPatchWithHttpInfo(
+    public function rescheduleABookingWithHttpInfo(
         string $booking_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?string $configuration_id = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdPatch'][0]
+        string $contentType = self::contentTypes['rescheduleABooking'][0]
     ): array
     {
-        $request = $this->v3SchedulingBookingsBookingIdPatchRequest($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
+        $request = $this->rescheduleABookingRequest($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1558,7 +1591,7 @@ class V3SchedulingBookingsBookingIdApi
     }
 
     /**
-     * Operation v3SchedulingBookingsBookingIdPatchAsync
+     * Operation rescheduleABookingAsync
      *
      * Reschedule a booking
      *
@@ -1567,21 +1600,21 @@ class V3SchedulingBookingsBookingIdApi
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rescheduleABooking'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3SchedulingBookingsBookingIdPatchAsync(
+    public function rescheduleABookingAsync(
         string $booking_id,
         ?string $content_type = null,
         ?string $accept = null,
         ?string $configuration_id = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdPatch'][0]
+        string $contentType = self::contentTypes['rescheduleABooking'][0]
     ): PromiseInterface
     {
-        return $this->v3SchedulingBookingsBookingIdPatchAsyncWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $body, $contentType)
+        return $this->rescheduleABookingAsyncWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1590,7 +1623,7 @@ class V3SchedulingBookingsBookingIdApi
     }
 
     /**
-     * Operation v3SchedulingBookingsBookingIdPatchAsyncWithHttpInfo
+     * Operation rescheduleABookingAsyncWithHttpInfo
      *
      * Reschedule a booking
      *
@@ -1599,22 +1632,22 @@ class V3SchedulingBookingsBookingIdApi
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rescheduleABooking'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3SchedulingBookingsBookingIdPatchAsyncWithHttpInfo(
+    public function rescheduleABookingAsyncWithHttpInfo(
         $booking_id,
         $content_type = null,
         $accept = null,
         $configuration_id = null,
         $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdPatch'][0]
+        string $contentType = self::contentTypes['rescheduleABooking'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3SchedulingBookingsBookingIdPatchRequest($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
+        $request = $this->rescheduleABookingRequest($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1653,32 +1686,32 @@ class V3SchedulingBookingsBookingIdApi
     }
 
     /**
-     * Create request for operation 'v3SchedulingBookingsBookingIdPatch'
+     * Create request for operation 'rescheduleABooking'
      *
      * @param  string $booking_id (Required) ID of the booking object to access. (required)
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdPatch'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['rescheduleABooking'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3SchedulingBookingsBookingIdPatchRequest(
+    public function rescheduleABookingRequest(
         $booking_id,
         $content_type = null,
         $accept = null,
         $configuration_id = null,
         $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdPatch'][0]
+        string $contentType = self::contentTypes['rescheduleABooking'][0]
     ): Request
     {
 
         // verify the required parameter 'booking_id' is set
         if ($booking_id === null || (is_array($booking_id) && count($booking_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $booking_id when calling v3SchedulingBookingsBookingIdPatch'
+                'Missing the required parameter $booking_id when calling rescheduleABooking'
             );
         }
 
@@ -1788,60 +1821,52 @@ class V3SchedulingBookingsBookingIdApi
     }
 
     /**
-     * Operation v3SchedulingBookingsBookingIdPut
+     * Operation returnABookingObject
      *
-     * Confirm a booking
+     * Return a Booking object
      *
      * @param  string $booking_id (Required) ID of the booking object to access. (required)
-     * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnABookingObject'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object|object|object
      */
-    public function v3SchedulingBookingsBookingIdPut(
+    public function returnABookingObject(
         string $booking_id,
-        ?string $content_type = null,
         ?string $accept = null,
         ?string $configuration_id = null,
-        ?array $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdPut'][0]
+        string $contentType = self::contentTypes['returnABookingObject'][0]
     ): object
     {
-        list($response) = $this->v3SchedulingBookingsBookingIdPutWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
+        list($response) = $this->returnABookingObjectWithHttpInfo($booking_id, $accept, $configuration_id, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3SchedulingBookingsBookingIdPutWithHttpInfo
+     * Operation returnABookingObjectWithHttpInfo
      *
-     * Confirm a booking
+     * Return a Booking object
      *
      * @param  string $booking_id (Required) ID of the booking object to access. (required)
-     * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnABookingObject'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3SchedulingBookingsBookingIdPutWithHttpInfo(
+    public function returnABookingObjectWithHttpInfo(
         string $booking_id,
-        ?string $content_type = null,
         ?string $accept = null,
         ?string $configuration_id = null,
-        ?array $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdPut'][0]
+        string $contentType = self::contentTypes['returnABookingObject'][0]
     ): array
     {
-        $request = $this->v3SchedulingBookingsBookingIdPutRequest($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
+        $request = $this->returnABookingObjectRequest($booking_id, $accept, $configuration_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2127,30 +2152,26 @@ class V3SchedulingBookingsBookingIdApi
     }
 
     /**
-     * Operation v3SchedulingBookingsBookingIdPutAsync
+     * Operation returnABookingObjectAsync
      *
-     * Confirm a booking
+     * Return a Booking object
      *
      * @param  string $booking_id (Required) ID of the booking object to access. (required)
-     * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnABookingObject'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3SchedulingBookingsBookingIdPutAsync(
+    public function returnABookingObjectAsync(
         string $booking_id,
-        ?string $content_type = null,
         ?string $accept = null,
         ?string $configuration_id = null,
-        ?array $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdPut'][0]
+        string $contentType = self::contentTypes['returnABookingObject'][0]
     ): PromiseInterface
     {
-        return $this->v3SchedulingBookingsBookingIdPutAsyncWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $body, $contentType)
+        return $this->returnABookingObjectAsyncWithHttpInfo($booking_id, $accept, $configuration_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2159,31 +2180,27 @@ class V3SchedulingBookingsBookingIdApi
     }
 
     /**
-     * Operation v3SchedulingBookingsBookingIdPutAsyncWithHttpInfo
+     * Operation returnABookingObjectAsyncWithHttpInfo
      *
-     * Confirm a booking
+     * Return a Booking object
      *
      * @param  string $booking_id (Required) ID of the booking object to access. (required)
-     * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnABookingObject'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3SchedulingBookingsBookingIdPutAsyncWithHttpInfo(
+    public function returnABookingObjectAsyncWithHttpInfo(
         $booking_id,
-        $content_type = null,
         $accept = null,
         $configuration_id = null,
-        $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdPut'][0]
+        string $contentType = self::contentTypes['returnABookingObject'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3SchedulingBookingsBookingIdPutRequest($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
+        $request = $this->returnABookingObjectRequest($booking_id, $accept, $configuration_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2222,36 +2239,30 @@ class V3SchedulingBookingsBookingIdApi
     }
 
     /**
-     * Create request for operation 'v3SchedulingBookingsBookingIdPut'
+     * Create request for operation 'returnABookingObject'
      *
      * @param  string $booking_id (Required) ID of the booking object to access. (required)
-     * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
-     * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsBookingIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['returnABookingObject'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3SchedulingBookingsBookingIdPutRequest(
+    public function returnABookingObjectRequest(
         $booking_id,
-        $content_type = null,
         $accept = null,
         $configuration_id = null,
-        $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsBookingIdPut'][0]
+        string $contentType = self::contentTypes['returnABookingObject'][0]
     ): Request
     {
 
         // verify the required parameter 'booking_id' is set
         if ($booking_id === null || (is_array($booking_id) && count($booking_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $booking_id when calling v3SchedulingBookingsBookingIdPut'
+                'Missing the required parameter $booking_id when calling returnABookingObject'
             );
         }
-
-
 
 
 
@@ -2274,10 +2285,6 @@ class V3SchedulingBookingsBookingIdApi
         ) ?? []);
 
         // header params
-        if ($content_type !== null) {
-            $headerParams['Content-Type'] = ObjectSerializer::toHeaderValue($content_type);
-        }
-        // header params
         if ($accept !== null) {
             $headerParams['Accept'] = ObjectSerializer::toHeaderValue($accept);
         }
@@ -2299,14 +2306,7 @@ class V3SchedulingBookingsBookingIdApi
         );
 
         // for model (json/xml)
-        if (isset($body)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($body));
-            } else {
-                $httpBody = $body;
-            }
-        } elseif (count($formParams) > 0) {
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
@@ -2349,7 +2349,7 @@ class V3SchedulingBookingsBookingIdApi
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
-            'PUT',
+            'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

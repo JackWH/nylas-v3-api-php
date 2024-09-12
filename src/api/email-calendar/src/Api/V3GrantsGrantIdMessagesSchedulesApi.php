@@ -71,7 +71,7 @@ class V3GrantsGrantIdMessagesSchedulesApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3GrantsGrantIdMessagesSchedulesGet' => [
+        'retrieveYourScheduledMessages' => [
             'application/json',
         ],
     ];
@@ -123,48 +123,48 @@ class V3GrantsGrantIdMessagesSchedulesApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesSchedulesGet
+     * Operation retrieveYourScheduledMessages
      *
      * Retrieve Your Scheduled Messages
      *
      * @param  string $grant_id grant_id (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrieveYourScheduledMessages'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object
      */
-    public function v3GrantsGrantIdMessagesSchedulesGet(
+    public function retrieveYourScheduledMessages(
         string $grant_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesGet'][0]
+        string $contentType = self::contentTypes['retrieveYourScheduledMessages'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGrantIdMessagesSchedulesGetWithHttpInfo($grant_id, $accept, $contentType);
+        list($response) = $this->retrieveYourScheduledMessagesWithHttpInfo($grant_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesSchedulesGetWithHttpInfo
+     * Operation retrieveYourScheduledMessagesWithHttpInfo
      *
      * Retrieve Your Scheduled Messages
      *
      * @param  string $grant_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrieveYourScheduledMessages'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGrantIdMessagesSchedulesGetWithHttpInfo(
+    public function retrieveYourScheduledMessagesWithHttpInfo(
         string $grant_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesGet'][0]
+        string $contentType = self::contentTypes['retrieveYourScheduledMessages'][0]
     ): array
     {
-        $request = $this->v3GrantsGrantIdMessagesSchedulesGetRequest($grant_id, $accept, $contentType);
+        $request = $this->retrieveYourScheduledMessagesRequest($grant_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -275,24 +275,24 @@ class V3GrantsGrantIdMessagesSchedulesApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesSchedulesGetAsync
+     * Operation retrieveYourScheduledMessagesAsync
      *
      * Retrieve Your Scheduled Messages
      *
      * @param  string $grant_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrieveYourScheduledMessages'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdMessagesSchedulesGetAsync(
+    public function retrieveYourScheduledMessagesAsync(
         string $grant_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesGet'][0]
+        string $contentType = self::contentTypes['retrieveYourScheduledMessages'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGrantIdMessagesSchedulesGetAsyncWithHttpInfo($grant_id, $accept, $contentType)
+        return $this->retrieveYourScheduledMessagesAsyncWithHttpInfo($grant_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -301,25 +301,25 @@ class V3GrantsGrantIdMessagesSchedulesApi
     }
 
     /**
-     * Operation v3GrantsGrantIdMessagesSchedulesGetAsyncWithHttpInfo
+     * Operation retrieveYourScheduledMessagesAsyncWithHttpInfo
      *
      * Retrieve Your Scheduled Messages
      *
      * @param  string $grant_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrieveYourScheduledMessages'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGrantIdMessagesSchedulesGetAsyncWithHttpInfo(
+    public function retrieveYourScheduledMessagesAsyncWithHttpInfo(
         $grant_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesGet'][0]
+        string $contentType = self::contentTypes['retrieveYourScheduledMessages'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGrantIdMessagesSchedulesGetRequest($grant_id, $accept, $contentType);
+        $request = $this->retrieveYourScheduledMessagesRequest($grant_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -358,26 +358,26 @@ class V3GrantsGrantIdMessagesSchedulesApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGrantIdMessagesSchedulesGet'
+     * Create request for operation 'retrieveYourScheduledMessages'
      *
      * @param  string $grant_id (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGrantIdMessagesSchedulesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retrieveYourScheduledMessages'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGrantIdMessagesSchedulesGetRequest(
+    public function retrieveYourScheduledMessagesRequest(
         $grant_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGrantIdMessagesSchedulesGet'][0]
+        string $contentType = self::contentTypes['retrieveYourScheduledMessages'][0]
     ): Request
     {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $grant_id when calling v3GrantsGrantIdMessagesSchedulesGet'
+                'Missing the required parameter $grant_id when calling retrieveYourScheduledMessages'
             );
         }
 

@@ -71,10 +71,10 @@ class V3SchedulingSessionsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3SchedulingSessionsPost' => [
+        'createASession' => [
             'application/json',
         ],
-        'v3SchedulingSessionsSessionIdDelete' => [
+        'deleteASession' => [
             'application/json',
         ],
     ];
@@ -126,52 +126,52 @@ class V3SchedulingSessionsApi
     }
 
     /**
-     * Operation v3SchedulingSessionsPost
+     * Operation createASession
      *
      * Create a session
      *
      * @param  string|null $content_type content_type (optional)
      * @param  string|null $accept accept (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingSessionsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createASession'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object|object
      */
-    public function v3SchedulingSessionsPost(
+    public function createASession(
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3SchedulingSessionsPost'][0]
+        string $contentType = self::contentTypes['createASession'][0]
     ): object
     {
-        list($response) = $this->v3SchedulingSessionsPostWithHttpInfo($content_type, $accept, $body, $contentType);
+        list($response) = $this->createASessionWithHttpInfo($content_type, $accept, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3SchedulingSessionsPostWithHttpInfo
+     * Operation createASessionWithHttpInfo
      *
      * Create a session
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingSessionsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createASession'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3SchedulingSessionsPostWithHttpInfo(
+    public function createASessionWithHttpInfo(
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3SchedulingSessionsPost'][0]
+        string $contentType = self::contentTypes['createASession'][0]
     ): array
     {
-        $request = $this->v3SchedulingSessionsPostRequest($content_type, $accept, $body, $contentType);
+        $request = $this->createASessionRequest($content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -422,26 +422,26 @@ class V3SchedulingSessionsApi
     }
 
     /**
-     * Operation v3SchedulingSessionsPostAsync
+     * Operation createASessionAsync
      *
      * Create a session
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingSessionsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createASession'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3SchedulingSessionsPostAsync(
+    public function createASessionAsync(
         ?string $content_type = null,
         ?string $accept = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3SchedulingSessionsPost'][0]
+        string $contentType = self::contentTypes['createASession'][0]
     ): PromiseInterface
     {
-        return $this->v3SchedulingSessionsPostAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
+        return $this->createASessionAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -450,27 +450,27 @@ class V3SchedulingSessionsApi
     }
 
     /**
-     * Operation v3SchedulingSessionsPostAsyncWithHttpInfo
+     * Operation createASessionAsyncWithHttpInfo
      *
      * Create a session
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingSessionsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createASession'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3SchedulingSessionsPostAsyncWithHttpInfo(
+    public function createASessionAsyncWithHttpInfo(
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3SchedulingSessionsPost'][0]
+        string $contentType = self::contentTypes['createASession'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3SchedulingSessionsPostRequest($content_type, $accept, $body, $contentType);
+        $request = $this->createASessionRequest($content_type, $accept, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -509,21 +509,21 @@ class V3SchedulingSessionsApi
     }
 
     /**
-     * Create request for operation 'v3SchedulingSessionsPost'
+     * Create request for operation 'createASession'
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingSessionsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createASession'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3SchedulingSessionsPostRequest(
+    public function createASessionRequest(
         $content_type = null,
         $accept = null,
         $body = null,
-        string $contentType = self::contentTypes['v3SchedulingSessionsPost'][0]
+        string $contentType = self::contentTypes['createASession'][0]
     ): Request
     {
 
@@ -615,48 +615,48 @@ class V3SchedulingSessionsApi
     }
 
     /**
-     * Operation v3SchedulingSessionsSessionIdDelete
+     * Operation deleteASession
      *
      * Delete a session
      *
      * @param  string $session_id (Required) The ID of the session to modify. (required)
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingSessionsSessionIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteASession'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object|object
      */
-    public function v3SchedulingSessionsSessionIdDelete(
+    public function deleteASession(
         string $session_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3SchedulingSessionsSessionIdDelete'][0]
+        string $contentType = self::contentTypes['deleteASession'][0]
     ): object
     {
-        list($response) = $this->v3SchedulingSessionsSessionIdDeleteWithHttpInfo($session_id, $accept, $contentType);
+        list($response) = $this->deleteASessionWithHttpInfo($session_id, $accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3SchedulingSessionsSessionIdDeleteWithHttpInfo
+     * Operation deleteASessionWithHttpInfo
      *
      * Delete a session
      *
      * @param  string $session_id (Required) The ID of the session to modify. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingSessionsSessionIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteASession'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3SchedulingSessionsSessionIdDeleteWithHttpInfo(
+    public function deleteASessionWithHttpInfo(
         string $session_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3SchedulingSessionsSessionIdDelete'][0]
+        string $contentType = self::contentTypes['deleteASession'][0]
     ): array
     {
-        $request = $this->v3SchedulingSessionsSessionIdDeleteRequest($session_id, $accept, $contentType);
+        $request = $this->deleteASessionRequest($session_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -907,24 +907,24 @@ class V3SchedulingSessionsApi
     }
 
     /**
-     * Operation v3SchedulingSessionsSessionIdDeleteAsync
+     * Operation deleteASessionAsync
      *
      * Delete a session
      *
      * @param  string $session_id (Required) The ID of the session to modify. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingSessionsSessionIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteASession'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3SchedulingSessionsSessionIdDeleteAsync(
+    public function deleteASessionAsync(
         string $session_id,
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3SchedulingSessionsSessionIdDelete'][0]
+        string $contentType = self::contentTypes['deleteASession'][0]
     ): PromiseInterface
     {
-        return $this->v3SchedulingSessionsSessionIdDeleteAsyncWithHttpInfo($session_id, $accept, $contentType)
+        return $this->deleteASessionAsyncWithHttpInfo($session_id, $accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -933,25 +933,25 @@ class V3SchedulingSessionsApi
     }
 
     /**
-     * Operation v3SchedulingSessionsSessionIdDeleteAsyncWithHttpInfo
+     * Operation deleteASessionAsyncWithHttpInfo
      *
      * Delete a session
      *
      * @param  string $session_id (Required) The ID of the session to modify. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingSessionsSessionIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteASession'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3SchedulingSessionsSessionIdDeleteAsyncWithHttpInfo(
+    public function deleteASessionAsyncWithHttpInfo(
         $session_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3SchedulingSessionsSessionIdDelete'][0]
+        string $contentType = self::contentTypes['deleteASession'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3SchedulingSessionsSessionIdDeleteRequest($session_id, $accept, $contentType);
+        $request = $this->deleteASessionRequest($session_id, $accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -990,26 +990,26 @@ class V3SchedulingSessionsApi
     }
 
     /**
-     * Create request for operation 'v3SchedulingSessionsSessionIdDelete'
+     * Create request for operation 'deleteASession'
      *
      * @param  string $session_id (Required) The ID of the session to modify. (required)
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingSessionsSessionIdDelete'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteASession'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3SchedulingSessionsSessionIdDeleteRequest(
+    public function deleteASessionRequest(
         $session_id,
         $accept = null,
-        string $contentType = self::contentTypes['v3SchedulingSessionsSessionIdDelete'][0]
+        string $contentType = self::contentTypes['deleteASession'][0]
     ): Request
     {
 
         // verify the required parameter 'session_id' is set
         if ($session_id === null || (is_array($session_id) && count($session_id) === 0)) {
             throw new InvalidArgumentException(
-                'Missing the required parameter $session_id when calling v3SchedulingSessionsSessionIdDelete'
+                'Missing the required parameter $session_id when calling deleteASession'
             );
         }
 

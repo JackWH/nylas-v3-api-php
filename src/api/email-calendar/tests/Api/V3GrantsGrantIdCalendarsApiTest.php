@@ -70,36 +70,36 @@ class V3GrantsGrantIdCalendarsApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdCalendarsFreeBusyPost
-     *
-     * Get Free/Busy Schedule.
-     *
-     */
-    public function testV3GrantsGrantIdCalendarsFreeBusyPost()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for v3GrantsGrantIdCalendarsGet
-     *
-     * Return all Calendars.
-     *
-     */
-    public function testV3GrantsGrantIdCalendarsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for v3GrantsGrantIdCalendarsPost
+     * Test case for createACalendar
      *
      * Create a Calendar.
      *
      */
-    public function testV3GrantsGrantIdCalendarsPost()
+    public function testCreateACalendar()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getFreeBusySchedule
+     *
+     * Get Free/Busy Schedule.
+     *
+     */
+    public function testGetFreeBusySchedule()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for returnAllCalendars
+     *
+     * Return all Calendars.
+     *
+     */
+    public function testReturnAllCalendars()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

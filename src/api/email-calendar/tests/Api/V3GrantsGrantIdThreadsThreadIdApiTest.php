@@ -70,36 +70,36 @@ class V3GrantsGrantIdThreadsThreadIdApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdThreadsThreadIdDelete
+     * Test case for deleteAThread
      *
      * Delete a Thread.
      *
      */
-    public function testV3GrantsGrantIdThreadsThreadIdDelete()
+    public function testDeleteAThread()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdThreadsThreadIdGet
+     * Test case for returnAThread
      *
      * Return a Thread.
      *
      */
-    public function testV3GrantsGrantIdThreadsThreadIdGet()
+    public function testReturnAThread()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for v3GrantsGrantIdThreadsThreadIdPut
+     * Test case for updateAThread
      *
      * Update a Thread.
      *
      */
-    public function testV3GrantsGrantIdThreadsThreadIdPut()
+    public function testUpdateAThread()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

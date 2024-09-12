@@ -71,10 +71,10 @@ class V3GrantsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3GrantsGet' => [
+        'getCurrentGrant' => [
             'application/json',
         ],
-        'v3GrantsMeGet' => [
+        'listGrants' => [
             'application/json',
         ],
     ];
@@ -126,44 +126,44 @@ class V3GrantsApi
     }
 
     /**
-     * Operation v3GrantsGet
+     * Operation getCurrentGrant
      *
-     * List grants
+     * Get current grant
      *
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCurrentGrant'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsGet(
+    public function getCurrentGrant(
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGet'][0]
+        string $contentType = self::contentTypes['getCurrentGrant'][0]
     ): object
     {
-        list($response) = $this->v3GrantsGetWithHttpInfo($accept, $contentType);
+        list($response) = $this->getCurrentGrantWithHttpInfo($accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsGetWithHttpInfo
+     * Operation getCurrentGrantWithHttpInfo
      *
-     * List grants
+     * Get current grant
      *
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCurrentGrant'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsGetWithHttpInfo(
+    public function getCurrentGrantWithHttpInfo(
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGet'][0]
+        string $contentType = self::contentTypes['getCurrentGrant'][0]
     ): array
     {
-        $request = $this->v3GrantsGetRequest($accept, $contentType);
+        $request = $this->getCurrentGrantRequest($accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -344,22 +344,22 @@ class V3GrantsApi
     }
 
     /**
-     * Operation v3GrantsGetAsync
+     * Operation getCurrentGrantAsync
      *
-     * List grants
+     * Get current grant
      *
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCurrentGrant'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGetAsync(
+    public function getCurrentGrantAsync(
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGet'][0]
+        string $contentType = self::contentTypes['getCurrentGrant'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsGetAsyncWithHttpInfo($accept, $contentType)
+        return $this->getCurrentGrantAsyncWithHttpInfo($accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -368,23 +368,23 @@ class V3GrantsApi
     }
 
     /**
-     * Operation v3GrantsGetAsyncWithHttpInfo
+     * Operation getCurrentGrantAsyncWithHttpInfo
      *
-     * List grants
+     * Get current grant
      *
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCurrentGrant'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsGetAsyncWithHttpInfo(
+    public function getCurrentGrantAsyncWithHttpInfo(
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGet'][0]
+        string $contentType = self::contentTypes['getCurrentGrant'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsGetRequest($accept, $contentType);
+        $request = $this->getCurrentGrantRequest($accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -423,23 +423,23 @@ class V3GrantsApi
     }
 
     /**
-     * Create request for operation 'v3GrantsGet'
+     * Create request for operation 'getCurrentGrant'
      *
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getCurrentGrant'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsGetRequest(
+    public function getCurrentGrantRequest(
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsGet'][0]
+        string $contentType = self::contentTypes['getCurrentGrant'][0]
     ): Request
     {
 
 
 
-        $resourcePath = '/v3/grants';
+        $resourcePath = '/v3/grants/me';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -512,44 +512,44 @@ class V3GrantsApi
     }
 
     /**
-     * Operation v3GrantsMeGet
+     * Operation listGrants
      *
-     * Get current grant
+     * List grants
      *
      * @param  string|null $accept accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsMeGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGrants'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object
      */
-    public function v3GrantsMeGet(
+    public function listGrants(
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsMeGet'][0]
+        string $contentType = self::contentTypes['listGrants'][0]
     ): object
     {
-        list($response) = $this->v3GrantsMeGetWithHttpInfo($accept, $contentType);
+        list($response) = $this->listGrantsWithHttpInfo($accept, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3GrantsMeGetWithHttpInfo
+     * Operation listGrantsWithHttpInfo
      *
-     * Get current grant
+     * List grants
      *
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsMeGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGrants'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3GrantsMeGetWithHttpInfo(
+    public function listGrantsWithHttpInfo(
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsMeGet'][0]
+        string $contentType = self::contentTypes['listGrants'][0]
     ): array
     {
-        $request = $this->v3GrantsMeGetRequest($accept, $contentType);
+        $request = $this->listGrantsRequest($accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -730,22 +730,22 @@ class V3GrantsApi
     }
 
     /**
-     * Operation v3GrantsMeGetAsync
+     * Operation listGrantsAsync
      *
-     * Get current grant
+     * List grants
      *
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsMeGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGrants'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsMeGetAsync(
+    public function listGrantsAsync(
         ?string $accept = null,
-        string $contentType = self::contentTypes['v3GrantsMeGet'][0]
+        string $contentType = self::contentTypes['listGrants'][0]
     ): PromiseInterface
     {
-        return $this->v3GrantsMeGetAsyncWithHttpInfo($accept, $contentType)
+        return $this->listGrantsAsyncWithHttpInfo($accept, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -754,23 +754,23 @@ class V3GrantsApi
     }
 
     /**
-     * Operation v3GrantsMeGetAsyncWithHttpInfo
+     * Operation listGrantsAsyncWithHttpInfo
      *
-     * Get current grant
+     * List grants
      *
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsMeGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGrants'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3GrantsMeGetAsyncWithHttpInfo(
+    public function listGrantsAsyncWithHttpInfo(
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsMeGet'][0]
+        string $contentType = self::contentTypes['listGrants'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3GrantsMeGetRequest($accept, $contentType);
+        $request = $this->listGrantsRequest($accept, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -809,23 +809,23 @@ class V3GrantsApi
     }
 
     /**
-     * Create request for operation 'v3GrantsMeGet'
+     * Create request for operation 'listGrants'
      *
      * @param  string|null $accept (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3GrantsMeGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listGrants'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3GrantsMeGetRequest(
+    public function listGrantsRequest(
         $accept = null,
-        string $contentType = self::contentTypes['v3GrantsMeGet'][0]
+        string $contentType = self::contentTypes['listGrants'][0]
     ): Request
     {
 
 
 
-        $resourcePath = '/v3/grants/me';
+        $resourcePath = '/v3/grants';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

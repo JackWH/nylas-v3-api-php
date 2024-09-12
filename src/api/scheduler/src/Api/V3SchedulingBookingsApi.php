@@ -71,7 +71,7 @@ class V3SchedulingBookingsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3SchedulingBookingsPost' => [
+        'bookAnEvent' => [
             'application/json',
         ],
     ];
@@ -123,7 +123,7 @@ class V3SchedulingBookingsApi
     }
 
     /**
-     * Operation v3SchedulingBookingsPost
+     * Operation bookAnEvent
      *
      * Book an event
      *
@@ -131,26 +131,26 @@ class V3SchedulingBookingsApi
      * @param  string|null $accept accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. If you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;), this field is required. (optional)
      * @param  object|null $body body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bookAnEvent'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object|object|object
      */
-    public function v3SchedulingBookingsPost(
+    public function bookAnEvent(
         ?string $content_type = null,
         ?string $accept = null,
         ?string $configuration_id = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsPost'][0]
+        string $contentType = self::contentTypes['bookAnEvent'][0]
     ): object
     {
-        list($response) = $this->v3SchedulingBookingsPostWithHttpInfo($content_type, $accept, $configuration_id, $body, $contentType);
+        list($response) = $this->bookAnEventWithHttpInfo($content_type, $accept, $configuration_id, $body, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3SchedulingBookingsPostWithHttpInfo
+     * Operation bookAnEventWithHttpInfo
      *
      * Book an event
      *
@@ -158,21 +158,21 @@ class V3SchedulingBookingsApi
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. If you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;), this field is required. (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bookAnEvent'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3SchedulingBookingsPostWithHttpInfo(
+    public function bookAnEventWithHttpInfo(
         ?string $content_type = null,
         ?string $accept = null,
         ?string $configuration_id = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsPost'][0]
+        string $contentType = self::contentTypes['bookAnEvent'][0]
     ): array
     {
-        $request = $this->v3SchedulingBookingsPostRequest($content_type, $accept, $configuration_id, $body, $contentType);
+        $request = $this->bookAnEventRequest($content_type, $accept, $configuration_id, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -458,7 +458,7 @@ class V3SchedulingBookingsApi
     }
 
     /**
-     * Operation v3SchedulingBookingsPostAsync
+     * Operation bookAnEventAsync
      *
      * Book an event
      *
@@ -466,20 +466,20 @@ class V3SchedulingBookingsApi
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. If you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;), this field is required. (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bookAnEvent'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3SchedulingBookingsPostAsync(
+    public function bookAnEventAsync(
         ?string $content_type = null,
         ?string $accept = null,
         ?string $configuration_id = null,
         ?array $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsPost'][0]
+        string $contentType = self::contentTypes['bookAnEvent'][0]
     ): PromiseInterface
     {
-        return $this->v3SchedulingBookingsPostAsyncWithHttpInfo($content_type, $accept, $configuration_id, $body, $contentType)
+        return $this->bookAnEventAsyncWithHttpInfo($content_type, $accept, $configuration_id, $body, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -488,7 +488,7 @@ class V3SchedulingBookingsApi
     }
 
     /**
-     * Operation v3SchedulingBookingsPostAsyncWithHttpInfo
+     * Operation bookAnEventAsyncWithHttpInfo
      *
      * Book an event
      *
@@ -496,21 +496,21 @@ class V3SchedulingBookingsApi
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. If you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;), this field is required. (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bookAnEvent'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3SchedulingBookingsPostAsyncWithHttpInfo(
+    public function bookAnEventAsyncWithHttpInfo(
         $content_type = null,
         $accept = null,
         $configuration_id = null,
         $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsPost'][0]
+        string $contentType = self::contentTypes['bookAnEvent'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3SchedulingBookingsPostRequest($content_type, $accept, $configuration_id, $body, $contentType);
+        $request = $this->bookAnEventRequest($content_type, $accept, $configuration_id, $body, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -549,23 +549,23 @@ class V3SchedulingBookingsApi
     }
 
     /**
-     * Create request for operation 'v3SchedulingBookingsPost'
+     * Create request for operation 'bookAnEvent'
      *
      * @param  string|null $content_type (optional)
      * @param  string|null $accept (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for the booking. If you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;), this field is required. (optional)
      * @param  object|null $body (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingBookingsPost'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bookAnEvent'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3SchedulingBookingsPostRequest(
+    public function bookAnEventRequest(
         $content_type = null,
         $accept = null,
         $configuration_id = null,
         $body = null,
-        string $contentType = self::contentTypes['v3SchedulingBookingsPost'][0]
+        string $contentType = self::contentTypes['bookAnEvent'][0]
     ): Request
     {
 

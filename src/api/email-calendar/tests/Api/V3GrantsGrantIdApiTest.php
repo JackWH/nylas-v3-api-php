@@ -70,12 +70,12 @@ class V3GrantsGrantIdApiTest extends TestCase
     }
 
     /**
-     * Test case for v3GrantsGrantIdResourcesGet
+     * Test case for returnAllRoomResources
      *
      * Return all room resources.
      *
      */
-    public function testV3GrantsGrantIdResourcesGet()
+    public function testReturnAllRoomResources()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

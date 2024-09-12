@@ -71,7 +71,7 @@ class V3SchedulingApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'v3SchedulingAvailabilityGet' => [
+        'getAvailability' => [
             'application/json',
         ],
     ];
@@ -123,7 +123,7 @@ class V3SchedulingApi
     }
 
     /**
-     * Operation v3SchedulingAvailabilityGet
+     * Operation getAvailability
      *
      * Get Availability
      *
@@ -132,27 +132,27 @@ class V3SchedulingApi
      * @param  int|null $end_time (Required) A Unix timestamp for the end time to check availability for. (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for calculating availability. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
      * @param  string|null $booking_id This is the ID of the booking to reschedule, if you are checking availability to reschedule a round-robin booking. Required only if &#x60;availability_method&#x60; is &#x60;max-fairness&#x60; or &#x60;max-availability&#x60;. See [Retrieving booking IDs](/docs/v3/scheduler/retrieving-booking-ids/) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingAvailabilityGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAvailability'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return object|object|object|object|object|object
      */
-    public function v3SchedulingAvailabilityGet(
+    public function getAvailability(
         ?string $accept = null,
         ?int $start_time = null,
         ?int $end_time = null,
         ?string $configuration_id = null,
         ?string $booking_id = null,
-        string $contentType = self::contentTypes['v3SchedulingAvailabilityGet'][0]
+        string $contentType = self::contentTypes['getAvailability'][0]
     ): object
     {
-        list($response) = $this->v3SchedulingAvailabilityGetWithHttpInfo($accept, $start_time, $end_time, $configuration_id, $booking_id, $contentType);
+        list($response) = $this->getAvailabilityWithHttpInfo($accept, $start_time, $end_time, $configuration_id, $booking_id, $contentType);
         return $response;
     }
 
     /**
-     * Operation v3SchedulingAvailabilityGetWithHttpInfo
+     * Operation getAvailabilityWithHttpInfo
      *
      * Get Availability
      *
@@ -161,22 +161,22 @@ class V3SchedulingApi
      * @param  int|null $end_time (Required) A Unix timestamp for the end time to check availability for. (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for calculating availability. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
      * @param  string|null $booking_id This is the ID of the booking to reschedule, if you are checking availability to reschedule a round-robin booking. Required only if &#x60;availability_method&#x60; is &#x60;max-fairness&#x60; or &#x60;max-availability&#x60;. See [Retrieving booking IDs](/docs/v3/scheduler/retrieving-booking-ids/) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingAvailabilityGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAvailability'] to see the possible values for this operation
      *
      * @throws ApiException on non-2xx response or if the response body is not in the expected format
      * @throws InvalidArgumentException
      * @return array of object|object|object|object|object|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function v3SchedulingAvailabilityGetWithHttpInfo(
+    public function getAvailabilityWithHttpInfo(
         ?string $accept = null,
         ?int $start_time = null,
         ?int $end_time = null,
         ?string $configuration_id = null,
         ?string $booking_id = null,
-        string $contentType = self::contentTypes['v3SchedulingAvailabilityGet'][0]
+        string $contentType = self::contentTypes['getAvailability'][0]
     ): array
     {
-        $request = $this->v3SchedulingAvailabilityGetRequest($accept, $start_time, $end_time, $configuration_id, $booking_id, $contentType);
+        $request = $this->getAvailabilityRequest($accept, $start_time, $end_time, $configuration_id, $booking_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -462,7 +462,7 @@ class V3SchedulingApi
     }
 
     /**
-     * Operation v3SchedulingAvailabilityGetAsync
+     * Operation getAvailabilityAsync
      *
      * Get Availability
      *
@@ -471,21 +471,21 @@ class V3SchedulingApi
      * @param  int|null $end_time (Required) A Unix timestamp for the end time to check availability for. (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for calculating availability. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
      * @param  string|null $booking_id This is the ID of the booking to reschedule, if you are checking availability to reschedule a round-robin booking. Required only if &#x60;availability_method&#x60; is &#x60;max-fairness&#x60; or &#x60;max-availability&#x60;. See [Retrieving booking IDs](/docs/v3/scheduler/retrieving-booking-ids/) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingAvailabilityGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAvailability'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3SchedulingAvailabilityGetAsync(
+    public function getAvailabilityAsync(
         ?string $accept = null,
         ?int $start_time = null,
         ?int $end_time = null,
         ?string $configuration_id = null,
         ?string $booking_id = null,
-        string $contentType = self::contentTypes['v3SchedulingAvailabilityGet'][0]
+        string $contentType = self::contentTypes['getAvailability'][0]
     ): PromiseInterface
     {
-        return $this->v3SchedulingAvailabilityGetAsyncWithHttpInfo($accept, $start_time, $end_time, $configuration_id, $booking_id, $contentType)
+        return $this->getAvailabilityAsyncWithHttpInfo($accept, $start_time, $end_time, $configuration_id, $booking_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -494,7 +494,7 @@ class V3SchedulingApi
     }
 
     /**
-     * Operation v3SchedulingAvailabilityGetAsyncWithHttpInfo
+     * Operation getAvailabilityAsyncWithHttpInfo
      *
      * Get Availability
      *
@@ -503,22 +503,22 @@ class V3SchedulingApi
      * @param  int|null $end_time (Required) A Unix timestamp for the end time to check availability for. (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for calculating availability. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
      * @param  string|null $booking_id This is the ID of the booking to reschedule, if you are checking availability to reschedule a round-robin booking. Required only if &#x60;availability_method&#x60; is &#x60;max-fairness&#x60; or &#x60;max-availability&#x60;. See [Retrieving booking IDs](/docs/v3/scheduler/retrieving-booking-ids/) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingAvailabilityGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAvailability'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return PromiseInterface
      */
-    public function v3SchedulingAvailabilityGetAsyncWithHttpInfo(
+    public function getAvailabilityAsyncWithHttpInfo(
         $accept = null,
         $start_time = null,
         $end_time = null,
         $configuration_id = null,
         $booking_id = null,
-        string $contentType = self::contentTypes['v3SchedulingAvailabilityGet'][0]
+        string $contentType = self::contentTypes['getAvailability'][0]
     ): PromiseInterface
     {
         $returnType = 'object';
-        $request = $this->v3SchedulingAvailabilityGetRequest($accept, $start_time, $end_time, $configuration_id, $booking_id, $contentType);
+        $request = $this->getAvailabilityRequest($accept, $start_time, $end_time, $configuration_id, $booking_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -557,25 +557,25 @@ class V3SchedulingApi
     }
 
     /**
-     * Create request for operation 'v3SchedulingAvailabilityGet'
+     * Create request for operation 'getAvailability'
      *
      * @param  string|null $accept (optional)
      * @param  int|null $start_time (Required) A Unix timestamp for the start time to check availability for. (optional)
      * @param  int|null $end_time (Required) A Unix timestamp for the end time to check availability for. (optional)
      * @param  string|null $configuration_id The ID of the Configuration object whose settings are used for calculating availability. Required only if you&#39;re not using session authentication (&#x60;requires_session_auth&#x60; is set to &#x60;false&#x60;). (optional)
      * @param  string|null $booking_id This is the ID of the booking to reschedule, if you are checking availability to reschedule a round-robin booking. Required only if &#x60;availability_method&#x60; is &#x60;max-fairness&#x60; or &#x60;max-availability&#x60;. See [Retrieving booking IDs](/docs/v3/scheduler/retrieving-booking-ids/) for more information. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['v3SchedulingAvailabilityGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAvailability'] to see the possible values for this operation
      *
      * @throws InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function v3SchedulingAvailabilityGetRequest(
+    public function getAvailabilityRequest(
         $accept = null,
         $start_time = null,
         $end_time = null,
         $configuration_id = null,
         $booking_id = null,
-        string $contentType = self::contentTypes['v3SchedulingAvailabilityGet'][0]
+        string $contentType = self::contentTypes['getAvailability'][0]
     ): Request
     {
 
