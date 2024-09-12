@@ -1,0 +1,59 @@
+{
+    "name": "jackwh/nylas-v3-api-php",
+    "description": "Nylas API v3 PHP SDK client",
+    "keywords": [
+        "nylas",
+        "nylas-v3-api-php",
+        "php",
+        "JackWH"
+    ],
+    "homepage": "https://github.com/JackWH/nylas-v3-api-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nylas Inc."
+        },
+        {
+            "name": "Jack Webb-Heller",
+            "email": "hello@jwh.fyi",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "roave/security-advisories":         "dev-latest",
+        "pestphp/pest":                      "^1.21",
+        "phpstan/extension-installer":       "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit":           "^1.0",
+        "phpunit/phpunit":                   "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "JackWH\\NylasV3\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JackWH\\NylasV3\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
