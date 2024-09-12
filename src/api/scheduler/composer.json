@@ -1,0 +1,46 @@
+{
+    "name": "jackwh/nylas-v3-api-php",
+    "description": "Scheduler v3 is a [public beta release](https:///docs/support/product-lifecycle/#beta-release). It is generally stable, but some features might be added or changed before it is generally available. This API reference documentation covers the **Nylas Scheduler API**. See the see the [<b>Administration API documentation</b>](https:///docs/api/v3/admin/) for information about working with Nylas applications, authentication, connectors, and webhook subscriptions.  Nylas API is designed using the [REST](http://en.wikipedia.org/wiki/Representational_State_Transfer) ideology to provide simple and predictable URIs to access and modify objects. Requests support [standard HTTP methods](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) like `GET`, `PUT`, `POST`, and `DELETE`, and [standard status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html). Response bodies are always UTF-8 encoded JSON objects, unless explicitly documented otherwise.",
+    "keywords": [
+        "openapitools",
+        "openapi-generator",
+        "openapi",
+        "php",
+        "sdk",
+        "rest",
+        "api"
+    ],
+    "homepage": "https://openapi-generator.tech",
+    "license": "unlicense",
+    "authors": [
+        {
+            "name": "OpenAPI-Generator contributors",
+            "homepage": "https://openapi-generator.tech"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^7.4.5",
+        "guzzlehttp/psr7": "^2.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.5",
+        "overtrue/phplint": "^9.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": { "JackWH\\NylasV3\\Scheduler\\" : "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "JackWH\\NylasV3\\Scheduler\\Test\\" : "tests/" }
+    },
+    "scripts": {
+        "test": [
+            "@phplint"
+        ],
+        "phplint": "phplint"
+    }
+}

@@ -1,0 +1,2231 @@
+openapi: 3.0.0
+info:
+  title: v3 Nylas Scheduler APIs
+  description: >-
+    Scheduler v3 is a [public beta
+    release](https:///docs/support/product-lifecycle/#beta-release). It is
+    generally stable, but some features might be added or changed before it is
+    generally available.
+
+    This API reference documentation covers the **Nylas Scheduler API**. See the
+    see the [<b>Administration API
+    documentation</b>](https:///docs/api/v3/admin/) for information about
+    working with Nylas applications, authentication, connectors, and webhook
+    subscriptions.
+
+
+    Nylas API is designed using the
+    [REST](http://en.wikipedia.org/wiki/Representational_State_Transfer)
+    ideology to provide simple and predictable URIs to access and modify
+    objects. Requests support [standard HTTP
+    methods](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) like `GET`,
+    `PUT`, `POST`, and `DELETE`, and [standard status
+    codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html). Response
+    bodies are always UTF-8 encoded JSON objects, unless explicitly documented
+    otherwise.
+  version: 1.0.0
+servers:
+  - url: https://api.us.nylas.com
+    description: US server
+  - url: https://api.eu.nylas.com
+    description: EU server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: v3
+  - name: v3 > grants/{grant_id}/scheduling/configurations
+  - name: v3 > grants/{grant_id}/scheduling/configurations > {configuration_id}
+  - name: v3 > scheduling
+  - name: v3 > scheduling > sessions
+  - name: v3 > scheduling > bookings
+  - name: v3 > scheduling > bookings > {booking_id}
+paths:
+  /v3/grants/{grant_id}/scheduling/configurations/{configuration_id}:
+    get:
+      tags:
+        - v3 > grants/{grant_id}/scheduling/configurations > {configuration_id}
+      summary: Return a Configuration object
+      description: Returns a specific Configuration object.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to access. Use `/me/` to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: configuration_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) The ID of the specific Configuration object you want to
+            work with.
+          example: '{{configuration_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                participants:
+                  - email: <string>
+                    name: <string>
+                    is_organizer: false
+                    availability:
+                      calendar_ids:
+                        - <string>
+                        - <string>
+                    booking:
+                      calendar_id: <string>
+                    timezone: <string>
+                  - email: <string>
+                    name: <string>
+                    is_organizer: false
+                    booking:
+                      calendar_id: <string>
+                    timezone: <string>
+                availability:
+                  duration_minutes: <integer>
+                  interval_minutes: <integer>
+                  round_to: 15
+                  availability_rules:
+                    availability_method: collective
+                    buffer:
+                      before: 0
+                      after: 0
+                    default_open_hours:
+                event_booking:
+                  title: <string>
+                  description: <string>
+                  location: <string>
+                  timezone: <string>
+                  booking_type: booking
+                  conferencing:
+                    autocreate: <object>
+                  disable_emails: <boolean>
+                ID: <string>
+                requires_session_auth: true
+                scheduler:
+                  additional_fields:
+                    pariaturf:
+                      label: <string>
+                      type: <string>
+                      required: <boolean>
+                      pattern: <string>
+                      order: <integer>
+                      options:
+                        - <string>
+                        - <string>
+                  available_days_in_future: 30
+                  min_booking_notice: 60
+                  min_cancellation_notice: 0
+                  cancellation_policy: <string>
+                  rescheduling_url: <string>
+                  cancellation_url: <string>
+                  organizer_confirmation_url: <string>
+                  confirmation_redirect_url: <string>
+                  hide_rescheduling_options: false
+                  hide_cancellation_options: false
+                  hide_additional_guests: false
+                  email_template:
+                    logo: <string>
+                    booking_confirmed:
+                      title: <string>
+                      body: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+    put:
+      tags:
+        - v3 > grants/{grant_id}/scheduling/configurations > {configuration_id}
+      summary: Update a Configuration object
+      description: Updates a specific Configuration object.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                participants:
+                  - email: <string>
+                    name: <string>
+                    is_organizer: false
+                    availability:
+                      calendar_ids:
+                        - <string>
+                        - <string>
+                      open_hours:
+                    booking:
+                      calendar_id: <string>
+                    timezone: <string>
+                  - email: <string>
+                    name: <string>
+                    is_organizer: false
+                    availability:
+                      calendar_ids:
+                        - <string>
+                        - <string>
+                      open_hours:
+                    booking:
+                      calendar_id: <string>
+                    timezone: <string>
+                availability:
+                  duration_minutes: <integer>
+                  interval_minutes: <integer>
+                  round_to: 15
+                  availability_rules:
+                    availability_method: collective
+                    buffer:
+                      before: 0
+                      after: 0
+                    default_open_hours:
+                      - days:
+                          - <integer>
+                          - <integer>
+                        start: <string>
+                        end: <string>
+                        exdates:
+                          - <string>
+                          - <string>
+                      - days:
+                          - <integer>
+                          - <integer>
+                        start: <string>
+                        end: <string>
+                        exdates:
+                          - <string>
+                          - <string>
+                event_booking:
+                  title: <string>
+                  description: <string>
+                  location: <string>
+                  timezone: <string>
+                  booking_type: booking
+                  conferencing:
+                    autocreate: <object>
+                  disable_emails: <boolean>
+                requires_session_auth: true
+                scheduler:
+                  additional_fields:
+                    consectetur89:
+                      label: <string>
+                      type: <string>
+                      required: <boolean>
+                      pattern: <string>
+                      order: <integer>
+                      options:
+                        - <string>
+                        - <string>
+                    aliqua__9b:
+                      label: <string>
+                      type: <string>
+                      required: <boolean>
+                      pattern: <string>
+                      order: <integer>
+                      options:
+                        - <string>
+                        - <string>
+                  available_days_in_future: 30
+                  min_booking_notice: 60
+                  min_cancellation_notice: 0
+                  cancellation_policy: <string>
+                  rescheduling_url: <string>
+                  cancellation_url: <string>
+                  organizer_confirmation_url: <string>
+                  confirmation_redirect_url: <string>
+                  hide_rescheduling_options: false
+                  hide_cancellation_options: false
+                  hide_additional_guests: false
+                  email_template:
+                    logo: <string>
+                    booking_confirmed:
+                      title: <string>
+                      body: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to access. Use `/me/` to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: configuration_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) The ID of the specific Configuration object you want to
+            work with.
+          example: '{{configuration_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                participants:
+                  - email: <string>
+                    name: <string>
+                    is_organizer: false
+                    availability:
+                      calendar_ids:
+                        - <string>
+                        - <string>
+                      open_hours:
+                    booking:
+                      calendar_id: <string>
+                    timezone: <string>
+                  - email: <string>
+                    name: <string>
+                    is_organizer: false
+                    availability:
+                      calendar_ids:
+                        - <string>
+                        - <string>
+                      open_hours:
+                    booking:
+                      calendar_id: <string>
+                    timezone: <string>
+                availability:
+                  duration_minutes: <integer>
+                  interval_minutes: <integer>
+                  round_to: 15
+                  availability_rules:
+                    availability_method: collective
+                    buffer:
+                      before: 0
+                      after: 0
+                    default_open_hours:
+                      - days:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                        start:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                        end:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                        exdates:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                      - days:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                        start:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                        end:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                        exdates:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                event_booking:
+                  title: <string>
+                  description: <string>
+                  location: <string>
+                  timezone: <string>
+                  booking_type: booking
+                  conferencing:
+                    autocreate: <object>
+                  disable_emails: <boolean>
+                ID: <string>
+                requires_session_auth: true
+                scheduler:
+                  additional_fields:
+                    pariaturf:
+                      label: <string>
+                      type: <string>
+                      required: <boolean>
+                      pattern: <string>
+                      order: <integer>
+                      options:
+                        - <string>
+                        - <string>
+                  available_days_in_future: 30
+                  min_booking_notice: 60
+                  min_cancellation_notice: 0
+                  cancellation_policy: <string>
+                  rescheduling_url: <string>
+                  cancellation_url: <string>
+                  organizer_confirmation_url: <string>
+                  confirmation_redirect_url: <string>
+                  hide_rescheduling_options: false
+                  hide_cancellation_options: false
+                  hide_additional_guests: false
+                  email_template:
+                    logo: <string>
+                    booking_confirmed:
+                      title: <string>
+                      body: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+    delete:
+      tags:
+        - v3 > grants/{grant_id}/scheduling/configurations > {configuration_id}
+      summary: Delete a Configuration object
+      description: >-
+        Deletes a specific Configuration object. You cannot delete a
+        Configuration object that has active sessions.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to access. Use `/me/` to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: configuration_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) The ID of the specific Configuration object you want to
+            work with.
+          example: '{{configuration_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+  /v3/grants/{grant_id}/scheduling/configurations:
+    post:
+      tags:
+        - v3 > grants/{grant_id}/scheduling/configurations
+      summary: Create a Configuration object
+      description: >-
+        Creates a Configuration object that you use to define the settings and
+        preferences for a scheduling session.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: |-
+                {
+                  "participants": [
+                    {
+                      "email": "{{email}}",
+                      "name": "{{name}}",
+                      "is_organizer": true,
+                      "availability": {
+                        "calendar_ids": ["primary"],
+                        "open_hours": [
+                          {
+                            "days": [0],
+                            "start": "0:00",
+                            "end": "16:00",
+                            "exdates": []
+                          }
+                        ]
+                      },
+                      "booking": {
+                        "calendar_id": "primary"
+                      }
+                    //   "timezone": "<string>"
+                    }
+                  ],
+                  "availability": {
+                    "duration_minutes": 30,
+                    "interval_minutes": 5,
+                    "round_to": 15,
+                    "availability_rules": {
+                      "availability_method": "collective",
+                      "buffer": {
+                        "before": 0,
+                        "after": 0
+                      },
+                      "default_open_hours": [
+                          {
+                            "days": [0],
+                            "start": "0:00",
+                            "end": "16:00",
+                            "exdates": []
+                          }
+                       ]
+                    }
+                  },
+                  "event_booking": {
+                    "title": "<string>",
+                    "description": "<string>",
+                    "location": "<string>",
+                    "timezone": "<string>",
+                    "booking_type": "booking"
+                    // "conferencing": {
+                    //   "autocreate": "<object>"
+                    // },
+                    // "disable_emails": "<boolean>"
+                  },
+                  "requires_session_auth": true,
+                  "scheduler": {
+                    "additional_fields": {
+                    //   "veniama42": {
+                    //     "label": "<string>",
+                    //     "type": "<string>",
+                    //     "required": "<boolean>",
+                    //     "pattern": "<string>",
+                    //     "order": "<integer>",
+                    //     "options": [
+                    //       "<string>",
+                    //       "<string>"
+                    //     ]
+                    //   },
+                    //   "nond55": {
+                    //     "label": "<string>",
+                    //     "type": "<string>",
+                    //     "required": "<boolean>",
+                    //     "pattern": "<string>",
+                    //     "order": "<integer>",
+                    //     "options": [
+                    //       "<string>",
+                    //       "<string>"
+                    //     ]
+                    //   }
+                    },
+                    "available_days_in_future": 30,
+                    "min_booking_notice": 60,
+                    "min_cancellation_notice": 0,
+                    "cancellation_policy": "<string>",
+                    // "rescheduling_url": "<string>",
+                    // "cancellation_url": "<string>",
+                    // "organizer_confirmation_url": "<string>",
+                    // "confirmation_redirect_url": "<string>",
+                    "hide_rescheduling_options": false,
+                    "hide_cancellation_options": false,
+                    "hide_additional_guests": false,
+                    "email_template": {
+                      "logo": "<string>",
+                      "booking_confirmed": {
+                        "title": "<string>",
+                        "body": "<string>"
+                      }
+                    }
+                  }
+                }
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to access. Use `/me/` to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                participants:
+                  - email: <string>
+                    name: <string>
+                    is_organizer: false
+                    availability:
+                      calendar_ids:
+                        - <string>
+                        - <string>
+                      open_hours:
+                    booking:
+                      calendar_id: <string>
+                    timezone: <string>
+                  - email: <string>
+                    name: <string>
+                    is_organizer: false
+                    availability:
+                      calendar_ids:
+                        - <string>
+                        - <string>
+                      open_hours:
+                    booking:
+                      calendar_id: <string>
+                    timezone: <string>
+                availability:
+                  duration_minutes: <integer>
+                  interval_minutes: <integer>
+                  round_to: 15
+                  availability_rules:
+                    availability_method: collective
+                    buffer:
+                      before: 0
+                      after: 0
+                    default_open_hours:
+                      - days:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                        start:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                        end:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                        exdates:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                      - days:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                        start:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                        end:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                        exdates:
+                          value: >-
+                            <Error: Too many levels of nesting to fake this
+                            schema>
+                event_booking:
+                  title: <string>
+                  description: <string>
+                  location: <string>
+                  timezone: <string>
+                  booking_type: booking
+                  conferencing:
+                    autocreate: <object>
+                  disable_emails: <boolean>
+                ID: <string>
+                requires_session_auth: true
+                scheduler:
+                  additional_fields:
+                    pariaturf:
+                      label: <string>
+                      type: <string>
+                      required: <boolean>
+                      pattern: <string>
+                      order: <integer>
+                      options:
+                        - <string>
+                        - <string>
+                  available_days_in_future: 30
+                  min_booking_notice: 60
+                  min_cancellation_notice: 0
+                  cancellation_policy: <string>
+                  rescheduling_url: <string>
+                  cancellation_url: <string>
+                  organizer_confirmation_url: <string>
+                  confirmation_redirect_url: <string>
+                  hide_rescheduling_options: false
+                  hide_cancellation_options: false
+                  hide_additional_guests: false
+                  email_template:
+                    logo: <string>
+                    booking_confirmed:
+                      title: <string>
+                      body: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+    get:
+      tags:
+        - v3 > grants/{grant_id}/scheduling/configurations
+      summary: Return all Configuration objects
+      description: Returns all Configuration objects.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: >-
+            The maximum number of objects to return. See
+            [pagination](/docs/api/v3/ecc/#overview--pagination) for more
+            information.
+          example: '50'
+        - name: page_token
+          in: query
+          schema:
+            type: string
+          description: >-
+            An identifier that specifies which page of data to return. You can
+            get this value from the `next_cursor` response field. See
+            [Pagination](/docs/api/v3/ecc/#overview--pagination) for more
+            information.
+          example: '{{page_token}}'
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to access. Use `/me/` to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                value: '<Error: Could not resolve allOf schema'
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+  /v3/scheduling/sessions:
+    post:
+      tags:
+        - v3 > scheduling > sessions
+      summary: Create a session
+      description: >-
+        Creates a new short-lived session that you can pass to the Scheduling
+        Component to enforce end-user authentication. Your request must include
+        the ID of an existing Configuration object.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                configuration_id: <string>
+                time_to_live: 5
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+  /v3/scheduling/sessions/{session_id}:
+    delete:
+      tags:
+        - v3 > scheduling > sessions
+      summary: Delete a session
+      description: Deletes a specific session.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: session_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) The ID of the session to modify.
+          example: '{{session_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+  /v3/scheduling/bookings/{booking_id}:
+    get:
+      tags:
+        - v3 > scheduling > bookings > {booking_id}
+      summary: Return a Booking object
+      description: >-
+        Returns a specific booking object.</br></br>   Nylas validates the
+        provided session ID and uses it to retrieve the related Configuration
+        object. If you created a [public
+        configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't
+        need to include the `Authorization` request header with a session ID,
+        but you must pass the Configuration object ID as a query parameter.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: configuration_id
+          in: query
+          schema:
+            type: string
+          description: >-
+            The ID of the Configuration object whose settings are used for the
+            booking. Required only if you're not using session authentication
+            (`requires_session_auth` is set to `false`).
+          example: '{{configuration_id}}'
+        - name: booking_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the booking object to access.
+          example: '{{booking_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+    patch:
+      tags:
+        - v3 > scheduling > bookings > {booking_id}
+      summary: Reschedule a booking
+      description: >-
+        Reschedules a specific booking. Nylas also updates the event linked to
+        the booking on the provider.</br></br>   Nylas validates the provided
+        session ID and uses it to retrieve the related Configuration object. If
+        you created a [public
+        configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't
+        need to include the `Authorization` request header with a session ID,
+        but you must pass the Configuration object ID as a query parameter.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                start_time: <string>
+                end_time: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: configuration_id
+          in: query
+          schema:
+            type: string
+          description: >-
+            The ID of the Configuration object whose settings are used for the
+            booking. Required only if you're not using session authentication
+            (`requires_session_auth` is set to `false`).
+          example: <string>
+        - name: booking_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the booking object to access.
+          example: '{{booking_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+    put:
+      tags:
+        - v3 > scheduling > bookings > {booking_id}
+      summary: Confirm a booking
+      description: >-
+        Confirms or cancels a pending booking. Nylas also updates the event
+        linked to the booking on the provider.</br></br>   Nylas validates the
+        provided session ID and uses it to retrieve the related Configuration
+        object. If you created a [public
+        configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't
+        need to include the `Authorization` request header with a session ID,
+        but you must pass the Configuration object ID as a query parameter.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                salt: <string>
+                status: <string>
+                cancellation_reason: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: configuration_id
+          in: query
+          schema:
+            type: string
+          description: >-
+            The ID of the Configuration object whose settings are used for the
+            booking. Required only if you're not using session authentication
+            (`requires_session_auth` is set to `false`).
+          example: '{{configuration_id}}'
+        - name: booking_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the booking object to access.
+          example: '{{booking_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                booking_id: <string>
+                event_id: <string>
+                title: <string>
+                organizer:
+                  email: <string>
+                  name: <string>
+                status: <string>
+                description: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+    delete:
+      tags:
+        - v3 > scheduling > bookings > {booking_id}
+      summary: Delete a booking
+      description: >-
+        Deletes an specific booking. Nylas also cancels the event linked to the
+        booking on the provider.</br></br>   Nylas validates the provided
+        session ID and uses it to retrieve the related Configuration object. If
+        you created a [public
+        configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't
+        need to include the `Authorization` request header with a session ID,
+        but you must pass the Configuration object ID as a query parameter.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: configuration_id
+          in: query
+          schema:
+            type: string
+          description: >-
+            The ID of the Configuration object whose settings are used for the
+            booking. Required only if you're not using session authentication
+            (`requires_session_auth` is set to `false`).
+          example: '{{configuration_id}}'
+        - name: booking_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the booking object to access.
+          example: '{{booking_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+  /v3/scheduling/bookings:
+    post:
+      tags:
+        - v3 > scheduling > bookings
+      summary: Book an event
+      description: >-
+        Books an event with the participants listed in the session's
+        Configuration object, using the details from the Configuration object.
+        The `start_time` and `end_time` must correspond to a valid time slot
+        returned by the [Scheduling  Availability
+        endpoint](/docs/api/v3/scheduler/#get-/v3/scheduling/availability) using
+        the same configuration.</br></br>
+         Nylas validates the session ID and uses it to retrieve the related Configuration object. If you created a [public configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't need to include the `Authorization` request header with a session ID, but you must pass the Configuration object ID as a query parameter.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                start_time: <string>
+                end_time: <string>
+                guest:
+                  email: <string>
+                  name: <string>
+                participants:
+                  - email: <string>
+                  - email: <string>
+                timezone: <string>
+                additional_guests:
+                  - email: <string>
+                    name: <string>
+                  - email: <string>
+                    name: <string>
+                additional_fields:
+                  pariaturf7: <string>
+                  cillum1bc: <string>
+                  sit01: <string>
+                  amet__39: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: configuration_id
+          in: query
+          schema:
+            type: string
+          description: >-
+            The ID of the Configuration object whose settings are used for the
+            booking. If you're not using session authentication
+            (`requires_session_auth` is set to `false`), this field is required.
+          example: '{{configuration_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+  /v3/scheduling/availability:
+    get:
+      tags:
+        - v3 > scheduling
+      summary: Get Availability
+      description: >-
+        Gets available time slots within the specified time range, using the
+        rules defined in the Configuration object.</br></br>   Nylas validates
+        the provided session ID and uses it to retrieve the related
+        Configuration object. If you created a [public
+        configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't
+        need to include the `Authorization` request header with a session ID,
+        but you must pass the Configuration object ID as a query parameter.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: start_time
+          in: query
+          schema:
+            type: integer
+          description: >-
+            (Required) A Unix timestamp for the start time to check availability
+            for.
+          example: '1722291193'
+        - name: end_time
+          in: query
+          schema:
+            type: integer
+          description: >-
+            (Required) A Unix timestamp for the end time to check availability
+            for.
+          example: '1724969593'
+        - name: configuration_id
+          in: query
+          schema:
+            type: string
+          description: >-
+            The ID of the Configuration object whose settings are used for
+            calculating availability. Required only if you're not using session
+            authentication (`requires_session_auth` is set to `false`).
+          example: '{{configuration_id}}'
+        - name: booking_id
+          in: query
+          schema:
+            type: string
+          description: >-
+            This is the ID of the booking to reschedule, if you are checking
+            availability to reschedule a round-robin booking. Required only if
+            `availability_method` is `max-fairness` or `max-availability`. See
+            [Retrieving booking IDs](/docs/v3/scheduler/retrieving-booking-ids/)
+            for more information.
+          example: '{{booking_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>

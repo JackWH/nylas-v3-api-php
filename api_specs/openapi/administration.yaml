@@ -1,0 +1,3270 @@
+openapi: 3.0.0
+info:
+  title: v3 Nylas Administration API
+  description: >-
+    **This API reference covers the **Administration APIs** only.
+
+    See the [<b>Email and Calendar API
+    reference</b>](https:///docs/api/v3-beta/ecc/) for information on working
+    with Email and Calendar APIs.
+
+
+    The **Nylas Administration APIs** are how you query and change your Nylas
+    applications, including the application's authentication configuration,
+    provider settings, and webhook subscriptions. You can also use
+    Administration APIs to query your application to list the Grants (specific
+    permissions to access user data) that are associated with each of your Nylas
+    applications.
+
+
+    The Nylas API is designed using the
+    [REST](http://en.wikipedia.org/wiki/Representational_State_Transfer)
+    ideology to provide simple and predictable URIs to access and modify
+    objects. Requests support [standard HTTP
+    methods](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) like GET,
+    PUT, POST, and DELETE and [standard status
+    codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html). Response
+    bodies are always UTF-8 encoded JSON objects, unless explicitly documented
+    otherwise.
+
+
+    ## Nylas authentication in v3
+
+
+    You can find more information about the Nylas Administration APIs in the
+    main documentation set:
+
+
+    - [Authentication in v3](https:///docs/developer-guide/v3-authentication/)
+        - [Create Grants with OAuth authentication + API key](https:///docs/developer-guide/v3-authentication/hosted-oauth-apikey/)
+        - [Create Grants with OAuth authentication + Access token](https:///docs/developer-guide/v3-authentication/hosted-oauth-accesstoken/)
+        - [Create Grants with custom authentication](https:///docs/developer-guide/v3-authentication/custom/) (called "native" authentication in v2)
+        - [Create Grants with IMAP authentication](https:///docs/developer-guide/v3-authentication/imap/)
+    - [Bulk authentication in
+    v3](https:///docs/developer-guide/v3-authentication/bulk-auth-grants/)
+
+    - [v3 event codes](https:///docs/v3-beta/event-codes/)
+
+    - [Virtual Calendars in
+    v3](https:///docs/developer-guide/v3-authentication/virtual-calendars/)
+  version: 1.0.0
+servers:
+  - url: https://api.us.nylas.com
+    description: US server
+  - url: https://api.eu.nylas.com
+    description: EU server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    oauth2Auth:
+      type: http
+      scheme: oauth2
+security:
+  - bearerAuth: [ ]
+tags:
+  - name: v3
+  - name: v3 > applications
+  - name: v3 > applications > redirect-uris
+  - name: v3 > applications > redirect-uris > {id}
+  - name: v3 > connectors
+  - name: v3 > connectors > {provider}
+  - name: v3 > connectors > {provider} > creds
+  - name: v3 > connectors > {provider} > creds > {id}
+  - name: v3 > connect
+  - name: v3 > grants
+  - name: v3 > grants > {grantId}
+  - name: v3 > webhooks
+  - name: v3 > webhooks > {id}
+  - name: v3 > channels/pubsub
+  - name: v3 > channels/pubsub > {id}
+paths:
+  /v3/applications/redirect-uris/{callback_id}:
+    get:
+      tags:
+        - v3 > applications > redirect-uris > {id}
+      summary: Get callback URI
+      description: Gets a Callback URI based on ID
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: callback_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  id: <string>
+                  url: <string>
+                  platform: <string>
+                  settings:
+                    origin: <string>
+                    bundle_id: <string>
+                    app_store_id: <string>
+                    team_id: <string>
+                    package_name: <string>
+                    sha1_certificate_fingerprint: <string>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Resource not found
+                  provider_error: <object>
+    patch:
+      tags:
+        - v3 > applications > redirect-uris > {id}
+      summary: Update a callback URI
+      description: Update a Callback URI based on ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                url: <string>
+                platform: <string>
+                settings:
+                  origin: <string>
+                  bundle_id: <string>
+                  package_name: <string>
+                  sha1_certificate_fingerprint: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: callback_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  id: <string>
+                  url: <string>
+                  platform: <string>
+                  settings:
+                    origin: <string>
+                    bundle_id: <string>
+                    app_store_id: <string>
+                    team_id: <string>
+                    package_name: <string>
+                    sha1_certificate_fingerprint: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Bad request
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Resource not found
+                  provider_error: <object>
+    delete:
+      tags:
+        - v3 > applications > redirect-uris > {id}
+      summary: Delete a callback URI
+      description: Delete existing Callback URI based on it's ID
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: callback_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Resource not found
+                  provider_error: <object>
+  /v3/applications/redirect-uris:
+    get:
+      tags:
+        - v3 > applications > redirect-uris
+      summary: Get an application's callback URIs
+      description: Get an application's callback URIs
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: <boolean>
+                data:
+                  - id: <string>
+                    url: <string>
+                    platform: <string>
+                    settings:
+                      origin: <string>
+                      bundle_id: <string>
+                      app_store_id: <string>
+                      team_id: <string>
+                      package_name: <string>
+                      sha1_certificate_fingerprint: <string>
+                  - id: <string>
+                    url: <string>
+                    platform: <string>
+                    settings:
+                      origin: <string>
+                      bundle_id: <string>
+                      app_store_id: <string>
+                      team_id: <string>
+                      package_name: <string>
+                      sha1_certificate_fingerprint: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: <boolean>
+                error:
+                  request_id: <string>
+                  error:
+                    type: <string>
+                    message: Bad request
+                    provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  request_id: <string>
+                  error:
+                    type: <string>
+                    message: Resource not found
+                    provider_error: <object>
+    post:
+      tags:
+        - v3 > applications > redirect-uris
+      summary: Add callback URI to application
+      description: Add new Callback URI to an existing Application
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                url: <string>
+                platform: <string>
+                settings:
+                  origin: <string>
+                  bundle_id: <string>
+                  package_name: <string>
+                  sha1_certificate_fingerprint: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  id: <string>
+                  url: <string>
+                  platform: <string>
+                  settings:
+                    origin: <string>
+                    bundle_id: <string>
+                    app_store_id: <string>
+                    team_id: <string>
+                    package_name: <string>
+                    sha1_certificate_fingerprint: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Bad request
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+  /v3/applications:
+    get:
+      tags:
+        - v3 > applications
+      summary: Get application
+      description: Gets the application object
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  application_id: <string>
+                  organization_id: <string>
+                  region: <string>
+                  environment: <string>
+                  branding:
+                    name: <string>
+                    icon_url: <string>
+                    website_url: <string>
+                    description: <string>
+                  hosted_authentication:
+                    background_image_url: <string>
+                    alignment: <string>
+                    color_primary: <string>
+                    color_secondary: <string>
+                    title: <string>
+                    subtitle: <string>
+                    background_color: <string>
+                    spacing: <integer>
+                  callback_uris:
+                    - id: <string>
+                      url: <string>
+                      platform: <string>
+                      settings:
+                        origin: <string>
+                        bundle_id: <string>
+                        package_name: <string>
+                        sha1_certificate_fingerprint: <string>
+                    - id: <string>
+                      url: <string>
+                      platform: <string>
+                      settings:
+                        origin: <string>
+                        bundle_id: <string>
+                        package_name: <string>
+                        sha1_certificate_fingerprint: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Bad request
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+    patch:
+      tags:
+        - v3 > applications
+      summary: Update application
+      description: >
+        Updates an application. Selects the application to update based on the
+        `client_id` associated with the API key.
+
+        <div style="padding:24px; background-color: #FFFEE6; border: 1px solid
+        #9E9600; color: #161717"><b>v3 Beta Note</b>: This API endpoint will be
+        removed in the future when application settings are available in the v3
+        Dashboard.</div>
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                application_id: <string>
+                organization_id: <string>
+                region: <string>
+                environment: <string>
+                branding:
+                  name: <string>
+                  icon_url: <string>
+                  website_url: <string>
+                  description: <string>
+                hosted_authentication:
+                  background_image_url: <string>
+                  alignment: <string>
+                  color_primary: <string>
+                  color_secondary: <string>
+                  title: <string>
+                  subtitle: <string>
+                  background_color: <string>
+                  spacing: <integer>
+                callback_uris:
+                  - id: <string>
+                    url: <string>
+                    platform: <string>
+                    settings:
+                      origin: <string>
+                      bundle_id: <string>
+                      package_name: <string>
+                      sha1_certificate_fingerprint: <string>
+                  - id: <string>
+                    url: <string>
+                    platform: <string>
+                    settings:
+                      origin: <string>
+                      bundle_id: <string>
+                      package_name: <string>
+                      sha1_certificate_fingerprint: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: <boolean>
+                data:
+                  application_id: <string>
+                  organization_id: <string>
+                  region: <string>
+                  environment: <string>
+                  branding:
+                    name: <string>
+                    icon_url: <string>
+                    website_url: <string>
+                    description: <string>
+                  hosted_authentication:
+                    background_image_url: <string>
+                    alignment: <string>
+                    color_primary: <string>
+                    color_secondary: <string>
+                    title: <string>
+                    subtitle: <string>
+                    background_color: <string>
+                    spacing: <integer>
+                  callback_uris:
+                    - id: <string>
+                      url: <string>
+                      platform: <string>
+                      settings:
+                        origin: <string>
+                        bundle_id: <string>
+                        package_name: <string>
+                        sha1_certificate_fingerprint: <string>
+                    - id: <string>
+                      url: <string>
+                      platform: <string>
+                      settings:
+                        origin: <string>
+                        bundle_id: <string>
+                        package_name: <string>
+                        sha1_certificate_fingerprint: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Bad request
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Resource not found
+                  provider_error: <object>
+  /v3/connectors/{provider}/creds/{id}:
+    get:
+      tags:
+        - v3 > connectors > {provider} > creds > {id}
+      summary: Get credential by ID
+      description: Get credential by specified ID
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: provider
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: '{{provider}}'
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: '{{credential_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  id: <string>
+                  name: <string>
+                  created_at: <integer>
+                  updated_at: <integer>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Bad request
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+    patch:
+      tags:
+        - v3 > connectors > {provider} > creds > {id}
+      summary: Update credential by ID
+      description: Patch credential by specified ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: google
+                credential_data:
+                  client_id: '{{google_client_id}}'
+                  client_secret: '{{google_client_secret}}'
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: provider
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: '{{provider}}'
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: '{{credential_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  id: <string>
+                  name: <string>
+                  created_at: <integer>
+                  updated_at: <integer>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Bad request
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+    delete:
+      tags:
+        - v3 > connectors > {provider} > creds > {id}
+      summary: Delete credential by ID
+      description: Delete credential by specified ID
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: provider
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: '{{provider}}'
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: '{{credential_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Bad request
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+  /v3/connectors/{provider}/creds:
+    post:
+      tags:
+        - v3 > connectors > {provider} > creds
+      summary: Create credential
+      description: |
+        Manually create a new credential record.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: google
+                credential_type: connector
+                credential_data:
+                  client_id: '{{google_client_id}}'
+                  client_secret: '{{google_client_secret}}'
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: provider
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: '{{provider}}'
+      responses:
+        '201':
+          description: Created
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  id: <string>
+                  name: <string>
+                  created_at: <integer>
+                  updated_at: <integer>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Bad request
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+    get:
+      tags:
+        - v3 > connectors > {provider} > creds
+      summary: List credentials
+      description: Lists credentials for given provider
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: provider
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: '{{provider}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  - id: <string>
+                    name: <string>
+                    created_at: <integer>
+                    updated_at: <integer>
+                  - id: <string>
+                    name: <string>
+                    created_at: <integer>
+                    updated_at: <integer>
+                limit: <integer>
+                offset: <integer>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Resource not found
+                  provider_error: <object>
+  /v3/connectors/{provider}:
+    post:
+      tags:
+        - v3 > connectors > {provider}
+      summary: Create a connector
+      description: >
+        Create a connector in your Nylas application. Connectors are how your
+        Nylas application stores information needed to connect to external
+        services. Creating a connector is the first step in setting up
+        authentication for your project.
+
+        <!-- Customer Developer onboarding setup up OAuth strategy with
+        ClientID/Secrets.-->
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                provider: <string>
+                settings:
+                  client_id: <string>
+                  client_secret: <string>
+                  topic_name: <string>
+                scope:
+                  - <string>
+                  - <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: provider
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  provider: <string>
+                  settings: <object>
+                  scope:
+                    - <string>
+                    - <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Bad request
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+    get:
+      tags:
+        - v3 > connectors > {provider}
+      summary: List connectors
+      description: Lists the connectors in your Nylas application
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: provider
+          in: path
+          schema:
+            type: string
+          required: true
+          example: google
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  - provider: <string>
+                    settings: <object>
+                    scope:
+                      - <string>
+                      - <string>
+                  - provider: <string>
+                    settings: <object>
+                    scope:
+                      - <string>
+                      - <string>
+                limit: <integer>
+                offset: <integer>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Resource not found
+                  provider_error: <object>
+  /v3/connectors:
+    post:
+      tags:
+        - v3 > connectors
+      summary: Create a connector
+      description: >
+        Create a connector in your Nylas application. Connectors are how your
+        Nylas application stores information needed to connect to external
+        services. Creating a connector is the first step in setting up
+        authentication for your project.
+
+        <!-- Customer Developer onboarding setup up OAuth strategy with
+        ClientID/Secrets.-->
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                provider: <string>
+                settings:
+                  client_id: <string>
+                  client_secret: <string>
+                  topic_name: <string>
+                scope:
+                  - <string>
+                  - <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '201':
+          description: Created
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  provider: <string>
+                  settings: <object>
+                  scope:
+                    - <string>
+                    - <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Bad request
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+    get:
+      tags:
+        - v3 > connectors
+      summary: List connectors
+      description: Lists the connectors in your Nylas application
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  - provider: <string>
+                    settings: <object>
+                    scope:
+                      - <string>
+                      - <string>
+                  - provider: <string>
+                    settings: <object>
+                    scope:
+                      - <string>
+                      - <string>
+                limit: <integer>
+                offset: <integer>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Resource not found
+                  provider_error: <object>
+  /v3/connect/custom:
+    post:
+      tags:
+        - v3 > connect
+      summary: Custom Authentication
+      description: >
+        Manually create a grant using a custom authentication flow.
+
+        If you are handling the OAuth flow in your own application or want to
+        migrate existing users,
+
+        Custom Authentication allows you to provide the user `refresh_token` in
+        order to create a grant.
+
+
+        If a user previously authenticated with your Nylas application using the
+        same email account, Nylas detects this and re-authenticates the existing
+        grant instead of creating a new one. The API response contains the
+        existing `grant_id` for the user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                provider: <string>
+                settings: <object>
+                state: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '201':
+          description: Created
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  id: <string>
+                  provider: <string>
+                  scope:
+                    - <string>
+                    - <string>
+                  created_at: <integer>
+                  grant_status: <string>
+                  email: <string>
+                  user_agent: <string>
+                  ip: <string>
+                  state: <string>
+                  updated_at: <integer>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Bad request
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+  /v3/connect/auth:
+    get:
+      tags:
+        - v3 > connect
+      summary: Hosted OAuth - Authorization Request
+      description: >
+        The initial OAuth 2.0 authorization request which supports the
+        authorization code flow in addition to optional PKCE for client side
+        only applications. Learn more:
+
+        - [Hosted OAuth with Access
+        token](/docs/developer-guide/v3-authentication/hosted-oauth-accesstoken/)
+
+        - [Hosted OAuth with Access token _and_
+        PKCE](/docs/developer-guide/v3-authentication/hosted-oauth-accesstoken/#creating-grants-with-authentication-oauth-20-pkce)
+      parameters:
+        - name: client_id
+          in: query
+          schema:
+            type: string
+          description: (Required) Nylas application client_id (or application id)
+          example: '{{application_id}}'
+        - name: provider
+          in: query
+          schema:
+            type: string
+          description: >-
+            The Connector provider type that you already had set up with Nylas
+            for this application. If not set, the user is directed to the Hosted
+            Login screen and prompted to select a provider.
+          example: '{{provider}}'
+        - name: redirect_uri
+          in: query
+          schema:
+            type: string
+          description: (Required) Redirect URI (aka callback URI) of the application
+          example: '{{redirect_uri}}'
+        - name: response_type
+          in: query
+          schema:
+            type: string
+          description: >-
+            (Required) Should be set to `code` for Nylas OAuth2.0 flow, and set
+            to 'adminconsent' for Microsoft admin consent service account flow.
+          example: '{{response_type}}'
+        - name: login_hint
+          in: query
+          schema:
+            type: string
+          description: >-
+            Prefill the login name (usually email) during authorization flow.
+            If a Grant for the provided email already exists, a Grant's re-auth
+            will automatically be initiated.
+          example: '{{email}}'
+      responses:
+        '302':
+          description: Found
+          headers:
+            Location:
+              schema:
+                type: string
+                example: <url>
+            Content-Type:
+              schema:
+                type: string
+                example: text/plain
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: ''
+  /v3/connect/token:
+    post:
+      tags:
+        - v3 > connect
+      summary: Hosted OAuth - Token exchange
+      description: >
+        The standard OAuth token endpoint for use with Hosted authentication.
+
+        - `authorization_code`: Exchange `code` returned from OAuth 2.0
+        authorization with tokens (`access_token` & `refresh_token`).
+
+        - `refresh_token`: Issue a new `access_token` using `refresh_token`
+
+        Learn More:
+          - [Hosted authentication with OAuth and access token](/docs/developer-guide/v3-authentication/hosted-oauth-accesstoken/)
+          - [Hosted OAuth with access token and PKCE](/docs/developer-guide/v3-authentication/hosted-oauth-accesstoken/#creating-grants-with-authentication-oauth-20-pkce)
+
+        Note that if you set `grant_type` to `refresh_token` you must include
+        the `client_secret`. The `client_secret` is optional only if you are
+        using PKCE and it's the initial one-time code exchange step
+        (`grant_type` is set to `authorization_code`).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                code: '{{code}}'
+                client_id: '{{nylas_client_id}}'
+                client_secret: '{{nylas_client_secret}}'
+                redirect_uri: '{{redirect_uri}}'
+                grant_type: authorization_code
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                access_token: <string>
+                expires_in: 3600
+                id_token: <string>
+                refresh_token: <string>
+                scope: <string>
+                token_type: <string>
+                grant_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: <string>
+                error_description: <string>
+                error_uri: <string>
+                error_code: <string>
+  /v3/connect/revoke:
+    post:
+      tags:
+        - v3 > connect
+      summary: Hosted OAuth - Revoke OAuth token
+      description: >
+        Revoke a Nylas OAuth access token. Pass the token to be revoked as a
+        query parameter.
+
+        If you revoke the Nylas OAuth token, it does not revoke the grant or the
+        associated provider token that Nylas uses internally. This means that an
+        end-user can reauthenticate to get a new access token for the existing
+        grant, so the `grant_id` does not change.
+
+        If you revoke a Nylas access token, Nylas also revokes all child tokens
+        and the parent `refresh_token` attached to the access token.
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: token
+          in: query
+          schema:
+            type: string
+          description: (Required) The token to revoke
+          example: '{{bearerToken}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: <string>
+                error_description: <string>
+                error_uri: <string>
+                error_code: <string>
+  /v3/connect/tokeninfo:
+    get:
+      tags:
+        - v3 > connect
+      summary: Token Info
+      description: >
+        Get info about a specific token based on the identifier you include. Use
+        _either_ the ID Token or Access Token.</br></br>**Note**: Because Nylas
+        uses the schema outlined in [RFC
+        9068](https://datatracker.ietf.org/doc/html/rfc9068#name-requesting-a-jwt-access-tok)
+        to ensure that it is compatible with all OAuth libraries in all
+        languages, the format for this endpoint is different from the other
+        OAuth endpoints.
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id_token
+          in: query
+          schema:
+            type: string
+          description: ID token
+          example: '{{id_token}}'
+        - name: access_token
+          in: query
+          schema:
+            type: string
+          description: Access token
+          example: '{{bearerToken}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  iss: <string>
+                  aud: <string>
+                  sub: <string>
+                  email: <string>
+                  iat: <integer>
+                  exp: <integer>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: <string>
+                error_description: <string>
+                error_uri: <string>
+                error_code: <string>
+  /v3/grants/{grantId}:
+    get:
+      tags:
+        - v3 > grants > {grantId}
+      summary: Get a grant
+      description: Gets a grant with the provided ID
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grantId
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  id: <string>
+                  provider: <string>
+                  scope:
+                    - <string>
+                    - <string>
+                  created_at: <integer>
+                  grant_status: <string>
+                  email: <string>
+                  user_agent: <string>
+                  ip: <string>
+                  state: <string>
+                  updated_at: <integer>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Resource not found
+                  provider_error: <object>
+    patch:
+      tags:
+        - v3 > grants > {grantId}
+      summary: Update grant
+      description: >-
+        Modify existing grant with partial update. Only fields that are included
+        in the payload will be updated.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                settings: <object>
+                scope:
+                  - <string>
+                  - <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grantId
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  id: <string>
+                  provider: <string>
+                  scope:
+                    - <string>
+                    - <string>
+                  created_at: <integer>
+                  grant_status: <string>
+                  email: <string>
+                  user_agent: <string>
+                  ip: <string>
+                  state: <string>
+                  updated_at: <integer>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Bad request
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Resource not found
+                  provider_error: <object>
+    delete:
+      tags:
+        - v3 > grants > {grantId}
+      summary: Delete grant
+      description: Delete existing grant based on provided ID
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grantId
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: <string>
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Resource not found
+                  provider_error: <object>
+  /v3/grants:
+    get:
+      tags:
+        - v3 > grants
+      summary: List grants
+      description: Lists grants for Connector
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  - id: <string>
+                    provider: <string>
+                    scope:
+                      - <string>
+                      - <string>
+                    created_at: <integer>
+                    grant_status: <string>
+                    email: <string>
+                    user_agent: <string>
+                    ip: <string>
+                    state: <string>
+                    updated_at: <integer>
+                  - id: <string>
+                    provider: <string>
+                    scope:
+                      - <string>
+                      - <string>
+                    created_at: <integer>
+                    grant_status: <string>
+                    email: <string>
+                    user_agent: <string>
+                    ip: <string>
+                    state: <string>
+                    updated_at: <integer>
+                limit: <integer>
+                offset: <integer>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Resource not found
+                  provider_error: <object>
+  /v3/grants/me:
+    get:
+      tags:
+        - v3 > grants
+      summary: Get current grant
+      description: Gets a grant using current access token
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  id: <string>
+                  provider: <string>
+                  scope:
+                    - <string>
+                    - <string>
+                  created_at: <integer>
+                  grant_status: <string>
+                  email: <string>
+                  user_agent: <string>
+                  ip: <string>
+                  state: <string>
+                  updated_at: <integer>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Resource not found
+                  provider_error: <object>
+  /v3/webhooks/{id}:
+    get:
+      tags:
+        - v3 > webhooks > {id}
+      summary: Get the destinations for an application by webhook ID
+      description: Get the webhook destinations for an application ID by webhook ID
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: '{{webhook_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  id: <string>
+                  description: <string>
+                  trigger_types:
+                    - <string>
+                    - <string>
+                  callback_url: <string>
+                  status: <string>
+                  notification_email_addresses:
+                    - <string>
+                    - <string>
+                  status_updated_at: <integer>
+                  created_at: <integer>
+                  updated_at: <integer>
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error:
+                  type: <string>
+                  message: <string>
+                request_id: <string>
+    put:
+      tags:
+        - v3 > webhooks > {id}
+      summary: Update a webhook destination
+      description: >
+        Update the values in a webhook destination.  <br> <i> **Note**: You only
+        need to specify fields that need to change when you call this endpoint.
+        Empty fields in the request do not overwrite existing fields. </i> <br>
+        <i> **Note**: You should limit how many webhook destinations you have
+        for each trigger type. When Nylas retries a webhook, the retry goes to
+        all of the destinations for that trigger type, and can result in a lot
+        of messages. Some webhook testing tools rate limit or block you if your
+        endpoint generates too much traffic. Nylas blocks ngrok connections in
+        v3 for this reason.</i>
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                description: <string>
+                trigger_types:
+                  - <string>
+                  - <string>
+                webhook_url: <string>
+                status: <string>
+                notification_email_addresses:
+                  - <string>
+                  - <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: '{{webhook_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  id: <string>
+                  description: <string>
+                  trigger_types:
+                    - <string>
+                    - <string>
+                  callback_url: <string>
+                  status: <string>
+                  notification_email_addresses:
+                    - <string>
+                    - <string>
+                  status_updated_at: <integer>
+                  created_at: <integer>
+                  updated_at: <integer>
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error:
+                  type: <string>
+                  message: <string>
+                request_id: <string>
+    delete:
+      tags:
+        - v3 > webhooks > {id}
+      summary: Delete a webhook destination
+      description: Delete a webhook destination record.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: <string>
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  status: <string>
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error:
+                  type: <string>
+                  message: <string>
+                request_id: <string>
+  /v3/webhooks:
+    post:
+      tags:
+        - v3 > webhooks
+      summary: Create a webhook destination
+      description: >
+        Create a new Webhook Destination with a callback URL and a set of
+        trigger types to send to the URL.  <br> <i> **Note**: You should limit
+        how many webhook destinations you have for each trigger type. When Nylas
+        retries a webhook, the retry goes to all of the destinations for that
+        trigger type, and can result in a lot of messages. Some webhook testing
+        tools rate limit or block you if your endpoint generates too much
+        traffic. Nylas blocks ngrok connections in v3 for this reason </i>
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                trigger_types:
+                  - <string>
+                  - <string>
+                webhook_url: <string>
+                description: <string>
+                notification_email_addresses:
+                  - <string>
+                  - <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  id: <string>
+                  description: <string>
+                  trigger_types:
+                    - <string>
+                    - <string>
+                  callback_url: <string>
+                  webhook_secret: <string>
+                  status: <string>
+                  notification_email_addresses:
+                    - <string>
+                    - <string>
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error:
+                  type: <string>
+                  message: <string>
+                request_id: <string>
+    get:
+      tags:
+        - v3 > webhooks
+      summary: Get destinations for an application
+      description: Get a list of all webhook destinations for an application id.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  - id: <string>
+                    description: <string>
+                    trigger_types:
+                      - <string>
+                      - <string>
+                    callback_url: <string>
+                    status: <string>
+                    notification_email_addresses:
+                      - <string>
+                      - <string>
+                  - id: <string>
+                    description: <string>
+                    trigger_types:
+                      - <string>
+                      - <string>
+                    callback_url: <string>
+                    status: <string>
+                    notification_email_addresses:
+                      - <string>
+                      - <string>
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error:
+                  type: <string>
+                  message: <string>
+                request_id: <string>
+  /v3/webhooks/rotate-secret/{id}:
+    post:
+      tags:
+        - v3 > webhooks
+      summary: Rotate a webhook secret
+      description: >-
+        Update the webhook secret value for a destination. The previous value
+        will immediately stop being used and the new value will take over.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: '(Required) '
+          example: '{{webhook_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  id: <string>
+                  description: <string>
+                  trigger_types:
+                    - <string>
+                    - <string>
+                  callback_url: <string>
+                  webhook_secret: <string>
+                  status: <string>
+                  notification_email_addresses:
+                    - <string>
+                    - <string>
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error:
+                  type: <string>
+                  message: <string>
+                request_id: <string>
+  /v3/webhooks/mock-payload:
+    post:
+      tags:
+        - v3 > webhooks
+      summary: Get mock webhook payload
+      description: The webhook payload that Nylas sends for the corresponding trigger type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                trigger_type: <string>
+                webhook_url: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  data: <object>
+                request_id: <string>
+  /v3/webhooks/send-test-event:
+    post:
+      tags:
+        - v3 > webhooks
+      summary: Send test event
+      description: >-
+        The mock webhook feature sends sample events so you can test your
+        webhook destinations or receivers. Webhooks with mock payloads are sent
+        to the callback URL you provide.
+
+        The secret used will be "mock-webhook-secret"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                trigger_type: <string>
+                webhook_url: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data: <string>
+                request_id: <string>
+  /v3/channels/pubsub/{id}:
+    get:
+      tags:
+        - v3 > channels/pubsub > {id}
+      summary: Get a specific PubSub channel by id
+      description: Get a specific PubSub channel from a specific Nylas application by id.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) The ID of the PubSub channel to retrieve.
+          example: <string>
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  id: <string>
+                  description: <string>
+                  trigger_types:
+                    - <string>
+                    - <string>
+                  topic: <string>
+                  status: <string>
+                  notification_email_addresses:
+                    - <string>
+                    - <string>
+                  status_updated_at: <integer>
+                  created_at: <integer>
+                  updated_at: <integer>
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error:
+                  type: <string>
+                  message: <string>
+                request_id: <string>
+    put:
+      tags:
+        - v3 > channels/pubsub > {id}
+      summary: Update a specific PubSub channel
+      description: Update a specific PubSub channel from a specific Nylas application.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                description: <string>
+                trigger_types:
+                  - <string>
+                  - <string>
+                topic: <string>
+                status: <string>
+                notification_email_addresses:
+                  - <string>
+                  - <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) The ID of the PubSub channel to retrieve.
+          example: <string>
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  id: <string>
+                  description: <string>
+                  trigger_types:
+                    - <string>
+                    - <string>
+                  topic: <string>
+                  status: <string>
+                  notification_email_addresses:
+                    - <string>
+                    - <string>
+                  status_updated_at: <integer>
+                  created_at: <integer>
+                  updated_at: <integer>
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error:
+                  type: <string>
+                  message: <string>
+                request_id: <string>
+    delete:
+      tags:
+        - v3 > channels/pubsub > {id}
+      summary: Delete a specific PubSub channel
+      description: Delete a specific PubSub channel from a specific Nylas application.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) The ID of the PubSub channel to retrieve.
+          example: <string>
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  status: <string>
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error:
+                  type: <string>
+                  message: <string>
+                request_id: <string>
+  /v3/channels/pubsub:
+    post:
+      tags:
+        - v3 > channels/pubsub
+      summary: Create a PubSub channel
+      description: |
+        Create a PubSub channel in the specified application.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                trigger_types:
+                  - <string>
+                  - <string>
+                description: <string>
+                topic: <string>
+                notification_email_addresses:
+                  - <string>
+                  - <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  id: <string>
+                  description: <string>
+                  trigger_types:
+                    - <string>
+                    - <string>
+                  topic: <string>
+                  status: <string>
+                  notification_email_addresses:
+                    - <string>
+                    - <string>
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error:
+                  type: <string>
+                  message: <string>
+                request_id: <string>
+    get:
+      tags:
+        - v3 > channels/pubsub
+      summary: Get PubSub channels for an application
+      description: |
+        Get the PubSub channels for an application.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  - id: <string>
+                    description: <string>
+                    trigger_types:
+                      - <string>
+                      - <string>
+                    topic: <string>
+                    status: <string>
+                    notification_email_addresses:
+                      - <string>
+                      - <string>
+                  - id: <string>
+                    description: <string>
+                    trigger_types:
+                      - <string>
+                      - <string>
+                    topic: <string>
+                    status: <string>
+                    notification_email_addresses:
+                      - <string>
+                      - <string>
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error:
+                  type: <string>
+                  message: <string>
+                request_id: <string>
+  /v3/providers/detect:
+    post:
+      tags:
+        - v3
+      summary: Detect provider
+      description: Returns detected provider if it is found
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: email
+          in: query
+          schema:
+            type: string
+          description: (Required) Email for detection
+          example: '{{email}}'
+        - name: all_provider_types
+          in: query
+          schema:
+            type: boolean
+          description: >-
+            Search by all providers regardless of if they have an existing
+            connector
+          example: 'false'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  email_address: <string>
+                  detected: <boolean>
+                  provider: <string>
+                  type: <string>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: Authentication error
+                  provider_error: <object>

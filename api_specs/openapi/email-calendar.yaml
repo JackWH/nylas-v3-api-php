@@ -1,0 +1,4338 @@
+openapi: 3.0.0
+info:
+  title: v3 Nylas Email and Calendar APIs
+  description: >-
+    This API reference covers the **Nylas Email and Calendar APIs**.
+
+    See the see the [<b>Administration API
+    documentation</b>](https:///docs/api/v3-beta/admin/) for information about
+    working with Nylas applications, authentication, connectors, and webhook
+    subscriptions.
+
+
+    The Nylas API is designed using the
+    [REST](http://en.wikipedia.org/wiki/Representational_State_Transfer)
+    ideology to provide simple and predictable URIs to access and modify
+    objects. Requests support [standard HTTP
+    methods](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) like GET,
+    PUT, POST, and DELETE and [standard status
+    codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html). Response
+    bodies are always UTF-8 encoded JSON objects, unless explicitly documented
+    otherwise.
+
+
+    # Pagination
+
+
+    Some queries result in multiple pages of data. Nylas includes a
+    `next_cursor` response body field when there are more pages of results. To
+    get the next page, pass the value of this header as the `page_token` query
+    parameter on your next request.
+
+
+    You can use the `limit` query parameter to specify the maximum number of
+    results you want in the page. A page might have less than `limit` results,
+    but that doesn't mean that it's the last page. Use the presences of the
+    `next_cursor` response body field to determine if there are additional
+    pages.
+
+
+    | Query Parameter | Type | Description |
+
+    | --- | --- | --- |
+
+    | `limit` | integer | The number of objects to return. This defaults to 50
+    and has a maximum of 200. |
+
+    | `page_token` | string | An identifier that specifies which page of data to
+    return. This value should be taken from the `next_cursor` response body
+    field. |
+
+
+    # /me/ syntax for API calls
+
+
+    The Nylas API v3 Beta includes new `/me/` syntax that you can use in
+    access-token authorized API calls, instead of specifying a user's Grant ID
+    (for example, `GET /v3/grants/me/messages`).
+
+
+    The `/me/` syntax looks up the Grant associated with the request's access
+    token, and uses the `grant_id` associated with the token as a locator. You
+    can use this syntax for API requests that access account data only, and only
+    if you use access tokens to authorize requests. You can't use this syntax if
+    you're using API key authorization, because there is no Grant associated
+    with an API key.
+
+
+    For more information, see the [API v3 Beta features and changes
+    documentation](https:///docs/v3-beta/features-and-changes/#changing-account_id-to-grant_id).
+
+
+    # Metadata
+
+
+    You can add key-value pairs to certain objects to store data against them.
+    You can currently create, read, update, and delete metadata on Calendars and
+    Events. Metadata is coming soon for message drafts and messages.
+
+
+    The `metadata` object is made of a list of key-value pairs. Keys and values
+    can be any string.
+
+
+    Nylas also reserves five specific keys that you can include in the JSON
+    payload of a query to filter the returned objects.
+
+
+    ## Metadata keys and filtering
+
+
+    Nylas reserves five metadata keys (`key1`, `key2`, `key3`, `key4`, `key5`)
+    and indexes their contents. If you add metadata values to these keys, you
+    can then add a metadata filter to a query so that only items with matching
+    metadata are returned. You can also add these filters as URI parameters to a
+    query, as in the examples below.
+
+
+    - `https://api.nylas.com/calendar?metadata_pair=key1:value`
+
+    -
+    `https://api.nylas.com/events?calendar_id=CALENDAR_ID&metadata_pair=key1:value`
+
+
+    You cannot create a query that contains **both** a provider and metadata
+    filter. Filters like the example below return an error message.
+
+
+    - `https://api.nylas.com/calendar?metadata_pair=key1:value&title=Birthday`"
+
+
+    You do not need to include an `event_id` when filtering with
+    `metadata_filters`.
+
+    What's this about? It seems a random
+
+
+    ## Example: Add metadata
+
+
+    The following example cURL request adds metadata to a Calendar. You can add
+    metadata to Calendars and Events using a `POST` request with a `--data-raw`
+    object for both.
+
+
+    In the example below, we add `key1`, which is one of the Nylas-indexed keys
+    that you can use for filtering.
+
+
+    ``` bash
+
+    curl --location --request POST
+    'https://api.us.nylas.com/v3/grants/me/calendars' \
+
+    --header 'Content-Type: application/json' \
+
+    --data-raw '{
+        "name" : "Name of a calendar with metadata",
+        "metadata":{
+            "key1": "value to filter on"
+        }
+    }'
+
+     ```
+
+    The `/me/` syntax in this example looks up the Grant associated with the
+    request's access token, and uses the `grant_id` associated with the token as
+    a locator. You can use this syntax for API requests that access account data
+    only, and only if you use access tokens to authorize requests. You can't use
+    this syntax if you're using API key authorization, because there is no Grant
+    associated with an API key.
+
+
+    ## Example: Query metadata
+
+
+    You can query the metadata you added by including a JSON object like the
+    example below to a query that would return metadata-enabled objects. At this
+    time calendars and events support metadata.
+
+
+    ``` json
+
+    "metadata": {
+        "key1": "value"
+    }
+
+     ```
+
+    ### Example: Update and delete metadata
+
+
+    The example cURL command below creates a new Calendar that includes
+    metadata.
+
+
+    ``` bash
+
+    curl --location --request POST
+    'https://api.us.nylas.com/v3/grants/me/calendars' \
+
+    --data-raw '{
+        "metadata": {
+            "key1": "Initial metadata value"
+        }
+    }'
+
+     ```
+
+    The example below updates the calendar `metadata` using a `PUT` command.
+
+
+    **Note**: The `PUT` command overwrites the entire `metadata` object. (The
+    `PATCH` command behaves in the same way, and overwrites the entire
+    `metadata` object.)
+
+
+    ``` bash
+
+    curl --location --request PUT
+    &#x27;https://api.us.nylas.com/v3/grants/me/calendars/<CALENDAR_ID>&#x27; \
+
+    --data-raw '{
+        "metadata": {
+            "key1": "This key has been updated",
+            "key2": "Added this new key"
+        }
+    }'
+
+     ```
+
+    The `/me/` syntax in this example looks up the Grant associated with the
+    request's access token, and uses the `grant_id` associated with the token as
+    a locator. You can use this syntax for API requests that access account data
+    only, and only if you use access tokens to authorize requests. You can't use
+    this syntax if you're using API key authorization, because there is no Grant
+    associated with an API key.
+
+
+    The response will be similar to the following example.
+
+    Is this Nylas' response confirming the change? Or is this the response if
+    you query for that metadata later?
+
+
+    ``` json
+
+    "metadata": {
+        "key1": "This key has been updated",
+        "key2": "Added this new key"
+    }
+
+     ```
+
+    If you update the above example with the `PUT` call below that does _not_
+    include both metadata keys, Nylas deletes `key2` from the `metadata` object.
+
+
+    ``` bash
+
+    curl --location --request PUT
+    &#x27;https://api.us.nylas.com/v3/grants/me/calendars/<CALENDAR_ID>&#x27; \
+
+    --data-raw '{
+        "metadata": {
+            "key1": "New Value"
+        }
+    }'
+
+     ```
+
+    The response will then be similar to the example below.
+
+    Same question re: what kind of response.
+
+
+    ``` json
+
+    "metadata": {
+        "key1": "New Value"
+    }
+
+     ```
+  version: 1.0.0
+servers:
+  - url: https://api.us.nylas.com
+    description: US server
+  - url: https://api.eu.nylas.com
+    description: EU server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: v3
+  - name: v3 > grants/{grant_id}
+  - name: v3 > grants/{grant_id} > calendars
+  - name: v3 > grants/{grant_id} > calendars > {calendar_id}
+  - name: v3 > grants/{grant_id} > events
+  - name: v3 > grants/{grant_id} > events > {event_id}
+  - name: v3 > grants/{grant_id} > messages
+  - name: v3 > grants/{grant_id} > messages > {message_id}
+  - name: v3 > grants/{grant_id} > messages > schedules
+  - name: v3 > grants/{grant_id} > messages > schedules > {scheduleId}
+  - name: v3 > grants/{grant_id} > threads
+  - name: v3 > grants/{grant_id} > threads > {thread_id}
+  - name: v3 > grants/{grant_id} > drafts
+  - name: v3 > grants/{grant_id} > drafts > {draft_id}
+  - name: v3 > grants/{grant_id} > folders
+  - name: v3 > grants/{grant_id} > folders > {folder_id}
+  - name: v3 > grants/{grant_id} > attachments/{attachment_id}
+paths:
+  /v3/grants/{grant_id}/calendars/{calendar_id}:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > calendars > {calendar_id}
+      summary: Return a Calendar
+      description: Returns a calendar by ID.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+        - name: calendar_id
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    put:
+      tags:
+        - v3 > grants/{grant_id} > calendars > {calendar_id}
+      summary: Update a Calendar
+      description: Updates an existing calendar by the specific calendar ID.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                description: <string>
+                hex_color: <string>
+                hex_foreground_color: <string>
+                location: <string>
+                metadata:
+                  your-key: <string>
+                name: <string>
+                timezone: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: calendar_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the calendar to act upon. Use "primary" to refer to
+            the primary calendar associated with grant.
+          example: '{{calendar_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    delete:
+      tags:
+        - v3 > grants/{grant_id} > calendars > {calendar_id}
+      summary: Delete a Calendar
+      description: >-
+        Deletes an existing calendar identified by the specific calendar ID. You
+        cannot delete a calendar where `is_primary: true`.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: <string>
+        - name: calendar_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the calendar to act upon. Use "primary" to refer to
+            the primary calendar associated with grant.
+          example: <string>
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/calendars:
+    post:
+      tags:
+        - v3 > grants/{grant_id} > calendars
+      summary: Create a Calendar
+      description: Create a calendar.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: <string>
+                description: <string>
+                location: <string>
+                metadata:
+                  your-key: <string>
+                timezone: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grantId}/calendars:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > calendars
+      summary: Return all Calendars
+      description: Returns all calendars.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          example: '50'
+        - name: grantId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                value: '<Error: Could not resolve allOf schema'
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/calendars/free-busy:
+    post:
+      tags:
+        - v3 > grants/{grant_id} > calendars
+      summary: Get Free/Busy Schedule
+      description: >-
+        Get the free/busy schedule for a list of email addresses. The Grant ID
+        included in the request must have access to view the provided emails'
+        free/busy data (typically, this is configured by the provider). All
+        email addresses must use the same provider (Google, Microsoft, etc).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                start_time: <integer>
+                end_time: <integer>
+                emails:
+                  - <string>
+                  - <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data:
+                  - email: <string>
+                    time_slots:
+                      - start_time: <integer>
+                        end_time: <integer>
+                        status: <string>
+                        object: <string>
+                      - start_time: <integer>
+                        end_time: <integer>
+                        status: <string>
+                        object: <string>
+                    error: <string>
+                    object: <string>
+                  - email: <string>
+                    time_slots:
+                      - start_time: <integer>
+                        end_time: <integer>
+                        status: <string>
+                        object: <string>
+                      - start_time: <integer>
+                        end_time: <integer>
+                        status: <string>
+                        object: <string>
+                    error: <string>
+                    object: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/events/{event_id}:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > events > {event_id}
+      summary: Return an Event
+      description: Returns an event by ID.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: calendar_id
+          in: query
+          schema:
+            type: string
+          description: >-
+            (Required) Specify calendar ID of the event.  "primary" is a
+            supported value indicating the user's primary calendar.
+          example: <string>
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: <string>
+        - name: event_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the event to act upon.
+          example: <string>
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    put:
+      tags:
+        - v3 > grants/{grant_id} > events > {event_id}
+      summary: Update an Event
+      description: >-
+        Updates an event, conference, or metadata.
+
+
+
+        ## Ready Only and Recurring Events
+
+
+        Updating and deleting an event is managed in a similar fashion to other
+        endpoints with the restriction that `read_only` events cannot be updated
+        and events cannot be updated or deleted from a `read_only` calendar.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                busy: <boolean>
+                capacity: <integer>
+                conferencing:
+                  autocreate:
+                    irure3: dolor l
+                description: <string>
+                hide_participants: <boolean>
+                location: <string>
+                metadata:
+                  your-key: <string>
+                participants:
+                  - email: <string>
+                    comment: <string>
+                    name: <string>
+                    phone_number: <string>
+                  - email: <string>
+                    comment: <string>
+                    name: <string>
+                    phone_number: <string>
+                recurrence:
+                  - <string>
+                  - <string>
+                reminders:
+                  use_default: <boolean>
+                  overrides:
+                    - reminder_minutes: <integer>
+                      reminder_method: <string>
+                    - reminder_minutes: <integer>
+                      reminder_method: <string>
+                title: <string>
+                visibility: <string>
+                when:
+                  time: <integer>
+                  timezone: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: notify_participants
+          in: query
+          schema:
+            type: boolean
+          description: >-
+            Defaults to `true`, email notifications containing the calendar
+            event is sent to all event participants. Microsoft accounts do not
+            support notify_participants = False.
+          example: 'true'
+        - name: calendar_id
+          in: query
+          schema:
+            type: string
+          description: >-
+            (Required) Specify calendar ID of the event.  "primary" is a
+            supported value indicating the user's primary calendar.
+          example: '{{calendar_id}}'
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: event_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the event to act upon.
+          example: '{{event_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    delete:
+      tags:
+        - v3 > grants/{grant_id} > events > {event_id}
+      summary: Delete an Event
+      description: >-
+        Deletes an event. For Google, deleted events can still be read for some
+        period of time via the `show_cancelled` query parameter. Microsoft
+        deletes happen immediately.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: notify_participants
+          in: query
+          schema:
+            type: boolean
+          description: >-
+            Defaults to `true`, email notifications containing the calendar
+            event is sent to all event participants. Microsoft accounts do not
+            support notify_participants = False.
+          example: 'true'
+        - name: calendar_id
+          in: query
+          schema:
+            type: string
+          description: >-
+            (Required) Specify calendar ID of the event.  "primary" is a
+            supported value indicating the user's primary calendar.
+          example: '{{calendar_id}}'
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: event_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the event to act upon.
+          example: '{{event_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/events/{event_id}/send-rsvp:
+    post:
+      tags:
+        - v3 > grants/{grant_id} > events > {event_id}
+      summary: Send RSVP
+      description: >-
+        The Send RSVP endpoint allows users to respond to events they have been
+        added to as an attendee.  You cannot directly update events as an
+        invitee, since you are not the owner/organizer.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                status: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: calendar_id
+          in: query
+          schema:
+            type: string
+          description: >-
+            (Required) Specify calendar ID of the event.  "primary" is a
+            supported value indicating the user's primary calendar.
+          example: '{{calendar_id}}'
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: event_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the event.
+          example: '{{event_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/events:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > events
+      summary: Return all Events
+      description: Returns all events.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: >-
+            The number of objects to return. This field defaults to 50. The
+            maximum allowed value for this field is 200.  See
+            [pagination](#section/Pagination) for more information.
+          example: '50'
+        - name: calendar_id
+          in: query
+          schema:
+            type: string
+          example: '{{calendar_id}}'
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                value: '<Error: Could not resolve allOf schema'
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    post:
+      tags:
+        - v3 > grants/{grant_id} > events
+      summary: Create an Event
+      description: |
+        Creates an event.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                when:
+                  time: <integer>
+                  timezone: <string>
+                busy: <boolean>
+                capacity: <integer>
+                conferencing:
+                  autocreate:
+                    sitc0e: 43224679
+                    id65: quis sint ex velit
+                description: <string>
+                hide_participants: <boolean>
+                location: <string>
+                metadata:
+                  your-key: <string>
+                organizer:
+                  name: <string>
+                  email: <string>
+                participants:
+                  - email: <string>
+                    comment: <string>
+                    name: <string>
+                    phone_number: <string>
+                  - email: <string>
+                    comment: <string>
+                    name: <string>
+                    phone_number: <string>
+                recurrence:
+                  - <string>
+                  - <string>
+                reminders:
+                  use_default: <boolean>
+                  overrides:
+                    - reminder_minutes: <integer>
+                      reminder_method: <string>
+                    - reminder_minutes: <integer>
+                      reminder_method: <string>
+                title: <string>
+                visibility: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: calendar_id
+          in: query
+          schema:
+            type: string
+          description: >-
+            (Required) Specify calendar ID of the event.  "primary" is a
+            supported value indicating the user's primary calendar.
+          example: '{{calendar_id}}'
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/messages/{message_id}:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > messages > {message_id}
+      summary: Return a Message
+      description: Returns a message by ID.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: fields
+          in: query
+          schema:
+            type: string
+          description: Return message with headers by specifying "include_headers".
+          example: standard
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: message_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the message to act upon.
+          example: '{{message_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    put:
+      tags:
+        - v3 > grants/{grant_id} > messages > {message_id}
+      summary: Update a Message
+      description: Updates a message.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                starred: <boolean>
+                unread: <boolean>
+                folders:
+                  - <string>
+                  - <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: message_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the message to act upon.
+          example: '{{message_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    delete:
+      tags:
+        - v3 > grants/{grant_id} > messages > {message_id}
+      summary: Delete a Message
+      description: >-
+        Nylas does not currently support hard delete but instead we move the
+        message to the trash folder (soft delete).
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: message_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the message to act upon.
+          example: '{{message_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/messages/{message_id}/smart-compose:
+    post:
+      tags:
+        - v3 > grants/{grant_id} > messages > {message_id}
+      summary: Compose a message reply
+      description: Generates a reply to a message based on a prompt.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                prompt: Send a nice response.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: message_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the message to act upon.
+          example: '{{message_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '422':
+          description: Unprocessable Entity (WebDAV) (RFC 4918)
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  details:
+                    - loc:
+                        - <string>
+                        - <string>
+                      msg: <string>
+                      type: <string>
+                    - loc:
+                        - <string>
+                        - <string>
+                      msg: <string>
+                      type: <string>
+        '500':
+          description: Internal Server Error
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+  /v3/grants/{grant_id}/messages/schedules/{scheduleId}:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > messages > schedules > {scheduleId}
+      summary: Retrieve a Scheduled Message
+      description: >-
+        This API returns a scheduled message. It returns both messages that have
+        been sent, and messages that have not yet been sent.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{grant_id}}'
+        - name: scheduleId
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) The ID of the schedule to retrieve.
+          example: '{{schedule_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                schedule_id: <string>
+                status:
+                  code: <string>
+                  description: <string>
+                close_time: <integer>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  message: <string>
+                request_id: <string>
+    delete:
+      tags:
+        - v3 > grants/{grant_id} > messages > schedules > {scheduleId}
+      summary: Stop a Scheduled Message
+      description: >-
+        This endpoint prevents a scheduled message that has not yet been sent
+        from being sent. You can only use this endpoint before the message has
+        reached its `send_at` time. You cannot use this endpoint to un-send a
+        message.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{grant_id}}'
+        - name: scheduleId
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the schedule to retrieve.
+          example: '{{schedule_id}}'
+      responses:
+        '202':
+          description: Accepted
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  message: <string>
+                request_id: <string>
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data:
+                  message: <string>
+                request_id: <string>
+  /v3/grants/{grant_id}/messages/schedules:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > messages > schedules
+      summary: Retrieve Your Scheduled Messages
+      description: >-
+        This API returns the messages that you have scheduled. It returns both
+        messages that have been, sent and messages that are still waiting to be
+        sent.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - schedule_id: <string>
+                  status:
+                    code: <string>
+                    description: <string>
+                  close_time: <integer>
+                - schedule_id: <string>
+                  status:
+                    code: <string>
+                    description: <string>
+                  close_time: <integer>
+  /v3/grants/{grant_id}/messages:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > messages
+      summary: Return all Messages
+      description: Returns all messages.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: >-
+            The number of objects to return. This field defaults to 50. The
+            maximum allowed value for this field is 200.  See
+            [pagination](#section/Pagination) for more information.
+          example: '50'
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                value: '<Error: Could not resolve allOf schema'
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/messages/clean:
+    put:
+      tags:
+        - v3 > grants/{grant_id} > messages
+      summary: Clean email messages
+      description: >-
+        This endpoint removes extra information from email messages. Instead of
+        needing to parse through images, attachments, and HTML pages,  Nylas
+        removes the information you don't need and returns what you _do_ need.
+
+        **Note**: Nylas removes all the extra information, such as `<script>`
+        and `<style>` tags, regardless of the configuration.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                message_id:
+                  - '{{message_id}}'
+                ignore_links: true
+                ignore_images: true
+                images_as_markdown: true
+                ignore_tables: true
+                remove_conclusion_phrases: true
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: select
+          in: query
+          schema:
+            type: string
+          description: >-
+            Specify fields that you want Nylas to return, as a comma-separated
+            list (for example,
+
+            `select=id,updated_at`). This allows you to receive only the portion
+            of object data that you're
+
+            interested in. You can use `select` to optimize response size and
+            reduce latency by limiting queries
+
+            to only the information that you need.
+          example: <string>
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to access. Use `/me/` to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                value: '<Error: Could not resolve allOf schema'
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+  /v3/grants/{grant_id}/messages/send:
+    post:
+      tags:
+        - v3 > grants/{grant_id} > messages
+      summary: Send a message
+      description: >
+        You can use the Send v3 API to send a message now, or schedule it to
+        send later. To
+
+        send a message now, omit the `send_at` field. To schedule a message, set
+        the `send_at`
+
+        field to the epoch time when you want to send the message. See the
+        [Messages documentation](/docs/api/v3-beta/ecc/#tag--Messages) for more
+        information.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                subject: Hey Reaching Out with Nylas
+                body: >-
+                  Hey I would like to track this link <a
+                  href='https://espn.com'>My Example Link</a>
+                to:
+                  - name: John Doe
+                    email: john.doe@example.com
+                tracking_options:
+                  opens: true
+                  links: true
+                  thread_replies: true
+                  label: hey just testing
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                grant_id: <string>
+                data:
+                  bcc:
+                    - email: <email>
+                      name: <string>
+                    - email: <email>
+                      name: <string>
+                  body: <string>
+                  cc:
+                    - email: <email>
+                      name: <string>
+                    - email: <email>
+                      name: <string>
+                  date: <integer>
+                  attachments:
+                    - content_type: <string>
+                      filename: <string>
+                      grant_id: <string>
+                      id: <string>
+                      is_inline: <boolean>
+                      size: <integer>
+                    - content_type: <string>
+                      filename: <string>
+                      grant_id: <string>
+                      id: <string>
+                      is_inline: <boolean>
+                      size: <integer>
+                  folders:
+                    - <string>
+                    - <string>
+                  from:
+                    - email: <email>
+                      name: <string>
+                    - email: <email>
+                      name: <string>
+                  grant_id: <string>
+                  id: <string>
+                  object: <string>
+                  reply_to:
+                    - email: <email>
+                      name: <string>
+                    - email: <email>
+                      name: <string>
+                  schedule_id: <string>
+                  snippet: <string>
+                  starred: <boolean>
+                  subject: <string>
+                  thread_id: <string>
+                  to:
+                    - email: <email>
+                      name: <string>
+                    - email: <email>
+                      name: <string>
+                  unread: <boolean>
+                  use_draft: <boolean>
+                request_id: <string>
+        '202':
+          description: Accepted
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                grant_id: <string>
+                data:
+                  bcc:
+                    - email: <email>
+                      name: <string>
+                    - email: <email>
+                      name: <string>
+                  body: <string>
+                  cc:
+                    - email: <email>
+                      name: <string>
+                    - email: <email>
+                      name: <string>
+                  date: <integer>
+                  attachments:
+                    - content_type: <string>
+                      filename: <string>
+                      grant_id: <string>
+                      id: <string>
+                      is_inline: <boolean>
+                      size: <integer>
+                    - content_type: <string>
+                      filename: <string>
+                      grant_id: <string>
+                      id: <string>
+                      is_inline: <boolean>
+                      size: <integer>
+                  folders:
+                    - <string>
+                    - <string>
+                  from:
+                    - email: <email>
+                      name: <string>
+                    - email: <email>
+                      name: <string>
+                  grant_id: <string>
+                  id: <string>
+                  object: <string>
+                  reply_to:
+                    - email: <email>
+                      name: <string>
+                    - email: <email>
+                      name: <string>
+                  schedule_id: <string>
+                  snippet: <string>
+                  starred: <boolean>
+                  subject: <string>
+                  thread_id: <string>
+                  to:
+                    - email: <email>
+                      name: <string>
+                    - email: <email>
+                      name: <string>
+                  unread: <boolean>
+                  use_draft: <boolean>
+                request_id: <string>
+                schedule_id: true
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '403':
+          description: Forbidden
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '500':
+          description: Internal Server Error
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '502':
+          description: Bad Gateway
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/messages/smart-compose:
+    post:
+      tags:
+        - v3 > grants/{grant_id} > messages
+      summary: Compose a message
+      description: Generates a message based on a prompt.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                prompt: Write a message welcoming my new colleague
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '422':
+          description: Unprocessable Entity (WebDAV) (RFC 4918)
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  details:
+                    - loc:
+                        - <string>
+                        - <string>
+                      msg: <string>
+                      type: <string>
+                    - loc:
+                        - <string>
+                        - <string>
+                      msg: <string>
+                      type: <string>
+        '500':
+          description: Internal Server Error
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+  /v3/grants/{grant_id}/threads/{thread_id}:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > threads > {thread_id}
+      summary: Return a Thread
+      description: Returns a thread by ID (not available for IMAP).
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: thread_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the thread to act upon.
+          example: '{{thread_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    put:
+      tags:
+        - v3 > grants/{grant_id} > threads > {thread_id}
+      summary: Update a Thread
+      description: Updates a thread (not available for IMAP).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                starred: <boolean>
+                unread: <boolean>
+                folders:
+                  - <string>
+                  - <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: thread_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the thread to act upon.
+          example: '{{thread_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    delete:
+      tags:
+        - v3 > grants/{grant_id} > threads > {thread_id}
+      summary: Delete a Thread
+      description: >-
+        Moves the specified thread to the trash. This is considered a "soft
+        delete" because the call does not empty the trash. Any messages that
+        belong to the thread are also moved to the trash. Not available for
+        IMAP.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: thread_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the thread to act upon.
+          example: '{{thread_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/threads:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > threads
+      summary: Return all Threads
+      description: Returns all threads. Not available for IMAP.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: >-
+            The number of objects to return. This field defaults to 20. The
+            maximum allowed value for this field is 50. See
+            [pagination](#pagination) for more information.
+          example: '20'
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                value: '<Error: Could not resolve allOf schema'
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/drafts/{draft_id}:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > drafts > {draft_id}
+      summary: Return a Draft
+      description: Returns a Draft by ID.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the Grant to act upon. Use "me" to refer to the
+            Grant associated with an access token. See the [Drafts
+            documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more
+            information.
+          example: '{{grant_id}}'
+        - name: draft_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the Draft to act upon.
+          example: '{{draft_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    put:
+      tags:
+        - v3 > grants/{grant_id} > drafts > {draft_id}
+      summary: Update a Draft
+      description: >-
+        You can use the Drafts v3 API to update a draft email message using its
+        ID.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                starred: true
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the Grant to act upon. Use "me" to refer to the
+            Grant associated with an access token. See the [Drafts
+            documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more
+            information.
+          example: '{{grant_id}}'
+        - name: draft_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the Draft to act upon.
+          example: '{{draft_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    delete:
+      tags:
+        - v3 > grants/{grant_id} > drafts > {draft_id}
+      summary: Delete a Draft
+      description: >-
+        Permanently deletes a Draft. See the [Drafts
+        documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the Grant to act upon. Use "me" to refer to the
+            Grant associated with an access token. See the [Drafts
+            documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more
+            information.
+          example: '{{grant_id}}'
+        - name: draft_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the Draft to act upon.
+          example: '{{draft_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    post:
+      tags:
+        - v3 > grants/{grant_id} > drafts > {draft_id}
+      summary: Send a Draft
+      description: >-
+        Sends a Draft using the specified ID. See the [Drafts
+        documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more information.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the Grant to act upon. Use "me" to refer to the
+            Grant associated with an access token. See the [Drafts
+            documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more
+            information.
+          example: '{{grant_id}}'
+        - name: draft_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the Draft to act upon.
+          example: '{{draft_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/drafts:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > drafts
+      summary: Return all Drafts
+      description: Returns all Drafts.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: >-
+            The number of objects to return. This field defaults to 50. The
+            maximum allowed value for this field is 200.  See
+            [pagination](#section/Pagination) for more information.
+          example: '50'
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the Grant to act upon. Use "me" to refer to the
+            Grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                value: '<Error: Could not resolve allOf schema'
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    post:
+      tags:
+        - v3 > grants/{grant_id} > drafts
+      summary: Create a Draft
+      description: >-
+        You can use the Drafts v3 API to create a draft email message. See the
+        [Drafts documentation](/docs/api/v3-beta/ecc/#tag--Drafts) for more
+        information.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                subject: <string
+                to:
+                  - email: <string>
+                    name: <string>
+                from:
+                  - email: <string>
+                    name: <string>
+                reply_to:
+                  - name: <string>
+                    email: <string>
+                reply_to_message_id: <string>
+                body: >-
+                  This email was sent using the Nylas email API. Visit
+                  https://nylas.com for details.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the Grant to act upon. Use "me" to refer to the
+            Grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/folders/{folder_id}:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > folders > {folder_id}
+      summary: Return a Folder
+      description: Returns a folder by ID.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: folder_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the folder to act upon.
+          example: '{{folder_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    put:
+      tags:
+        - v3 > grants/{grant_id} > folders > {folder_id}
+      summary: Update a Folder
+      description: Updates an existing folder.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: yolo
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: folder_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the folder to act upon.
+          example: '{{folder_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    delete:
+      tags:
+        - v3 > grants/{grant_id} > folders > {folder_id}
+      summary: Delete a Folder
+      description: Deletes a folder.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: folder_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the folder to act upon.
+          example: '{{folder_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/folders:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > folders
+      summary: Return all Folders
+      description: Returns all folders.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                value: '<Error: Could not resolve allOf schema'
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+    post:
+      tags:
+        - v3 > grants/{grant_id} > folders
+      summary: Create a Folder
+      description: |
+        Creates a folder.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: name
+                text_color: '#000000'
+                background_color: '#000000'
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/attachments/{attachment_id}:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > attachments/{attachment_id}
+      summary: Return metadata of an Attachment
+      description: Returns an attachment by ID.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: message_id
+          in: query
+          schema:
+            type: string
+          description: (Required) ID of the message the attachment belongs to.
+          example: <string>
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: attachment_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the attachment to act upon.
+          example: '{{attachment_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/attachments/{attachment_id}/download:
+    get:
+      tags:
+        - v3 > grants/{grant_id} > attachments/{attachment_id}
+      summary: Download an Attachment
+      description: Returns an attachment by ID.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/octet-stream
+        - name: message_id
+          in: query
+          schema:
+            type: string
+          description: (Required) ID of the message the attachment belongs to.
+          example: '{{message_id}}'
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to act upon. Use "me" to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+        - name: attachment_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: (Required) ID of the attachment to act upon.
+          example: '{{attachment_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/octet-stream
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: ''
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+  /v3/grants/{grant_id}/resources:
+    get:
+      tags:
+        - v3 > grants/{grant_id}
+      summary: Return all room resources
+      description: Returns all room resources.
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: >-
+            The maximum number of objects to return. See
+            [pagination](/docs/api/v3/ecc/#overview--pagination) for more
+            information.
+          example: '50'
+        - name: page_token
+          in: query
+          schema:
+            type: string
+          description: >-
+            An identifier that specifies which page of data to return. You can
+            get this value from the `next_cursor` response field. See
+            [Pagination](/docs/api/v3/ecc/#overview--pagination) for more
+            information.
+          example: <string>
+        - name: grant_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            (Required) ID of the grant to access. Use `/me/` to refer to the
+            grant associated with an access token.
+          example: '{{grant_id}}'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                value: '<Error: Could not resolve allOf schema'
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '429':
+          description: Too Many Requests
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+        '504':
+          description: Gateway Timeout
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+  /v3/calendars/availability:
+    post:
+      tags:
+        - v3
+      summary: Get Availability
+      description: >-
+        Get Availability for a given account / accounts. All participant emails
+        must be associated with a valid Nylas Grant, and _should_ be unique
+        within their application, including [Virtual Calendar
+        identifiers](/docs/developer-guide/v3-authentication/virtual-calendars/#create-a-new-grant-for-the-virtual-calendar).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                participants:
+                  - email: <string>
+                    calendar_ids:
+                      - <string>
+                      - <string>
+                    open_hours:
+                      - days:
+                        - <integer>
+                        - <integer>
+                        timezone: <string>
+                        start: <string>
+                        end: <string>
+                        exdates:
+                          - <string>
+                          - <string>
+                      - days:
+                        - <integer>
+                        - <integer>
+                        timezone: <string>
+                        start: <string>
+                        end: <string>
+                        exdates:
+                        - <string>
+                        - <string>
+                  - email: <string>
+                    calendar_ids:
+                      - <string>
+                      - <string>
+                    open_hours:
+                      - days:
+                          - <integer>
+                          - <integer>
+                        timezone: <string>
+                        start: <string>
+                        end: <string>
+                        exdates:
+                          - <string>
+                          - <string>
+                      - days:
+                          - <integer>
+                          - <integer>
+                        timezone: <string>
+                        start: <string>
+                        end: <string>
+                        exdates:
+                          - <string>
+                          - <string>
+                duration_minutes: <integer>
+                start_time: <integer>
+                end_time: <integer>
+                interval_minutes: <integer>
+                round_to_30_minutes: <boolean>
+                availability_rules:
+                  availability_method: <string>
+                  buffer:
+                    before: <integer>
+                    after: <integer>
+                  default_open_hours:
+                    - days:
+                        - <integer>
+                        - <integer>
+                      timezone: <string>
+                      start: <string>
+                      end: <string>
+                      exdates:
+                        - <string>
+                        - <string>
+                    - days:
+                        - <integer>
+                        - <integer>
+                      timezone: <string>
+                      start: <string>
+                      end: <string>
+                      exdates:
+                        - <string>
+                        - <string>
+                  round_robin_group_id: <string>
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                data: <object>
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                request_id: <string>
+                error:
+                  type: <string>
+                  message: <string>
+                  provider_error: <object>
