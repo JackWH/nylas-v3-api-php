@@ -32,9 +32,9 @@
     },
     "autoload": {
         "psr-4": {
-            "JackWH\\NylasV3\\Administration\\": "src/api/administration/src/",
-            "JackWH\\NylasV3\\EmailCalendar\\": ["src/api/email-calendar", "src/api/email-calendar/src", "src/api/email-calendar/src/Model"],
-            "JackWH\\NylasV3\\Scheduler\\": "src/api/scheduler/src/"
+            "JackWH\\NylasV3\\Administration\\": "src/api/administration/src",
+            "JackWH\\NylasV3\\EmailCalendar\\": "src/api/email-calendar",
+            "JackWH\\NylasV3\\Scheduler\\": "src/api/scheduler/src"
         }
     },
     "autoload-dev": {

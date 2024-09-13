@@ -3,8 +3,6 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/api/administration/src" isTestSource="false" packagePrefix="JackWH\NylasV3\Administration\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/api/email-calendar/src" isTestSource="false" packagePrefix="JackWH\NylasV3\EmailCalendar\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/api/email-calendar/src/Model" isTestSource="false" packagePrefix="JackWH\NylasV3\EmailCalendar\" />
       <sourceFolder url="file://$MODULE_DIR$/src/api/scheduler/src" isTestSource="false" packagePrefix="JackWH\NylasV3\Scheduler\" />
       <sourceFolder url="file://$MODULE_DIR$/src/api/scheduler/tests" isTestSource="true" packagePrefix="JackWH\NylasV3\Scheduler\Test\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="JackWH\NylasV3\Tests\" />
