@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Administration\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Administration\ApiException;
 use JackWH\NylasV3\Administration\Configuration;
 use JackWH\NylasV3\Administration\HeaderSelector;
@@ -69,7 +69,7 @@ class V3ApplicationsRedirectUrisApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'addCallbackURIToApplication' => [
             'application/json',
@@ -144,9 +144,9 @@ class V3ApplicationsRedirectUrisApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['addCallbackURIToApplication'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->addCallbackURIToApplicationWithHttpInfo($content_type, $accept, $body, $contentType);
+
         return $response;
     }
 
@@ -169,12 +169,12 @@ class V3ApplicationsRedirectUrisApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['addCallbackURIToApplication'][0]
-    ): array
-    {
+    ): array {
         $request = $this->addCallbackURIToApplicationRequest($content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -208,7 +208,7 @@ class V3ApplicationsRedirectUrisApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -234,7 +234,7 @@ class V3ApplicationsRedirectUrisApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -261,7 +261,7 @@ class V3ApplicationsRedirectUrisApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -288,7 +288,7 @@ class V3ApplicationsRedirectUrisApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -317,7 +317,7 @@ class V3ApplicationsRedirectUrisApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -329,6 +329,7 @@ class V3ApplicationsRedirectUrisApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -337,6 +338,7 @@ class V3ApplicationsRedirectUrisApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -345,8 +347,10 @@ class V3ApplicationsRedirectUrisApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -369,8 +373,7 @@ class V3ApplicationsRedirectUrisApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['addCallbackURIToApplication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->addCallbackURIToApplicationAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
@@ -397,8 +400,7 @@ class V3ApplicationsRedirectUrisApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['addCallbackURIToApplication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->addCallbackURIToApplicationRequest($content_type, $accept, $body, $contentType);
 
@@ -418,12 +420,13 @@ class V3ApplicationsRedirectUrisApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -454,8 +457,7 @@ class V3ApplicationsRedirectUrisApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['addCallbackURIToApplication'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -502,7 +504,7 @@ class V3ApplicationsRedirectUrisApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -519,7 +521,7 @@ class V3ApplicationsRedirectUrisApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -536,6 +538,7 @@ class V3ApplicationsRedirectUrisApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -559,9 +562,9 @@ class V3ApplicationsRedirectUrisApi
     public function getAnApplicationsCallbackURIs(
         ?string $accept = null,
         string $contentType = self::contentTypes['getAnApplicationsCallbackURIs'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->getAnApplicationsCallbackURIsWithHttpInfo($accept, $contentType);
+
         return $response;
     }
 
@@ -580,12 +583,12 @@ class V3ApplicationsRedirectUrisApi
     public function getAnApplicationsCallbackURIsWithHttpInfo(
         ?string $accept = null,
         string $contentType = self::contentTypes['getAnApplicationsCallbackURIs'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getAnApplicationsCallbackURIsRequest($accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -619,7 +622,7 @@ class V3ApplicationsRedirectUrisApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -645,7 +648,7 @@ class V3ApplicationsRedirectUrisApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -672,7 +675,7 @@ class V3ApplicationsRedirectUrisApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -699,7 +702,7 @@ class V3ApplicationsRedirectUrisApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -728,7 +731,7 @@ class V3ApplicationsRedirectUrisApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -740,6 +743,7 @@ class V3ApplicationsRedirectUrisApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -748,6 +752,7 @@ class V3ApplicationsRedirectUrisApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -756,8 +761,10 @@ class V3ApplicationsRedirectUrisApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -776,8 +783,7 @@ class V3ApplicationsRedirectUrisApi
     public function getAnApplicationsCallbackURIsAsync(
         ?string $accept = null,
         string $contentType = self::contentTypes['getAnApplicationsCallbackURIs'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getAnApplicationsCallbackURIsAsyncWithHttpInfo($accept, $contentType)
             ->then(
                 function ($response) {
@@ -800,8 +806,7 @@ class V3ApplicationsRedirectUrisApi
     public function getAnApplicationsCallbackURIsAsyncWithHttpInfo(
         $accept = null,
         string $contentType = self::contentTypes['getAnApplicationsCallbackURIs'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->getAnApplicationsCallbackURIsRequest($accept, $contentType);
 
@@ -821,12 +826,13 @@ class V3ApplicationsRedirectUrisApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -853,8 +859,7 @@ class V3ApplicationsRedirectUrisApi
     public function getAnApplicationsCallbackURIsRequest(
         $accept = null,
         string $contentType = self::contentTypes['getAnApplicationsCallbackURIs'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -888,7 +893,7 @@ class V3ApplicationsRedirectUrisApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -905,7 +910,7 @@ class V3ApplicationsRedirectUrisApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -922,6 +927,7 @@ class V3ApplicationsRedirectUrisApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -941,7 +947,7 @@ class V3ApplicationsRedirectUrisApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

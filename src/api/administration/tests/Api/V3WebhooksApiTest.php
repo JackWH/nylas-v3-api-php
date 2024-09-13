@@ -26,9 +26,6 @@
 
 namespace JackWH\NylasV3\Administration\Test\Api;
 
-use JackWH\NylasV3\Administration\Configuration;
-use JackWH\NylasV3\Administration\ApiException;
-use JackWH\NylasV3\Administration\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -40,7 +37,6 @@ use PHPUnit\Framework\TestCase;
  */
 class V3WebhooksApiTest extends TestCase
 {
-
     /**
      * Setup before running any test cases
      */

@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\EmailCalendar\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\EmailCalendar\ApiException;
 use JackWH\NylasV3\EmailCalendar\Configuration;
 use JackWH\NylasV3\EmailCalendar\HeaderSelector;
@@ -69,7 +69,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'deleteAFolder' => [
             'application/json',
@@ -147,9 +147,9 @@ class V3GrantsGrantIdFoldersFolderIdApi
         string $folder_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['deleteAFolder'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->deleteAFolderWithHttpInfo($grant_id, $folder_id, $accept, $contentType);
+
         return $response;
     }
 
@@ -172,12 +172,12 @@ class V3GrantsGrantIdFoldersFolderIdApi
         string $folder_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['deleteAFolder'][0]
-    ): array
-    {
+    ): array {
         $request = $this->deleteAFolderRequest($grant_id, $folder_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -211,7 +211,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -237,7 +237,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -264,7 +264,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -291,7 +291,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -320,7 +320,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -332,6 +332,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -340,6 +341,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -348,8 +350,10 @@ class V3GrantsGrantIdFoldersFolderIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -372,8 +376,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
         string $folder_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['deleteAFolder'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->deleteAFolderAsyncWithHttpInfo($grant_id, $folder_id, $accept, $contentType)
             ->then(
                 function ($response) {
@@ -400,8 +403,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
         $folder_id,
         $accept = null,
         string $contentType = self::contentTypes['deleteAFolder'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->deleteAFolderRequest($grant_id, $folder_id, $accept, $contentType);
 
@@ -421,12 +423,13 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -457,8 +460,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
         $folder_id,
         $accept = null,
         string $contentType = self::contentTypes['deleteAFolder'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -522,7 +524,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -539,7 +541,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -556,6 +558,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -583,9 +586,9 @@ class V3GrantsGrantIdFoldersFolderIdApi
         string $folder_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['returnAFolder'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->returnAFolderWithHttpInfo($grant_id, $folder_id, $accept, $contentType);
+
         return $response;
     }
 
@@ -608,12 +611,12 @@ class V3GrantsGrantIdFoldersFolderIdApi
         string $folder_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['returnAFolder'][0]
-    ): array
-    {
+    ): array {
         $request = $this->returnAFolderRequest($grant_id, $folder_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -647,7 +650,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -673,7 +676,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -700,7 +703,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -727,7 +730,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -756,7 +759,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -768,6 +771,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -776,6 +780,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -784,8 +789,10 @@ class V3GrantsGrantIdFoldersFolderIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -808,8 +815,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
         string $folder_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['returnAFolder'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->returnAFolderAsyncWithHttpInfo($grant_id, $folder_id, $accept, $contentType)
             ->then(
                 function ($response) {
@@ -836,8 +842,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
         $folder_id,
         $accept = null,
         string $contentType = self::contentTypes['returnAFolder'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->returnAFolderRequest($grant_id, $folder_id, $accept, $contentType);
 
@@ -857,12 +862,13 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -893,8 +899,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
         $folder_id,
         $accept = null,
         string $contentType = self::contentTypes['returnAFolder'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -958,7 +963,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -975,7 +980,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -992,6 +997,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1023,9 +1029,9 @@ class V3GrantsGrantIdFoldersFolderIdApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['updateAFolder'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->updateAFolderWithHttpInfo($grant_id, $folder_id, $content_type, $accept, $body, $contentType);
+
         return $response;
     }
 
@@ -1052,12 +1058,12 @@ class V3GrantsGrantIdFoldersFolderIdApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['updateAFolder'][0]
-    ): array
-    {
+    ): array {
         $request = $this->updateAFolderRequest($grant_id, $folder_id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1091,7 +1097,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1117,7 +1123,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1144,7 +1150,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1171,7 +1177,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1200,7 +1206,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1212,6 +1218,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1220,6 +1227,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1228,8 +1236,10 @@ class V3GrantsGrantIdFoldersFolderIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1256,8 +1266,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['updateAFolder'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->updateAFolderAsyncWithHttpInfo($grant_id, $folder_id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
@@ -1288,8 +1297,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['updateAFolder'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->updateAFolderRequest($grant_id, $folder_id, $content_type, $accept, $body, $contentType);
 
@@ -1309,12 +1317,13 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1349,8 +1358,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['updateAFolder'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -1427,7 +1435,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1444,7 +1452,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1461,6 +1469,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PUT',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1480,7 +1489,7 @@ class V3GrantsGrantIdFoldersFolderIdApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

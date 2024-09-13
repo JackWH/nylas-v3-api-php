@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Administration\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Administration\ApiException;
 use JackWH\NylasV3\Administration\Configuration;
 use JackWH\NylasV3\Administration\HeaderSelector;
@@ -69,7 +69,7 @@ class V3ConnectApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'customAuthentication' => [
             'application/json',
@@ -153,9 +153,9 @@ class V3ConnectApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['customAuthentication'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->customAuthenticationWithHttpInfo($content_type, $accept, $body, $contentType);
+
         return $response;
     }
 
@@ -178,12 +178,12 @@ class V3ConnectApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['customAuthentication'][0]
-    ): array
-    {
+    ): array {
         $request = $this->customAuthenticationRequest($content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -217,7 +217,7 @@ class V3ConnectApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 201:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -243,7 +243,7 @@ class V3ConnectApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -270,7 +270,7 @@ class V3ConnectApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -297,7 +297,7 @@ class V3ConnectApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -326,7 +326,7 @@ class V3ConnectApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -338,6 +338,7 @@ class V3ConnectApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -346,6 +347,7 @@ class V3ConnectApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -354,8 +356,10 @@ class V3ConnectApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -378,8 +382,7 @@ class V3ConnectApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['customAuthentication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->customAuthenticationAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
@@ -406,8 +409,7 @@ class V3ConnectApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['customAuthentication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->customAuthenticationRequest($content_type, $accept, $body, $contentType);
 
@@ -427,12 +429,13 @@ class V3ConnectApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -463,8 +466,7 @@ class V3ConnectApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['customAuthentication'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -511,7 +513,7 @@ class V3ConnectApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -528,7 +530,7 @@ class V3ConnectApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -545,6 +547,7 @@ class V3ConnectApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -576,8 +579,7 @@ class V3ConnectApi
         ?string $response_type = null,
         ?string $login_hint = null,
         string $contentType = self::contentTypes['hostedOAuthAuthorizationRequest'][0]
-    ): void
-    {
+    ): void {
         $this->hostedOAuthAuthorizationRequestWithHttpInfo($client_id, $provider, $redirect_uri, $response_type, $login_hint, $contentType);
     }
 
@@ -604,12 +606,12 @@ class V3ConnectApi
         ?string $response_type = null,
         ?string $login_hint = null,
         string $contentType = self::contentTypes['hostedOAuthAuthorizationRequest'][0]
-    ): array
-    {
+    ): array {
         $request = $this->hostedOAuthAuthorizationRequestRequest($client_id, $provider, $redirect_uri, $response_type, $login_hint, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -654,8 +656,10 @@ class V3ConnectApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -682,8 +686,7 @@ class V3ConnectApi
         ?string $response_type = null,
         ?string $login_hint = null,
         string $contentType = self::contentTypes['hostedOAuthAuthorizationRequest'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->hostedOAuthAuthorizationRequestAsyncWithHttpInfo($client_id, $provider, $redirect_uri, $response_type, $login_hint, $contentType)
             ->then(
                 function ($response) {
@@ -714,8 +717,7 @@ class V3ConnectApi
         $response_type = null,
         $login_hint = null,
         string $contentType = self::contentTypes['hostedOAuthAuthorizationRequest'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '';
         $request = $this->hostedOAuthAuthorizationRequestRequest($client_id, $provider, $redirect_uri, $response_type, $login_hint, $contentType);
 
@@ -728,6 +730,7 @@ class V3ConnectApi
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -762,8 +765,7 @@ class V3ConnectApi
         $response_type = null,
         $login_hint = null,
         string $contentType = self::contentTypes['hostedOAuthAuthorizationRequest'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -842,7 +844,7 @@ class V3ConnectApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -859,7 +861,7 @@ class V3ConnectApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -876,6 +878,7 @@ class V3ConnectApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -901,9 +904,9 @@ class V3ConnectApi
         ?string $accept = null,
         ?string $token = null,
         string $contentType = self::contentTypes['hostedOAuthRevokeOAuthToken'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->hostedOAuthRevokeOAuthTokenWithHttpInfo($accept, $token, $contentType);
+
         return $response;
     }
 
@@ -924,12 +927,12 @@ class V3ConnectApi
         ?string $accept = null,
         ?string $token = null,
         string $contentType = self::contentTypes['hostedOAuthRevokeOAuthToken'][0]
-    ): array
-    {
+    ): array {
         $request = $this->hostedOAuthRevokeOAuthTokenRequest($accept, $token, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -963,7 +966,7 @@ class V3ConnectApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -989,7 +992,7 @@ class V3ConnectApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1016,7 +1019,7 @@ class V3ConnectApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1045,7 +1048,7 @@ class V3ConnectApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1057,6 +1060,7 @@ class V3ConnectApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1065,8 +1069,10 @@ class V3ConnectApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1087,8 +1093,7 @@ class V3ConnectApi
         ?string $accept = null,
         ?string $token = null,
         string $contentType = self::contentTypes['hostedOAuthRevokeOAuthToken'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->hostedOAuthRevokeOAuthTokenAsyncWithHttpInfo($accept, $token, $contentType)
             ->then(
                 function ($response) {
@@ -1113,8 +1118,7 @@ class V3ConnectApi
         $accept = null,
         $token = null,
         string $contentType = self::contentTypes['hostedOAuthRevokeOAuthToken'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->hostedOAuthRevokeOAuthTokenRequest($accept, $token, $contentType);
 
@@ -1134,12 +1138,13 @@ class V3ConnectApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1168,8 +1173,7 @@ class V3ConnectApi
         $accept = null,
         $token = null,
         string $contentType = self::contentTypes['hostedOAuthRevokeOAuthToken'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -1213,7 +1217,7 @@ class V3ConnectApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1230,7 +1234,7 @@ class V3ConnectApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1247,6 +1251,7 @@ class V3ConnectApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1274,9 +1279,9 @@ class V3ConnectApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['hostedOAuthTokenExchange'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->hostedOAuthTokenExchangeWithHttpInfo($content_type, $accept, $body, $contentType);
+
         return $response;
     }
 
@@ -1299,12 +1304,12 @@ class V3ConnectApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['hostedOAuthTokenExchange'][0]
-    ): array
-    {
+    ): array {
         $request = $this->hostedOAuthTokenExchangeRequest($content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1338,7 +1343,7 @@ class V3ConnectApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1364,7 +1369,7 @@ class V3ConnectApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1391,7 +1396,7 @@ class V3ConnectApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1420,7 +1425,7 @@ class V3ConnectApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1432,6 +1437,7 @@ class V3ConnectApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1440,8 +1446,10 @@ class V3ConnectApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1464,8 +1472,7 @@ class V3ConnectApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['hostedOAuthTokenExchange'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->hostedOAuthTokenExchangeAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
@@ -1492,8 +1499,7 @@ class V3ConnectApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['hostedOAuthTokenExchange'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->hostedOAuthTokenExchangeRequest($content_type, $accept, $body, $contentType);
 
@@ -1513,12 +1519,13 @@ class V3ConnectApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1549,8 +1556,7 @@ class V3ConnectApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['hostedOAuthTokenExchange'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -1597,7 +1603,7 @@ class V3ConnectApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1614,7 +1620,7 @@ class V3ConnectApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1631,6 +1637,7 @@ class V3ConnectApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1658,9 +1665,9 @@ class V3ConnectApi
         ?string $id_token = null,
         ?string $access_token = null,
         string $contentType = self::contentTypes['tokenInfo'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->tokenInfoWithHttpInfo($accept, $id_token, $access_token, $contentType);
+
         return $response;
     }
 
@@ -1683,12 +1690,12 @@ class V3ConnectApi
         ?string $id_token = null,
         ?string $access_token = null,
         string $contentType = self::contentTypes['tokenInfo'][0]
-    ): array
-    {
+    ): array {
         $request = $this->tokenInfoRequest($accept, $id_token, $access_token, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1722,7 +1729,7 @@ class V3ConnectApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1748,7 +1755,7 @@ class V3ConnectApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1775,7 +1782,7 @@ class V3ConnectApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1804,7 +1811,7 @@ class V3ConnectApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1816,6 +1823,7 @@ class V3ConnectApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1824,8 +1832,10 @@ class V3ConnectApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1848,8 +1858,7 @@ class V3ConnectApi
         ?string $id_token = null,
         ?string $access_token = null,
         string $contentType = self::contentTypes['tokenInfo'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->tokenInfoAsyncWithHttpInfo($accept, $id_token, $access_token, $contentType)
             ->then(
                 function ($response) {
@@ -1876,8 +1885,7 @@ class V3ConnectApi
         $id_token = null,
         $access_token = null,
         string $contentType = self::contentTypes['tokenInfo'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->tokenInfoRequest($accept, $id_token, $access_token, $contentType);
 
@@ -1897,12 +1905,13 @@ class V3ConnectApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1933,8 +1942,7 @@ class V3ConnectApi
         $id_token = null,
         $access_token = null,
         string $contentType = self::contentTypes['tokenInfo'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -1988,7 +1996,7 @@ class V3ConnectApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2005,7 +2013,7 @@ class V3ConnectApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2022,6 +2030,7 @@ class V3ConnectApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2041,7 +2050,7 @@ class V3ConnectApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

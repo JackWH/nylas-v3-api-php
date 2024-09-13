@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Administration\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Administration\ApiException;
 use JackWH\NylasV3\Administration\Configuration;
 use JackWH\NylasV3\Administration\HeaderSelector;
@@ -69,7 +69,7 @@ class V3ApplicationsApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'getApplication' => [
             'application/json',
@@ -140,9 +140,9 @@ class V3ApplicationsApi
     public function getApplication(
         ?string $accept = null,
         string $contentType = self::contentTypes['getApplication'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->getApplicationWithHttpInfo($accept, $contentType);
+
         return $response;
     }
 
@@ -161,12 +161,12 @@ class V3ApplicationsApi
     public function getApplicationWithHttpInfo(
         ?string $accept = null,
         string $contentType = self::contentTypes['getApplication'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getApplicationRequest($accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -200,7 +200,7 @@ class V3ApplicationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -226,7 +226,7 @@ class V3ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -253,7 +253,7 @@ class V3ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -280,7 +280,7 @@ class V3ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -309,7 +309,7 @@ class V3ApplicationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -321,6 +321,7 @@ class V3ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -329,6 +330,7 @@ class V3ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -337,8 +339,10 @@ class V3ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -357,8 +361,7 @@ class V3ApplicationsApi
     public function getApplicationAsync(
         ?string $accept = null,
         string $contentType = self::contentTypes['getApplication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getApplicationAsyncWithHttpInfo($accept, $contentType)
             ->then(
                 function ($response) {
@@ -381,8 +384,7 @@ class V3ApplicationsApi
     public function getApplicationAsyncWithHttpInfo(
         $accept = null,
         string $contentType = self::contentTypes['getApplication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->getApplicationRequest($accept, $contentType);
 
@@ -402,12 +404,13 @@ class V3ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -434,8 +437,7 @@ class V3ApplicationsApi
     public function getApplicationRequest(
         $accept = null,
         string $contentType = self::contentTypes['getApplication'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -469,7 +471,7 @@ class V3ApplicationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -486,7 +488,7 @@ class V3ApplicationsApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -503,6 +505,7 @@ class V3ApplicationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -530,9 +533,9 @@ class V3ApplicationsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['updateApplication'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->updateApplicationWithHttpInfo($content_type, $accept, $body, $contentType);
+
         return $response;
     }
 
@@ -555,12 +558,12 @@ class V3ApplicationsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['updateApplication'][0]
-    ): array
-    {
+    ): array {
         $request = $this->updateApplicationRequest($content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -594,7 +597,7 @@ class V3ApplicationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -620,7 +623,7 @@ class V3ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -647,7 +650,7 @@ class V3ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -674,7 +677,7 @@ class V3ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -701,7 +704,7 @@ class V3ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -730,7 +733,7 @@ class V3ApplicationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -742,6 +745,7 @@ class V3ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -750,6 +754,7 @@ class V3ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -758,6 +763,7 @@ class V3ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -766,8 +772,10 @@ class V3ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -790,8 +798,7 @@ class V3ApplicationsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['updateApplication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->updateApplicationAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
@@ -818,8 +825,7 @@ class V3ApplicationsApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['updateApplication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->updateApplicationRequest($content_type, $accept, $body, $contentType);
 
@@ -839,12 +845,13 @@ class V3ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -875,8 +882,7 @@ class V3ApplicationsApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['updateApplication'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -923,7 +929,7 @@ class V3ApplicationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -940,7 +946,7 @@ class V3ApplicationsApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -957,6 +963,7 @@ class V3ApplicationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PATCH',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -976,7 +983,7 @@ class V3ApplicationsApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

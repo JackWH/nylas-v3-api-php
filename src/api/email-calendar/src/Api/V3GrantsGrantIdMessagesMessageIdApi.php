@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\EmailCalendar\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\EmailCalendar\ApiException;
 use JackWH\NylasV3\EmailCalendar\Configuration;
 use JackWH\NylasV3\EmailCalendar\HeaderSelector;
@@ -69,7 +69,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'composeAMessageReply' => [
             'application/json',
@@ -154,9 +154,9 @@ class V3GrantsGrantIdMessagesMessageIdApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['composeAMessageReply'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->composeAMessageReplyWithHttpInfo($grant_id, $message_id, $content_type, $accept, $body, $contentType);
+
         return $response;
     }
 
@@ -183,12 +183,12 @@ class V3GrantsGrantIdMessagesMessageIdApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['composeAMessageReply'][0]
-    ): array
-    {
+    ): array {
         $request = $this->composeAMessageReplyRequest($grant_id, $message_id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -222,7 +222,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -248,7 +248,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -275,7 +275,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -302,7 +302,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 422:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -329,7 +329,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 500:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -356,7 +356,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -385,7 +385,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -397,6 +397,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -405,6 +406,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -413,6 +415,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 422:
                     $data = ObjectSerializer::deserialize(
@@ -421,6 +424,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 500:
                     $data = ObjectSerializer::deserialize(
@@ -429,8 +433,10 @@ class V3GrantsGrantIdMessagesMessageIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -457,8 +463,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['composeAMessageReply'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->composeAMessageReplyAsyncWithHttpInfo($grant_id, $message_id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
@@ -489,8 +494,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['composeAMessageReply'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->composeAMessageReplyRequest($grant_id, $message_id, $content_type, $accept, $body, $contentType);
 
@@ -510,12 +514,13 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -550,8 +555,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['composeAMessageReply'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -628,7 +632,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -645,7 +649,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -662,6 +666,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -689,9 +694,9 @@ class V3GrantsGrantIdMessagesMessageIdApi
         string $message_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['deleteAMessage'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->deleteAMessageWithHttpInfo($grant_id, $message_id, $accept, $contentType);
+
         return $response;
     }
 
@@ -714,12 +719,12 @@ class V3GrantsGrantIdMessagesMessageIdApi
         string $message_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['deleteAMessage'][0]
-    ): array
-    {
+    ): array {
         $request = $this->deleteAMessageRequest($grant_id, $message_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -753,7 +758,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -779,7 +784,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -806,7 +811,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -833,7 +838,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -862,7 +867,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -874,6 +879,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -882,6 +888,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -890,8 +897,10 @@ class V3GrantsGrantIdMessagesMessageIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -914,8 +923,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         string $message_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['deleteAMessage'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->deleteAMessageAsyncWithHttpInfo($grant_id, $message_id, $accept, $contentType)
             ->then(
                 function ($response) {
@@ -942,8 +950,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         $message_id,
         $accept = null,
         string $contentType = self::contentTypes['deleteAMessage'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->deleteAMessageRequest($grant_id, $message_id, $accept, $contentType);
 
@@ -963,12 +970,13 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -999,8 +1007,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         $message_id,
         $accept = null,
         string $contentType = self::contentTypes['deleteAMessage'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -1064,7 +1071,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1081,7 +1088,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1098,6 +1105,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1127,9 +1135,9 @@ class V3GrantsGrantIdMessagesMessageIdApi
         ?string $accept = null,
         ?string $fields = null,
         string $contentType = self::contentTypes['returnAMessage'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->returnAMessageWithHttpInfo($grant_id, $message_id, $accept, $fields, $contentType);
+
         return $response;
     }
 
@@ -1154,12 +1162,12 @@ class V3GrantsGrantIdMessagesMessageIdApi
         ?string $accept = null,
         ?string $fields = null,
         string $contentType = self::contentTypes['returnAMessage'][0]
-    ): array
-    {
+    ): array {
         $request = $this->returnAMessageRequest($grant_id, $message_id, $accept, $fields, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1193,7 +1201,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1219,7 +1227,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1246,7 +1254,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1273,7 +1281,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1302,7 +1310,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1314,6 +1322,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1322,6 +1331,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1330,8 +1340,10 @@ class V3GrantsGrantIdMessagesMessageIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1356,8 +1368,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         ?string $accept = null,
         ?string $fields = null,
         string $contentType = self::contentTypes['returnAMessage'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->returnAMessageAsyncWithHttpInfo($grant_id, $message_id, $accept, $fields, $contentType)
             ->then(
                 function ($response) {
@@ -1386,8 +1397,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         $accept = null,
         $fields = null,
         string $contentType = self::contentTypes['returnAMessage'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->returnAMessageRequest($grant_id, $message_id, $accept, $fields, $contentType);
 
@@ -1407,12 +1417,13 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1445,8 +1456,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         $accept = null,
         $fields = null,
         string $contentType = self::contentTypes['returnAMessage'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -1520,7 +1530,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1537,7 +1547,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1554,6 +1564,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1585,9 +1596,9 @@ class V3GrantsGrantIdMessagesMessageIdApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['updateAMessage'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->updateAMessageWithHttpInfo($grant_id, $message_id, $content_type, $accept, $body, $contentType);
+
         return $response;
     }
 
@@ -1614,12 +1625,12 @@ class V3GrantsGrantIdMessagesMessageIdApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['updateAMessage'][0]
-    ): array
-    {
+    ): array {
         $request = $this->updateAMessageRequest($grant_id, $message_id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1653,7 +1664,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1679,7 +1690,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1706,7 +1717,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1733,7 +1744,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1762,7 +1773,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1774,6 +1785,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1782,6 +1794,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1790,8 +1803,10 @@ class V3GrantsGrantIdMessagesMessageIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1818,8 +1833,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['updateAMessage'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->updateAMessageAsyncWithHttpInfo($grant_id, $message_id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
@@ -1850,8 +1864,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['updateAMessage'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->updateAMessageRequest($grant_id, $message_id, $content_type, $accept, $body, $contentType);
 
@@ -1871,12 +1884,13 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1911,8 +1925,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['updateAMessage'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -1989,7 +2002,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2006,7 +2019,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2023,6 +2036,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PUT',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2042,7 +2056,7 @@ class V3GrantsGrantIdMessagesMessageIdApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

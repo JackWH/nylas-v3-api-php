@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\EmailCalendar\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\EmailCalendar\ApiException;
 use JackWH\NylasV3\EmailCalendar\Configuration;
 use JackWH\NylasV3\EmailCalendar\HeaderSelector;
@@ -69,7 +69,7 @@ class V3GrantsGrantIdCalendarsApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'createACalendar' => [
             'application/json',
@@ -149,9 +149,9 @@ class V3GrantsGrantIdCalendarsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['createACalendar'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->createACalendarWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType);
+
         return $response;
     }
 
@@ -176,12 +176,12 @@ class V3GrantsGrantIdCalendarsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['createACalendar'][0]
-    ): array
-    {
+    ): array {
         $request = $this->createACalendarRequest($grant_id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -215,7 +215,7 @@ class V3GrantsGrantIdCalendarsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -241,7 +241,7 @@ class V3GrantsGrantIdCalendarsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -268,7 +268,7 @@ class V3GrantsGrantIdCalendarsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -295,7 +295,7 @@ class V3GrantsGrantIdCalendarsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -324,7 +324,7 @@ class V3GrantsGrantIdCalendarsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -336,6 +336,7 @@ class V3GrantsGrantIdCalendarsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -344,6 +345,7 @@ class V3GrantsGrantIdCalendarsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -352,8 +354,10 @@ class V3GrantsGrantIdCalendarsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -378,8 +382,7 @@ class V3GrantsGrantIdCalendarsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['createACalendar'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->createACalendarAsyncWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
@@ -408,8 +411,7 @@ class V3GrantsGrantIdCalendarsApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['createACalendar'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->createACalendarRequest($grant_id, $content_type, $accept, $body, $contentType);
 
@@ -429,12 +431,13 @@ class V3GrantsGrantIdCalendarsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -467,8 +470,7 @@ class V3GrantsGrantIdCalendarsApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['createACalendar'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -530,7 +532,7 @@ class V3GrantsGrantIdCalendarsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -547,7 +549,7 @@ class V3GrantsGrantIdCalendarsApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -564,6 +566,7 @@ class V3GrantsGrantIdCalendarsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -593,9 +596,9 @@ class V3GrantsGrantIdCalendarsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['getFreeBusySchedule'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->getFreeBusyScheduleWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType);
+
         return $response;
     }
 
@@ -620,12 +623,12 @@ class V3GrantsGrantIdCalendarsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['getFreeBusySchedule'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getFreeBusyScheduleRequest($grant_id, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -659,7 +662,7 @@ class V3GrantsGrantIdCalendarsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -685,7 +688,7 @@ class V3GrantsGrantIdCalendarsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -712,7 +715,7 @@ class V3GrantsGrantIdCalendarsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -739,7 +742,7 @@ class V3GrantsGrantIdCalendarsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -768,7 +771,7 @@ class V3GrantsGrantIdCalendarsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -780,6 +783,7 @@ class V3GrantsGrantIdCalendarsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -788,6 +792,7 @@ class V3GrantsGrantIdCalendarsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -796,8 +801,10 @@ class V3GrantsGrantIdCalendarsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -822,8 +829,7 @@ class V3GrantsGrantIdCalendarsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['getFreeBusySchedule'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getFreeBusyScheduleAsyncWithHttpInfo($grant_id, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
@@ -852,8 +858,7 @@ class V3GrantsGrantIdCalendarsApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['getFreeBusySchedule'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->getFreeBusyScheduleRequest($grant_id, $content_type, $accept, $body, $contentType);
 
@@ -873,12 +878,13 @@ class V3GrantsGrantIdCalendarsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -911,8 +917,7 @@ class V3GrantsGrantIdCalendarsApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['getFreeBusySchedule'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -974,7 +979,7 @@ class V3GrantsGrantIdCalendarsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -991,7 +996,7 @@ class V3GrantsGrantIdCalendarsApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1008,6 +1013,7 @@ class V3GrantsGrantIdCalendarsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1035,9 +1041,9 @@ class V3GrantsGrantIdCalendarsApi
         ?string $accept = null,
         ?int $limit = null,
         string $contentType = self::contentTypes['returnAllCalendars'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->returnAllCalendarsWithHttpInfo($grant_id, $accept, $limit, $contentType);
+
         return $response;
     }
 
@@ -1060,12 +1066,12 @@ class V3GrantsGrantIdCalendarsApi
         ?string $accept = null,
         ?int $limit = null,
         string $contentType = self::contentTypes['returnAllCalendars'][0]
-    ): array
-    {
+    ): array {
         $request = $this->returnAllCalendarsRequest($grant_id, $accept, $limit, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1099,7 +1105,7 @@ class V3GrantsGrantIdCalendarsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1125,7 +1131,7 @@ class V3GrantsGrantIdCalendarsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1152,7 +1158,7 @@ class V3GrantsGrantIdCalendarsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1179,7 +1185,7 @@ class V3GrantsGrantIdCalendarsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1208,7 +1214,7 @@ class V3GrantsGrantIdCalendarsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1220,6 +1226,7 @@ class V3GrantsGrantIdCalendarsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1228,6 +1235,7 @@ class V3GrantsGrantIdCalendarsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1236,8 +1244,10 @@ class V3GrantsGrantIdCalendarsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1260,8 +1270,7 @@ class V3GrantsGrantIdCalendarsApi
         ?string $accept = null,
         ?int $limit = null,
         string $contentType = self::contentTypes['returnAllCalendars'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->returnAllCalendarsAsyncWithHttpInfo($grant_id, $accept, $limit, $contentType)
             ->then(
                 function ($response) {
@@ -1288,8 +1297,7 @@ class V3GrantsGrantIdCalendarsApi
         $accept = null,
         $limit = null,
         string $contentType = self::contentTypes['returnAllCalendars'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->returnAllCalendarsRequest($grant_id, $accept, $limit, $contentType);
 
@@ -1309,12 +1317,13 @@ class V3GrantsGrantIdCalendarsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1345,8 +1354,7 @@ class V3GrantsGrantIdCalendarsApi
         $accept = null,
         $limit = null,
         string $contentType = self::contentTypes['returnAllCalendars'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -1405,7 +1413,7 @@ class V3GrantsGrantIdCalendarsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1422,7 +1430,7 @@ class V3GrantsGrantIdCalendarsApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1439,6 +1447,7 @@ class V3GrantsGrantIdCalendarsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1458,7 +1467,7 @@ class V3GrantsGrantIdCalendarsApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

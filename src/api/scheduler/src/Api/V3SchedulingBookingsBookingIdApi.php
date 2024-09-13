@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Scheduler\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Scheduler\ApiException;
 use JackWH\NylasV3\Scheduler\Configuration;
 use JackWH\NylasV3\Scheduler\HeaderSelector;
@@ -69,7 +69,7 @@ class V3SchedulingBookingsBookingIdApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'confirmABooking' => [
             'application/json',
@@ -154,9 +154,9 @@ class V3SchedulingBookingsBookingIdApi
         ?string $configuration_id = null,
         ?array $body = null,
         string $contentType = self::contentTypes['confirmABooking'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->confirmABookingWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
+
         return $response;
     }
 
@@ -183,12 +183,12 @@ class V3SchedulingBookingsBookingIdApi
         ?string $configuration_id = null,
         ?array $body = null,
         string $contentType = self::contentTypes['confirmABooking'][0]
-    ): array
-    {
+    ): array {
         $request = $this->confirmABookingRequest($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -222,7 +222,7 @@ class V3SchedulingBookingsBookingIdApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -248,7 +248,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -275,7 +275,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -302,7 +302,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -329,7 +329,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -356,7 +356,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -383,7 +383,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -412,7 +412,7 @@ class V3SchedulingBookingsBookingIdApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -424,6 +424,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -432,6 +433,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -440,6 +442,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -448,6 +451,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -456,6 +460,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -464,8 +469,10 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -492,8 +499,7 @@ class V3SchedulingBookingsBookingIdApi
         ?string $configuration_id = null,
         ?array $body = null,
         string $contentType = self::contentTypes['confirmABooking'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->confirmABookingAsyncWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $body, $contentType)
             ->then(
                 function ($response) {
@@ -524,8 +530,7 @@ class V3SchedulingBookingsBookingIdApi
         $configuration_id = null,
         $body = null,
         string $contentType = self::contentTypes['confirmABooking'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->confirmABookingRequest($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
 
@@ -545,12 +550,13 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -585,8 +591,7 @@ class V3SchedulingBookingsBookingIdApi
         $configuration_id = null,
         $body = null,
         string $contentType = self::contentTypes['confirmABooking'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'booking_id' is set
         if ($booking_id === null || (is_array($booking_id) && count($booking_id) === 0)) {
@@ -658,7 +663,7 @@ class V3SchedulingBookingsBookingIdApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -675,7 +680,7 @@ class V3SchedulingBookingsBookingIdApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -692,6 +697,7 @@ class V3SchedulingBookingsBookingIdApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PUT',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -721,9 +727,9 @@ class V3SchedulingBookingsBookingIdApi
         ?string $accept = null,
         ?string $configuration_id = null,
         string $contentType = self::contentTypes['deleteABooking'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->deleteABookingWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $contentType);
+
         return $response;
     }
 
@@ -748,12 +754,12 @@ class V3SchedulingBookingsBookingIdApi
         ?string $accept = null,
         ?string $configuration_id = null,
         string $contentType = self::contentTypes['deleteABooking'][0]
-    ): array
-    {
+    ): array {
         $request = $this->deleteABookingRequest($booking_id, $content_type, $accept, $configuration_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -787,7 +793,7 @@ class V3SchedulingBookingsBookingIdApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -813,7 +819,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -840,7 +846,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -867,7 +873,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -894,7 +900,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -921,7 +927,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -948,7 +954,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -977,7 +983,7 @@ class V3SchedulingBookingsBookingIdApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -989,6 +995,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -997,6 +1004,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1005,6 +1013,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -1013,6 +1022,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -1021,6 +1031,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -1029,8 +1040,10 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1055,8 +1068,7 @@ class V3SchedulingBookingsBookingIdApi
         ?string $accept = null,
         ?string $configuration_id = null,
         string $contentType = self::contentTypes['deleteABooking'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->deleteABookingAsyncWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $contentType)
             ->then(
                 function ($response) {
@@ -1085,8 +1097,7 @@ class V3SchedulingBookingsBookingIdApi
         $accept = null,
         $configuration_id = null,
         string $contentType = self::contentTypes['deleteABooking'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->deleteABookingRequest($booking_id, $content_type, $accept, $configuration_id, $contentType);
 
@@ -1106,12 +1117,13 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1144,8 +1156,7 @@ class V3SchedulingBookingsBookingIdApi
         $accept = null,
         $configuration_id = null,
         string $contentType = self::contentTypes['deleteABooking'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'booking_id' is set
         if ($booking_id === null || (is_array($booking_id) && count($booking_id) === 0)) {
@@ -1209,7 +1220,7 @@ class V3SchedulingBookingsBookingIdApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1226,7 +1237,7 @@ class V3SchedulingBookingsBookingIdApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1243,6 +1254,7 @@ class V3SchedulingBookingsBookingIdApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1274,9 +1286,9 @@ class V3SchedulingBookingsBookingIdApi
         ?string $configuration_id = null,
         ?array $body = null,
         string $contentType = self::contentTypes['rescheduleABooking'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->rescheduleABookingWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
+
         return $response;
     }
 
@@ -1303,12 +1315,12 @@ class V3SchedulingBookingsBookingIdApi
         ?string $configuration_id = null,
         ?array $body = null,
         string $contentType = self::contentTypes['rescheduleABooking'][0]
-    ): array
-    {
+    ): array {
         $request = $this->rescheduleABookingRequest($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1342,7 +1354,7 @@ class V3SchedulingBookingsBookingIdApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1368,7 +1380,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1395,7 +1407,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1422,7 +1434,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1449,7 +1461,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1476,7 +1488,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1503,7 +1515,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1532,7 +1544,7 @@ class V3SchedulingBookingsBookingIdApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1544,6 +1556,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1552,6 +1565,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1560,6 +1574,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -1568,6 +1583,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -1576,6 +1592,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -1584,8 +1601,10 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1612,8 +1631,7 @@ class V3SchedulingBookingsBookingIdApi
         ?string $configuration_id = null,
         ?array $body = null,
         string $contentType = self::contentTypes['rescheduleABooking'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->rescheduleABookingAsyncWithHttpInfo($booking_id, $content_type, $accept, $configuration_id, $body, $contentType)
             ->then(
                 function ($response) {
@@ -1644,8 +1662,7 @@ class V3SchedulingBookingsBookingIdApi
         $configuration_id = null,
         $body = null,
         string $contentType = self::contentTypes['rescheduleABooking'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->rescheduleABookingRequest($booking_id, $content_type, $accept, $configuration_id, $body, $contentType);
 
@@ -1665,12 +1682,13 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1705,8 +1723,7 @@ class V3SchedulingBookingsBookingIdApi
         $configuration_id = null,
         $body = null,
         string $contentType = self::contentTypes['rescheduleABooking'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'booking_id' is set
         if ($booking_id === null || (is_array($booking_id) && count($booking_id) === 0)) {
@@ -1778,7 +1795,7 @@ class V3SchedulingBookingsBookingIdApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1795,7 +1812,7 @@ class V3SchedulingBookingsBookingIdApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1812,6 +1829,7 @@ class V3SchedulingBookingsBookingIdApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PATCH',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1839,9 +1857,9 @@ class V3SchedulingBookingsBookingIdApi
         ?string $accept = null,
         ?string $configuration_id = null,
         string $contentType = self::contentTypes['returnABookingObject'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->returnABookingObjectWithHttpInfo($booking_id, $accept, $configuration_id, $contentType);
+
         return $response;
     }
 
@@ -1864,12 +1882,12 @@ class V3SchedulingBookingsBookingIdApi
         ?string $accept = null,
         ?string $configuration_id = null,
         string $contentType = self::contentTypes['returnABookingObject'][0]
-    ): array
-    {
+    ): array {
         $request = $this->returnABookingObjectRequest($booking_id, $accept, $configuration_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1903,7 +1921,7 @@ class V3SchedulingBookingsBookingIdApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1929,7 +1947,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1956,7 +1974,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1983,7 +2001,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2010,7 +2028,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2037,7 +2055,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2064,7 +2082,7 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2093,7 +2111,7 @@ class V3SchedulingBookingsBookingIdApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2105,6 +2123,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -2113,6 +2132,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -2121,6 +2141,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -2129,6 +2150,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -2137,6 +2159,7 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -2145,8 +2168,10 @@ class V3SchedulingBookingsBookingIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2169,8 +2194,7 @@ class V3SchedulingBookingsBookingIdApi
         ?string $accept = null,
         ?string $configuration_id = null,
         string $contentType = self::contentTypes['returnABookingObject'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->returnABookingObjectAsyncWithHttpInfo($booking_id, $accept, $configuration_id, $contentType)
             ->then(
                 function ($response) {
@@ -2197,8 +2221,7 @@ class V3SchedulingBookingsBookingIdApi
         $accept = null,
         $configuration_id = null,
         string $contentType = self::contentTypes['returnABookingObject'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->returnABookingObjectRequest($booking_id, $accept, $configuration_id, $contentType);
 
@@ -2218,12 +2241,13 @@ class V3SchedulingBookingsBookingIdApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2254,8 +2278,7 @@ class V3SchedulingBookingsBookingIdApi
         $accept = null,
         $configuration_id = null,
         string $contentType = self::contentTypes['returnABookingObject'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'booking_id' is set
         if ($booking_id === null || (is_array($booking_id) && count($booking_id) === 0)) {
@@ -2314,7 +2337,7 @@ class V3SchedulingBookingsBookingIdApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2331,7 +2354,7 @@ class V3SchedulingBookingsBookingIdApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2348,6 +2371,7 @@ class V3SchedulingBookingsBookingIdApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2367,7 +2391,7 @@ class V3SchedulingBookingsBookingIdApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

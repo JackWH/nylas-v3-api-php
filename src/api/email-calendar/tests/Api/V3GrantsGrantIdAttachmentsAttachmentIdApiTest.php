@@ -26,9 +26,6 @@
 
 namespace JackWH\NylasV3\EmailCalendar\Test\Api;
 
-use JackWH\NylasV3\EmailCalendar\Configuration;
-use JackWH\NylasV3\EmailCalendar\ApiException;
-use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -40,7 +37,6 @@ use PHPUnit\Framework\TestCase;
  */
 class V3GrantsGrantIdAttachmentsAttachmentIdApiTest extends TestCase
 {
-
     /**
      * Setup before running any test cases
      */

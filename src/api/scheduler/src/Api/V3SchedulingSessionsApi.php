@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Scheduler\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Scheduler\ApiException;
 use JackWH\NylasV3\Scheduler\Configuration;
 use JackWH\NylasV3\Scheduler\HeaderSelector;
@@ -69,7 +69,7 @@ class V3SchedulingSessionsApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'createASession' => [
             'application/json',
@@ -144,9 +144,9 @@ class V3SchedulingSessionsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['createASession'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->createASessionWithHttpInfo($content_type, $accept, $body, $contentType);
+
         return $response;
     }
 
@@ -169,12 +169,12 @@ class V3SchedulingSessionsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['createASession'][0]
-    ): array
-    {
+    ): array {
         $request = $this->createASessionRequest($content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -208,7 +208,7 @@ class V3SchedulingSessionsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -234,7 +234,7 @@ class V3SchedulingSessionsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -261,7 +261,7 @@ class V3SchedulingSessionsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -288,7 +288,7 @@ class V3SchedulingSessionsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -315,7 +315,7 @@ class V3SchedulingSessionsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -342,7 +342,7 @@ class V3SchedulingSessionsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -371,7 +371,7 @@ class V3SchedulingSessionsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -383,6 +383,7 @@ class V3SchedulingSessionsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -391,6 +392,7 @@ class V3SchedulingSessionsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -399,6 +401,7 @@ class V3SchedulingSessionsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -407,6 +410,7 @@ class V3SchedulingSessionsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -415,8 +419,10 @@ class V3SchedulingSessionsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -439,8 +445,7 @@ class V3SchedulingSessionsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['createASession'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->createASessionAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
@@ -467,8 +472,7 @@ class V3SchedulingSessionsApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['createASession'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->createASessionRequest($content_type, $accept, $body, $contentType);
 
@@ -488,12 +492,13 @@ class V3SchedulingSessionsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -524,8 +529,7 @@ class V3SchedulingSessionsApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['createASession'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -572,7 +576,7 @@ class V3SchedulingSessionsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -589,7 +593,7 @@ class V3SchedulingSessionsApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -606,6 +610,7 @@ class V3SchedulingSessionsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -631,9 +636,9 @@ class V3SchedulingSessionsApi
         string $session_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['deleteASession'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->deleteASessionWithHttpInfo($session_id, $accept, $contentType);
+
         return $response;
     }
 
@@ -654,12 +659,12 @@ class V3SchedulingSessionsApi
         string $session_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['deleteASession'][0]
-    ): array
-    {
+    ): array {
         $request = $this->deleteASessionRequest($session_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -693,7 +698,7 @@ class V3SchedulingSessionsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -719,7 +724,7 @@ class V3SchedulingSessionsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -746,7 +751,7 @@ class V3SchedulingSessionsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -773,7 +778,7 @@ class V3SchedulingSessionsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -800,7 +805,7 @@ class V3SchedulingSessionsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -827,7 +832,7 @@ class V3SchedulingSessionsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -856,7 +861,7 @@ class V3SchedulingSessionsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -868,6 +873,7 @@ class V3SchedulingSessionsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -876,6 +882,7 @@ class V3SchedulingSessionsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -884,6 +891,7 @@ class V3SchedulingSessionsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -892,6 +900,7 @@ class V3SchedulingSessionsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -900,8 +909,10 @@ class V3SchedulingSessionsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -922,8 +933,7 @@ class V3SchedulingSessionsApi
         string $session_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['deleteASession'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->deleteASessionAsyncWithHttpInfo($session_id, $accept, $contentType)
             ->then(
                 function ($response) {
@@ -948,8 +958,7 @@ class V3SchedulingSessionsApi
         $session_id,
         $accept = null,
         string $contentType = self::contentTypes['deleteASession'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->deleteASessionRequest($session_id, $accept, $contentType);
 
@@ -969,12 +978,13 @@ class V3SchedulingSessionsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1003,8 +1013,7 @@ class V3SchedulingSessionsApi
         $session_id,
         $accept = null,
         string $contentType = self::contentTypes['deleteASession'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'session_id' is set
         if ($session_id === null || (is_array($session_id) && count($session_id) === 0)) {
@@ -1053,7 +1062,7 @@ class V3SchedulingSessionsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1070,7 +1079,7 @@ class V3SchedulingSessionsApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1087,6 +1096,7 @@ class V3SchedulingSessionsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1106,7 +1116,7 @@ class V3SchedulingSessionsApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

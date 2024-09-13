@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\EmailCalendar\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\EmailCalendar\ApiException;
 use JackWH\NylasV3\EmailCalendar\Configuration;
 use JackWH\NylasV3\EmailCalendar\HeaderSelector;
@@ -69,7 +69,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'downloadAnAttachment' => [
             'application/json',
@@ -146,9 +146,9 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
         ?string $accept = null,
         ?string $message_id = null,
         string $contentType = self::contentTypes['downloadAnAttachment'][0]
-    ): string
-    {
+    ): string {
         list($response) = $this->downloadAnAttachmentWithHttpInfo($grant_id, $attachment_id, $accept, $message_id, $contentType);
+
         return $response;
     }
 
@@ -173,12 +173,12 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
         ?string $accept = null,
         ?string $message_id = null,
         string $contentType = self::contentTypes['downloadAnAttachment'][0]
-    ): array
-    {
+    ): array {
         $request = $this->downloadAnAttachmentRequest($grant_id, $attachment_id, $accept, $message_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -212,7 +212,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('string', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -238,7 +238,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'string', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -265,7 +265,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -292,7 +292,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -321,7 +321,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -333,6 +333,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -341,6 +342,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -349,8 +351,10 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -375,8 +379,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
         ?string $accept = null,
         ?string $message_id = null,
         string $contentType = self::contentTypes['downloadAnAttachment'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->downloadAnAttachmentAsyncWithHttpInfo($grant_id, $attachment_id, $accept, $message_id, $contentType)
             ->then(
                 function ($response) {
@@ -405,8 +408,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
         $accept = null,
         $message_id = null,
         string $contentType = self::contentTypes['downloadAnAttachment'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'string';
         $request = $this->downloadAnAttachmentRequest($grant_id, $attachment_id, $accept, $message_id, $contentType);
 
@@ -426,12 +428,13 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -464,8 +467,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
         $accept = null,
         $message_id = null,
         string $contentType = self::contentTypes['downloadAnAttachment'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -539,7 +541,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -556,7 +558,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -573,6 +575,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -602,9 +605,9 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
         ?string $accept = null,
         ?string $message_id = null,
         string $contentType = self::contentTypes['returnMetadataOfAnAttachment'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->returnMetadataOfAnAttachmentWithHttpInfo($grant_id, $attachment_id, $accept, $message_id, $contentType);
+
         return $response;
     }
 
@@ -629,12 +632,12 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
         ?string $accept = null,
         ?string $message_id = null,
         string $contentType = self::contentTypes['returnMetadataOfAnAttachment'][0]
-    ): array
-    {
+    ): array {
         $request = $this->returnMetadataOfAnAttachmentRequest($grant_id, $attachment_id, $accept, $message_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -668,7 +671,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -694,7 +697,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -721,7 +724,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -748,7 +751,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -777,7 +780,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -789,6 +792,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -797,6 +801,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -805,8 +810,10 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -831,8 +838,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
         ?string $accept = null,
         ?string $message_id = null,
         string $contentType = self::contentTypes['returnMetadataOfAnAttachment'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->returnMetadataOfAnAttachmentAsyncWithHttpInfo($grant_id, $attachment_id, $accept, $message_id, $contentType)
             ->then(
                 function ($response) {
@@ -861,8 +867,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
         $accept = null,
         $message_id = null,
         string $contentType = self::contentTypes['returnMetadataOfAnAttachment'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->returnMetadataOfAnAttachmentRequest($grant_id, $attachment_id, $accept, $message_id, $contentType);
 
@@ -882,12 +887,13 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -920,8 +926,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
         $accept = null,
         $message_id = null,
         string $contentType = self::contentTypes['returnMetadataOfAnAttachment'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -995,7 +1000,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1012,7 +1017,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1029,6 +1034,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1048,7 +1054,7 @@ class V3GrantsGrantIdAttachmentsAttachmentIdApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

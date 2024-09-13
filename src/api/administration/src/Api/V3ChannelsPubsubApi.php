@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Administration\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Administration\ApiException;
 use JackWH\NylasV3\Administration\Configuration;
 use JackWH\NylasV3\Administration\HeaderSelector;
@@ -69,7 +69,7 @@ class V3ChannelsPubsubApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'createAPubSubChannel' => [
             'application/json',
@@ -144,9 +144,9 @@ class V3ChannelsPubsubApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['createAPubSubChannel'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->createAPubSubChannelWithHttpInfo($content_type, $accept, $body, $contentType);
+
         return $response;
     }
 
@@ -169,12 +169,12 @@ class V3ChannelsPubsubApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['createAPubSubChannel'][0]
-    ): array
-    {
+    ): array {
         $request = $this->createAPubSubChannelRequest($content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -208,7 +208,7 @@ class V3ChannelsPubsubApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -234,7 +234,7 @@ class V3ChannelsPubsubApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -261,7 +261,7 @@ class V3ChannelsPubsubApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -290,7 +290,7 @@ class V3ChannelsPubsubApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -302,6 +302,7 @@ class V3ChannelsPubsubApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -310,8 +311,10 @@ class V3ChannelsPubsubApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -334,8 +337,7 @@ class V3ChannelsPubsubApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['createAPubSubChannel'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->createAPubSubChannelAsyncWithHttpInfo($content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
@@ -362,8 +364,7 @@ class V3ChannelsPubsubApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['createAPubSubChannel'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->createAPubSubChannelRequest($content_type, $accept, $body, $contentType);
 
@@ -383,12 +384,13 @@ class V3ChannelsPubsubApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -419,8 +421,7 @@ class V3ChannelsPubsubApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['createAPubSubChannel'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -467,7 +468,7 @@ class V3ChannelsPubsubApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -484,7 +485,7 @@ class V3ChannelsPubsubApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -501,6 +502,7 @@ class V3ChannelsPubsubApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -524,9 +526,9 @@ class V3ChannelsPubsubApi
     public function getPubSubChannelsForAnApplication(
         ?string $accept = null,
         string $contentType = self::contentTypes['getPubSubChannelsForAnApplication'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->getPubSubChannelsForAnApplicationWithHttpInfo($accept, $contentType);
+
         return $response;
     }
 
@@ -545,12 +547,12 @@ class V3ChannelsPubsubApi
     public function getPubSubChannelsForAnApplicationWithHttpInfo(
         ?string $accept = null,
         string $contentType = self::contentTypes['getPubSubChannelsForAnApplication'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getPubSubChannelsForAnApplicationRequest($accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -584,7 +586,7 @@ class V3ChannelsPubsubApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -610,7 +612,7 @@ class V3ChannelsPubsubApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -637,7 +639,7 @@ class V3ChannelsPubsubApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -666,7 +668,7 @@ class V3ChannelsPubsubApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -678,6 +680,7 @@ class V3ChannelsPubsubApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -686,8 +689,10 @@ class V3ChannelsPubsubApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -706,8 +711,7 @@ class V3ChannelsPubsubApi
     public function getPubSubChannelsForAnApplicationAsync(
         ?string $accept = null,
         string $contentType = self::contentTypes['getPubSubChannelsForAnApplication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getPubSubChannelsForAnApplicationAsyncWithHttpInfo($accept, $contentType)
             ->then(
                 function ($response) {
@@ -730,8 +734,7 @@ class V3ChannelsPubsubApi
     public function getPubSubChannelsForAnApplicationAsyncWithHttpInfo(
         $accept = null,
         string $contentType = self::contentTypes['getPubSubChannelsForAnApplication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->getPubSubChannelsForAnApplicationRequest($accept, $contentType);
 
@@ -751,12 +754,13 @@ class V3ChannelsPubsubApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -783,8 +787,7 @@ class V3ChannelsPubsubApi
     public function getPubSubChannelsForAnApplicationRequest(
         $accept = null,
         string $contentType = self::contentTypes['getPubSubChannelsForAnApplication'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -818,7 +821,7 @@ class V3ChannelsPubsubApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -835,7 +838,7 @@ class V3ChannelsPubsubApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -852,6 +855,7 @@ class V3ChannelsPubsubApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -871,7 +875,7 @@ class V3ChannelsPubsubApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

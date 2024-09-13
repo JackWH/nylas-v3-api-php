@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Administration\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Administration\ApiException;
 use JackWH\NylasV3\Administration\Configuration;
 use JackWH\NylasV3\Administration\HeaderSelector;
@@ -69,7 +69,7 @@ class V3GrantsApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'getCurrentGrant' => [
             'application/json',
@@ -140,9 +140,9 @@ class V3GrantsApi
     public function getCurrentGrant(
         ?string $accept = null,
         string $contentType = self::contentTypes['getCurrentGrant'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->getCurrentGrantWithHttpInfo($accept, $contentType);
+
         return $response;
     }
 
@@ -161,12 +161,12 @@ class V3GrantsApi
     public function getCurrentGrantWithHttpInfo(
         ?string $accept = null,
         string $contentType = self::contentTypes['getCurrentGrant'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getCurrentGrantRequest($accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -200,7 +200,7 @@ class V3GrantsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -226,7 +226,7 @@ class V3GrantsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -253,7 +253,7 @@ class V3GrantsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -280,7 +280,7 @@ class V3GrantsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -309,7 +309,7 @@ class V3GrantsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -321,6 +321,7 @@ class V3GrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -329,6 +330,7 @@ class V3GrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -337,8 +339,10 @@ class V3GrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -357,8 +361,7 @@ class V3GrantsApi
     public function getCurrentGrantAsync(
         ?string $accept = null,
         string $contentType = self::contentTypes['getCurrentGrant'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getCurrentGrantAsyncWithHttpInfo($accept, $contentType)
             ->then(
                 function ($response) {
@@ -381,8 +384,7 @@ class V3GrantsApi
     public function getCurrentGrantAsyncWithHttpInfo(
         $accept = null,
         string $contentType = self::contentTypes['getCurrentGrant'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->getCurrentGrantRequest($accept, $contentType);
 
@@ -402,12 +404,13 @@ class V3GrantsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -434,8 +437,7 @@ class V3GrantsApi
     public function getCurrentGrantRequest(
         $accept = null,
         string $contentType = self::contentTypes['getCurrentGrant'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -469,7 +471,7 @@ class V3GrantsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -486,7 +488,7 @@ class V3GrantsApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -503,6 +505,7 @@ class V3GrantsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -526,9 +529,9 @@ class V3GrantsApi
     public function listGrants(
         ?string $accept = null,
         string $contentType = self::contentTypes['listGrants'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->listGrantsWithHttpInfo($accept, $contentType);
+
         return $response;
     }
 
@@ -547,12 +550,12 @@ class V3GrantsApi
     public function listGrantsWithHttpInfo(
         ?string $accept = null,
         string $contentType = self::contentTypes['listGrants'][0]
-    ): array
-    {
+    ): array {
         $request = $this->listGrantsRequest($accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -586,7 +589,7 @@ class V3GrantsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -612,7 +615,7 @@ class V3GrantsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -639,7 +642,7 @@ class V3GrantsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -666,7 +669,7 @@ class V3GrantsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -695,7 +698,7 @@ class V3GrantsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -707,6 +710,7 @@ class V3GrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -715,6 +719,7 @@ class V3GrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -723,8 +728,10 @@ class V3GrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -743,8 +750,7 @@ class V3GrantsApi
     public function listGrantsAsync(
         ?string $accept = null,
         string $contentType = self::contentTypes['listGrants'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->listGrantsAsyncWithHttpInfo($accept, $contentType)
             ->then(
                 function ($response) {
@@ -767,8 +773,7 @@ class V3GrantsApi
     public function listGrantsAsyncWithHttpInfo(
         $accept = null,
         string $contentType = self::contentTypes['listGrants'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->listGrantsRequest($accept, $contentType);
 
@@ -788,12 +793,13 @@ class V3GrantsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -820,8 +826,7 @@ class V3GrantsApi
     public function listGrantsRequest(
         $accept = null,
         string $contentType = self::contentTypes['listGrants'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -855,7 +860,7 @@ class V3GrantsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -872,7 +877,7 @@ class V3GrantsApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -889,6 +894,7 @@ class V3GrantsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -908,7 +914,7 @@ class V3GrantsApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Administration\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Administration\ApiException;
 use JackWH\NylasV3\Administration\Configuration;
 use JackWH\NylasV3\Administration\HeaderSelector;
@@ -69,7 +69,7 @@ class V3ConnectorsProviderCredsApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'createCredential' => [
             'application/json',
@@ -146,9 +146,9 @@ class V3ConnectorsProviderCredsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['createCredential'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->createCredentialWithHttpInfo($provider, $content_type, $accept, $body, $contentType);
+
         return $response;
     }
 
@@ -173,12 +173,12 @@ class V3ConnectorsProviderCredsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['createCredential'][0]
-    ): array
-    {
+    ): array {
         $request = $this->createCredentialRequest($provider, $content_type, $accept, $body, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -212,7 +212,7 @@ class V3ConnectorsProviderCredsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 201:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -238,7 +238,7 @@ class V3ConnectorsProviderCredsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -265,7 +265,7 @@ class V3ConnectorsProviderCredsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -292,7 +292,7 @@ class V3ConnectorsProviderCredsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -321,7 +321,7 @@ class V3ConnectorsProviderCredsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -333,6 +333,7 @@ class V3ConnectorsProviderCredsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -341,6 +342,7 @@ class V3ConnectorsProviderCredsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -349,8 +351,10 @@ class V3ConnectorsProviderCredsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -375,8 +379,7 @@ class V3ConnectorsProviderCredsApi
         ?string $accept = null,
         ?array $body = null,
         string $contentType = self::contentTypes['createCredential'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->createCredentialAsyncWithHttpInfo($provider, $content_type, $accept, $body, $contentType)
             ->then(
                 function ($response) {
@@ -405,8 +408,7 @@ class V3ConnectorsProviderCredsApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['createCredential'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->createCredentialRequest($provider, $content_type, $accept, $body, $contentType);
 
@@ -426,12 +428,13 @@ class V3ConnectorsProviderCredsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -464,8 +467,7 @@ class V3ConnectorsProviderCredsApi
         $accept = null,
         $body = null,
         string $contentType = self::contentTypes['createCredential'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
@@ -527,7 +529,7 @@ class V3ConnectorsProviderCredsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -544,7 +546,7 @@ class V3ConnectorsProviderCredsApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -561,6 +563,7 @@ class V3ConnectorsProviderCredsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -586,9 +589,9 @@ class V3ConnectorsProviderCredsApi
         string $provider,
         ?string $accept = null,
         string $contentType = self::contentTypes['listCredentials'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->listCredentialsWithHttpInfo($provider, $accept, $contentType);
+
         return $response;
     }
 
@@ -609,12 +612,12 @@ class V3ConnectorsProviderCredsApi
         string $provider,
         ?string $accept = null,
         string $contentType = self::contentTypes['listCredentials'][0]
-    ): array
-    {
+    ): array {
         $request = $this->listCredentialsRequest($provider, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -648,7 +651,7 @@ class V3ConnectorsProviderCredsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -674,7 +677,7 @@ class V3ConnectorsProviderCredsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -701,7 +704,7 @@ class V3ConnectorsProviderCredsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -728,7 +731,7 @@ class V3ConnectorsProviderCredsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -757,7 +760,7 @@ class V3ConnectorsProviderCredsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -769,6 +772,7 @@ class V3ConnectorsProviderCredsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -777,6 +781,7 @@ class V3ConnectorsProviderCredsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -785,8 +790,10 @@ class V3ConnectorsProviderCredsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -807,8 +814,7 @@ class V3ConnectorsProviderCredsApi
         string $provider,
         ?string $accept = null,
         string $contentType = self::contentTypes['listCredentials'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->listCredentialsAsyncWithHttpInfo($provider, $accept, $contentType)
             ->then(
                 function ($response) {
@@ -833,8 +839,7 @@ class V3ConnectorsProviderCredsApi
         $provider,
         $accept = null,
         string $contentType = self::contentTypes['listCredentials'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->listCredentialsRequest($provider, $accept, $contentType);
 
@@ -854,12 +859,13 @@ class V3ConnectorsProviderCredsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -888,8 +894,7 @@ class V3ConnectorsProviderCredsApi
         $provider,
         $accept = null,
         string $contentType = self::contentTypes['listCredentials'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
@@ -938,7 +943,7 @@ class V3ConnectorsProviderCredsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -955,7 +960,7 @@ class V3ConnectorsProviderCredsApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -972,6 +977,7 @@ class V3ConnectorsProviderCredsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -991,7 +997,7 @@ class V3ConnectorsProviderCredsApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\EmailCalendar\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\EmailCalendar\ApiException;
 use JackWH\NylasV3\EmailCalendar\Configuration;
 use JackWH\NylasV3\EmailCalendar\HeaderSelector;
@@ -69,7 +69,7 @@ class V3GrantsGrantIdMessagesSchedulesApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'retrieveYourScheduledMessages' => [
             'application/json',
@@ -139,9 +139,9 @@ class V3GrantsGrantIdMessagesSchedulesApi
         string $grant_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['retrieveYourScheduledMessages'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->retrieveYourScheduledMessagesWithHttpInfo($grant_id, $accept, $contentType);
+
         return $response;
     }
 
@@ -162,12 +162,12 @@ class V3GrantsGrantIdMessagesSchedulesApi
         string $grant_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['retrieveYourScheduledMessages'][0]
-    ): array
-    {
+    ): array {
         $request = $this->retrieveYourScheduledMessagesRequest($grant_id, $accept, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -201,7 +201,7 @@ class V3GrantsGrantIdMessagesSchedulesApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -227,7 +227,7 @@ class V3GrantsGrantIdMessagesSchedulesApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -256,7 +256,7 @@ class V3GrantsGrantIdMessagesSchedulesApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -268,8 +268,10 @@ class V3GrantsGrantIdMessagesSchedulesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -290,8 +292,7 @@ class V3GrantsGrantIdMessagesSchedulesApi
         string $grant_id,
         ?string $accept = null,
         string $contentType = self::contentTypes['retrieveYourScheduledMessages'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->retrieveYourScheduledMessagesAsyncWithHttpInfo($grant_id, $accept, $contentType)
             ->then(
                 function ($response) {
@@ -316,8 +317,7 @@ class V3GrantsGrantIdMessagesSchedulesApi
         $grant_id,
         $accept = null,
         string $contentType = self::contentTypes['retrieveYourScheduledMessages'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->retrieveYourScheduledMessagesRequest($grant_id, $accept, $contentType);
 
@@ -337,12 +337,13 @@ class V3GrantsGrantIdMessagesSchedulesApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -371,8 +372,7 @@ class V3GrantsGrantIdMessagesSchedulesApi
         $grant_id,
         $accept = null,
         string $contentType = self::contentTypes['retrieveYourScheduledMessages'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -421,7 +421,7 @@ class V3GrantsGrantIdMessagesSchedulesApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -438,7 +438,7 @@ class V3GrantsGrantIdMessagesSchedulesApi
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -455,6 +455,7 @@ class V3GrantsGrantIdMessagesSchedulesApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -474,7 +475,7 @@ class V3GrantsGrantIdMessagesSchedulesApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

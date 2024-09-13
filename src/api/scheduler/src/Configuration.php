@@ -141,6 +141,7 @@ class Configuration
     public function setApiKey(string $apiKeyIdentifier, string $key): static
     {
         $this->apiKeys[$apiKeyIdentifier] = $key;
+
         return $this;
     }
 
@@ -167,6 +168,7 @@ class Configuration
     public function setApiKeyPrefix(string $apiKeyIdentifier, string $prefix): static
     {
         $this->apiKeyPrefixes[$apiKeyIdentifier] = $prefix;
+
         return $this;
     }
 
@@ -192,6 +194,7 @@ class Configuration
     public function setAccessToken(string $accessToken): static
     {
         $this->accessToken = $accessToken;
+
         return $this;
     }
 
@@ -239,6 +242,7 @@ class Configuration
     public function setUsername(string $username): static
     {
         $this->username = $username;
+
         return $this;
     }
 
@@ -262,6 +266,7 @@ class Configuration
     public function setPassword(string $password): static
     {
         $this->password = $password;
+
         return $this;
     }
 
@@ -285,6 +290,7 @@ class Configuration
     public function setHost(string $host): static
     {
         $this->host = $host;
+
         return $this;
     }
 
@@ -309,6 +315,7 @@ class Configuration
     public function setUserAgent(string $userAgent): static
     {
         $this->userAgent = $userAgent;
+
         return $this;
     }
 
@@ -332,6 +339,7 @@ class Configuration
     public function setDebug(bool $debug): static
     {
         $this->debug = $debug;
+
         return $this;
     }
 
@@ -355,6 +363,7 @@ class Configuration
     public function setDebugFile(string $debugFile): static
     {
         $this->debugFile = $debugFile;
+
         return $this;
     }
 
@@ -378,6 +387,7 @@ class Configuration
     public function setTempFolderPath(string $tempFolderPath): static
     {
         $this->tempFolderPath = $tempFolderPath;
+
         return $this;
     }
 
@@ -424,7 +434,7 @@ class Configuration
      */
     public static function toDebugReport(): string
     {
-        $report  = 'PHP SDK (JackWH\NylasV3\Scheduler) Debug Report:' . PHP_EOL;
+        $report = 'PHP SDK (JackWH\NylasV3\Scheduler) Debug Report:' . PHP_EOL;
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
         $report .= '    The version of the OpenAPI document: 1.0.0' . PHP_EOL;
@@ -473,7 +483,7 @@ class Configuration
             [
                 "url" => "https://api.eu.nylas.com",
                 "description" => "EU server",
-            ]
+            ],
         ];
     }
 
@@ -502,7 +512,7 @@ class Configuration
         // go through variable and assign a value
         foreach ($host["variables"] ?? [] as $name => $variable) {
             if (array_key_exists($name, $variables)) { // check to see if it's in the variables provided by the user
-                if (!isset($variable['enum_values']) || in_array($variables[$name], $variable["enum_values"], true)) { // check to see if the value is in the enum
+                if (! isset($variable['enum_values']) || in_array($variables[$name], $variable["enum_values"], true)) { // check to see if the value is in the enum
                     $url = str_replace("{".$name."}", $variables[$name], $url);
                 } else {
                     throw new InvalidArgumentException("The variable `$name` in the host URL has invalid value ".$variables[$name].". Must be ".join(',', $variable["enum_values"]).".");

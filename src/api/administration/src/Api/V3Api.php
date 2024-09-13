@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Administration\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Administration\ApiException;
 use JackWH\NylasV3\Administration\Configuration;
 use JackWH\NylasV3\Administration\HeaderSelector;
@@ -69,7 +69,7 @@ class V3Api
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'detectProvider' => [
             'application/json',
@@ -141,9 +141,9 @@ class V3Api
         ?string $email = null,
         ?bool $all_provider_types = null,
         string $contentType = self::contentTypes['detectProvider'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->detectProviderWithHttpInfo($accept, $email, $all_provider_types, $contentType);
+
         return $response;
     }
 
@@ -166,12 +166,12 @@ class V3Api
         ?string $email = null,
         ?bool $all_provider_types = null,
         string $contentType = self::contentTypes['detectProvider'][0]
-    ): array
-    {
+    ): array {
         $request = $this->detectProviderRequest($accept, $email, $all_provider_types, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -205,7 +205,7 @@ class V3Api
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -231,7 +231,7 @@ class V3Api
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -258,7 +258,7 @@ class V3Api
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -287,7 +287,7 @@ class V3Api
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -299,6 +299,7 @@ class V3Api
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -307,8 +308,10 @@ class V3Api
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -331,8 +334,7 @@ class V3Api
         ?string $email = null,
         ?bool $all_provider_types = null,
         string $contentType = self::contentTypes['detectProvider'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->detectProviderAsyncWithHttpInfo($accept, $email, $all_provider_types, $contentType)
             ->then(
                 function ($response) {
@@ -359,8 +361,7 @@ class V3Api
         $email = null,
         $all_provider_types = null,
         string $contentType = self::contentTypes['detectProvider'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->detectProviderRequest($accept, $email, $all_provider_types, $contentType);
 
@@ -380,12 +381,13 @@ class V3Api
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -416,8 +418,7 @@ class V3Api
         $email = null,
         $all_provider_types = null,
         string $contentType = self::contentTypes['detectProvider'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -471,7 +472,7 @@ class V3Api
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -488,7 +489,7 @@ class V3Api
         }
 
         // this endpoint requires Bearer authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -505,6 +506,7 @@ class V3Api
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -524,7 +526,7 @@ class V3Api
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }
