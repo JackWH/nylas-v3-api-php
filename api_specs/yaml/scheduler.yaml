@@ -1,0 +1,1884 @@
+openapi: 3.1.0
+info:
+  title: Nylas v3 Scheduler APIs
+  version: v3
+  summary: The Nylas APIs for Scheduler
+  description: |
+    <div style="padding:24px; background-color: #F5FFFD; border: 1px solid #00A88C; color: #161717">This API reference documentation covers the <strong>Nylas Scheduler API</strong>. See the see the <strong><a href="/docs/api/v3/admin/">Administration API documentation</a></strong> for information about working with Nylas applications, authentication, connectors, and webhook subscriptions.</div>
+
+    The **Nylas Scheduler API** is designed using the [REST](http://en.wikipedia.org/wiki/Representational_State_Transfer) ideology to provide simple and predictable URIs to access and modify objects. Requests support [standard HTTP methods](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) like `GET`, `PUT`, `POST`, and `DELETE`, and [standard status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html). Response bodies are always UTF-8 encoded JSON objects, unless explicitly documented otherwise.
+
+    ## Updating objects
+
+    `PUT` and `PATCH` requests behave similarly in Nylas v3: when you make a request, Nylas replaces all data in the nested object with the information you define. Because of this, your request might fail if you don't include all mandatory fields.
+
+    Nylas doesn't erase the data from fields that you don't include in your request, so you can define only the mandatory fields and any that you want to update.
+
+    ## Nylas Postman collection
+
+    You can use the [Nylas Postman collection](https://www.postman.com/trynylas/workspace/nylas-api/overview) to quickly start using the Nylas Scheduler API. For more information, check out the [Nylas Postman collection documentation](/docs/v3/api-references/postman/).
+
+    ## Scheduler documentation
+
+    You can find more information about Scheduler in the main documentation set:
+
+    - [Scheduler overview](/docs/v3/scheduler/)
+    - [Scheduler Quickstart guide](/docs/v3/quickstart/scheduler/)
+
+    ## Nylas v3 encoding
+
+    Response bodies are always UTF-8 encoded JSON objects, unless explicitly documented otherwise.
+  contact:
+    url: https://www.nylas.com/
+servers:
+  - url: https://api.us.nylas.com
+    description: US
+  - url: https://api.eu.nylas.com
+    description: EU
+tags:
+  - name: Configurations
+    description: |
+      A configuration is a collection of event settings and preferences. Nylas Scheduler stores Configuration objects in the Scheduler database and loads them as Scheduling Pages in the Scheduler UI.
+
+      A configuration can be either private if it uses a session, or public if it does not. By default, Nylas creates public configurations (`requires_session_auth: false`). To create a private configuration, set `requires_session_auth` to `true`.
+
+      After you create a private configuration, you can make a [`POST /v3/scheduling/sessions` request](/docs/api/v3/scheduler/#post-/v3/scheduling/sessions) that includes the Configuration object ID to create a session.
+
+      ## Configurations scopes
+
+      The table below lists the Configurations endpoints and which scopes they require. The table shortens the full scope URI for space reasons, so add the prefix for the provider when requesting scopes.
+
+      The ☑️ in each column indicates the most restrictive scope you can request for each provider and still use that API. More permissive scopes appear under the minimum option. If you're already using one of the permissive scopes, you don't need to add the more restrictive scope.
+
+      | Endpoint | Google Scopes</br>`https://www.googleapis.com/auth/...` | Microsoft Scopes</br>`https://graph.microsoft.com/...` |
+      | :--- | :--- | :--- |
+      | **POST** `/scheduling/configurations`</br>**PUT** `/scheduling/configuration/<SCHEDULER_CONFIG_ID>` | `/calendar.readonly` ☑️</br>`/calendar` | `Calendars.Read` ☑️</br>`Calendars.ReadWrite` |
+
+      For more information about scopes in Nylas v3, see the [Authentication scopes documentation](/docs/v3/auth/v3-scopes/).
+  - name: Sessions
+    description: |
+      Nylas Scheduler uses session IDs to authorize requests to the [`/v3/scheduling/availability`](/docs/api/v3/scheduler/#get-/v3/scheduling/availability) and [`/v3/scheduling/bookings`](/docs/api/v3/scheduler/#post-/v3/scheduling/bookings) endpoints.
+
+      When you create a session, you must include the ID of an existing [Configuration object](/docs/api/v3/scheduler/#tag--Configurations). Sessions are only required for private configurations (`requires_session_auth: true`).
+
+      ## Time to live
+
+      For security purposes, Nylas recommends you set the `time_to_live` value for each session and refresh the sessions as they expire.
+  - name: Availability
+    description: |
+      Nylas Scheduler uses the `/v3/scheduling/availability` endpoint to retrieve availability information. When you make a request, Nylas validates the provided session ID and uses it to retrieve the related Configuration object.
+
+      ## Availability scopes
+
+      The table below lists the Availability endpoints and which scopes they require. The table shortens the full scope URI for space reasons, so add the prefix for the provider when requesting scopes.
+
+      The ☑️ in each column indicates the most restrictive scope you can request for each provider and still use that API. More permissive scopes appear under the minimum option. If you're already using one of the permissive scopes, you don't need to add the more restrictive scope.
+
+      | Endpoint | Google Scopes</br>`https://www.googleapis.com/auth/...` | Microsoft Scopes</br>`https://graph.microsoft.com/...` |
+      | :--- | :--- | :--- |
+      | **GET** `/scheduling/availability` | `/calendar.readonly` ☑️</br>`/calendar` | `Calendars.Read` ☑️</br>`Calendars.ReadWrite` |
+
+      For more information about scopes in Nylas v3, see the [Authentication scopes documentation](/docs/v3/auth/v3-scopes/).
+  - name: Bookings
+    description: |
+      Nylas Scheduler uses the `/v3/scheduling/bookings` endpoint to manage bookings.
+
+      ## Booking types
+
+      Nylas Scheduler supports two booking types, `booking` and `organizer-confirmation`.
+
+      `booking` represents a regular booking flow. When the booking type is `organizer-confirmation`, Nylas creates an event marked "Pending" in the organizer's calendar. It then sends an confirmation request email to the organizer, which includes a link to a page where the organizer can confirm or cancel the booking.
+
+      ### Finalizing pending bookings
+
+      The [`PUT /v3/scheduling/bookings/{booking_id}` request](/docs/api/v3/scheduler/#put-/v3/scheduling/bookings/-booking_id-) allows the organizer to confirm or cancel a pending booking.
+
+      ## Booking flow
+
+      The Scheduling Component provides information about the selected time slot, and any additional information that the end user added, to the [`/v3/scheduling/bookings` endpoint](/docs/api/v3/scheduler/#post-/v3/scheduling/bookings). The Bookings endpoint performs the following tasks:
+
+      1. Validates the provided session ID and uses it to retrieve the related Configuration object.
+      2. Confirms if the selected time slot is still available.
+      3. Retrieves the booking participant's `grant_id`, using the list of participants' email addresses in the Configuration object.
+      4. Creates an event.
+          If the booking type is set to `organizer-confirmation`, a placeholder event is created in the organizer's calendar.
+      5. Creates a booking entry in the database and maps the provider's event ID and Scheduler's `booking_id`.
+          If the booking type is set to `organizer-confirmation`, a booking entry with the `pending` status is created. The booking entry includes the placeholder event's `booking_id` and the `additional_fields` data provided in the request.
+      6. Nylas creates a booking reference based on the configuration ID and the booking ID. You can use the booking reference to reschedule and cancel the event.
+      7. (Optional) Emits a booking (`booking.created`) or a pending booking (`booking.pending`) webhook, depending on the booking type.
+
+      ## Bookings scopes
+
+      The table below lists the Bookings endpoints and which scopes they require. The table shortens the full scope URI for space reasons, so add the prefix for the provider when requesting scopes.
+
+      The ☑️ in each column indicates the most restrictive scope you can request for each provider and still use that API. More permissive scopes appear under the minimum option. If you're already using one of the permissive scopes, you don't need to add the more restrictive scope.
+
+      | Endpoint | Google Scopes</br>`https://www.googleapis.com/auth/...` | Microsoft Scopes</br>`https://graph.microsoft.com/...` |
+      | :--- | :--- | :--- |
+      | **POST** `/scheduling/bookings`</br>**DELETE** `/scheduling/bookings/<BOOKING_ID>`</br>**PATCH** `/scheduling/bookings/<BOOKING_ID>` | `/calendar.events` ☑️</br>`/calendar` | `Calendars.ReadWrite` ☑️ |
+
+      For more information about scopes in Nylas v3, see the [Authentication scopes documentation](/docs/v3/auth/v3-scopes/).
+paths:
+  /v3/grants/{grant_id}/scheduling/configurations:
+    parameters:
+      - schema:
+          type: string
+        name: grant_id
+        in: path
+        required: true
+        description: ID of the grant to access. Use `/me/` to refer to the grant associated with an access token.
+    post:
+      summary: Create a Configuration object
+      tags:
+        - Configurations
+      x-scopes:
+        google:
+          min: https://www.googleapis.com/auth/calendar.readonly
+          others: https://www.googleapis.com/auth/calendar
+        microsoft:
+          min: https://graph.microsoft.com/Calendars.Read
+          others: https://graph.microsoft.com/Calendars.ReadWrite
+      operationId: post-configurations
+      description: Creates a Configuration object that you use to define the settings and preferences for a scheduling session.
+      x-code-samples:
+        - lang: bash
+          label: cURL
+          source: |-
+            curl --request POST \
+              --url "https://api.us.nylas.com/v3/grants/<NYLAS_GRANT_ID>/scheduling/configurations" \
+              --header 'Accept: application/json' \
+              --header 'Authorization: Bearer <NYLAS_API_KEY>' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                "requires_session_auth": false,
+                "participants": [
+                  {
+                    "name": "Test",
+                    "email": "nylas_test_8",
+                    "is_organizer": true,
+                    "availability": {
+                      "calendar_ids": [
+                        "primary"
+                      ]
+                    },
+                    "booking": {
+                      "calendar_id": "primary"
+                    }
+                  }
+                ],
+                "availability": {
+                  "duration_minutes": 30
+                },
+                "event_booking": {
+                  "title": "My test event"
+                }
+              }'
+      security:
+        - NYLAS_API_KEY: []
+      parameters: []
+      requestBody:
+        $ref: '#/components/requestBodies/configuration'
+      responses:
+        '200':
+          $ref: '#/components/responses/configuration'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '429':
+          $ref: '#/components/responses/429'
+        '504':
+          $ref: '#/components/responses/504'
+    get:
+      summary: Return all Configuration objects
+      tags:
+        - Configurations
+      responses:
+        '200':
+          $ref: '#/components/responses/configurations'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '429':
+          $ref: '#/components/responses/429'
+        '504':
+          $ref: '#/components/responses/504'
+      operationId: get-configurations
+      description: Returns all Configuration objects.
+      x-code-samples:
+        - lang: bash
+          label: cURL
+          source: |-
+            curl --request GET \
+              --url "https://api.us.nylas.com/v3/grants/<NYLAS_GRANT_ID>/scheduling/configurations" \
+              --header 'Accept: application/json' \
+              --header 'Authorization: Bearer <NYLAS_API_KEY>' \
+              --header 'Content-Type: application/json'
+      security:
+        - NYLAS_API_KEY: []
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/page_token'
+  /v3/grants/{grant_id}/scheduling/configurations/{configuration_id}:
+    parameters:
+      - schema:
+          type: string
+        name: grant_id
+        in: path
+        required: true
+        description: ID of the grant to access. Use `/me/` to refer to the grant associated with an access token.
+      - schema:
+          type: string
+        name: configuration_id
+        in: path
+        required: true
+        description: The ID of the specific Configuration object you want to work with.
+    get:
+      summary: Return a Configuration object
+      tags:
+        - Configurations
+      responses:
+        '200':
+          $ref: '#/components/responses/configuration'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '504':
+          $ref: '#/components/responses/504'
+      operationId: get-configurations-id
+      description: Returns a specific Configuration object.
+      x-code-samples:
+        - lang: bash
+          label: cURL
+          source: |-
+            curl --request GET \
+              --url "https://api.us.nylas.com/v3/grants/<NYLAS_GRANT_ID>/scheduling/configurations/<SCHEDULER_CONFIG_ID>" \
+              --header 'Accept: application/json' \
+              --header 'Authorization: Bearer <NYLAS_API_KEY>' \
+              --header 'Content-Type: application/json'
+      security:
+        - NYLAS_API_KEY: []
+    put:
+      summary: Update a configuration
+      tags:
+        - Configurations
+      x-scopes:
+        google:
+          min: https://www.googleapis.com/auth/calendar.readonly
+          others: https://www.googleapis.com/auth/calendar
+        microsoft:
+          min: https://graph.microsoft.com/Calendars.Read
+          others: https://graph.microsoft.com/Calendars.ReadWrite
+      responses:
+        '200':
+          $ref: '#/components/responses/configuration'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '504':
+          $ref: '#/components/responses/504'
+      operationId: put-configurations-id
+      description: |-
+        Update a specific configuration.
+
+        When you make a `PUT` request, Nylas replaces all data in the nested object with the information
+        included in your request. For more information, see
+        [Updating objects](/docs/api/v3/scheduler/#overview--updating-objects).
+      x-code-samples:
+        - lang: bash
+          label: cURL
+          source: |-
+            curl --request PUT \
+              --url "https://api.us.nylas.com/v3/grants/<NYLAS_GRANT_ID>/scheduling/configurations/<SCHEDULER_CONFIG_ID>" \
+              --header 'Accept: application/json' \
+              --header 'Authorization: Bearer <NYLAS_API_KEY>' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                "scheduler": {
+                  "rescheduling_url": "https://www.example.com/reschdule/:booking_ref",
+                  "cancellation_url": "https://www.example.com/cancel/:booking_ref"
+                }
+              }'
+      security:
+        - NYLAS_API_KEY: []
+      requestBody:
+        $ref: '#/components/requestBodies/configuration'
+    delete:
+      summary: Delete a Configuration object
+      tags:
+        - Configurations
+      responses:
+        '200':
+          $ref: '#/components/responses/200-delete'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '504':
+          $ref: '#/components/responses/504'
+      operationId: delete-configurations-id
+      description: Deletes a specific Configuration object. You cannot delete a Configuration object that has active sessions.
+      x-code-samples:
+        - lang: bash
+          label: cURL
+          source: |-
+            curl --request DELETE \
+              --url "https://api.us.nylas.com/v3/grants/<NYLAS_GRANT_ID>/scheduling/configurations/<SCHEDULER_CONFIG_ID>" \
+              --header 'Accept: application/json' \
+              --header 'Authorization: Bearer <NYLAS_API_KEY>' \
+              --header 'Content-Type: application/json'
+      security:
+        - NYLAS_API_KEY: []
+  /v3/scheduling/sessions:
+    post:
+      summary: Create a session
+      tags:
+        - Sessions
+      operationId: post-sessions
+      description: Creates a new short-lived session that you can pass to the Scheduling Component to enforce end-user authentication. Your request must include the ID of an existing Configuration object.
+      x-code-samples:
+        - lang: bash
+          label: cURL
+          source: |-
+            curl --request POST \
+              --url "https://api.us.nylas.com/v3/scheduling/sessions" \
+              --header 'Accept: application/json' \
+              --header 'Authorization: Bearer <NYLAS_API_KEY>' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                "configuration_id": "AAAA-BBBB-1111-2222",
+                "time_to_live": 10
+              }'
+      security:
+        - NYLAS_API_KEY: []
+      parameters: []
+      requestBody:
+        $ref: '#/components/requestBodies/session_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/session_create'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '429':
+          $ref: '#/components/responses/429'
+        '504':
+          $ref: '#/components/responses/504'
+  /v3/scheduling/sessions/{session_id}:
+    parameters:
+      - schema:
+          type: string
+        name: session_id
+        in: path
+        required: true
+        description: The ID of the session to modify.
+    delete:
+      summary: Delete a session
+      tags:
+        - Sessions
+      operationId: delete-session
+      description: Deletes a specific session.
+      x-code-samples:
+        - lang: bash
+          label: cURL
+          source: |-
+            curl --request DELETE \
+              --url "https://api.us.nylas.com/v3/scheduling/sessions/<SCHEDULER_SESSION_ID>" \
+              --header 'Accept: application/json' \
+              --header 'Authorization: Bearer <NYLAS_API_KEY>' \
+              --header 'Content-Type: application/json'
+      security:
+        - NYLAS_API_KEY: []
+      responses:
+        '200':
+          $ref: '#/components/responses/session_delete'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '429':
+          $ref: '#/components/responses/429'
+        '504':
+          $ref: '#/components/responses/504'
+  /v3/scheduling/availability:
+    parameters:
+      - schema:
+          type: string
+        name: start_time
+        in: query
+        required: true
+        description: A Unix timestamp for the start time to check availability for.
+      - schema:
+          type: string
+        name: end_time
+        in: query
+        required: true
+        description: A Unix timestamp for the end time to check availability for.
+      - schema:
+          type: string
+        name: configuration_id
+        in: query
+        required: false
+        description: The ID of the Configuration object whose settings are used for calculating availability. If you're using session authentication (`requires_session_auth` is set to `true`), `configuration_id` is not required.
+      - schema:
+          type: string
+        name: slug
+        in: query
+        required: false
+        description: The slug of the Configuration object. You can use this with the `client_id` instead of using the `configuration_id`. If you're using session authentication (`requires_session_auth` is set to `true`) or using the `configuration_id`, `slug` is not required.
+      - schema:
+          type: string
+        name: client_id
+        in: query
+        required: false
+        description: The client ID that was used to create the Configuration object. `client_id` is required only if you're using `slug`.
+      - schema:
+          type: string
+        name: booking_id
+        in: query
+        required: false
+        description: This is the ID of the booking to reschedule, if you are checking availability to reschedule a round-robin booking. Required only if `availability_method` is `max-fairness` or `max-availability`. See [Retrieving booking IDs](/docs/v3/scheduler/retrieve-booking-ids/) for more information.
+    get:
+      summary: Get Availability
+      tags:
+        - Availability
+      x-scopes:
+        google:
+          min: https://www.googleapis.com/auth/calendar.readonly
+          others: https://www.googleapis.com/auth/calendar
+        microsoft:
+          min: https://graph.microsoft.com/Calendars.Read
+          others: https://graph.microsoft.com/Calendars.ReadWrite
+      responses:
+        '200':
+          $ref: '#/components/responses/availability'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '504':
+          $ref: '#/components/responses/504'
+      operationId: get-availability
+      description: Gets available time slots within the specified time range, using the rules defined in the Configuration object.</br></br>   Nylas validates the provided session ID and uses it to retrieve the related Configuration object. If you created a [public configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't need to include the `Authorization` request header with a session ID, but you must pass the Configuration object ID as a query parameter.
+      x-code-samples:
+        - lang: bash
+          label: cURL (Public)
+          source: |-
+            curl --request GET \
+              --url 'https://api.us.nylas.com/v3/scheduling/availability?start_time=1709643600&end_time=1709665200&configuration_id=<SCHEDULER_CONFIG_ID>' \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json'
+        - lang: bash
+          label: cURL (Private)
+          source: |-
+            curl --request GET \
+              --url 'https://api.us.nylas.com/v3/scheduling/availability?start_time=1709643600&end_time=1709665200' \
+              --header 'Accept: application/json' \
+              --header 'Authorization: Bearer <SCHEDULER_SESSION_ID>' \
+              --header 'Content-Type: application/json'
+      security:
+        - SCHEDULER_SESSION_TOKEN: []
+  /v3/scheduling/bookings:
+    parameters:
+      - schema:
+          type: string
+        name: timezone
+        in: query
+        required: false
+        description: The timezone to use for the booking. If not provided, Nylas uses the timezone from the Configuration object.
+      - schema:
+          type: string
+        name: configuration_id
+        in: query
+        required: false
+        description: The ID of the Configuration object whose settings are used for calculating availability. If you're using session authentication (`requires_session_auth` is set to `true`), `configuration_id` is not required.
+      - schema:
+          type: string
+        name: slug
+        in: query
+        required: false
+        description: The slug of the Configuration object. You can use this with the `client_id` instead of using the `configuration_id`. If you're using session authentication (`requires_session_auth` is set to `true`) or using the `configuration_id`, `slug` is not required.
+      - schema:
+          type: string
+        name: client_id
+        in: query
+        required: false
+        description: The client ID that was used to create the Configuration object. `client_id` is required only if you're using `slug`.
+    post:
+      summary: Book an event
+      tags:
+        - Bookings
+      x-scopes:
+        google:
+          min: https://www.googleapis.com/auth/calendar.events
+          others: https://www.googleapis.com/auth/calendar
+        microsoft:
+          min: https://graph.microsoft.com/Calendars.ReadWrite
+          others: ''
+      requestBody:
+        $ref: '#/components/requestBodies/booking_create'
+      responses:
+        '200':
+          $ref: '#/components/responses/booking_create'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '504':
+          $ref: '#/components/responses/504'
+      operationId: post-bookings
+      description: |-
+        Books an event with the participants listed in the session's Configuration object, using the details from the Configuration object. The `start_time` and `end_time` must correspond to a valid time slot returned by the [Scheduling  Availability endpoint](/docs/api/v3/scheduler/#get-/v3/scheduling/availability) using the same configuration.</br></br>
+         Nylas validates the session ID and uses it to retrieve the related Configuration object. If you created a [public configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't need to include the `Authorization` request header with a session ID, but you must pass the Configuration object ID as a query parameter.
+      x-code-samples:
+        - lang: bash
+          label: cURL (Public)
+          source: |-
+            curl --request GET \
+              --url 'https://api.us.nylas.com/v3/scheduling/bookings?configuration_id=<SCHEDULER_CONFIG_ID>' \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                "start_time": 1709643600,
+                "end_time": 1709645400,
+                "participants": [],
+                "guest": {
+                  "name": "Jane Doe",
+                  "email": "jane.doe@example.com"
+                }
+              }'
+        - lang: bash
+          label: cURL (Private)
+          source: |-
+            curl --request POST \
+              --url 'https://api.us.nylas.com/v3/scheduling/bookings' \
+              --header 'Accept: application/json' \
+              --header 'Authorization: Bearer <SCHEDULER_SESSION_ID>' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                "start_time": 1709643600,
+                "end_time": 1709645400,
+                "participants": [],
+                "guest": {
+                  "name": "Jane Doe",
+                  "email": "jane.doe@example.com"
+                }
+              }'
+      security:
+        - SCHEDULER_SESSION_TOKEN: []
+  /v3/scheduling/bookings/{booking_id}:
+    parameters:
+      - schema:
+          type: string
+        name: booking_id
+        in: path
+        required: true
+        description: ID of the booking object to access.
+      - schema:
+          type: string
+        name: configuration_id
+        in: query
+        required: false
+        description: The ID of the Configuration object whose settings are used for calculating availability. If you're using session authentication (`requires_session_auth` is set to `true`), `configuration_id` is not required.
+      - schema:
+          type: string
+        name: slug
+        in: query
+        required: false
+        description: The slug of the Configuration object. You can use this with the `client_id` instead of using the `configuration_id`. If you're using session authentication (`requires_session_auth` is set to `true`) or using the `configuration_id`, `slug` is not required.
+      - schema:
+          type: string
+        name: client_id
+        in: query
+        required: false
+        description: The client ID that was used to create the Configuration object. `client_id` is required only if you're using `slug`.
+    get:
+      summary: Return a Booking object
+      tags:
+        - Bookings
+      x-scopes:
+        google:
+          min: https://www.googleapis.com/auth/calendar.events
+          others: https://www.googleapis.com/auth/calendar
+        microsoft:
+          min: https://graph.microsoft.com/Calendars.ReadWrite
+          others: ''
+      responses:
+        '200':
+          $ref: '#/components/responses/booking_create'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '504':
+          $ref: '#/components/responses/504'
+      operationId: get-bookings-id
+      description: Returns a specific booking object.</br></br>   Nylas validates the provided session ID and uses it to retrieve the related Configuration object. If you created a [public configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't need to include the `Authorization` request header with a session ID, but you must pass the Configuration object ID as a query parameter.
+      x-code-samples:
+        - lang: bash
+          label: cURL (Public)
+          source: |-
+            curl --request GET \
+              --url 'https://api.us.nylas.com/v3/scheduling/bookings/<BOOKING_ID>?configuration_id=<SCHEDULER_CONFIG_ID>' \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json'
+        - lang: bash
+          label: cURL (Private)
+          source: |-
+            curl --request GET \
+              --url 'https://api.us.nylas.com/v3/scheduling/bookings/<BOOKING_ID>' \
+              --header 'Accept: application/json' \
+              --header 'Authorization: Bearer <SCHEDULER_SESSION_ID>' \
+              --header 'Content-Type: application/json'
+      security:
+        - SCHEDULER_SESSION_TOKEN: []
+    patch:
+      summary: Reschedule a booking
+      tags:
+        - Bookings
+      x-scopes:
+        google:
+          min: https://www.googleapis.com/auth/calendar.events
+          others: https://www.googleapis.com/auth/calendar
+        microsoft:
+          min: https://graph.microsoft.com/Calendars.ReadWrite
+          others: ''
+      requestBody:
+        $ref: '#/components/requestBodies/booking_update'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '504':
+          $ref: '#/components/responses/504'
+      operationId: patch-bookings-id
+      description: |-
+        Reschedule a specific booking. Nylas also updates the associated event on the provider.
+
+        Nylas validates the provided session ID and uses it to retrieve the related Configuration. If you
+        created a [public configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't need to
+        include the `Authorization` request header with a session ID, but you must pass the Configuration
+        ID as a query parameter.
+
+        When you make a `PATCH` request, Nylas replaces all data in the nested object with the information
+        included in your request. For more information, see
+        [Updating objects](/docs/api/v3/scheduler/#overview--updating-objects).
+      x-code-samples:
+        - lang: bash
+          label: cURL (Public)
+          source: |-
+            curl --request PATCH \
+              --url 'https://api.us.nylas.com/v3/scheduling/bookings/<BOOKING_ID>?configuration_id=<SCHEDULER_CONFIG_ID>' \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                "start_time": 1708714800,
+                "end_time": 1708722000
+              }'
+        - lang: bash
+          label: cURL (Private)
+          source: |-
+            curl --request PATCH \
+              --url 'https://api.us.nylas.com/v3/scheduling/bookings/<BOOKING_ID>' \
+              --header 'Accept: application/json' \
+              --header 'Authorization: Bearer <SCHEDULER_SESSION_ID>' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                "start_time": 1708714800,
+                "end_time": 1708722000
+              }'
+      security:
+        - SCHEDULER_SESSION_TOKEN: []
+    put:
+      summary: Confirm a booking
+      tags:
+        - Bookings
+      x-scopes:
+        google:
+          min: https://www.googleapis.com/auth/calendar.events
+          others: https://www.googleapis.com/auth/calendar
+        microsoft:
+          min: https://graph.microsoft.com/Calendars.ReadWrite
+          others: ''
+      requestBody:
+        $ref: '#/components/requestBodies/booking_confirm'
+      responses:
+        '200':
+          $ref: '#/components/responses/booking_confirm'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '504':
+          $ref: '#/components/responses/504'
+      operationId: put-bookings-id
+      description: |-
+        Confirm or cancel a specific pending booking. Nylas also updates the event linked to the booking
+        on the provider.
+
+        Nylas validates the provided session ID and uses it to retrieve the related Configuration. If you
+        created a [public configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't need to
+        include the `Authorization` request header with a session ID, but you must pass the Configuration
+        ID as a query parameter.
+
+        When you make a `PUT` request, Nylas replaces all data in the nested object with the information
+        included in your request. For more information, see
+        [Updating objects](/docs/api/v3/scheduler/#overview--updating-objects).
+      x-code-samples:
+        - lang: bash
+          label: cURL (Public)
+          source: |-
+            curl --request PUT \
+              --url 'https://api.us.nylas.com/v3/scheduling/bookings/<BOOKING_ID>?configuration_id=<SCHEDULER_CONFIG_ID>' \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                "salt": -zgLLAuk_qtcsw,
+                "status": "cancelled",
+                "cancellation_reason": "I am no longer available at this time."
+              }'
+        - lang: bash
+          label: cURL (Private)
+          source: |-
+            curl --request PUT \
+              --url 'https://api.us.nylas.com/v3/scheduling/bookings/<BOOKING_ID>' \
+              --header 'Accept: application/json' \
+              --header 'Authorization: Bearer <SCHEDULER_SESSION_ID>' \
+              --header 'Content-Type: application/json' \
+              --data '{
+                "salt": -zgLLAuk_qtcsw,
+                "status": "cancelled",
+                "cancellation_reason": "I am no longer available at this time."
+              }'
+      security:
+        - SCHEDULER_SESSION_TOKEN: []
+    delete:
+      summary: Delete a booking
+      tags:
+        - Bookings
+      x-scopes:
+        google:
+          min: https://www.googleapis.com/auth/calendar.events
+          others: https://www.googleapis.com/auth/calendar
+        microsoft:
+          min: https://graph.microsoft.com/Calendars.ReadWrite
+          others: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                cancellation_reason:
+                  type: string
+                  description: The reason that the booking is being cancelled.
+            example:
+              cancellation_reason: I am no longer available at this time.
+      responses:
+        '200':
+          $ref: '#/components/responses/200-delete'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '504':
+          $ref: '#/components/responses/504'
+      operationId: delete-bookings-id
+      description: Deletes an specific booking. Nylas also cancels the event linked to the booking on the provider.</br></br>   Nylas validates the provided session ID and uses it to retrieve the related Configuration object. If you created a [public configuration](/docs/api/v3/scheduler/#tag--Configurations), you don't need to include the `Authorization` request header with a session ID, but you must pass the Configuration object ID as a query parameter.
+      x-code-samples:
+        - lang: bash
+          label: cURL (Public)
+          source: |-
+            curl --request DELETE \
+              --url 'https://api.us.nylas.com/v3/scheduling/bookings/<BOOKING_ID>?configuration_id=<SCHEDULER_CONFIG_ID>' \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json'
+        - lang: bash
+          label: cURL (Private)
+          source: |-
+            curl --request DELETE \
+              --url 'https://api.us.nylas.com/v3/scheduling/bookings/<BOOKING_ID>' \
+              --header 'Accept: application/json' \
+              --header 'Authorization: Bearer <SCHEDULER_SESSION_ID>' \
+              --header 'Content-Type: application/json'
+      security:
+        - SCHEDULER_SESSION_TOKEN: []
+components:
+  schemas:
+    common_response_with_cursor:
+      properties:
+        request_id:
+          type: string
+          description: The request ID.
+        data:
+          type: object
+          description: The response object.
+        next_cursor:
+          type: string
+          description: The next cursor for the request.
+      example:
+        request_id: 5fa64c92-e840-4357-86b9-2aa364d35b88
+        next_cursor: CigKGjRlaDdyNGQydTFqbWJ0bGo5a2QxdWJtdDZnGAEggIDAu7fw7bEYGg8IABIAGPjh2PGEi_0CIAEiBwgCEOqs6i4=
+    configuration_availability_open_hours:
+      description: ''
+      type: object
+      title: Open Hours
+      examples: []
+      properties:
+        days:
+          type: array
+          description: The days of the week that the open hour settings are applied to. Sunday corresponds to `0`, and Saturday corresponds to `6`.
+          items:
+            type: integer
+          example:
+            - 0
+            - 1
+            - 2
+        start:
+          type: string
+          minLength: 1
+          description: The start time in 24-hour time format. Single-digit hours doesn't have a leading zero. The earliest start time is `0:00`, and the latest start time is `23:49`.
+          example: '10:00'
+        end:
+          type: string
+          minLength: 1
+          description: The end time in a 24-hour time format. Single-digit hours doesn't have a leading zero.
+          example: '14:00'
+        exdates:
+          type: array
+          description: A list of dates that are excluded from the open hours. Dates should be formatted as `YYYY-MM-DD`.
+          items:
+            type: string
+          example:
+            - '2006-01-18'
+    configuration_participants_availability:
+      _title: participants-availability
+      type: object
+      required:
+        - calendar_ids
+      description: The availability data for the participant. If omitted, the participant is considered to be available at all times. At least one participant must have availability data.
+      properties:
+        calendar_ids:
+          type: array
+          description: A list of calendar IDs associated with the participant's email address. These calendars are used to check the participant's availability.
+          items:
+            type: string
+        open_hours:
+          type: array
+          description: An array of objects for the participant's open hours. Nylas searches for free time slots within these open hours.
+          items:
+            $ref: '#/components/schemas/configuration_availability_open_hours'
+    configuration_participants_booking:
+      _title: participants-booking
+      type: object
+      required:
+        - calendar_id
+      description: The booking data for the participant. If omitted, the participant is not included in the booked event. At least one participant must have booking data.
+      properties:
+        calendar_id:
+          type: string
+          description: The calendar ID that the event is created in.
+    configuration_participants:
+      _title: participants
+      type: object
+      required:
+        - email
+      properties:
+        name:
+          type: string
+          description: The participant's name.
+        email:
+          type: string
+          description: The participant's email address.
+        is_organizer:
+          type: boolean
+          default: false
+          description: Whether the participant is the organizer of the event. For non-round-robin meetings, one of the participants must be specified as an organizer. For round-robin meetings, remove the `is_organizer` key/value pair or set `is_organizer` to `false` for all participants.
+        availability:
+          $ref: '#/components/schemas/configuration_participants_availability'
+        booking:
+          $ref: '#/components/schemas/configuration_participants_booking'
+        timezone:
+          type: string
+          description: The participant's timezone. This is used when calculating the participant's open hours and in email notifications.
+    availability_buffer:
+      title: buffer
+      type: object
+      properties:
+        before:
+          type: integer
+          description: |-
+            The amount of buffer time to add before meetings, in increments of five minutes. For example,
+            if an account has a meeting scheduled from 10:00–11:00a.m., and you set a `before` buffer of
+            30 minutes, Nylas treats 9:30–11:00a.m. as busy.
+
+            This value must be between 0 and 120, and must be divisible by 5.
+          default: 0
+          minimum: 0
+          maximum: 120
+        after:
+          type: integer
+          description: |-
+            The amount of buffer time to add after meetings, in increments of five minutes. For example, if
+            an account has a meeting scheduled from 10:00–11:00a.m., and you set an `after` buffer of 15
+            minutes, Nylas treats 10:00–11:15a.m. as busy.
+
+            This value must be between 0 and 120, and must be divisible by 5.
+          default: 0
+          minimum: 0
+          maximum: 120
+    configuration_availability_rules:
+      _title: configuration_availability_rules
+      type: object
+      properties:
+        availability_method:
+          description: The method that Nylas uses to calculate availability for all participants. For one-on-one meetings, the `availability_method` is always `collective`.
+          type: string
+          default: collective
+          enum:
+            - collective
+            - max-fairness
+            - max-availability
+        buffer:
+          type: object
+          description: The amount of buffer time to add around existing meetings, in minutes. For example, if an account has a meeting scheduled from 10–11a.m., and you set a buffer of 30 minutes, Nylas treats 9:30–11:30a.m. as busy.
+          $ref: '#/components/schemas/availability_buffer'
+        default_open_hours:
+          type: array
+          description: A default set of open hours to apply to all participants. You can overwrite these open hours for individual participants by specifying `open_hours` on the participant object.
+          items:
+            $ref: '#/components/schemas/configuration_availability_open_hours'
+    configuration_availability:
+      _title: availability
+      type: object
+      description: The rules that determine the available time slots for the event.
+      required:
+        - duration_minutes
+      properties:
+        duration_minutes:
+          type: integer
+          description: The total number of minutes the event should last.
+        interval_minutes:
+          type: integer
+          description: The interval between meetings. Nylas checks from the nearest interval of the passed `start_time`. For example, you schedule 30-minute meetings (`duration_minutes`) with 15 minutes between them (`interval_minutes`). If you have a meeting starting at 9:59, the API returns times starting at 10:00 (10:00-10:30, 10:15-10:45).
+        round_to:
+          type: integer
+          default: 15
+          description: Nylas rounds each time slot to the nearest `round_to` value. For example, if a time slot starts at 9:05a.m. and `round_to` is set to `15`, Nylas rounds it to 9:15a.m. Must be a multiple of 5 minutes.
+        availability_rules:
+          $ref: '#/components/schemas/configuration_availability_rules'
+    event_conferencing_request:
+      _title: Conferencing
+      type: object
+      description: |-
+        An object that allows you to automatically create a conference or enter conferencing details manually.
+
+        You _cannot_ use `autocreate` and `details` in the same request.
+      properties:
+        provider:
+          type: string
+          minLength: 1
+          enum:
+            - Google Meet
+            - Zoom Meeting
+            - Microsoft Teams
+      oneOf:
+        - properties:
+            autocreate:
+              type: object
+              description: |-
+                Include `autocreate` in your request to indicate that you want Nylas to
+                automatically create conferencing details. If you specify the provider as `Zoom Meeting`, you must also include the `conf_grant_id` for the user creating the event.
+
+                You can include additional provider settings in `autocreate.settings`, but Nylas does _not_ validate them.
+        - properties:
+            details:
+              type: object
+              oneOf:
+                - title: Google Meet
+                  description: An object that contains Google Meet conferencing details.
+                  properties:
+                    phone:
+                      type: array
+                      items:
+                        type: string
+                      description: |-
+                        The phone number associated with the Google Meet conference. This array accepts only
+                        one phone number.
+                    pin:
+                      type: string
+                      description: The PIN associated with the Google Meet conference, if applicable.
+                    url:
+                      type: string
+                      description: The URL for the Google Meet conference.
+                - title: Zoom Meeting
+                  description: An object that contains Zoom conferencing details.
+                  properties:
+                    meeting_code:
+                      type: string
+                      description: A unique ID associated with the Zoom conference.
+                    password:
+                      type: string
+                      description: The password for the Zoom conference, if applicable.
+                    url:
+                      type: string
+                      description: The URL for the Zoom conference.
+                - title: Microsoft Teams
+                  description: An object that contains Microsoft Teams conferencing details.
+                  properties:
+                    url:
+                      type: string
+                      description: The URL for the Microsoft Teams conference.
+    configuration_event_booking:
+      _title: event_booking
+      type: object
+      required:
+        - title
+      description: The booking data for the event.
+      properties:
+        title:
+          type: string
+          description: The title of the event.
+        description:
+          type: string
+          description: The description of the event.
+        location:
+          type: string
+          description: The location of the event.
+        timezone:
+          type: string
+          minLength: 1
+          description: The timezone for displaying the times in confirmation email messages and reminders. The timezone must be an [IANA time zone database](https://en.wikipedia.org/wiki/Tz_database) formatted string. For example, `America/New_York`.
+          example: America/Chicago
+        booking_type:
+          type: string
+          description: |-
+            The type of booking. If set to `booking`, Scheduler follows the [standard booking flow](/docs/v3/scheduler/customize-booking-flows/) and instantly creates the event.
+            If set to `organizer-confirmation`, Scheduler creates an event marked "Pending" in the organizer's calendar and sends an confirmation request email to the organizer.
+            The confirmation request email includes a link to a page where the organizer can confirm or cancel the booking.
+          enum:
+            - booking
+            - organizer-confirmation
+          default: booking
+        conferencing:
+          $ref: '#/components/schemas/event_conferencing_request'
+        disable_emails:
+          type: boolean
+          description: If `true`, Nylas doesn't send any email messages when an event is booked, cancelled, or rescheduled.
+    configuration_scheduler_additional_fields:
+      _title: additional-fields
+      type: object
+      required:
+        - label
+        - type
+        - required
+      description: 'The definitions for additional fields to be displayed in the Scheduler UI. Guest will see the additional fields on the Scheduling Page when they book an event. '
+      properties:
+        label:
+          type: string
+          description: The text label to be displayed in the Scheduler UI.
+        type:
+          type: string
+          description: The field type. Supported values are `text`, `multi_line_text`, `email`, `phone_number`, `dropdown`, `date`, `checkbox`, and `radio_button`.
+        required:
+          type: boolean
+          description: Whether the field is required to be filled out by the guest when booking an event.
+        pattern:
+          type: string
+          description: A regular expression pattern that the value of the field must match.
+        order:
+          type: integer
+          description: The order in which the field will be displayed in the Scheduler UI. Fields with lower order values will be displayed first.
+        options:
+          type: array
+          description: A list of options for the `dropdown` or `radio_button` types. This field is required for the `dropdown` and `radio_button` types.
+          items:
+            type: string
+    configuration_scheduler_email_template_booking_confirmed:
+      _title: email_template_booking_confirmed
+      type: object
+      description: Configurable settings specifically for booking confirmed emails.
+      properties:
+        title:
+          type: string
+          description: The title to replace the default 'Booking Confirmed' title. This doesn't change the email subject line. Only visible in emails sent to guests.
+        body:
+          type: string
+          description: The additional body to be appended after the default body. Only visible in emails sent to guests.
+    configuration_scheduler_email_template:
+      _title: email_template
+      type: object
+      description: Configurable settings for booking emails.
+      properties:
+        logo:
+          type: string
+          description: The URL to a custom logo that appears at the top of the booking email. Replaces the default Nylas logo. The URL must be publicly accessible.
+        booking_confirmed:
+          $ref: '#/components/schemas/configuration_scheduler_email_template_booking_confirmed'
+    configuration_scheduler:
+      type: object
+      properties:
+        additional_fields:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/configuration_scheduler_additional_fields'
+        available_days_in_future:
+          type: integer
+          description: The number of days in the future that Scheduler is available for scheduling events.
+          default: 30
+        min_booking_notice:
+          type: integer
+          description: The minimum number of minutes in the future that a user can make a new booking.
+          default: 60
+        min_cancellation_notice:
+          type: integer
+          description: The minimum number of minutes before a booking can be cancelled.
+          default: 0
+        cancellation_policy:
+          type: string
+          description: A message about the cancellation policy to display to users when booking an event.
+        rescheduling_url:
+          type: string
+          description: The URL used to reschedule bookings. This URL is included in confirmation email messages.
+        cancellation_url:
+          type: string
+          description: The URL used to cancel bookings. This URL is included in confirmation email messages.
+        organizer_confirmation_url:
+          type: string
+          description: The URL used to confirm or cancel pending bookings. This URL is included in booking request email messages.
+        confirmation_redirect_url:
+          type: string
+          description: The custom URL to redirect to once the booking is confirmed.
+        hide_rescheduling_options:
+          type: boolean
+          description: If `true`, the option to reschedule an event is hidden in booking confirmations and email notifications.
+          default: false
+        hide_cancellation_options:
+          type: boolean
+          description: If `true`, the option to cancel an event is hidden in booking confirmations and email notifications.
+          default: false
+        hide_additional_guests:
+          type: boolean
+          description: Whether to hide the **Additional guests** field on the Scheduling Page. If `true`, guests cannot invite additional guests to the event.
+          default: false
+        email_template:
+          $ref: '#/components/schemas/configuration_scheduler_email_template'
+    configuration_appearance:
+      _title: additional-fields
+      type: object
+      description: Appearance settings definitions for the Scheduling Page.
+      properties:
+        company_logo_url:
+          type: string
+          description: The URL of the company logo displayed on the Scheduling Page. If not set, Scheduler displays the Nylas logo.
+        color:
+          type: string
+          description: The primary color of the Scheduling Page.
+        submit_button_label:
+          type: string
+          description: The custom text label for the Submit button.
+        thank_you_message:
+          type: string
+          description: The custom thank you message on the confirmation page.
+    configuration:
+      type: object
+      required:
+        - participants
+        - availability
+        - event_booking
+      properties:
+        slug:
+          type: string
+          description: The slug of the Configuration object. This is an optional, unique identifier for the Configuration object, and you can use the slug instead of the `configuration_id` when making requests to other Scheduling endpoints. Slugs are unique to the Nylas application.
+        requires_session_auth:
+          type: boolean
+          default: false
+          description: If `true`, the scheduling [Availability](/docs/api/v3/scheduler/#get-/v3/scheduling/availability) and [Bookings](/docs/api/v3/scheduler/#post-/v3/scheduling/bookings) endpoints require a valid session ID to authenticate requests when you use this configuration.
+        participants:
+          type: array
+          description: The list of participants that is included in the scheduled event. All participants must have a valid Nylas grant.
+          items:
+            $ref: '#/components/schemas/configuration_participants'
+        availability:
+          $ref: '#/components/schemas/configuration_availability'
+        event_booking:
+          $ref: '#/components/schemas/configuration_event_booking'
+        scheduler:
+          $ref: '#/components/schemas/configuration_scheduler'
+        appearance:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/configuration_appearance'
+    common_response:
+      properties:
+        request_id:
+          type: string
+          description: The request ID.
+        data:
+          type: object
+          description: The response object.
+      example:
+        request_id: 5fa64c92-e840-4357-86b9-2aa364d35b88
+    availability_time_slot:
+      title: TimeSlot
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: string
+        start_time:
+          type: integer
+          description: The start of a time slot, in Unix epoch format.
+        end_time:
+          type: integer
+          description: The end of a time slot, in Unix epoch format.
+    availability_response:
+      _title: availability_response
+      type: object
+      properties:
+        order:
+          type: array
+          items:
+            type: string
+          description: (Round-robin events only) The order of participants in line to attend the proposed meeting.
+        time_slots:
+          type: array
+          items:
+            $ref: '#/components/schemas/availability_time_slot'
+          description: An array of the available time slots when you can create a meeting using the requested settings.
+    booking_create:
+      type: object
+      required:
+        - start_time
+        - end_time
+        - guest
+      properties:
+        start_time:
+          type: string
+          description: The event's start time, in Unix epoch format.
+        end_time:
+          type: string
+          description: The event's end time, in Unix epoch format.
+        participants:
+          type: array
+          description: An array of objects that include a list of participant email addresses from the Configuration object to include in the booking. If not provided, Nylas includes all participants from the Configuration object.
+          items:
+            type: object
+            properties:
+              email:
+                type: string
+                description: The participant's email address.
+        guest:
+          type: object
+          description: Details about the guest that is creating the booking. The guest `name` and `email` are required.
+          properties:
+            email:
+              type: string
+              description: The guest's email address.
+            name:
+              type: string
+              description: The guest's name.
+        timezone:
+          type: string
+          description: The guest's timezone that is used in email notifications. If not provided, Nylas uses the timezone from the [Configuration](/docs/api/v3/scheduler/#post-/v3/grants/-grant_id-/scheduling/configurations) object.
+        email_language:
+          type: string
+          description: The language of the guest email notifications.
+          enum:
+            - en
+            - fr
+            - de
+            - es
+            - nl
+            - sv
+            - ja
+            - zh
+          default:
+            - en
+        additional_guests:
+          type: array
+          description: An array of objects that include a list of additional guest email addresses to include in the booking.
+          items:
+            type: object
+            properties:
+              email:
+                type: string
+                description: The additional guest's email address.
+              name:
+                type: string
+                description: The additional guest's name.
+        additional_fields:
+          type: object
+          description: A dictionary of additional field keys mapped to the values populated by the guest in the booking form.
+          additionalProperties:
+            type: string
+          example:
+            name: Dorothy Vaughan
+            email_address: dorothy@example.com
+    booking:
+      type: object
+      required:
+        - booking_id
+        - event_id
+        - title
+        - organizer
+        - status
+      properties:
+        booking_id:
+          type: string
+          description: The unique ID of the booking.
+        event_id:
+          type: string
+          description: The unique ID of the event object associated with the booking.
+        title:
+          type: string
+          description: The title of the event.
+        organizer:
+          type: object
+          description: The participant that is designated as the organizer of the event.
+          properties:
+            email:
+              type: string
+              description: The organizer's email address.
+            name:
+              type: string
+              description: The organizer's name.
+        status:
+          type: string
+          description: The current status of the booking.
+          enum:
+            - booked
+            - pending
+            - cancelled
+        description:
+          type: string
+          description: The description of the event.
+    booking_confirm:
+      type: object
+      required:
+        - salt
+        - status
+      properties:
+        salt:
+          type: string
+          description: The salt extracted from the booking reference embedded in the organizer confirmation link, encoded as a URL-safe base64 string (without padding).
+        status:
+          type: string
+          description: The action to take on the pending booking.
+          enum:
+            - confirmed
+            - cancelled
+        cancellation_reason:
+          type: string
+          description: The reason that the booking is being cancelled.
+    200-delete:
+      description: Delete Succeed
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - request_id
+            properties:
+              request_id:
+                type: string
+                description: ID of the request.
+                example: 5967ca40-a2d8-4ee0-a0e0-6f18ace39a90
+    booking_update:
+      type: object
+      required:
+        - start_time
+        - end_time
+      properties:
+        start_time:
+          type: string
+          description: The event's start time, in Unix epoch format.
+        end_time:
+          type: string
+          description: The event's end time, in Unix epoch format.
+  requestBodies:
+    configuration:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/configuration'
+          example:
+            participants:
+              - name: Test
+                email: user@example.com
+                is_organizer: true
+                availability:
+                  calendar_ids:
+                    - primary
+                booking:
+                  calendar_id: primary
+            availability:
+              duration_minutes: 30
+            event_booking:
+              title: My test event
+    session_create:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              configuration_id:
+                type: string
+                description: The ID of the Scheduler Configuration object for the session. If you're using `slug`, `configuration_id` is not required.
+                example: AAAA-BBBB-1111-2222
+              slug:
+                type: string
+                description: The slug of the Scheduler Configuration object for the session. You can use `slug` instead of `configuration_id`.
+                example: my-page-slug
+              time_to_live:
+                type: int
+                description: The time to live for the session in minutes. The maximum value is `30`.
+                default: 5
+                example: 10
+    booking_create:
+      description: Booking Create Response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/booking_create'
+          example:
+            start_time: 1708714800
+            end_time: 1708722000
+            participants:
+              - email: user@example.com
+            guest:
+              name: Guest
+              email: guest@example.com
+    booking_confirm:
+      description: Booking Confirm Response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/booking_confirm'
+          example:
+            salt: '-zgLLAuk_qtcsw'
+            status: cancelled
+            cancellation_reason: I am no longer available at this time.
+    booking_update:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/booking_update'
+          example:
+            start_time: 1708714800
+            end_time: 1708722000
+  securitySchemes:
+    ACCESS_TOKEN:
+      scheme: bearer
+      type: http
+      bearerFormat: Access token
+      description: The Nylas **access token** for a specific grant. Issued as part of OAuth 2.1 flow token exchange.
+    NYLAS_API_KEY:
+      scheme: bearer
+      type: http
+      bearerFormat: API key
+      description: The Nylas **API key** provides application-level access to APIs and all grants. You can generate these from the v3 Dashboard. Learn more about [authorizing requests in Nylas v3](/docs/v3/auth/).
+    SCHEDULER_SESSION_TOKEN:
+      scheme: bearer
+      type: http
+      bearerFormat: Session ID
+      description: The Nylas Scheduler **session ID** that Scheduler UI Components use to authorize API requests.
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: ID of the request.
+          examples:
+            OK:
+              value:
+                request_id: 5fa64c92-e840-4357-86b9-2aa364d35b88
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            title: error
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: The request ID.
+              error:
+                type: object
+                description: The response error object.
+                properties:
+                  type:
+                    type: string
+                    description: The error type.
+                  message:
+                    type: string
+                    description: The error message.
+                  provider_error:
+                    type: object
+                    description: The error from the provider.
+          examples:
+            Bad Request:
+              value:
+                request_id: 5fa64c92-e840-4357-86b9-2aa364d35b88
+                error:
+                  type: invalid_request_error
+                  message: error parsing request body
+                  provider_error:
+                    code: TargetIdShouldNotBeMeOrWhitespace
+                    message: Id is malformed.
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            title: error
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: The request ID.
+              error:
+                type: object
+                description: The response error object.
+                properties:
+                  type:
+                    type: string
+                    description: The error type.
+                  message:
+                    type: string
+                    description: The error message.
+                  provider_error:
+                    type: object
+                    description: The error from the provider.
+          examples:
+            Unauthorized:
+              value:
+                request_id: 5fa64c92-e840-4357-86b9-2aa364d35b88
+                error:
+                  type: unauthorized
+                  message: Unauthorized
+                  provider_error:
+                    code: 401
+                    message: Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential.
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            title: error
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: The request ID.
+              error:
+                type: object
+                description: The response error object.
+                properties:
+                  type:
+                    type: string
+                    description: The error type.
+                  message:
+                    type: string
+                    description: The error message.
+          examples:
+            Not Found:
+              value:
+                request_id: 5fa64c92-e840-4357-86b9-2aa364d35b88
+                error:
+                  type: not_found_error
+                  message: requested object not found
+                  provider_error:
+                    code: MailboxNotEnabledForRESTAPI
+                    message: The mailbox is either inactive, soft-deleted, or is hosted on-premise.
+    '429':
+      description: Rate Limit
+      content:
+        application/json:
+          schema:
+            title: error
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: The request ID.
+              error:
+                type: object
+                description: The response error object.
+                properties:
+                  type:
+                    type: string
+                    description: The error type.
+                  message:
+                    type: string
+                    description: The error message.
+          examples:
+            Not Found:
+              value:
+                request_id: 5fa64c92-e840-4357-86b9-2aa364d35b88
+                error:
+                  type: rate_limit_error
+                  message: Too many requests, please try again shortly.
+    '504':
+      description: Provider Failure
+      content:
+        application/json:
+          schema:
+            title: error
+            type: object
+            properties:
+              request_id:
+                type: string
+                description: The request ID.
+              error:
+                type: object
+                description: The response error object.
+                properties:
+                  type:
+                    type: string
+                    description: The error type.
+                  message:
+                    type: string
+                    description: The error message.
+          examples:
+            Provider Failure:
+              value:
+                request_id: 5fa64c92-e840-4357-86b9-2aa364d35b88
+                error:
+                  type: provider_error
+                  message: Provider request timed out.
+    configurations:
+      description: Configuration Response
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/common_response_with_cursor'
+              - properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/configuration'
+          example:
+            request_id: 5fa64c92-e840-4357-86b9-2aa364d35b88
+            data:
+              - ID: AAAA-BBBB-1111-2222
+                participants:
+                  - name: Nylas
+                    email: nylas@example.com
+                    is_organizer: true
+                    availability:
+                      calendar_ids:
+                        - primary
+                    booking:
+                      calendar_id: primary
+                availability:
+                  duration_minutes: 30
+                event_booking:
+                  title: My test event
+            next_cursor: CigKGjRlaDdyNGQydTFqbWJ0bGo5a2QxdWJtdDZnGAEggIDAu7fw7bEYGg8IABIAGPjh2PGEi_0CIAEiBwgCEOqs6i4=
+    configuration:
+      description: Configuration Response
+      content:
+        application/json:
+          schema:
+            allOf:
+              - properties:
+                  ID:
+                    type: string
+                    description: The Configuration object ID.
+              - $ref: '#/components/schemas/configuration'
+          example:
+            ID: AAAA-BBBB-1111-2222
+            participants:
+              - name: Nylas
+                email: nylas@example.com
+                is_organizer: true
+                availability:
+                  calendar_ids:
+                    - primary
+                booking:
+                  calendar_id: primary
+            availability:
+              duration_minutes: 30
+            event_booking:
+              title: My test event
+    200-delete:
+      description: Delete Succeed
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - request_id
+            properties:
+              request_id:
+                type: string
+                description: ID of the request.
+                example: 5967ca40-a2d8-4ee0-a0e0-6f18ace39a90
+    session_create:
+      description: Session Create
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/common_response'
+              - properties:
+                  data:
+                    type: object
+                    properties:
+                      session_id:
+                        type: string
+                        description: The ID of the session
+          example:
+            request_id: 5fa64c92-e840-4357-86b9-2aa364d35b88
+            data:
+              session_id: AAAA-BBBB-1111-2222
+    session_delete:
+      description: Session Delete Response
+      content:
+        application/json:
+          schema:
+            properties:
+              request_id:
+                type: string
+                description: The ID of the request
+                example: 5967ca40-a2d8-4ee0-a0e0-6f18ace39a90
+    availability:
+      description: Availability Response
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/common_response'
+              - properties:
+                  data:
+                    $ref: '#/components/schemas/availability_response'
+          examples:
+            round_robin_availability_response:
+              value:
+                request_id: 5fa64c92-e840-4357-86b9-2aa364d35b88
+                data:
+                  order:
+                    - user1@example.com
+                    - user2@example.com
+                  time_slots:
+                    - emails:
+                        - user2@example.com
+                        - user1@example.com
+                      start_time: 1659367800
+                      end_time: 1659369600
+                    - emails:
+                        - user1@example.com
+                      start_time: 1659376800
+                      end_time: 1659378600
+    booking_create:
+      description: Booking Create Response
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/common_response'
+              - properties:
+                  data:
+                    $ref: '#/components/schemas/booking'
+          example:
+            request_id: 5fa64c92-e840-4357-86b9-2aa364d35b88
+            data:
+              booking_id: AAAA-BBBB-1111-2222
+              event_id: CCCC-DDDD-3333-4444
+              title: My test event
+              organizer:
+                name: John Doe
+                email: user@example.com
+              status: booked
+              description: This is an example of a description.
+    booking_confirm:
+      description: Booking Confirm Response
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - type: object
+                title: Confirm booking response
+                $ref: '#/components/schemas/booking'
+              - type: object
+                title: Cancel booking response
+                $ref: '#/components/schemas/200-delete'
+          example:
+            request_id: 5fa64c92-e840-4357-86b9-2aa364d35b88
+            data:
+              booking_id: AAAA-BBBB-1111-2222
+              event_id: CCCC-DDDD-3333-4444
+              title: My test event
+              organizer:
+                name: John Doe
+                email: user@example.com
+              status: booked
+              description: This is an example of a description.
+  parameters:
+    limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 50
+        maximum: 200
+      description: The maximum number of objects to return. See [pagination](/docs/api/v3/ecc/#overview--pagination) for more information.
+    page_token:
+      name: page_token
+      in: query
+      required: false
+      schema:
+        type: string
+      description: An identifier that specifies which page of data to return. You can get this value from the `next_cursor` response field. See [Pagination](/docs/api/v3/ecc/#overview--pagination) for more information.

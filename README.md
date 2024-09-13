@@ -17,22 +17,18 @@ You can then use the relevant API clients like so:
 ```php
 use JackWH\NylasV3;
 
-// ...
+$accessToken = '**********';
+$grantId     = '##########';
 
-$accessToken = 'nyk_v0_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-$grantId     = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
-
-$api = new NylasV3\EmailCalendar\Api\V3GrantsGrantIdCalendarsApi(
+$api = new NylasV3\EmailCalendar\Api\CalendarApi(
     new \GuzzleHttp\Client(),
     NylasV3\EmailCalendar\Configuration::getDefaultConfiguration()->setAccessToken($accessToken)
 );
 
-$result = $api->returnAllCalendars($grantId, limit: 10);
-
-// ...
+$result = $api->getCalendars($grantId, limit: 10);
 ```
 
-When converted to JSON, `$result` looks something like this:
+In this example you'll receive back a `NylasV3\EmailCalendar\Model\GetCalendars200Response` object, with entries mapped to `NylasV3\EmailCalendar\Model\Calendar` objects. When converted to JSON the output will look something like this:
 
 ```json
 {
@@ -72,39 +68,21 @@ When converted to JSON, `$result` looks something like this:
 
 As there's no official v3 API client for PHP, I've done my best to semi-automatically generate this one. There were a few hoops to jump through, I'm sure there must be an easier/simpler way to do this (if anybody knows, please explain!). Here's how I went about it...
 
-1. Export [Nylas' Postman Collections](https://www.postman.com/trynylas/nylas-api) to JSON.
-2. Convert Postman's JSON files to YAML OpenAPI specs using [Postman2OpenAPI](https://p2o.defcon007.com/).
-3. Convert the YAML OpenAPI specs [to JSON](https://onlineyamltools.com/convert-yaml-to-json) again (yes really).
-4. Normalize the JSON-format OpenAPI specs using the [JSON Canonicalization Scheme](https://www.rfc-editor.org/rfc/rfc8785).
-5. Use the normalized JSON OpenAPI specs to automatically add missing `operationID` fields. This is necessary as the OpenAPI Generator requires `operationId` fields in order to name client methods. Without these, method names are derived from the full API path and were far too verbose. Here's how I did this at the time using a utility script:
+1. Export [OpenAPI specs](https://developer.nylas.com/docs/api/v3/scheduler/) from Nylas' documentation for each API, and save to `api_specs/yaml`.
+2. Take the YAML specs and [convert them to JSON](https://onlineyamltools.com/convert-yaml-to-json), place these alongside the originals in `api_specs/yaml`. 
+3. Due to a [bug in the PHP OpenAPI generator](https://github.com/OpenAPITools/openapi-generator/issues/3136), we need to [dereference `$ref` pointers](https://github.com/APIDevTools/json-schema-ref-parser) using the `npm` script below. This calls the `api_specs/utilities/dereference-json.js` script, which recursively dereferences all `$ref` pointers in each JSON OpenAPI spec. The final JSON specs are saved to `api_specs`:
 
-```php
-/** Helper function to write an operationId from a path summary (e.g. "Return all calendars" --> returnAllCalendars) */
-$generateOperationIds = fn(Collection $data) => $data->put(
-    'paths',
-    Collection::wrap($data->get('paths'))->mapWithKeys(fn(array $path, string $pathName) => [
-        $pathName => collect($path)->mapWithKeys(fn(array $operation, string $operationName) => [
-            $operationName => collect($operation)->put(
-                'operationId',
-                str($operation['summary'])->camel()->toString()
-            )->all(),
-        ])->all(),
-    ])->all()
-)->toArray();
-
-// Overwrite the original spec with the new one, which now includes operationIds:
-$originalSpec = file_get_contents('administration.json');
-$data = collect(json_decode($originalSpec, true, 512, JSON_THROW_ON_ERROR));
-$specWithOperationIds = $generateOperationIds($data);
-file_put_contents('administration.json', $specWithOperationIds);
+```bash
+npm run dereference-json
 ```
 
-6. Finally, generate client code for each of the APIs using the [OpenAPI Generator](https://openapi-generator.tech):
+4. Finally we can generate client code for each of the APIs using the [OpenAPI Generator](https://openapi-generator.tech):
 
 ```bash
 openapi-generator generate -g php-nextgen \
   -o src/api/administration/ \
-  -i api_specs/administration.yaml \
+  -i api_specs/administration.json \
+  --openapi-normalizer REF_AS_PARENT_IN_ALLOF=true,REFACTOR_ALLOF_WITH_PROPERTIES_ONLY=true,REMOVE_ANYOF_ONEOF_AND_KEEP_PROPERTIES_ONLY=true \
   --invoker-package="JackWH\\NylasV3\\Administration" \
   --additional-properties=composerPackageName="jackwh/nylas-v3-api-php",variableNamingConvention="snake_case"
 ```
@@ -112,7 +90,7 @@ openapi-generator generate -g php-nextgen \
 ```bash
 openapi-generator generate -g php-nextgen \
   -o src/api/email-calendar/ \
-  -i api_specs/email-calendar.yaml \
+  -i api_specs/email-calendar.json \
   --openapi-normalizer REF_AS_PARENT_IN_ALLOF=true,REFACTOR_ALLOF_WITH_PROPERTIES_ONLY=true,REMOVE_ANYOF_ONEOF_AND_KEEP_PROPERTIES_ONLY=true \
   --invoker-package="JackWH\\NylasV3\\EmailCalendar" \
   --additional-properties=composerPackageName="jackwh/nylas-v3-api-php",variableNamingConvention="snake_case"
@@ -121,7 +99,8 @@ openapi-generator generate -g php-nextgen \
 ```bash
 openapi-generator generate -g php-nextgen \
   -o src/api/scheduler/ \
-  -i api_specs/scheduler.yaml \
+  -i api_specs/scheduler.json \
+  --openapi-normalizer REF_AS_PARENT_IN_ALLOF=true,REFACTOR_ALLOF_WITH_PROPERTIES_ONLY=true,REMOVE_ANYOF_ONEOF_AND_KEEP_PROPERTIES_ONLY=true \
   --invoker-package="JackWH\\NylasV3\\Scheduler" \
   --additional-properties=composerPackageName="jackwh/nylas-v3-api-php",variableNamingConvention="snake_case"
 ```
