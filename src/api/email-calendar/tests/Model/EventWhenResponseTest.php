@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class EventWhenResponseTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

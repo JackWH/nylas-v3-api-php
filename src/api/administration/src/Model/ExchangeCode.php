@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ExchangeCode Class Doc Comment
@@ -63,7 +63,7 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
         'grant_type' => 'string',
         'code' => 'string',
         'redirect_uri' => 'string',
-        'code_verifier' => 'string'
+        'code_verifier' => 'string',
     ];
 
     /**
@@ -77,7 +77,7 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
         'grant_type' => null,
         'code' => null,
         'redirect_uri' => 'url',
-        'code_verifier' => null
+        'code_verifier' => null,
     ];
 
     /**
@@ -91,7 +91,7 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
         'grant_type' => false,
         'code' => false,
         'redirect_uri' => false,
-        'code_verifier' => false
+        'code_verifier' => false,
     ];
 
     /**
@@ -185,7 +185,7 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
         'grant_type' => 'grant_type',
         'code' => 'code',
         'redirect_uri' => 'redirect_uri',
-        'code_verifier' => 'code_verifier'
+        'code_verifier' => 'code_verifier',
     ];
 
     /**
@@ -199,7 +199,7 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
         'grant_type' => 'setGrantType',
         'code' => 'setCode',
         'redirect_uri' => 'setRedirectUri',
-        'code_verifier' => 'setCodeVerifier'
+        'code_verifier' => 'setCodeVerifier',
     ];
 
     /**
@@ -213,7 +213,7 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
         'grant_type' => 'getGrantType',
         'code' => 'getCode',
         'redirect_uri' => 'getRedirectUri',
-        'code_verifier' => 'getCodeVerifier'
+        'code_verifier' => 'getCodeVerifier',
     ];
 
     /**
@@ -330,7 +330,7 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
             $invalidProperties[] = "'grant_type' can't be null";
         }
         $allowedValues = $this->getGrantTypeAllowableValues();
-        if (!is_null($this->container['grant_type']) && !in_array($this->container['grant_type'], $allowedValues, true)) {
+        if (! is_null($this->container['grant_type']) && ! in_array($this->container['grant_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'grant_type', must be one of '%s'",
                 $this->container['grant_type'],
@@ -344,6 +344,7 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['redirect_uri'] === null) {
             $invalidProperties[] = "'redirect_uri' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -357,7 +358,6 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets client_id
@@ -436,7 +436,7 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
             throw new InvalidArgumentException('non-nullable grant_type cannot be null');
         }
         $allowedValues = $this->getGrantTypeAllowableValues();
-        if (!in_array($grant_type, $allowedValues, true)) {
+        if (! in_array($grant_type, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'grant_type', must be one of '%s'",
@@ -530,12 +530,13 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -545,7 +546,7 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -575,7 +576,7 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -594,7 +595,7 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -620,5 +621,3 @@ class ExchangeCode implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

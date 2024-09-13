@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Administration\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Administration\ApiException;
 use JackWH\NylasV3\Administration\Configuration;
 use JackWH\NylasV3\Administration\HeaderSelector;
@@ -69,7 +69,7 @@ class ManageGrantsApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'customAuthFlow' => [
             'application/json',
@@ -152,9 +152,9 @@ class ManageGrantsApi
     public function customAuthFlow(
         \JackWH\NylasV3\Administration\Model\CustomAuthFlowRequest $custom_auth_flow_request,
         string $contentType = self::contentTypes['customAuthFlow'][0]
-    ): \JackWH\NylasV3\Administration\Model\CustomAuthFlow201Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\CustomAuthFlow201Response {
         list($response) = $this->customAuthFlowWithHttpInfo($custom_auth_flow_request, $contentType);
+
         return $response;
     }
 
@@ -173,12 +173,12 @@ class ManageGrantsApi
     public function customAuthFlowWithHttpInfo(
         \JackWH\NylasV3\Administration\Model\CustomAuthFlowRequest $custom_auth_flow_request,
         string $contentType = self::contentTypes['customAuthFlow'][0]
-    ): array
-    {
+    ): array {
         $request = $this->customAuthFlowRequest($custom_auth_flow_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -212,7 +212,7 @@ class ManageGrantsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 201:
                     if (in_array('\JackWH\NylasV3\Administration\Model\CustomAuthFlow201Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -238,7 +238,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\CustomAuthFlow201Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -265,7 +265,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -292,7 +292,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -321,7 +321,7 @@ class ManageGrantsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -333,6 +333,7 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -341,6 +342,7 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -349,8 +351,10 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -369,8 +373,7 @@ class ManageGrantsApi
     public function customAuthFlowAsync(
         \JackWH\NylasV3\Administration\Model\CustomAuthFlowRequest $custom_auth_flow_request,
         string $contentType = self::contentTypes['customAuthFlow'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->customAuthFlowAsyncWithHttpInfo($custom_auth_flow_request, $contentType)
             ->then(
                 function ($response) {
@@ -393,8 +396,7 @@ class ManageGrantsApi
     public function customAuthFlowAsyncWithHttpInfo(
         $custom_auth_flow_request,
         string $contentType = self::contentTypes['customAuthFlow'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\CustomAuthFlow201Response';
         $request = $this->customAuthFlowRequest($custom_auth_flow_request, $contentType);
 
@@ -414,12 +416,13 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -446,8 +449,7 @@ class ManageGrantsApi
     public function customAuthFlowRequest(
         $custom_auth_flow_request,
         string $contentType = self::contentTypes['customAuthFlow'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'custom_auth_flow_request' is set
         if ($custom_auth_flow_request === null || (is_array($custom_auth_flow_request) && count($custom_auth_flow_request) === 0)) {
@@ -490,7 +492,7 @@ class ManageGrantsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -507,7 +509,7 @@ class ManageGrantsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -524,6 +526,7 @@ class ManageGrantsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -547,9 +550,9 @@ class ManageGrantsApi
     public function deleteGrantById(
         string $grant_id,
         string $contentType = self::contentTypes['deleteGrantById'][0]
-    ): \JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response {
         list($response) = $this->deleteGrantByIdWithHttpInfo($grant_id, $contentType);
+
         return $response;
     }
 
@@ -568,12 +571,12 @@ class ManageGrantsApi
     public function deleteGrantByIdWithHttpInfo(
         string $grant_id,
         string $contentType = self::contentTypes['deleteGrantById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->deleteGrantByIdRequest($grant_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -607,7 +610,7 @@ class ManageGrantsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -633,7 +636,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -660,7 +663,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -687,7 +690,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -716,7 +719,7 @@ class ManageGrantsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -728,6 +731,7 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -736,6 +740,7 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -744,8 +749,10 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -764,8 +771,7 @@ class ManageGrantsApi
     public function deleteGrantByIdAsync(
         string $grant_id,
         string $contentType = self::contentTypes['deleteGrantById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->deleteGrantByIdAsyncWithHttpInfo($grant_id, $contentType)
             ->then(
                 function ($response) {
@@ -788,8 +794,7 @@ class ManageGrantsApi
     public function deleteGrantByIdAsyncWithHttpInfo(
         $grant_id,
         string $contentType = self::contentTypes['deleteGrantById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response';
         $request = $this->deleteGrantByIdRequest($grant_id, $contentType);
 
@@ -809,12 +814,13 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -841,8 +847,7 @@ class ManageGrantsApi
     public function deleteGrantByIdRequest(
         $grant_id,
         string $contentType = self::contentTypes['deleteGrantById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -886,7 +891,7 @@ class ManageGrantsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -903,7 +908,7 @@ class ManageGrantsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -920,6 +925,7 @@ class ManageGrantsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -965,9 +971,9 @@ class ManageGrantsApi
         ?string $account_id = null,
         ?string $account_ids = null,
         string $contentType = self::contentTypes['getGrantAll'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetGrantAll200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetGrantAll200Response {
         list($response) = $this->getGrantAllWithHttpInfo($limit, $offset, $sort_by, $order_by, $since, $before, $email, $grant_status, $ip, $provider, $account_id, $account_ids, $contentType);
+
         return $response;
     }
 
@@ -1008,12 +1014,12 @@ class ManageGrantsApi
         ?string $account_id = null,
         ?string $account_ids = null,
         string $contentType = self::contentTypes['getGrantAll'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getGrantAllRequest($limit, $offset, $sort_by, $order_by, $since, $before, $email, $grant_status, $ip, $provider, $account_id, $account_ids, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1047,7 +1053,7 @@ class ManageGrantsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetGrantAll200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1073,7 +1079,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetGrantAll200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1100,7 +1106,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1127,7 +1133,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1156,7 +1162,7 @@ class ManageGrantsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1168,6 +1174,7 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1176,6 +1183,7 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -1184,8 +1192,10 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1226,8 +1236,7 @@ class ManageGrantsApi
         ?string $account_id = null,
         ?string $account_ids = null,
         string $contentType = self::contentTypes['getGrantAll'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getGrantAllAsyncWithHttpInfo($limit, $offset, $sort_by, $order_by, $since, $before, $email, $grant_status, $ip, $provider, $account_id, $account_ids, $contentType)
             ->then(
                 function ($response) {
@@ -1272,8 +1281,7 @@ class ManageGrantsApi
         $account_id = null,
         $account_ids = null,
         string $contentType = self::contentTypes['getGrantAll'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetGrantAll200Response';
         $request = $this->getGrantAllRequest($limit, $offset, $sort_by, $order_by, $since, $before, $email, $grant_status, $ip, $provider, $account_id, $account_ids, $contentType);
 
@@ -1293,12 +1301,13 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1347,8 +1356,7 @@ class ManageGrantsApi
         $account_id = null,
         $account_ids = null,
         string $contentType = self::contentTypes['getGrantAll'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -1497,7 +1505,7 @@ class ManageGrantsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1514,7 +1522,7 @@ class ManageGrantsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1531,6 +1539,7 @@ class ManageGrantsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1552,9 +1561,9 @@ class ManageGrantsApi
      */
     public function getGrantByAccessToken(
         string $contentType = self::contentTypes['getGrantByAccessToken'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetGrantById200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetGrantById200Response {
         list($response) = $this->getGrantByAccessTokenWithHttpInfo($contentType);
+
         return $response;
     }
 
@@ -1571,12 +1580,12 @@ class ManageGrantsApi
      */
     public function getGrantByAccessTokenWithHttpInfo(
         string $contentType = self::contentTypes['getGrantByAccessToken'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getGrantByAccessTokenRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1610,7 +1619,7 @@ class ManageGrantsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetGrantById200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1636,7 +1645,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetGrantById200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1663,7 +1672,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1690,7 +1699,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1719,7 +1728,7 @@ class ManageGrantsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1731,6 +1740,7 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1739,6 +1749,7 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -1747,8 +1758,10 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1765,8 +1778,7 @@ class ManageGrantsApi
      */
     public function getGrantByAccessTokenAsync(
         string $contentType = self::contentTypes['getGrantByAccessToken'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getGrantByAccessTokenAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -1787,8 +1799,7 @@ class ManageGrantsApi
      */
     public function getGrantByAccessTokenAsyncWithHttpInfo(
         string $contentType = self::contentTypes['getGrantByAccessToken'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetGrantById200Response';
         $request = $this->getGrantByAccessTokenRequest($contentType);
 
@@ -1808,12 +1819,13 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1838,8 +1850,7 @@ class ManageGrantsApi
      */
     public function getGrantByAccessTokenRequest(
         string $contentType = self::contentTypes['getGrantByAccessToken'][0]
-    ): Request
-    {
+    ): Request {
 
 
         $resourcePath = '/v3/grants/me';
@@ -1868,7 +1879,7 @@ class ManageGrantsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1885,7 +1896,7 @@ class ManageGrantsApi
         }
 
         // this endpoint requires Bearer (Access token) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1902,6 +1913,7 @@ class ManageGrantsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1925,9 +1937,9 @@ class ManageGrantsApi
     public function getGrantById(
         string $grant_id,
         string $contentType = self::contentTypes['getGrantById'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetGrantById200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetGrantById200Response {
         list($response) = $this->getGrantByIdWithHttpInfo($grant_id, $contentType);
+
         return $response;
     }
 
@@ -1946,12 +1958,12 @@ class ManageGrantsApi
     public function getGrantByIdWithHttpInfo(
         string $grant_id,
         string $contentType = self::contentTypes['getGrantById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getGrantByIdRequest($grant_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1985,7 +1997,7 @@ class ManageGrantsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetGrantById200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -2011,7 +2023,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetGrantById200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2038,7 +2050,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2065,7 +2077,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2094,7 +2106,7 @@ class ManageGrantsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2106,6 +2118,7 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -2114,6 +2127,7 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -2122,8 +2136,10 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2142,8 +2158,7 @@ class ManageGrantsApi
     public function getGrantByIdAsync(
         string $grant_id,
         string $contentType = self::contentTypes['getGrantById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getGrantByIdAsyncWithHttpInfo($grant_id, $contentType)
             ->then(
                 function ($response) {
@@ -2166,8 +2181,7 @@ class ManageGrantsApi
     public function getGrantByIdAsyncWithHttpInfo(
         $grant_id,
         string $contentType = self::contentTypes['getGrantById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetGrantById200Response';
         $request = $this->getGrantByIdRequest($grant_id, $contentType);
 
@@ -2187,12 +2201,13 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2219,8 +2234,7 @@ class ManageGrantsApi
     public function getGrantByIdRequest(
         $grant_id,
         string $contentType = self::contentTypes['getGrantById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -2264,7 +2278,7 @@ class ManageGrantsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2281,7 +2295,7 @@ class ManageGrantsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2298,6 +2312,7 @@ class ManageGrantsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2323,9 +2338,9 @@ class ManageGrantsApi
         string $grant_id,
         \JackWH\NylasV3\Administration\Model\PatchGrantByIdRequest $patch_grant_by_id_request,
         string $contentType = self::contentTypes['patchGrantById'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetGrantById200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetGrantById200Response {
         list($response) = $this->patchGrantByIdWithHttpInfo($grant_id, $patch_grant_by_id_request, $contentType);
+
         return $response;
     }
 
@@ -2346,12 +2361,12 @@ class ManageGrantsApi
         string $grant_id,
         \JackWH\NylasV3\Administration\Model\PatchGrantByIdRequest $patch_grant_by_id_request,
         string $contentType = self::contentTypes['patchGrantById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->patchGrantByIdRequest($grant_id, $patch_grant_by_id_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -2385,7 +2400,7 @@ class ManageGrantsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetGrantById200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -2411,7 +2426,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetGrantById200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2438,7 +2453,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2465,7 +2480,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2492,7 +2507,7 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2521,7 +2536,7 @@ class ManageGrantsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2533,6 +2548,7 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -2541,6 +2557,7 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -2549,6 +2566,7 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -2557,8 +2575,10 @@ class ManageGrantsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2579,8 +2599,7 @@ class ManageGrantsApi
         string $grant_id,
         \JackWH\NylasV3\Administration\Model\PatchGrantByIdRequest $patch_grant_by_id_request,
         string $contentType = self::contentTypes['patchGrantById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->patchGrantByIdAsyncWithHttpInfo($grant_id, $patch_grant_by_id_request, $contentType)
             ->then(
                 function ($response) {
@@ -2605,8 +2624,7 @@ class ManageGrantsApi
         $grant_id,
         $patch_grant_by_id_request,
         string $contentType = self::contentTypes['patchGrantById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetGrantById200Response';
         $request = $this->patchGrantByIdRequest($grant_id, $patch_grant_by_id_request, $contentType);
 
@@ -2626,12 +2644,13 @@ class ManageGrantsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2660,8 +2679,7 @@ class ManageGrantsApi
         $grant_id,
         $patch_grant_by_id_request,
         string $contentType = self::contentTypes['patchGrantById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -2719,7 +2737,7 @@ class ManageGrantsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2736,7 +2754,7 @@ class ManageGrantsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2753,6 +2771,7 @@ class ManageGrantsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PATCH',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2772,7 +2791,7 @@ class ManageGrantsApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

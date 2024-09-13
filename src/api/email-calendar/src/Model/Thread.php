@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Thread Class Doc Comment
@@ -74,7 +74,7 @@ class Thread implements ModelInterface, ArrayAccess, JsonSerializable
         'unread' => 'bool',
         'message_ids' => 'string[]',
         'draft_ids' => 'string[]',
-        'folders' => 'string[]'
+        'folders' => 'string[]',
     ];
 
     /**
@@ -99,7 +99,7 @@ class Thread implements ModelInterface, ArrayAccess, JsonSerializable
         'unread' => null,
         'message_ids' => null,
         'draft_ids' => null,
-        'folders' => null
+        'folders' => null,
     ];
 
     /**
@@ -124,7 +124,7 @@ class Thread implements ModelInterface, ArrayAccess, JsonSerializable
         'unread' => false,
         'message_ids' => false,
         'draft_ids' => false,
-        'folders' => false
+        'folders' => false,
     ];
 
     /**
@@ -229,7 +229,7 @@ class Thread implements ModelInterface, ArrayAccess, JsonSerializable
         'unread' => 'unread',
         'message_ids' => 'message_ids',
         'draft_ids' => 'draft_ids',
-        'folders' => 'folders'
+        'folders' => 'folders',
     ];
 
     /**
@@ -254,7 +254,7 @@ class Thread implements ModelInterface, ArrayAccess, JsonSerializable
         'unread' => 'setUnread',
         'message_ids' => 'setMessageIds',
         'draft_ids' => 'setDraftIds',
-        'folders' => 'setFolders'
+        'folders' => 'setFolders',
     ];
 
     /**
@@ -279,7 +279,7 @@ class Thread implements ModelInterface, ArrayAccess, JsonSerializable
         'unread' => 'getUnread',
         'message_ids' => 'getMessageIds',
         'draft_ids' => 'getDraftIds',
-        'folders' => 'getFolders'
+        'folders' => 'getFolders',
     ];
 
     /**
@@ -384,11 +384,11 @@ class Thread implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
+        if (! is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
             $invalidProperties[] = "invalid value for 'id', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['snippet']) && (mb_strlen($this->container['snippet']) < 1)) {
+        if (! is_null($this->container['snippet']) && (mb_strlen($this->container['snippet']) < 1)) {
             $invalidProperties[] = "invalid value for 'snippet', the character length must be bigger than or equal to 1.";
         }
 
@@ -405,7 +405,6 @@ class Thread implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets grant_id
@@ -877,12 +876,13 @@ class Thread implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -892,7 +892,7 @@ class Thread implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -922,7 +922,7 @@ class Thread implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -941,7 +941,7 @@ class Thread implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -967,5 +967,3 @@ class Thread implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

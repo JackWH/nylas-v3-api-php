@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Event Class Doc Comment
@@ -82,7 +82,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         'title' => 'string',
         'updated_at' => 'int',
         'visibility' => 'string',
-        'when' => '\JackWH\NylasV3\EmailCalendar\Model\When'
+        'when' => '\JackWH\NylasV3\EmailCalendar\Model\When',
     ];
 
     /**
@@ -115,7 +115,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         'title' => null,
         'updated_at' => null,
         'visibility' => null,
-        'when' => null
+        'when' => null,
     ];
 
     /**
@@ -148,7 +148,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         'title' => false,
         'updated_at' => true,
         'visibility' => true,
-        'when' => false
+        'when' => false,
     ];
 
     /**
@@ -261,7 +261,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         'title' => 'title',
         'updated_at' => 'updated_at',
         'visibility' => 'visibility',
-        'when' => 'when'
+        'when' => 'when',
     ];
 
     /**
@@ -294,7 +294,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         'title' => 'setTitle',
         'updated_at' => 'setUpdatedAt',
         'visibility' => 'setVisibility',
-        'when' => 'setWhen'
+        'when' => 'setWhen',
     ];
 
     /**
@@ -327,7 +327,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         'title' => 'getTitle',
         'updated_at' => 'getUpdatedAt',
         'visibility' => 'getVisibility',
-        'when' => 'getWhen'
+        'when' => 'getWhen',
     ];
 
     /**
@@ -472,24 +472,24 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 8192)) {
+        if (! is_null($this->container['description']) && (mb_strlen($this->container['description']) > 8192)) {
             $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 8192.";
         }
 
-        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) < 0)) {
+        if (! is_null($this->container['description']) && (mb_strlen($this->container['description']) < 0)) {
             $invalidProperties[] = "invalid value for 'description', the character length must be bigger than or equal to 0.";
         }
 
-        if (!is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
+        if (! is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
             $invalidProperties[] = "invalid value for 'id', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['participants']) && (count($this->container['participants']) < 1)) {
+        if (! is_null($this->container['participants']) && (count($this->container['participants']) < 1)) {
             $invalidProperties[] = "invalid value for 'participants', number of items must be greater than or equal to 1.";
         }
 
         $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+        if (! is_null($this->container['status']) && ! in_array($this->container['status'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
@@ -497,16 +497,16 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
             );
         }
 
-        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 1024)) {
+        if (! is_null($this->container['title']) && (mb_strlen($this->container['title']) > 1024)) {
             $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 1024.";
         }
 
-        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) < 1)) {
+        if (! is_null($this->container['title']) && (mb_strlen($this->container['title']) < 1)) {
             $invalidProperties[] = "invalid value for 'title', the character length must be bigger than or equal to 1.";
         }
 
         $allowedValues = $this->getVisibilityAllowableValues();
-        if (!is_null($this->container['visibility']) && !in_array($this->container['visibility'], $allowedValues, true)) {
+        if (! is_null($this->container['visibility']) && ! in_array($this->container['visibility'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'visibility', must be one of '%s'",
                 $this->container['visibility'],
@@ -527,7 +527,6 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets busy
@@ -634,7 +633,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('created_at', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
@@ -668,15 +667,15 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('description', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        if (!is_null($description) && (mb_strlen($description) > 8192)) {
+        if (! is_null($description) && (mb_strlen($description) > 8192)) {
             throw new InvalidArgumentException('invalid length for $description when calling Event., must be smaller than or equal to 8192.');
         }
-        if (!is_null($description) && (mb_strlen($description) < 0)) {
+        if (! is_null($description) && (mb_strlen($description) < 0)) {
             throw new InvalidArgumentException('invalid length for $description when calling Event., must be bigger than or equal to 0.');
         }
 
@@ -790,7 +789,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('ical_uid', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
@@ -856,7 +855,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('location', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
@@ -890,7 +889,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('master_event_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
@@ -1144,7 +1143,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
             throw new InvalidArgumentException('non-nullable status cannot be null');
         }
         $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
+        if (! in_array($status, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'status', must be one of '%s'",
@@ -1216,7 +1215,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('updated_at', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
@@ -1250,13 +1249,13 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('visibility', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
         $allowedValues = $this->getVisibilityAllowableValues();
-        if (!is_null($visibility) && !in_array($visibility, $allowedValues, true)) {
+        if (! is_null($visibility) && ! in_array($visibility, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'visibility', must be one of '%s'",
@@ -1296,12 +1295,13 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -1311,7 +1311,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -1341,7 +1341,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -1360,7 +1360,7 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -1386,5 +1386,3 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

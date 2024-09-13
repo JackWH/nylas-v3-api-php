@@ -28,15 +28,15 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ResponseObject Class Doc Comment
  *
- * @description 
+ * @description
  * @package  JackWH\NylasV3\EmailCalendar
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -64,7 +64,7 @@ class ResponseObject implements ModelInterface, ArrayAccess, JsonSerializable
         'application_id' => 'string',
         'object' => 'string',
         'created_at' => 'int',
-        'updated_at' => 'int'
+        'updated_at' => 'int',
     ];
 
     /**
@@ -78,7 +78,7 @@ class ResponseObject implements ModelInterface, ArrayAccess, JsonSerializable
         'application_id' => null,
         'object' => null,
         'created_at' => null,
-        'updated_at' => null
+        'updated_at' => null,
     ];
 
     /**
@@ -92,7 +92,7 @@ class ResponseObject implements ModelInterface, ArrayAccess, JsonSerializable
         'application_id' => false,
         'object' => false,
         'created_at' => false,
-        'updated_at' => false
+        'updated_at' => false,
     ];
 
     /**
@@ -186,7 +186,7 @@ class ResponseObject implements ModelInterface, ArrayAccess, JsonSerializable
         'application_id' => 'application_id',
         'object' => 'object',
         'created_at' => 'created_at',
-        'updated_at' => 'updated_at'
+        'updated_at' => 'updated_at',
     ];
 
     /**
@@ -200,7 +200,7 @@ class ResponseObject implements ModelInterface, ArrayAccess, JsonSerializable
         'application_id' => 'setApplicationId',
         'object' => 'setObject',
         'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'updated_at' => 'setUpdatedAt',
     ];
 
     /**
@@ -214,7 +214,7 @@ class ResponseObject implements ModelInterface, ArrayAccess, JsonSerializable
         'application_id' => 'getApplicationId',
         'object' => 'getObject',
         'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'updated_at' => 'getUpdatedAt',
     ];
 
     /**
@@ -330,6 +330,7 @@ class ResponseObject implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['updated_at'] === null) {
             $invalidProperties[] = "'updated_at' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -343,7 +344,6 @@ class ResponseObject implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets id
@@ -511,12 +511,13 @@ class ResponseObject implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -526,7 +527,7 @@ class ResponseObject implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -556,7 +557,7 @@ class ResponseObject implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -575,7 +576,7 @@ class ResponseObject implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -601,5 +602,3 @@ class ResponseObject implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

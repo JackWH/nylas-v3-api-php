@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * IosCallbackwSettingsSettings Class Doc Comment
@@ -61,7 +61,7 @@ class IosCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonS
     protected static array $openAPITypes = [
         'bundle_id' => 'string',
         'app_store_id' => 'string',
-        'team_id' => 'string'
+        'team_id' => 'string',
     ];
 
     /**
@@ -72,7 +72,7 @@ class IosCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonS
     protected static array $openAPIFormats = [
         'bundle_id' => null,
         'app_store_id' => null,
-        'team_id' => null
+        'team_id' => null,
     ];
 
     /**
@@ -83,7 +83,7 @@ class IosCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonS
     protected static array $openAPINullables = [
         'bundle_id' => false,
         'app_store_id' => false,
-        'team_id' => false
+        'team_id' => false,
     ];
 
     /**
@@ -174,7 +174,7 @@ class IosCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonS
     protected static array $attributeMap = [
         'bundle_id' => 'bundle_id',
         'app_store_id' => 'app_store_id',
-        'team_id' => 'team_id'
+        'team_id' => 'team_id',
     ];
 
     /**
@@ -185,7 +185,7 @@ class IosCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonS
     protected static array $setters = [
         'bundle_id' => 'setBundleId',
         'app_store_id' => 'setAppStoreId',
-        'team_id' => 'setTeamId'
+        'team_id' => 'setTeamId',
     ];
 
     /**
@@ -196,7 +196,7 @@ class IosCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonS
     protected static array $getters = [
         'bundle_id' => 'getBundleId',
         'app_store_id' => 'getAppStoreId',
-        'team_id' => 'getTeamId'
+        'team_id' => 'getTeamId',
     ];
 
     /**
@@ -290,6 +290,7 @@ class IosCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonS
         if ($this->container['bundle_id'] === null) {
             $invalidProperties[] = "'bundle_id' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -303,7 +304,6 @@ class IosCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonS
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets bundle_id
@@ -385,12 +385,13 @@ class IosCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonS
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -400,7 +401,7 @@ class IosCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonS
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -430,7 +431,7 @@ class IosCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonS
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -449,7 +450,7 @@ class IosCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonS
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -475,5 +476,3 @@ class IosCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonS
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

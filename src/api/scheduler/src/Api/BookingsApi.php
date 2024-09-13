@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Scheduler\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Scheduler\ApiException;
 use JackWH\NylasV3\Scheduler\Configuration;
 use JackWH\NylasV3\Scheduler\HeaderSelector;
@@ -69,7 +69,7 @@ class BookingsApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'deleteBookingsId' => [
             'application/json',
@@ -157,9 +157,9 @@ class BookingsApi
         ?string $client_id = null,
         ?\JackWH\NylasV3\Scheduler\Model\DeleteBookingsIdRequest $delete_bookings_id_request = null,
         string $contentType = self::contentTypes['deleteBookingsId'][0]
-    ): \JackWH\NylasV3\Scheduler\Model\DeleteConfigurationsId200Response
-    {
+    ): \JackWH\NylasV3\Scheduler\Model\DeleteConfigurationsId200Response {
         list($response) = $this->deleteBookingsIdWithHttpInfo($booking_id, $configuration_id, $slug, $client_id, $delete_bookings_id_request, $contentType);
+
         return $response;
     }
 
@@ -186,12 +186,12 @@ class BookingsApi
         ?string $client_id = null,
         ?\JackWH\NylasV3\Scheduler\Model\DeleteBookingsIdRequest $delete_bookings_id_request = null,
         string $contentType = self::contentTypes['deleteBookingsId'][0]
-    ): array
-    {
+    ): array {
         $request = $this->deleteBookingsIdRequest($booking_id, $configuration_id, $slug, $client_id, $delete_bookings_id_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -225,7 +225,7 @@ class BookingsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\DeleteConfigurationsId200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -251,7 +251,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\DeleteConfigurationsId200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -278,7 +278,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -305,7 +305,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -332,7 +332,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -359,7 +359,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -386,7 +386,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -415,7 +415,7 @@ class BookingsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -427,6 +427,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -435,6 +436,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -443,6 +445,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -451,6 +454,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -459,6 +463,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -467,8 +472,10 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -495,8 +502,7 @@ class BookingsApi
         ?string $client_id = null,
         ?\JackWH\NylasV3\Scheduler\Model\DeleteBookingsIdRequest $delete_bookings_id_request = null,
         string $contentType = self::contentTypes['deleteBookingsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->deleteBookingsIdAsyncWithHttpInfo($booking_id, $configuration_id, $slug, $client_id, $delete_bookings_id_request, $contentType)
             ->then(
                 function ($response) {
@@ -527,8 +533,7 @@ class BookingsApi
         $client_id = null,
         $delete_bookings_id_request = null,
         string $contentType = self::contentTypes['deleteBookingsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Scheduler\Model\DeleteConfigurationsId200Response';
         $request = $this->deleteBookingsIdRequest($booking_id, $configuration_id, $slug, $client_id, $delete_bookings_id_request, $contentType);
 
@@ -548,12 +553,13 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -588,8 +594,7 @@ class BookingsApi
         $client_id = null,
         $delete_bookings_id_request = null,
         string $contentType = self::contentTypes['deleteBookingsId'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'booking_id' is set
         if ($booking_id === null || (is_array($booking_id) && count($booking_id) === 0)) {
@@ -671,7 +676,7 @@ class BookingsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -688,7 +693,7 @@ class BookingsApi
         }
 
         // this endpoint requires Bearer (Session ID) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -705,6 +710,7 @@ class BookingsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -734,9 +740,9 @@ class BookingsApi
         ?string $slug = null,
         ?string $client_id = null,
         string $contentType = self::contentTypes['getBookingsId'][0]
-    ): \JackWH\NylasV3\Scheduler\Model\PostBookings200Response
-    {
+    ): \JackWH\NylasV3\Scheduler\Model\PostBookings200Response {
         list($response) = $this->getBookingsIdWithHttpInfo($booking_id, $configuration_id, $slug, $client_id, $contentType);
+
         return $response;
     }
 
@@ -761,12 +767,12 @@ class BookingsApi
         ?string $slug = null,
         ?string $client_id = null,
         string $contentType = self::contentTypes['getBookingsId'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getBookingsIdRequest($booking_id, $configuration_id, $slug, $client_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -800,7 +806,7 @@ class BookingsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\PostBookings200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -826,7 +832,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\PostBookings200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -853,7 +859,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -880,7 +886,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -907,7 +913,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -934,7 +940,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -961,7 +967,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -990,7 +996,7 @@ class BookingsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1002,6 +1008,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1010,6 +1017,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1018,6 +1026,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -1026,6 +1035,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -1034,6 +1044,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -1042,8 +1053,10 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1068,8 +1081,7 @@ class BookingsApi
         ?string $slug = null,
         ?string $client_id = null,
         string $contentType = self::contentTypes['getBookingsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getBookingsIdAsyncWithHttpInfo($booking_id, $configuration_id, $slug, $client_id, $contentType)
             ->then(
                 function ($response) {
@@ -1098,8 +1110,7 @@ class BookingsApi
         $slug = null,
         $client_id = null,
         string $contentType = self::contentTypes['getBookingsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Scheduler\Model\PostBookings200Response';
         $request = $this->getBookingsIdRequest($booking_id, $configuration_id, $slug, $client_id, $contentType);
 
@@ -1119,12 +1130,13 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1157,8 +1169,7 @@ class BookingsApi
         $slug = null,
         $client_id = null,
         string $contentType = self::contentTypes['getBookingsId'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'booking_id' is set
         if ($booking_id === null || (is_array($booking_id) && count($booking_id) === 0)) {
@@ -1232,7 +1243,7 @@ class BookingsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1249,7 +1260,7 @@ class BookingsApi
         }
 
         // this endpoint requires Bearer (Session ID) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1266,6 +1277,7 @@ class BookingsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1297,9 +1309,9 @@ class BookingsApi
         ?string $client_id = null,
         ?\JackWH\NylasV3\Scheduler\Model\PatchBookingsIdRequest $patch_bookings_id_request = null,
         string $contentType = self::contentTypes['patchBookingsId'][0]
-    ): \JackWH\NylasV3\Scheduler\Model\PatchBookingsId200Response
-    {
+    ): \JackWH\NylasV3\Scheduler\Model\PatchBookingsId200Response {
         list($response) = $this->patchBookingsIdWithHttpInfo($booking_id, $configuration_id, $slug, $client_id, $patch_bookings_id_request, $contentType);
+
         return $response;
     }
 
@@ -1326,12 +1338,12 @@ class BookingsApi
         ?string $client_id = null,
         ?\JackWH\NylasV3\Scheduler\Model\PatchBookingsIdRequest $patch_bookings_id_request = null,
         string $contentType = self::contentTypes['patchBookingsId'][0]
-    ): array
-    {
+    ): array {
         $request = $this->patchBookingsIdRequest($booking_id, $configuration_id, $slug, $client_id, $patch_bookings_id_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1365,7 +1377,7 @@ class BookingsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\PatchBookingsId200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1391,7 +1403,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\PatchBookingsId200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1418,7 +1430,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1445,7 +1457,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1472,7 +1484,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1499,7 +1511,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1526,7 +1538,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1555,7 +1567,7 @@ class BookingsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1567,6 +1579,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1575,6 +1588,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1583,6 +1597,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -1591,6 +1606,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -1599,6 +1615,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -1607,8 +1624,10 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1635,8 +1654,7 @@ class BookingsApi
         ?string $client_id = null,
         ?\JackWH\NylasV3\Scheduler\Model\PatchBookingsIdRequest $patch_bookings_id_request = null,
         string $contentType = self::contentTypes['patchBookingsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->patchBookingsIdAsyncWithHttpInfo($booking_id, $configuration_id, $slug, $client_id, $patch_bookings_id_request, $contentType)
             ->then(
                 function ($response) {
@@ -1667,8 +1685,7 @@ class BookingsApi
         $client_id = null,
         $patch_bookings_id_request = null,
         string $contentType = self::contentTypes['patchBookingsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Scheduler\Model\PatchBookingsId200Response';
         $request = $this->patchBookingsIdRequest($booking_id, $configuration_id, $slug, $client_id, $patch_bookings_id_request, $contentType);
 
@@ -1688,12 +1705,13 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1728,8 +1746,7 @@ class BookingsApi
         $client_id = null,
         $patch_bookings_id_request = null,
         string $contentType = self::contentTypes['patchBookingsId'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'booking_id' is set
         if ($booking_id === null || (is_array($booking_id) && count($booking_id) === 0)) {
@@ -1811,7 +1828,7 @@ class BookingsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1828,7 +1845,7 @@ class BookingsApi
         }
 
         // this endpoint requires Bearer (Session ID) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1845,6 +1862,7 @@ class BookingsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PATCH',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1876,9 +1894,9 @@ class BookingsApi
         ?string $client_id = null,
         ?\JackWH\NylasV3\Scheduler\Model\PostBookingsRequest $post_bookings_request = null,
         string $contentType = self::contentTypes['postBookings'][0]
-    ): \JackWH\NylasV3\Scheduler\Model\PostBookings200Response
-    {
+    ): \JackWH\NylasV3\Scheduler\Model\PostBookings200Response {
         list($response) = $this->postBookingsWithHttpInfo($timezone, $configuration_id, $slug, $client_id, $post_bookings_request, $contentType);
+
         return $response;
     }
 
@@ -1905,12 +1923,12 @@ class BookingsApi
         ?string $client_id = null,
         ?\JackWH\NylasV3\Scheduler\Model\PostBookingsRequest $post_bookings_request = null,
         string $contentType = self::contentTypes['postBookings'][0]
-    ): array
-    {
+    ): array {
         $request = $this->postBookingsRequest($timezone, $configuration_id, $slug, $client_id, $post_bookings_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1944,7 +1962,7 @@ class BookingsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\PostBookings200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1970,7 +1988,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\PostBookings200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1997,7 +2015,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2024,7 +2042,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2051,7 +2069,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2078,7 +2096,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2105,7 +2123,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2134,7 +2152,7 @@ class BookingsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2146,6 +2164,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -2154,6 +2173,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -2162,6 +2182,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -2170,6 +2191,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -2178,6 +2200,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -2186,8 +2209,10 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2214,8 +2239,7 @@ class BookingsApi
         ?string $client_id = null,
         ?\JackWH\NylasV3\Scheduler\Model\PostBookingsRequest $post_bookings_request = null,
         string $contentType = self::contentTypes['postBookings'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->postBookingsAsyncWithHttpInfo($timezone, $configuration_id, $slug, $client_id, $post_bookings_request, $contentType)
             ->then(
                 function ($response) {
@@ -2246,8 +2270,7 @@ class BookingsApi
         $client_id = null,
         $post_bookings_request = null,
         string $contentType = self::contentTypes['postBookings'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Scheduler\Model\PostBookings200Response';
         $request = $this->postBookingsRequest($timezone, $configuration_id, $slug, $client_id, $post_bookings_request, $contentType);
 
@@ -2267,12 +2290,13 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2307,8 +2331,7 @@ class BookingsApi
         $client_id = null,
         $post_bookings_request = null,
         string $contentType = self::contentTypes['postBookings'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -2385,7 +2408,7 @@ class BookingsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2402,7 +2425,7 @@ class BookingsApi
         }
 
         // this endpoint requires Bearer (Session ID) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2419,6 +2442,7 @@ class BookingsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2450,9 +2474,9 @@ class BookingsApi
         ?string $client_id = null,
         ?\JackWH\NylasV3\Scheduler\Model\PutBookingsIdRequest $put_bookings_id_request = null,
         string $contentType = self::contentTypes['putBookingsId'][0]
-    ): \JackWH\NylasV3\Scheduler\Model\PutBookingsId200Response
-    {
+    ): \JackWH\NylasV3\Scheduler\Model\PutBookingsId200Response {
         list($response) = $this->putBookingsIdWithHttpInfo($booking_id, $configuration_id, $slug, $client_id, $put_bookings_id_request, $contentType);
+
         return $response;
     }
 
@@ -2479,12 +2503,12 @@ class BookingsApi
         ?string $client_id = null,
         ?\JackWH\NylasV3\Scheduler\Model\PutBookingsIdRequest $put_bookings_id_request = null,
         string $contentType = self::contentTypes['putBookingsId'][0]
-    ): array
-    {
+    ): array {
         $request = $this->putBookingsIdRequest($booking_id, $configuration_id, $slug, $client_id, $put_bookings_id_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -2518,7 +2542,7 @@ class BookingsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\PutBookingsId200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -2544,7 +2568,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\PutBookingsId200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2571,7 +2595,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2598,7 +2622,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2625,7 +2649,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2652,7 +2676,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2679,7 +2703,7 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2708,7 +2732,7 @@ class BookingsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2720,6 +2744,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -2728,6 +2753,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -2736,6 +2762,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -2744,6 +2771,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -2752,6 +2780,7 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -2760,8 +2789,10 @@ class BookingsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2788,8 +2819,7 @@ class BookingsApi
         ?string $client_id = null,
         ?\JackWH\NylasV3\Scheduler\Model\PutBookingsIdRequest $put_bookings_id_request = null,
         string $contentType = self::contentTypes['putBookingsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->putBookingsIdAsyncWithHttpInfo($booking_id, $configuration_id, $slug, $client_id, $put_bookings_id_request, $contentType)
             ->then(
                 function ($response) {
@@ -2820,8 +2850,7 @@ class BookingsApi
         $client_id = null,
         $put_bookings_id_request = null,
         string $contentType = self::contentTypes['putBookingsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Scheduler\Model\PutBookingsId200Response';
         $request = $this->putBookingsIdRequest($booking_id, $configuration_id, $slug, $client_id, $put_bookings_id_request, $contentType);
 
@@ -2841,12 +2870,13 @@ class BookingsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2881,8 +2911,7 @@ class BookingsApi
         $client_id = null,
         $put_bookings_id_request = null,
         string $contentType = self::contentTypes['putBookingsId'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'booking_id' is set
         if ($booking_id === null || (is_array($booking_id) && count($booking_id) === 0)) {
@@ -2964,7 +2993,7 @@ class BookingsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2981,7 +3010,7 @@ class BookingsApi
         }
 
         // this endpoint requires Bearer (Session ID) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2998,6 +3027,7 @@ class BookingsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PUT',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -3017,7 +3047,7 @@ class BookingsApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ThreadParticipantsInner Class Doc Comment
@@ -59,7 +59,7 @@ class ThreadParticipantsInner implements ModelInterface, ArrayAccess, JsonSerial
       */
     protected static array $openAPITypes = [
         'email' => 'string',
-        'name' => 'string'
+        'name' => 'string',
     ];
 
     /**
@@ -69,7 +69,7 @@ class ThreadParticipantsInner implements ModelInterface, ArrayAccess, JsonSerial
       */
     protected static array $openAPIFormats = [
         'email' => null,
-        'name' => null
+        'name' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class ThreadParticipantsInner implements ModelInterface, ArrayAccess, JsonSerial
       */
     protected static array $openAPINullables = [
         'email' => false,
-        'name' => false
+        'name' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class ThreadParticipantsInner implements ModelInterface, ArrayAccess, JsonSerial
      */
     protected static array $attributeMap = [
         'email' => 'email',
-        'name' => 'name'
+        'name' => 'name',
     ];
 
     /**
@@ -179,7 +179,7 @@ class ThreadParticipantsInner implements ModelInterface, ArrayAccess, JsonSerial
      */
     protected static array $setters = [
         'email' => 'setEmail',
-        'name' => 'setName'
+        'name' => 'setName',
     ];
 
     /**
@@ -189,7 +189,7 @@ class ThreadParticipantsInner implements ModelInterface, ArrayAccess, JsonSerial
      */
     protected static array $getters = [
         'email' => 'getEmail',
-        'name' => 'getName'
+        'name' => 'getName',
     ];
 
     /**
@@ -293,7 +293,6 @@ class ThreadParticipantsInner implements ModelInterface, ArrayAccess, JsonSerial
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets email
      *
@@ -347,12 +346,13 @@ class ThreadParticipantsInner implements ModelInterface, ArrayAccess, JsonSerial
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -362,7 +362,7 @@ class ThreadParticipantsInner implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -392,7 +392,7 @@ class ThreadParticipantsInner implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -411,7 +411,7 @@ class ThreadParticipantsInner implements ModelInterface, ArrayAccess, JsonSerial
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -437,5 +437,3 @@ class ThreadParticipantsInner implements ModelInterface, ArrayAccess, JsonSerial
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

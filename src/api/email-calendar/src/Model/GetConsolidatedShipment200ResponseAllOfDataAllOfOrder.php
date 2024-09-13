@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConsolidatedShipment200ResponseAllOfDataAllOfOrder Class Doc Comment
@@ -70,7 +70,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfOrder implements ModelInte
         'shipping_total' => 'float',
         'gift_card_total' => 'float',
         'products' => '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner[]',
-        'order_provider_message_ids' => 'string[]'
+        'order_provider_message_ids' => 'string[]',
     ];
 
     /**
@@ -90,7 +90,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfOrder implements ModelInte
         'shipping_total' => null,
         'gift_card_total' => null,
         'products' => null,
-        'order_provider_message_ids' => null
+        'order_provider_message_ids' => null,
     ];
 
     /**
@@ -110,7 +110,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfOrder implements ModelInte
         'shipping_total' => false,
         'gift_card_total' => false,
         'products' => false,
-        'order_provider_message_ids' => false
+        'order_provider_message_ids' => false,
     ];
 
     /**
@@ -210,7 +210,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfOrder implements ModelInte
         'shipping_total' => 'shipping_total',
         'gift_card_total' => 'gift_card_total',
         'products' => 'products',
-        'order_provider_message_ids' => 'order_provider_message_ids'
+        'order_provider_message_ids' => 'order_provider_message_ids',
     ];
 
     /**
@@ -230,7 +230,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfOrder implements ModelInte
         'shipping_total' => 'setShippingTotal',
         'gift_card_total' => 'setGiftCardTotal',
         'products' => 'setProducts',
-        'order_provider_message_ids' => 'setOrderProviderMessageIds'
+        'order_provider_message_ids' => 'setOrderProviderMessageIds',
     ];
 
     /**
@@ -250,7 +250,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfOrder implements ModelInte
         'shipping_total' => 'getShippingTotal',
         'gift_card_total' => 'getGiftCardTotal',
         'products' => 'getProducts',
-        'order_provider_message_ids' => 'getOrderProviderMessageIds'
+        'order_provider_message_ids' => 'getOrderProviderMessageIds',
     ];
 
     /**
@@ -368,6 +368,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfOrder implements ModelInte
         if ($this->container['order_provider_message_ids'] === null) {
             $invalidProperties[] = "'order_provider_message_ids' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -381,7 +382,6 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfOrder implements ModelInte
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets order_id
@@ -706,12 +706,13 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfOrder implements ModelInte
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -721,7 +722,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfOrder implements ModelInte
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -751,7 +752,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfOrder implements ModelInte
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -770,7 +771,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfOrder implements ModelInte
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -796,5 +797,3 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfOrder implements ModelInte
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

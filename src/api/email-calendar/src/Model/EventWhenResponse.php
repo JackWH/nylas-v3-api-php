@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * EventWhenResponse Class Doc Comment
@@ -65,7 +65,7 @@ class EventWhenResponse implements ModelInterface, ArrayAccess, JsonSerializable
         'end_timezone' => 'string',
         'date' => 'string',
         'start_date' => 'string',
-        'end_date' => 'string'
+        'end_date' => 'string',
     ];
 
     /**
@@ -80,7 +80,7 @@ class EventWhenResponse implements ModelInterface, ArrayAccess, JsonSerializable
         'end_timezone' => null,
         'date' => null,
         'start_date' => null,
-        'end_date' => null
+        'end_date' => null,
     ];
 
     /**
@@ -95,7 +95,7 @@ class EventWhenResponse implements ModelInterface, ArrayAccess, JsonSerializable
         'end_timezone' => false,
         'date' => false,
         'start_date' => false,
-        'end_date' => false
+        'end_date' => false,
     ];
 
     /**
@@ -190,7 +190,7 @@ class EventWhenResponse implements ModelInterface, ArrayAccess, JsonSerializable
         'end_timezone' => 'end_timezone',
         'date' => 'date',
         'start_date' => 'start_date',
-        'end_date' => 'end_date'
+        'end_date' => 'end_date',
     ];
 
     /**
@@ -205,7 +205,7 @@ class EventWhenResponse implements ModelInterface, ArrayAccess, JsonSerializable
         'end_timezone' => 'setEndTimezone',
         'date' => 'setDate',
         'start_date' => 'setStartDate',
-        'end_date' => 'setEndDate'
+        'end_date' => 'setEndDate',
     ];
 
     /**
@@ -220,7 +220,7 @@ class EventWhenResponse implements ModelInterface, ArrayAccess, JsonSerializable
         'end_timezone' => 'getEndTimezone',
         'date' => 'getDate',
         'start_date' => 'getStartDate',
-        'end_date' => 'getEndDate'
+        'end_date' => 'getEndDate',
     ];
 
     /**
@@ -315,15 +315,15 @@ class EventWhenResponse implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['start_timezone']) && (mb_strlen($this->container['start_timezone']) < 1)) {
+        if (! is_null($this->container['start_timezone']) && (mb_strlen($this->container['start_timezone']) < 1)) {
             $invalidProperties[] = "invalid value for 'start_timezone', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['end_timezone']) && (mb_strlen($this->container['end_timezone']) < 1)) {
+        if (! is_null($this->container['end_timezone']) && (mb_strlen($this->container['end_timezone']) < 1)) {
             $invalidProperties[] = "invalid value for 'end_timezone', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['start_date']) && (mb_strlen($this->container['start_date']) < 1)) {
+        if (! is_null($this->container['start_date']) && (mb_strlen($this->container['start_date']) < 1)) {
             $invalidProperties[] = "invalid value for 'start_date', the character length must be bigger than or equal to 1.";
         }
 
@@ -340,7 +340,6 @@ class EventWhenResponse implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets start_time
@@ -545,12 +544,13 @@ class EventWhenResponse implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -560,7 +560,7 @@ class EventWhenResponse implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -590,7 +590,7 @@ class EventWhenResponse implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -609,7 +609,7 @@ class EventWhenResponse implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -635,5 +635,3 @@ class EventWhenResponse implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

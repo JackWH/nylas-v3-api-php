@@ -28,10 +28,9 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
-use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * RedirectURIObject Class Doc Comment
@@ -58,7 +57,7 @@ class RedirectURIObject implements ModelInterface, ArrayAccess, JsonSerializable
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        
+
     ];
 
     /**
@@ -67,7 +66,7 @@ class RedirectURIObject implements ModelInterface, ArrayAccess, JsonSerializable
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        
+
     ];
 
     /**
@@ -76,7 +75,7 @@ class RedirectURIObject implements ModelInterface, ArrayAccess, JsonSerializable
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        
+
     ];
 
     /**
@@ -165,7 +164,7 @@ class RedirectURIObject implements ModelInterface, ArrayAccess, JsonSerializable
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        
+
     ];
 
     /**
@@ -174,7 +173,7 @@ class RedirectURIObject implements ModelInterface, ArrayAccess, JsonSerializable
      * @var array<string, string>
      */
     protected static array $setters = [
-        
+
     ];
 
     /**
@@ -183,7 +182,7 @@ class RedirectURIObject implements ModelInterface, ArrayAccess, JsonSerializable
      * @var array<string, string>
      */
     protected static array $getters = [
-        
+
     ];
 
     /**
@@ -291,9 +290,9 @@ class RedirectURIObject implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -303,7 +302,7 @@ class RedirectURIObject implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -333,7 +332,7 @@ class RedirectURIObject implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -352,7 +351,7 @@ class RedirectURIObject implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -378,5 +377,3 @@ class RedirectURIObject implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

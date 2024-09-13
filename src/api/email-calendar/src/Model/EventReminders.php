@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * EventReminders Class Doc Comment
@@ -60,7 +60,7 @@ class EventReminders implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPITypes = [
         'use_default' => 'bool',
-        'overrides' => '\JackWH\NylasV3\EmailCalendar\Model\EventRemindersOverridesInner[]'
+        'overrides' => '\JackWH\NylasV3\EmailCalendar\Model\EventRemindersOverridesInner[]',
     ];
 
     /**
@@ -70,7 +70,7 @@ class EventReminders implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPIFormats = [
         'use_default' => null,
-        'overrides' => null
+        'overrides' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class EventReminders implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPINullables = [
         'use_default' => false,
-        'overrides' => false
+        'overrides' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class EventReminders implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $attributeMap = [
         'use_default' => 'use_default',
-        'overrides' => 'overrides'
+        'overrides' => 'overrides',
     ];
 
     /**
@@ -180,7 +180,7 @@ class EventReminders implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $setters = [
         'use_default' => 'setUseDefault',
-        'overrides' => 'setOverrides'
+        'overrides' => 'setOverrides',
     ];
 
     /**
@@ -190,7 +190,7 @@ class EventReminders implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $getters = [
         'use_default' => 'getUseDefault',
-        'overrides' => 'getOverrides'
+        'overrides' => 'getOverrides',
     ];
 
     /**
@@ -294,7 +294,6 @@ class EventReminders implements ModelInterface, ArrayAccess, JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets use_default
      *
@@ -348,12 +347,13 @@ class EventReminders implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -363,7 +363,7 @@ class EventReminders implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -393,7 +393,7 @@ class EventReminders implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -412,7 +412,7 @@ class EventReminders implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -438,5 +438,3 @@ class EventReminders implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

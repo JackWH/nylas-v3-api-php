@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Administration\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Administration\ApiException;
 use JackWH\NylasV3\Administration\Configuration;
 use JackWH\NylasV3\Administration\HeaderSelector;
@@ -69,7 +69,7 @@ class PubSubNotificationsApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'createPubsubChannel' => [
             'application/json',
@@ -152,9 +152,9 @@ class PubSubNotificationsApi
     public function createPubsubChannel(
         \JackWH\NylasV3\Administration\Model\DestinationPayload1 $destination_payload1,
         string $contentType = self::contentTypes['createPubsubChannel'][0]
-    ): \JackWH\NylasV3\Administration\Model\CreatePubsubChannel200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\CreatePubsubChannel200Response {
         list($response) = $this->createPubsubChannelWithHttpInfo($destination_payload1, $contentType);
+
         return $response;
     }
 
@@ -173,12 +173,12 @@ class PubSubNotificationsApi
     public function createPubsubChannelWithHttpInfo(
         \JackWH\NylasV3\Administration\Model\DestinationPayload1 $destination_payload1,
         string $contentType = self::contentTypes['createPubsubChannel'][0]
-    ): array
-    {
+    ): array {
         $request = $this->createPubsubChannelRequest($destination_payload1, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -212,7 +212,7 @@ class PubSubNotificationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\CreatePubsubChannel200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -238,7 +238,7 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\CreatePubsubChannel200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\CreatePubsubChannel400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -265,7 +265,7 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\CreatePubsubChannel400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -294,7 +294,7 @@ class PubSubNotificationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -306,6 +306,7 @@ class PubSubNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -314,8 +315,10 @@ class PubSubNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -334,8 +337,7 @@ class PubSubNotificationsApi
     public function createPubsubChannelAsync(
         \JackWH\NylasV3\Administration\Model\DestinationPayload1 $destination_payload1,
         string $contentType = self::contentTypes['createPubsubChannel'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->createPubsubChannelAsyncWithHttpInfo($destination_payload1, $contentType)
             ->then(
                 function ($response) {
@@ -358,8 +360,7 @@ class PubSubNotificationsApi
     public function createPubsubChannelAsyncWithHttpInfo(
         $destination_payload1,
         string $contentType = self::contentTypes['createPubsubChannel'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\CreatePubsubChannel200Response';
         $request = $this->createPubsubChannelRequest($destination_payload1, $contentType);
 
@@ -379,12 +380,13 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -411,8 +413,7 @@ class PubSubNotificationsApi
     public function createPubsubChannelRequest(
         $destination_payload1,
         string $contentType = self::contentTypes['createPubsubChannel'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'destination_payload1' is set
         if ($destination_payload1 === null || (is_array($destination_payload1) && count($destination_payload1) === 0)) {
@@ -455,7 +456,7 @@ class PubSubNotificationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -472,7 +473,7 @@ class PubSubNotificationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -489,6 +490,7 @@ class PubSubNotificationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -512,9 +514,9 @@ class PubSubNotificationsApi
     public function deletePubsubById(
         string $id,
         string $contentType = self::contentTypes['deletePubsubById'][0]
-    ): \JackWH\NylasV3\Administration\Model\DeleteWebhookById200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\DeleteWebhookById200Response {
         list($response) = $this->deletePubsubByIdWithHttpInfo($id, $contentType);
+
         return $response;
     }
 
@@ -533,12 +535,12 @@ class PubSubNotificationsApi
     public function deletePubsubByIdWithHttpInfo(
         string $id,
         string $contentType = self::contentTypes['deletePubsubById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->deletePubsubByIdRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -572,7 +574,7 @@ class PubSubNotificationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\DeleteWebhookById200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -598,7 +600,7 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\DeleteWebhookById200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\PutWebhookById400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -625,7 +627,7 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\PutWebhookById400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -654,7 +656,7 @@ class PubSubNotificationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -666,6 +668,7 @@ class PubSubNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -674,8 +677,10 @@ class PubSubNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -694,8 +699,7 @@ class PubSubNotificationsApi
     public function deletePubsubByIdAsync(
         string $id,
         string $contentType = self::contentTypes['deletePubsubById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->deletePubsubByIdAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
@@ -718,8 +722,7 @@ class PubSubNotificationsApi
     public function deletePubsubByIdAsyncWithHttpInfo(
         $id,
         string $contentType = self::contentTypes['deletePubsubById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\DeleteWebhookById200Response';
         $request = $this->deletePubsubByIdRequest($id, $contentType);
 
@@ -739,12 +742,13 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -771,8 +775,7 @@ class PubSubNotificationsApi
     public function deletePubsubByIdRequest(
         $id,
         string $contentType = self::contentTypes['deletePubsubById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
@@ -816,7 +819,7 @@ class PubSubNotificationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -833,7 +836,7 @@ class PubSubNotificationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -850,6 +853,7 @@ class PubSubNotificationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -873,9 +877,9 @@ class PubSubNotificationsApi
     public function getMockWebhookPayload(
         \JackWH\NylasV3\Administration\Model\InputPayload $input_payload,
         string $contentType = self::contentTypes['getMockWebhookPayload'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetMockWebhookPayload200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetMockWebhookPayload200Response {
         list($response) = $this->getMockWebhookPayloadWithHttpInfo($input_payload, $contentType);
+
         return $response;
     }
 
@@ -894,12 +898,12 @@ class PubSubNotificationsApi
     public function getMockWebhookPayloadWithHttpInfo(
         \JackWH\NylasV3\Administration\Model\InputPayload $input_payload,
         string $contentType = self::contentTypes['getMockWebhookPayload'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getMockWebhookPayloadRequest($input_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -933,7 +937,7 @@ class PubSubNotificationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetMockWebhookPayload200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -959,7 +963,7 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetMockWebhookPayload200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -988,7 +992,7 @@ class PubSubNotificationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1000,8 +1004,10 @@ class PubSubNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1020,8 +1026,7 @@ class PubSubNotificationsApi
     public function getMockWebhookPayloadAsync(
         \JackWH\NylasV3\Administration\Model\InputPayload $input_payload,
         string $contentType = self::contentTypes['getMockWebhookPayload'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getMockWebhookPayloadAsyncWithHttpInfo($input_payload, $contentType)
             ->then(
                 function ($response) {
@@ -1044,8 +1049,7 @@ class PubSubNotificationsApi
     public function getMockWebhookPayloadAsyncWithHttpInfo(
         $input_payload,
         string $contentType = self::contentTypes['getMockWebhookPayload'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetMockWebhookPayload200Response';
         $request = $this->getMockWebhookPayloadRequest($input_payload, $contentType);
 
@@ -1065,12 +1069,13 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1097,8 +1102,7 @@ class PubSubNotificationsApi
     public function getMockWebhookPayloadRequest(
         $input_payload,
         string $contentType = self::contentTypes['getMockWebhookPayload'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'input_payload' is set
         if ($input_payload === null || (is_array($input_payload) && count($input_payload) === 0)) {
@@ -1141,7 +1145,7 @@ class PubSubNotificationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1158,7 +1162,7 @@ class PubSubNotificationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1175,6 +1179,7 @@ class PubSubNotificationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1198,9 +1203,9 @@ class PubSubNotificationsApi
     public function getPubsubById(
         string $id,
         string $contentType = self::contentTypes['getPubsubById'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetPubsubById200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetPubsubById200Response {
         list($response) = $this->getPubsubByIdWithHttpInfo($id, $contentType);
+
         return $response;
     }
 
@@ -1219,12 +1224,12 @@ class PubSubNotificationsApi
     public function getPubsubByIdWithHttpInfo(
         string $id,
         string $contentType = self::contentTypes['getPubsubById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getPubsubByIdRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1258,7 +1263,7 @@ class PubSubNotificationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetPubsubById200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1284,7 +1289,7 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetPubsubById200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetPubsubChannels400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1311,7 +1316,7 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetPubsubChannels400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1340,7 +1345,7 @@ class PubSubNotificationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1352,6 +1357,7 @@ class PubSubNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1360,8 +1366,10 @@ class PubSubNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1380,8 +1388,7 @@ class PubSubNotificationsApi
     public function getPubsubByIdAsync(
         string $id,
         string $contentType = self::contentTypes['getPubsubById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getPubsubByIdAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
@@ -1404,8 +1411,7 @@ class PubSubNotificationsApi
     public function getPubsubByIdAsyncWithHttpInfo(
         $id,
         string $contentType = self::contentTypes['getPubsubById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetPubsubById200Response';
         $request = $this->getPubsubByIdRequest($id, $contentType);
 
@@ -1425,12 +1431,13 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1457,8 +1464,7 @@ class PubSubNotificationsApi
     public function getPubsubByIdRequest(
         $id,
         string $contentType = self::contentTypes['getPubsubById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
@@ -1502,7 +1508,7 @@ class PubSubNotificationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1519,7 +1525,7 @@ class PubSubNotificationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1536,6 +1542,7 @@ class PubSubNotificationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1557,9 +1564,9 @@ class PubSubNotificationsApi
      */
     public function getPubsubChannels(
         string $contentType = self::contentTypes['getPubsubChannels'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetPubsubChannels200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetPubsubChannels200Response {
         list($response) = $this->getPubsubChannelsWithHttpInfo($contentType);
+
         return $response;
     }
 
@@ -1576,12 +1583,12 @@ class PubSubNotificationsApi
      */
     public function getPubsubChannelsWithHttpInfo(
         string $contentType = self::contentTypes['getPubsubChannels'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getPubsubChannelsRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1615,7 +1622,7 @@ class PubSubNotificationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetPubsubChannels200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1641,7 +1648,7 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetPubsubChannels200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetPubsubChannels400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1668,7 +1675,7 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetPubsubChannels400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1697,7 +1704,7 @@ class PubSubNotificationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1709,6 +1716,7 @@ class PubSubNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1717,8 +1725,10 @@ class PubSubNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1735,8 +1745,7 @@ class PubSubNotificationsApi
      */
     public function getPubsubChannelsAsync(
         string $contentType = self::contentTypes['getPubsubChannels'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getPubsubChannelsAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -1757,8 +1766,7 @@ class PubSubNotificationsApi
      */
     public function getPubsubChannelsAsyncWithHttpInfo(
         string $contentType = self::contentTypes['getPubsubChannels'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetPubsubChannels200Response';
         $request = $this->getPubsubChannelsRequest($contentType);
 
@@ -1778,12 +1786,13 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1808,8 +1817,7 @@ class PubSubNotificationsApi
      */
     public function getPubsubChannelsRequest(
         string $contentType = self::contentTypes['getPubsubChannels'][0]
-    ): Request
-    {
+    ): Request {
 
 
         $resourcePath = '/v3/channels/pubsub';
@@ -1838,7 +1846,7 @@ class PubSubNotificationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1855,7 +1863,7 @@ class PubSubNotificationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1872,6 +1880,7 @@ class PubSubNotificationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1897,9 +1906,9 @@ class PubSubNotificationsApi
         string $id,
         \JackWH\NylasV3\Administration\Model\PutPubsubByIdRequest $put_pubsub_by_id_request,
         string $contentType = self::contentTypes['putPubsubById'][0]
-    ): \JackWH\NylasV3\Administration\Model\PutPubsubById200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\PutPubsubById200Response {
         list($response) = $this->putPubsubByIdWithHttpInfo($id, $put_pubsub_by_id_request, $contentType);
+
         return $response;
     }
 
@@ -1920,12 +1929,12 @@ class PubSubNotificationsApi
         string $id,
         \JackWH\NylasV3\Administration\Model\PutPubsubByIdRequest $put_pubsub_by_id_request,
         string $contentType = self::contentTypes['putPubsubById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->putPubsubByIdRequest($id, $put_pubsub_by_id_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1959,7 +1968,7 @@ class PubSubNotificationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\PutPubsubById200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1985,7 +1994,7 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\PutPubsubById200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\PutPubsubById400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2012,7 +2021,7 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\PutPubsubById400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2041,7 +2050,7 @@ class PubSubNotificationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2053,6 +2062,7 @@ class PubSubNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -2061,8 +2071,10 @@ class PubSubNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2083,8 +2095,7 @@ class PubSubNotificationsApi
         string $id,
         \JackWH\NylasV3\Administration\Model\PutPubsubByIdRequest $put_pubsub_by_id_request,
         string $contentType = self::contentTypes['putPubsubById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->putPubsubByIdAsyncWithHttpInfo($id, $put_pubsub_by_id_request, $contentType)
             ->then(
                 function ($response) {
@@ -2109,8 +2120,7 @@ class PubSubNotificationsApi
         $id,
         $put_pubsub_by_id_request,
         string $contentType = self::contentTypes['putPubsubById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\PutPubsubById200Response';
         $request = $this->putPubsubByIdRequest($id, $put_pubsub_by_id_request, $contentType);
 
@@ -2130,12 +2140,13 @@ class PubSubNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2164,8 +2175,7 @@ class PubSubNotificationsApi
         $id,
         $put_pubsub_by_id_request,
         string $contentType = self::contentTypes['putPubsubById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
@@ -2223,7 +2233,7 @@ class PubSubNotificationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2240,7 +2250,7 @@ class PubSubNotificationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2257,6 +2267,7 @@ class PubSubNotificationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PUT',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2276,7 +2287,7 @@ class PubSubNotificationsApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

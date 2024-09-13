@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CustomAuthFlowRequestOneOf1Settings Class Doc Comment
@@ -60,7 +60,7 @@ class CustomAuthFlowRequestOneOf1Settings implements ModelInterface, ArrayAccess
       */
     protected static array $openAPITypes = [
         'refresh_token' => 'string',
-        'credential_id' => 'string'
+        'credential_id' => 'string',
     ];
 
     /**
@@ -70,7 +70,7 @@ class CustomAuthFlowRequestOneOf1Settings implements ModelInterface, ArrayAccess
       */
     protected static array $openAPIFormats = [
         'refresh_token' => null,
-        'credential_id' => null
+        'credential_id' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class CustomAuthFlowRequestOneOf1Settings implements ModelInterface, ArrayAccess
       */
     protected static array $openAPINullables = [
         'refresh_token' => false,
-        'credential_id' => false
+        'credential_id' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class CustomAuthFlowRequestOneOf1Settings implements ModelInterface, ArrayAccess
      */
     protected static array $attributeMap = [
         'refresh_token' => 'refresh_token',
-        'credential_id' => 'credential_id'
+        'credential_id' => 'credential_id',
     ];
 
     /**
@@ -180,7 +180,7 @@ class CustomAuthFlowRequestOneOf1Settings implements ModelInterface, ArrayAccess
      */
     protected static array $setters = [
         'refresh_token' => 'setRefreshToken',
-        'credential_id' => 'setCredentialId'
+        'credential_id' => 'setCredentialId',
     ];
 
     /**
@@ -190,7 +190,7 @@ class CustomAuthFlowRequestOneOf1Settings implements ModelInterface, ArrayAccess
      */
     protected static array $getters = [
         'refresh_token' => 'getRefreshToken',
-        'credential_id' => 'getCredentialId'
+        'credential_id' => 'getCredentialId',
     ];
 
     /**
@@ -294,7 +294,6 @@ class CustomAuthFlowRequestOneOf1Settings implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets refresh_token
      *
@@ -348,12 +347,13 @@ class CustomAuthFlowRequestOneOf1Settings implements ModelInterface, ArrayAccess
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -363,7 +363,7 @@ class CustomAuthFlowRequestOneOf1Settings implements ModelInterface, ArrayAccess
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -393,7 +393,7 @@ class CustomAuthFlowRequestOneOf1Settings implements ModelInterface, ArrayAccess
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -412,7 +412,7 @@ class CustomAuthFlowRequestOneOf1Settings implements ModelInterface, ArrayAccess
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -438,5 +438,3 @@ class CustomAuthFlowRequestOneOf1Settings implements ModelInterface, ArrayAccess
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

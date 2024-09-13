@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConfigurations200ResponseAllOfDataInnerEventBooking Class Doc Comment
@@ -65,7 +65,7 @@ class GetConfigurations200ResponseAllOfDataInnerEventBooking implements ModelInt
         'timezone' => 'string',
         'booking_type' => 'string',
         'conferencing' => '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerEventBookingConferencing',
-        'disable_emails' => 'bool'
+        'disable_emails' => 'bool',
     ];
 
     /**
@@ -80,7 +80,7 @@ class GetConfigurations200ResponseAllOfDataInnerEventBooking implements ModelInt
         'timezone' => null,
         'booking_type' => null,
         'conferencing' => null,
-        'disable_emails' => null
+        'disable_emails' => null,
     ];
 
     /**
@@ -95,7 +95,7 @@ class GetConfigurations200ResponseAllOfDataInnerEventBooking implements ModelInt
         'timezone' => false,
         'booking_type' => false,
         'conferencing' => false,
-        'disable_emails' => false
+        'disable_emails' => false,
     ];
 
     /**
@@ -190,7 +190,7 @@ class GetConfigurations200ResponseAllOfDataInnerEventBooking implements ModelInt
         'timezone' => 'timezone',
         'booking_type' => 'booking_type',
         'conferencing' => 'conferencing',
-        'disable_emails' => 'disable_emails'
+        'disable_emails' => 'disable_emails',
     ];
 
     /**
@@ -205,7 +205,7 @@ class GetConfigurations200ResponseAllOfDataInnerEventBooking implements ModelInt
         'timezone' => 'setTimezone',
         'booking_type' => 'setBookingType',
         'conferencing' => 'setConferencing',
-        'disable_emails' => 'setDisableEmails'
+        'disable_emails' => 'setDisableEmails',
     ];
 
     /**
@@ -220,7 +220,7 @@ class GetConfigurations200ResponseAllOfDataInnerEventBooking implements ModelInt
         'timezone' => 'getTimezone',
         'booking_type' => 'getBookingType',
         'conferencing' => 'getConferencing',
-        'disable_emails' => 'getDisableEmails'
+        'disable_emails' => 'getDisableEmails',
     ];
 
     /**
@@ -333,12 +333,12 @@ class GetConfigurations200ResponseAllOfDataInnerEventBooking implements ModelInt
         if ($this->container['title'] === null) {
             $invalidProperties[] = "'title' can't be null";
         }
-        if (!is_null($this->container['timezone']) && (mb_strlen($this->container['timezone']) < 1)) {
+        if (! is_null($this->container['timezone']) && (mb_strlen($this->container['timezone']) < 1)) {
             $invalidProperties[] = "invalid value for 'timezone', the character length must be bigger than or equal to 1.";
         }
 
         $allowedValues = $this->getBookingTypeAllowableValues();
-        if (!is_null($this->container['booking_type']) && !in_array($this->container['booking_type'], $allowedValues, true)) {
+        if (! is_null($this->container['booking_type']) && ! in_array($this->container['booking_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'booking_type', must be one of '%s'",
                 $this->container['booking_type'],
@@ -359,7 +359,6 @@ class GetConfigurations200ResponseAllOfDataInnerEventBooking implements ModelInt
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets title
@@ -497,7 +496,7 @@ class GetConfigurations200ResponseAllOfDataInnerEventBooking implements ModelInt
             throw new InvalidArgumentException('non-nullable booking_type cannot be null');
         }
         $allowedValues = $this->getBookingTypeAllowableValues();
-        if (!in_array($booking_type, $allowedValues, true)) {
+        if (! in_array($booking_type, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'booking_type', must be one of '%s'",
@@ -564,12 +563,13 @@ class GetConfigurations200ResponseAllOfDataInnerEventBooking implements ModelInt
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -579,7 +579,7 @@ class GetConfigurations200ResponseAllOfDataInnerEventBooking implements ModelInt
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -609,7 +609,7 @@ class GetConfigurations200ResponseAllOfDataInnerEventBooking implements ModelInt
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -628,7 +628,7 @@ class GetConfigurations200ResponseAllOfDataInnerEventBooking implements ModelInt
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -654,5 +654,3 @@ class GetConfigurations200ResponseAllOfDataInnerEventBooking implements ModelInt
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

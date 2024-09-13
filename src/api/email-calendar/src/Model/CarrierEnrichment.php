@@ -28,15 +28,15 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CarrierEnrichment Class Doc Comment
  *
- * @description 
+ * @description
  * @package  JackWH\NylasV3\EmailCalendar
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -65,7 +65,7 @@ class CarrierEnrichment implements ModelInterface, ArrayAccess, JsonSerializable
         'sihp_to_address' => '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAddress',
         'package_activity' => '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentPackageActivityInner[]',
         'service_type' => 'string',
-        'signature_required' => 'bool'
+        'signature_required' => 'bool',
     ];
 
     /**
@@ -80,7 +80,7 @@ class CarrierEnrichment implements ModelInterface, ArrayAccess, JsonSerializable
         'sihp_to_address' => null,
         'package_activity' => null,
         'service_type' => null,
-        'signature_required' => null
+        'signature_required' => null,
     ];
 
     /**
@@ -95,7 +95,7 @@ class CarrierEnrichment implements ModelInterface, ArrayAccess, JsonSerializable
         'sihp_to_address' => false,
         'package_activity' => false,
         'service_type' => false,
-        'signature_required' => false
+        'signature_required' => false,
     ];
 
     /**
@@ -190,7 +190,7 @@ class CarrierEnrichment implements ModelInterface, ArrayAccess, JsonSerializable
         'sihp_to_address' => 'sihp_to_address',
         'package_activity' => 'package_activity',
         'service_type' => 'service_type',
-        'signature_required' => 'signature_required'
+        'signature_required' => 'signature_required',
     ];
 
     /**
@@ -205,7 +205,7 @@ class CarrierEnrichment implements ModelInterface, ArrayAccess, JsonSerializable
         'sihp_to_address' => 'setSihpToAddress',
         'package_activity' => 'setPackageActivity',
         'service_type' => 'setServiceType',
-        'signature_required' => 'setSignatureRequired'
+        'signature_required' => 'setSignatureRequired',
     ];
 
     /**
@@ -220,7 +220,7 @@ class CarrierEnrichment implements ModelInterface, ArrayAccess, JsonSerializable
         'sihp_to_address' => 'getSihpToAddress',
         'package_activity' => 'getPackageActivity',
         'service_type' => 'getServiceType',
-        'signature_required' => 'getSignatureRequired'
+        'signature_required' => 'getSignatureRequired',
     ];
 
     /**
@@ -327,6 +327,7 @@ class CarrierEnrichment implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['package_activity'] === null) {
             $invalidProperties[] = "'package_activity' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -340,7 +341,6 @@ class CarrierEnrichment implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets delivery_date
@@ -530,12 +530,13 @@ class CarrierEnrichment implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -545,7 +546,7 @@ class CarrierEnrichment implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -575,7 +576,7 @@ class CarrierEnrichment implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -594,7 +595,7 @@ class CarrierEnrichment implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -620,5 +621,3 @@ class CarrierEnrichment implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

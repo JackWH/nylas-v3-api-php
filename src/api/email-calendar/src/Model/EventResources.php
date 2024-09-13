@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * EventResources Class Doc Comment
@@ -59,7 +59,7 @@ class EventResources implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPITypes = [
         'email' => 'string',
-        'name' => 'string'
+        'name' => 'string',
     ];
 
     /**
@@ -69,7 +69,7 @@ class EventResources implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPIFormats = [
         'email' => null,
-        'name' => null
+        'name' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class EventResources implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPINullables = [
         'email' => false,
-        'name' => false
+        'name' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class EventResources implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $attributeMap = [
         'email' => 'email',
-        'name' => 'name'
+        'name' => 'name',
     ];
 
     /**
@@ -179,7 +179,7 @@ class EventResources implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $setters = [
         'email' => 'setEmail',
-        'name' => 'setName'
+        'name' => 'setName',
     ];
 
     /**
@@ -189,7 +189,7 @@ class EventResources implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $getters = [
         'email' => 'getEmail',
-        'name' => 'getName'
+        'name' => 'getName',
     ];
 
     /**
@@ -282,6 +282,7 @@ class EventResources implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['email'] === null) {
             $invalidProperties[] = "'email' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -295,7 +296,6 @@ class EventResources implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets email
@@ -350,12 +350,13 @@ class EventResources implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -365,7 +366,7 @@ class EventResources implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -395,7 +396,7 @@ class EventResources implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -414,7 +415,7 @@ class EventResources implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -440,5 +441,3 @@ class EventResources implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

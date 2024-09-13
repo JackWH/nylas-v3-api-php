@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Administration\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Administration\ApiException;
 use JackWH\NylasV3\Administration\Configuration;
 use JackWH\NylasV3\Administration\HeaderSelector;
@@ -69,7 +69,7 @@ class ApplicationsApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'addApplicationRedirectUri' => [
             'application/json',
@@ -155,9 +155,9 @@ class ApplicationsApi
     public function addApplicationRedirectUri(
         array $unknown_base_type,
         string $contentType = self::contentTypes['addApplicationRedirectUri'][0]
-    ): \JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response {
         list($response) = $this->addApplicationRedirectUriWithHttpInfo($unknown_base_type, $contentType);
+
         return $response;
     }
 
@@ -176,12 +176,12 @@ class ApplicationsApi
     public function addApplicationRedirectUriWithHttpInfo(
         array $unknown_base_type,
         string $contentType = self::contentTypes['addApplicationRedirectUri'][0]
-    ): array
-    {
+    ): array {
         $request = $this->addApplicationRedirectUriRequest($unknown_base_type, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -215,7 +215,7 @@ class ApplicationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -241,7 +241,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -268,7 +268,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -295,7 +295,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -324,7 +324,7 @@ class ApplicationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -336,6 +336,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -344,6 +345,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -352,8 +354,10 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -372,8 +376,7 @@ class ApplicationsApi
     public function addApplicationRedirectUriAsync(
         array $unknown_base_type,
         string $contentType = self::contentTypes['addApplicationRedirectUri'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->addApplicationRedirectUriAsyncWithHttpInfo($unknown_base_type, $contentType)
             ->then(
                 function ($response) {
@@ -396,8 +399,7 @@ class ApplicationsApi
     public function addApplicationRedirectUriAsyncWithHttpInfo(
         $unknown_base_type,
         string $contentType = self::contentTypes['addApplicationRedirectUri'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response';
         $request = $this->addApplicationRedirectUriRequest($unknown_base_type, $contentType);
 
@@ -417,12 +419,13 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -449,8 +452,7 @@ class ApplicationsApi
     public function addApplicationRedirectUriRequest(
         $unknown_base_type,
         string $contentType = self::contentTypes['addApplicationRedirectUri'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'unknown_base_type' is set
         if ($unknown_base_type === null || (is_array($unknown_base_type) && count($unknown_base_type) === 0)) {
@@ -493,7 +495,7 @@ class ApplicationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -510,7 +512,7 @@ class ApplicationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -527,6 +529,7 @@ class ApplicationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -550,9 +553,9 @@ class ApplicationsApi
     public function deleteApplicationRedirectUriById(
         string $id,
         string $contentType = self::contentTypes['deleteApplicationRedirectUriById'][0]
-    ): \JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response {
         list($response) = $this->deleteApplicationRedirectUriByIdWithHttpInfo($id, $contentType);
+
         return $response;
     }
 
@@ -571,12 +574,12 @@ class ApplicationsApi
     public function deleteApplicationRedirectUriByIdWithHttpInfo(
         string $id,
         string $contentType = self::contentTypes['deleteApplicationRedirectUriById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->deleteApplicationRedirectUriByIdRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -610,7 +613,7 @@ class ApplicationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -636,7 +639,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -663,7 +666,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -690,7 +693,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -719,7 +722,7 @@ class ApplicationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -731,6 +734,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -739,6 +743,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -747,8 +752,10 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -767,8 +774,7 @@ class ApplicationsApi
     public function deleteApplicationRedirectUriByIdAsync(
         string $id,
         string $contentType = self::contentTypes['deleteApplicationRedirectUriById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->deleteApplicationRedirectUriByIdAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
@@ -791,8 +797,7 @@ class ApplicationsApi
     public function deleteApplicationRedirectUriByIdAsyncWithHttpInfo(
         $id,
         string $contentType = self::contentTypes['deleteApplicationRedirectUriById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response';
         $request = $this->deleteApplicationRedirectUriByIdRequest($id, $contentType);
 
@@ -812,12 +817,13 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -844,8 +850,7 @@ class ApplicationsApi
     public function deleteApplicationRedirectUriByIdRequest(
         $id,
         string $contentType = self::contentTypes['deleteApplicationRedirectUriById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
@@ -889,7 +894,7 @@ class ApplicationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -906,7 +911,7 @@ class ApplicationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -923,6 +928,7 @@ class ApplicationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -944,9 +950,9 @@ class ApplicationsApi
      */
     public function getApplication(
         string $contentType = self::contentTypes['getApplication'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetApplication200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetApplication200Response {
         list($response) = $this->getApplicationWithHttpInfo($contentType);
+
         return $response;
     }
 
@@ -963,12 +969,12 @@ class ApplicationsApi
      */
     public function getApplicationWithHttpInfo(
         string $contentType = self::contentTypes['getApplication'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getApplicationRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1002,7 +1008,7 @@ class ApplicationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1028,7 +1034,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1055,7 +1061,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1082,7 +1088,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1111,7 +1117,7 @@ class ApplicationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1123,6 +1129,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1131,6 +1138,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1139,8 +1147,10 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1157,8 +1167,7 @@ class ApplicationsApi
      */
     public function getApplicationAsync(
         string $contentType = self::contentTypes['getApplication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getApplicationAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -1179,8 +1188,7 @@ class ApplicationsApi
      */
     public function getApplicationAsyncWithHttpInfo(
         string $contentType = self::contentTypes['getApplication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetApplication200Response';
         $request = $this->getApplicationRequest($contentType);
 
@@ -1200,12 +1208,13 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1230,8 +1239,7 @@ class ApplicationsApi
      */
     public function getApplicationRequest(
         string $contentType = self::contentTypes['getApplication'][0]
-    ): Request
-    {
+    ): Request {
 
 
         $resourcePath = '/v3/applications';
@@ -1260,7 +1268,7 @@ class ApplicationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1277,7 +1285,7 @@ class ApplicationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1294,6 +1302,7 @@ class ApplicationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1315,9 +1324,9 @@ class ApplicationsApi
      */
     public function getApplicationRedirectUriAll(
         string $contentType = self::contentTypes['getApplicationRedirectUriAll'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetApplicationRedirectUriAll200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetApplicationRedirectUriAll200Response {
         list($response) = $this->getApplicationRedirectUriAllWithHttpInfo($contentType);
+
         return $response;
     }
 
@@ -1334,12 +1343,12 @@ class ApplicationsApi
      */
     public function getApplicationRedirectUriAllWithHttpInfo(
         string $contentType = self::contentTypes['getApplicationRedirectUriAll'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getApplicationRedirectUriAllRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1373,7 +1382,7 @@ class ApplicationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplicationRedirectUriAll200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1399,7 +1408,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplicationRedirectUriAll200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplicationRedirectUriAll400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1426,7 +1435,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplicationRedirectUriAll400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplicationRedirectUriAll404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1453,7 +1462,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplicationRedirectUriAll404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1482,7 +1491,7 @@ class ApplicationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1494,6 +1503,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1502,6 +1512,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -1510,8 +1521,10 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1528,8 +1541,7 @@ class ApplicationsApi
      */
     public function getApplicationRedirectUriAllAsync(
         string $contentType = self::contentTypes['getApplicationRedirectUriAll'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getApplicationRedirectUriAllAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -1550,8 +1562,7 @@ class ApplicationsApi
      */
     public function getApplicationRedirectUriAllAsyncWithHttpInfo(
         string $contentType = self::contentTypes['getApplicationRedirectUriAll'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetApplicationRedirectUriAll200Response';
         $request = $this->getApplicationRedirectUriAllRequest($contentType);
 
@@ -1571,12 +1582,13 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1601,8 +1613,7 @@ class ApplicationsApi
      */
     public function getApplicationRedirectUriAllRequest(
         string $contentType = self::contentTypes['getApplicationRedirectUriAll'][0]
-    ): Request
-    {
+    ): Request {
 
 
         $resourcePath = '/v3/applications/redirect-uris';
@@ -1631,7 +1642,7 @@ class ApplicationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1648,7 +1659,7 @@ class ApplicationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1665,6 +1676,7 @@ class ApplicationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1688,9 +1700,9 @@ class ApplicationsApi
     public function getApplicationRedirectUriById(
         string $id,
         string $contentType = self::contentTypes['getApplicationRedirectUriById'][0]
-    ): \JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response {
         list($response) = $this->getApplicationRedirectUriByIdWithHttpInfo($id, $contentType);
+
         return $response;
     }
 
@@ -1709,12 +1721,12 @@ class ApplicationsApi
     public function getApplicationRedirectUriByIdWithHttpInfo(
         string $id,
         string $contentType = self::contentTypes['getApplicationRedirectUriById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getApplicationRedirectUriByIdRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1748,7 +1760,7 @@ class ApplicationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1774,7 +1786,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1801,7 +1813,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1828,7 +1840,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1857,7 +1869,7 @@ class ApplicationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1869,6 +1881,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1877,6 +1890,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -1885,8 +1899,10 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1905,8 +1921,7 @@ class ApplicationsApi
     public function getApplicationRedirectUriByIdAsync(
         string $id,
         string $contentType = self::contentTypes['getApplicationRedirectUriById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getApplicationRedirectUriByIdAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
@@ -1929,8 +1944,7 @@ class ApplicationsApi
     public function getApplicationRedirectUriByIdAsyncWithHttpInfo(
         $id,
         string $contentType = self::contentTypes['getApplicationRedirectUriById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response';
         $request = $this->getApplicationRedirectUriByIdRequest($id, $contentType);
 
@@ -1950,12 +1964,13 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1982,8 +1997,7 @@ class ApplicationsApi
     public function getApplicationRedirectUriByIdRequest(
         $id,
         string $contentType = self::contentTypes['getApplicationRedirectUriById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
@@ -2027,7 +2041,7 @@ class ApplicationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2044,7 +2058,7 @@ class ApplicationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2061,6 +2075,7 @@ class ApplicationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2086,9 +2101,9 @@ class ApplicationsApi
         string $id,
         array $unknown_base_type,
         string $contentType = self::contentTypes['patchApplicationRedirectUriById'][0]
-    ): \JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response {
         list($response) = $this->patchApplicationRedirectUriByIdWithHttpInfo($id, $unknown_base_type, $contentType);
+
         return $response;
     }
 
@@ -2109,12 +2124,12 @@ class ApplicationsApi
         string $id,
         array $unknown_base_type,
         string $contentType = self::contentTypes['patchApplicationRedirectUriById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->patchApplicationRedirectUriByIdRequest($id, $unknown_base_type, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -2148,7 +2163,7 @@ class ApplicationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -2174,7 +2189,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2201,7 +2216,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2228,7 +2243,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2255,7 +2270,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2284,7 +2299,7 @@ class ApplicationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2296,6 +2311,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -2304,6 +2320,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -2312,6 +2329,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -2320,8 +2338,10 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2342,8 +2362,7 @@ class ApplicationsApi
         string $id,
         array $unknown_base_type,
         string $contentType = self::contentTypes['patchApplicationRedirectUriById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->patchApplicationRedirectUriByIdAsyncWithHttpInfo($id, $unknown_base_type, $contentType)
             ->then(
                 function ($response) {
@@ -2368,8 +2387,7 @@ class ApplicationsApi
         $id,
         $unknown_base_type,
         string $contentType = self::contentTypes['patchApplicationRedirectUriById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\AddApplicationRedirectUri200Response';
         $request = $this->patchApplicationRedirectUriByIdRequest($id, $unknown_base_type, $contentType);
 
@@ -2389,12 +2407,13 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2423,8 +2442,7 @@ class ApplicationsApi
         $id,
         $unknown_base_type,
         string $contentType = self::contentTypes['patchApplicationRedirectUriById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
@@ -2482,7 +2500,7 @@ class ApplicationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2499,7 +2517,7 @@ class ApplicationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2516,6 +2534,7 @@ class ApplicationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PATCH',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2539,9 +2558,9 @@ class ApplicationsApi
     public function updateApplication(
         \JackWH\NylasV3\Administration\Model\GetApplication200ResponseData $get_application200_response_data,
         string $contentType = self::contentTypes['updateApplication'][0]
-    ): \JackWH\NylasV3\Administration\Model\UpdateApplication200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\UpdateApplication200Response {
         list($response) = $this->updateApplicationWithHttpInfo($get_application200_response_data, $contentType);
+
         return $response;
     }
 
@@ -2560,12 +2579,12 @@ class ApplicationsApi
     public function updateApplicationWithHttpInfo(
         \JackWH\NylasV3\Administration\Model\GetApplication200ResponseData $get_application200_response_data,
         string $contentType = self::contentTypes['updateApplication'][0]
-    ): array
-    {
+    ): array {
         $request = $this->updateApplicationRequest($get_application200_response_data, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -2599,7 +2618,7 @@ class ApplicationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -2625,7 +2644,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2652,7 +2671,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2679,7 +2698,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2706,7 +2725,7 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2735,7 +2754,7 @@ class ApplicationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2747,6 +2766,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -2755,6 +2775,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -2763,6 +2784,7 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -2771,8 +2793,10 @@ class ApplicationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2791,8 +2815,7 @@ class ApplicationsApi
     public function updateApplicationAsync(
         \JackWH\NylasV3\Administration\Model\GetApplication200ResponseData $get_application200_response_data,
         string $contentType = self::contentTypes['updateApplication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->updateApplicationAsyncWithHttpInfo($get_application200_response_data, $contentType)
             ->then(
                 function ($response) {
@@ -2815,8 +2838,7 @@ class ApplicationsApi
     public function updateApplicationAsyncWithHttpInfo(
         $get_application200_response_data,
         string $contentType = self::contentTypes['updateApplication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\UpdateApplication200Response';
         $request = $this->updateApplicationRequest($get_application200_response_data, $contentType);
 
@@ -2836,12 +2858,13 @@ class ApplicationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2868,8 +2891,7 @@ class ApplicationsApi
     public function updateApplicationRequest(
         $get_application200_response_data,
         string $contentType = self::contentTypes['updateApplication'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'get_application200_response_data' is set
         if ($get_application200_response_data === null || (is_array($get_application200_response_data) && count($get_application200_response_data) === 0)) {
@@ -2912,7 +2934,7 @@ class ApplicationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2929,7 +2951,7 @@ class ApplicationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2946,6 +2968,7 @@ class ApplicationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PATCH',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2965,7 +2988,7 @@ class ApplicationsApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

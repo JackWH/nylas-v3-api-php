@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * DeleteCredentialById200Response Class Doc Comment
@@ -58,7 +58,7 @@ class DeleteCredentialById200Response implements ModelInterface, ArrayAccess, Js
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'request_id' => 'string'
+        'request_id' => 'string',
     ];
 
     /**
@@ -67,7 +67,7 @@ class DeleteCredentialById200Response implements ModelInterface, ArrayAccess, Js
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'request_id' => null
+        'request_id' => null,
     ];
 
     /**
@@ -76,7 +76,7 @@ class DeleteCredentialById200Response implements ModelInterface, ArrayAccess, Js
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'request_id' => false
+        'request_id' => false,
     ];
 
     /**
@@ -165,7 +165,7 @@ class DeleteCredentialById200Response implements ModelInterface, ArrayAccess, Js
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'request_id' => 'request_id'
+        'request_id' => 'request_id',
     ];
 
     /**
@@ -174,7 +174,7 @@ class DeleteCredentialById200Response implements ModelInterface, ArrayAccess, Js
      * @var array<string, string>
      */
     protected static array $setters = [
-        'request_id' => 'setRequestId'
+        'request_id' => 'setRequestId',
     ];
 
     /**
@@ -183,7 +183,7 @@ class DeleteCredentialById200Response implements ModelInterface, ArrayAccess, Js
      * @var array<string, string>
      */
     protected static array $getters = [
-        'request_id' => 'getRequestId'
+        'request_id' => 'getRequestId',
     ];
 
     /**
@@ -286,7 +286,6 @@ class DeleteCredentialById200Response implements ModelInterface, ArrayAccess, Js
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets request_id
      *
@@ -313,12 +312,13 @@ class DeleteCredentialById200Response implements ModelInterface, ArrayAccess, Js
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -328,7 +328,7 @@ class DeleteCredentialById200Response implements ModelInterface, ArrayAccess, Js
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -358,7 +358,7 @@ class DeleteCredentialById200Response implements ModelInterface, ArrayAccess, Js
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -377,7 +377,7 @@ class DeleteCredentialById200Response implements ModelInterface, ArrayAccess, Js
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -403,5 +403,3 @@ class DeleteCredentialById200Response implements ModelInterface, ArrayAccess, Js
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

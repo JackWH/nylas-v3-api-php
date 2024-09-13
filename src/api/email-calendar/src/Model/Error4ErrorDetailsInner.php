@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Error4ErrorDetailsInner Class Doc Comment
@@ -60,7 +60,7 @@ class Error4ErrorDetailsInner implements ModelInterface, ArrayAccess, JsonSerial
     protected static array $openAPITypes = [
         'loc' => '\JackWH\NylasV3\EmailCalendar\Model\Error4ErrorDetailsInnerLocInner[]',
         'msg' => 'string',
-        'type' => 'string'
+        'type' => 'string',
     ];
 
     /**
@@ -71,7 +71,7 @@ class Error4ErrorDetailsInner implements ModelInterface, ArrayAccess, JsonSerial
     protected static array $openAPIFormats = [
         'loc' => null,
         'msg' => null,
-        'type' => null
+        'type' => null,
     ];
 
     /**
@@ -82,7 +82,7 @@ class Error4ErrorDetailsInner implements ModelInterface, ArrayAccess, JsonSerial
     protected static array $openAPINullables = [
         'loc' => false,
         'msg' => false,
-        'type' => false
+        'type' => false,
     ];
 
     /**
@@ -173,7 +173,7 @@ class Error4ErrorDetailsInner implements ModelInterface, ArrayAccess, JsonSerial
     protected static array $attributeMap = [
         'loc' => 'loc',
         'msg' => 'msg',
-        'type' => 'type'
+        'type' => 'type',
     ];
 
     /**
@@ -184,7 +184,7 @@ class Error4ErrorDetailsInner implements ModelInterface, ArrayAccess, JsonSerial
     protected static array $setters = [
         'loc' => 'setLoc',
         'msg' => 'setMsg',
-        'type' => 'setType'
+        'type' => 'setType',
     ];
 
     /**
@@ -195,7 +195,7 @@ class Error4ErrorDetailsInner implements ModelInterface, ArrayAccess, JsonSerial
     protected static array $getters = [
         'loc' => 'getLoc',
         'msg' => 'getMsg',
-        'type' => 'getType'
+        'type' => 'getType',
     ];
 
     /**
@@ -300,7 +300,6 @@ class Error4ErrorDetailsInner implements ModelInterface, ArrayAccess, JsonSerial
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets loc
      *
@@ -381,12 +380,13 @@ class Error4ErrorDetailsInner implements ModelInterface, ArrayAccess, JsonSerial
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -396,7 +396,7 @@ class Error4ErrorDetailsInner implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -426,7 +426,7 @@ class Error4ErrorDetailsInner implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -445,7 +445,7 @@ class Error4ErrorDetailsInner implements ModelInterface, ArrayAccess, JsonSerial
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -471,5 +471,3 @@ class Error4ErrorDetailsInner implements ModelInterface, ArrayAccess, JsonSerial
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

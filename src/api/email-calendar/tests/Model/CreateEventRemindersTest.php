@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class CreateEventRemindersTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

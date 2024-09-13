@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class DeleteAScheduledMessage202ResponseDataTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

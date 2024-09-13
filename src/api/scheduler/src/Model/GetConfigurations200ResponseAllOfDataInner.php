@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConfigurations200ResponseAllOfDataInner Class Doc Comment
@@ -64,7 +64,7 @@ class GetConfigurations200ResponseAllOfDataInner implements ModelInterface, Arra
         'availability' => '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerAvailability',
         'event_booking' => '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerEventBooking',
         'scheduler' => '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerScheduler',
-        'appearance' => 'array<string,\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerAppearanceValue>'
+        'appearance' => 'array<string,\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerAppearanceValue>',
     ];
 
     /**
@@ -79,7 +79,7 @@ class GetConfigurations200ResponseAllOfDataInner implements ModelInterface, Arra
         'availability' => null,
         'event_booking' => null,
         'scheduler' => null,
-        'appearance' => null
+        'appearance' => null,
     ];
 
     /**
@@ -94,7 +94,7 @@ class GetConfigurations200ResponseAllOfDataInner implements ModelInterface, Arra
         'availability' => false,
         'event_booking' => false,
         'scheduler' => false,
-        'appearance' => false
+        'appearance' => false,
     ];
 
     /**
@@ -189,7 +189,7 @@ class GetConfigurations200ResponseAllOfDataInner implements ModelInterface, Arra
         'availability' => 'availability',
         'event_booking' => 'event_booking',
         'scheduler' => 'scheduler',
-        'appearance' => 'appearance'
+        'appearance' => 'appearance',
     ];
 
     /**
@@ -204,7 +204,7 @@ class GetConfigurations200ResponseAllOfDataInner implements ModelInterface, Arra
         'availability' => 'setAvailability',
         'event_booking' => 'setEventBooking',
         'scheduler' => 'setScheduler',
-        'appearance' => 'setAppearance'
+        'appearance' => 'setAppearance',
     ];
 
     /**
@@ -219,7 +219,7 @@ class GetConfigurations200ResponseAllOfDataInner implements ModelInterface, Arra
         'availability' => 'getAvailability',
         'event_booking' => 'getEventBooking',
         'scheduler' => 'getScheduler',
-        'appearance' => 'getAppearance'
+        'appearance' => 'getAppearance',
     ];
 
     /**
@@ -323,6 +323,7 @@ class GetConfigurations200ResponseAllOfDataInner implements ModelInterface, Arra
         if ($this->container['event_booking'] === null) {
             $invalidProperties[] = "'event_booking' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -336,7 +337,6 @@ class GetConfigurations200ResponseAllOfDataInner implements ModelInterface, Arra
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets slug
@@ -526,12 +526,13 @@ class GetConfigurations200ResponseAllOfDataInner implements ModelInterface, Arra
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -541,7 +542,7 @@ class GetConfigurations200ResponseAllOfDataInner implements ModelInterface, Arra
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -571,7 +572,7 @@ class GetConfigurations200ResponseAllOfDataInner implements ModelInterface, Arra
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -590,7 +591,7 @@ class GetConfigurations200ResponseAllOfDataInner implements ModelInterface, Arra
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -616,5 +617,3 @@ class GetConfigurations200ResponseAllOfDataInner implements ModelInterface, Arra
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

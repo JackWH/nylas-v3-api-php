@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules Class Doc Comment
@@ -60,7 +60,7 @@ class GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules im
     protected static array $openAPITypes = [
         'availability_method' => 'string',
         'buffer' => '\JackWH\NylasV3\Scheduler\Model\Buffer',
-        'default_open_hours' => '\JackWH\NylasV3\Scheduler\Model\OpenHours[]'
+        'default_open_hours' => '\JackWH\NylasV3\Scheduler\Model\OpenHours[]',
     ];
 
     /**
@@ -71,7 +71,7 @@ class GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules im
     protected static array $openAPIFormats = [
         'availability_method' => null,
         'buffer' => null,
-        'default_open_hours' => null
+        'default_open_hours' => null,
     ];
 
     /**
@@ -82,7 +82,7 @@ class GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules im
     protected static array $openAPINullables = [
         'availability_method' => false,
         'buffer' => false,
-        'default_open_hours' => false
+        'default_open_hours' => false,
     ];
 
     /**
@@ -173,7 +173,7 @@ class GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules im
     protected static array $attributeMap = [
         'availability_method' => 'availability_method',
         'buffer' => 'buffer',
-        'default_open_hours' => 'default_open_hours'
+        'default_open_hours' => 'default_open_hours',
     ];
 
     /**
@@ -184,7 +184,7 @@ class GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules im
     protected static array $setters = [
         'availability_method' => 'setAvailabilityMethod',
         'buffer' => 'setBuffer',
-        'default_open_hours' => 'setDefaultOpenHours'
+        'default_open_hours' => 'setDefaultOpenHours',
     ];
 
     /**
@@ -195,7 +195,7 @@ class GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules im
     protected static array $getters = [
         'availability_method' => 'getAvailabilityMethod',
         'buffer' => 'getBuffer',
-        'default_open_hours' => 'getDefaultOpenHours'
+        'default_open_hours' => 'getDefaultOpenHours',
     ];
 
     /**
@@ -304,7 +304,7 @@ class GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules im
         $invalidProperties = [];
 
         $allowedValues = $this->getAvailabilityMethodAllowableValues();
-        if (!is_null($this->container['availability_method']) && !in_array($this->container['availability_method'], $allowedValues, true)) {
+        if (! is_null($this->container['availability_method']) && ! in_array($this->container['availability_method'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'availability_method', must be one of '%s'",
                 $this->container['availability_method'],
@@ -325,7 +325,6 @@ class GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules im
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets availability_method
@@ -350,7 +349,7 @@ class GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules im
             throw new InvalidArgumentException('non-nullable availability_method cannot be null');
         }
         $allowedValues = $this->getAvailabilityMethodAllowableValues();
-        if (!in_array($availability_method, $allowedValues, true)) {
+        if (! in_array($availability_method, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'availability_method', must be one of '%s'",
@@ -417,12 +416,13 @@ class GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules im
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -432,7 +432,7 @@ class GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules im
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -462,7 +462,7 @@ class GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules im
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -481,7 +481,7 @@ class GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules im
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -507,5 +507,3 @@ class GetConfigurations200ResponseAllOfDataInnerAvailabilityAvailabilityRules im
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

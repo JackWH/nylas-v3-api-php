@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConsolidatedOrder200ResponseAllOfData Class Doc Comment
@@ -75,7 +75,7 @@ class GetConsolidatedOrder200ResponseAllOfData implements ModelInterface, ArrayA
         'shipping_total' => 'float',
         'gift_card_total' => 'float',
         'products' => '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner[]',
-        'order_provider_message_ids' => 'string[]'
+        'order_provider_message_ids' => 'string[]',
     ];
 
     /**
@@ -101,7 +101,7 @@ class GetConsolidatedOrder200ResponseAllOfData implements ModelInterface, ArrayA
         'shipping_total' => null,
         'gift_card_total' => null,
         'products' => null,
-        'order_provider_message_ids' => null
+        'order_provider_message_ids' => null,
     ];
 
     /**
@@ -127,7 +127,7 @@ class GetConsolidatedOrder200ResponseAllOfData implements ModelInterface, ArrayA
         'shipping_total' => false,
         'gift_card_total' => false,
         'products' => false,
-        'order_provider_message_ids' => false
+        'order_provider_message_ids' => false,
     ];
 
     /**
@@ -233,7 +233,7 @@ class GetConsolidatedOrder200ResponseAllOfData implements ModelInterface, ArrayA
         'shipping_total' => 'shipping_total',
         'gift_card_total' => 'gift_card_total',
         'products' => 'products',
-        'order_provider_message_ids' => 'order_provider_message_ids'
+        'order_provider_message_ids' => 'order_provider_message_ids',
     ];
 
     /**
@@ -259,7 +259,7 @@ class GetConsolidatedOrder200ResponseAllOfData implements ModelInterface, ArrayA
         'shipping_total' => 'setShippingTotal',
         'gift_card_total' => 'setGiftCardTotal',
         'products' => 'setProducts',
-        'order_provider_message_ids' => 'setOrderProviderMessageIds'
+        'order_provider_message_ids' => 'setOrderProviderMessageIds',
     ];
 
     /**
@@ -285,7 +285,7 @@ class GetConsolidatedOrder200ResponseAllOfData implements ModelInterface, ArrayA
         'shipping_total' => 'getShippingTotal',
         'gift_card_total' => 'getGiftCardTotal',
         'products' => 'getProducts',
-        'order_provider_message_ids' => 'getOrderProviderMessageIds'
+        'order_provider_message_ids' => 'getOrderProviderMessageIds',
     ];
 
     /**
@@ -431,6 +431,7 @@ class GetConsolidatedOrder200ResponseAllOfData implements ModelInterface, ArrayA
         if ($this->container['order_provider_message_ids'] === null) {
             $invalidProperties[] = "'order_provider_message_ids' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -444,7 +445,6 @@ class GetConsolidatedOrder200ResponseAllOfData implements ModelInterface, ArrayA
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets id
@@ -936,12 +936,13 @@ class GetConsolidatedOrder200ResponseAllOfData implements ModelInterface, ArrayA
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -951,7 +952,7 @@ class GetConsolidatedOrder200ResponseAllOfData implements ModelInterface, ArrayA
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -981,7 +982,7 @@ class GetConsolidatedOrder200ResponseAllOfData implements ModelInterface, ArrayA
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -1000,7 +1001,7 @@ class GetConsolidatedOrder200ResponseAllOfData implements ModelInterface, ArrayA
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -1026,5 +1027,3 @@ class GetConsolidatedOrder200ResponseAllOfData implements ModelInterface, ArrayA
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

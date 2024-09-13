@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PatchCredentialByIdRequest Class Doc Comment
@@ -59,7 +59,7 @@ class PatchCredentialByIdRequest implements ModelInterface, ArrayAccess, JsonSer
       */
     protected static array $openAPITypes = [
         'name' => 'string',
-        'credential_data' => 'object'
+        'credential_data' => 'object',
     ];
 
     /**
@@ -69,7 +69,7 @@ class PatchCredentialByIdRequest implements ModelInterface, ArrayAccess, JsonSer
       */
     protected static array $openAPIFormats = [
         'name' => null,
-        'credential_data' => null
+        'credential_data' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class PatchCredentialByIdRequest implements ModelInterface, ArrayAccess, JsonSer
       */
     protected static array $openAPINullables = [
         'name' => false,
-        'credential_data' => false
+        'credential_data' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class PatchCredentialByIdRequest implements ModelInterface, ArrayAccess, JsonSer
      */
     protected static array $attributeMap = [
         'name' => 'name',
-        'credential_data' => 'credential_data'
+        'credential_data' => 'credential_data',
     ];
 
     /**
@@ -179,7 +179,7 @@ class PatchCredentialByIdRequest implements ModelInterface, ArrayAccess, JsonSer
      */
     protected static array $setters = [
         'name' => 'setName',
-        'credential_data' => 'setCredentialData'
+        'credential_data' => 'setCredentialData',
     ];
 
     /**
@@ -189,7 +189,7 @@ class PatchCredentialByIdRequest implements ModelInterface, ArrayAccess, JsonSer
      */
     protected static array $getters = [
         'name' => 'getName',
-        'credential_data' => 'getCredentialData'
+        'credential_data' => 'getCredentialData',
     ];
 
     /**
@@ -293,7 +293,6 @@ class PatchCredentialByIdRequest implements ModelInterface, ArrayAccess, JsonSer
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets name
      *
@@ -347,12 +346,13 @@ class PatchCredentialByIdRequest implements ModelInterface, ArrayAccess, JsonSer
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -362,7 +362,7 @@ class PatchCredentialByIdRequest implements ModelInterface, ArrayAccess, JsonSer
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -392,7 +392,7 @@ class PatchCredentialByIdRequest implements ModelInterface, ArrayAccess, JsonSer
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -411,7 +411,7 @@ class PatchCredentialByIdRequest implements ModelInterface, ArrayAccess, JsonSer
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -437,5 +437,3 @@ class PatchCredentialByIdRequest implements ModelInterface, ArrayAccess, JsonSer
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

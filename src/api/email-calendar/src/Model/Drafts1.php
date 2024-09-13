@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Drafts1 Class Doc Comment
@@ -69,7 +69,7 @@ class Drafts1 implements ModelInterface, ArrayAccess, JsonSerializable
         'starred' => 'bool',
         'subject' => 'string',
         'to' => '\JackWH\NylasV3\EmailCalendar\Model\MessageParticipant[]',
-        'custom_headers' => '\JackWH\NylasV3\EmailCalendar\Model\SendMailNowRequestCustomHeadersInner[]'
+        'custom_headers' => '\JackWH\NylasV3\EmailCalendar\Model\SendMailNowRequestCustomHeadersInner[]',
     ];
 
     /**
@@ -88,7 +88,7 @@ class Drafts1 implements ModelInterface, ArrayAccess, JsonSerializable
         'starred' => null,
         'subject' => null,
         'to' => null,
-        'custom_headers' => null
+        'custom_headers' => null,
     ];
 
     /**
@@ -107,7 +107,7 @@ class Drafts1 implements ModelInterface, ArrayAccess, JsonSerializable
         'starred' => false,
         'subject' => false,
         'to' => false,
-        'custom_headers' => false
+        'custom_headers' => false,
     ];
 
     /**
@@ -206,7 +206,7 @@ class Drafts1 implements ModelInterface, ArrayAccess, JsonSerializable
         'starred' => 'starred',
         'subject' => 'subject',
         'to' => 'to',
-        'custom_headers' => 'custom_headers'
+        'custom_headers' => 'custom_headers',
     ];
 
     /**
@@ -225,7 +225,7 @@ class Drafts1 implements ModelInterface, ArrayAccess, JsonSerializable
         'starred' => 'setStarred',
         'subject' => 'setSubject',
         'to' => 'setTo',
-        'custom_headers' => 'setCustomHeaders'
+        'custom_headers' => 'setCustomHeaders',
     ];
 
     /**
@@ -244,7 +244,7 @@ class Drafts1 implements ModelInterface, ArrayAccess, JsonSerializable
         'starred' => 'getStarred',
         'subject' => 'getSubject',
         'to' => 'getTo',
-        'custom_headers' => 'getCustomHeaders'
+        'custom_headers' => 'getCustomHeaders',
     ];
 
     /**
@@ -356,7 +356,6 @@ class Drafts1 implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets bcc
@@ -664,12 +663,13 @@ class Drafts1 implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -679,7 +679,7 @@ class Drafts1 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -709,7 +709,7 @@ class Drafts1 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -728,7 +728,7 @@ class Drafts1 implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -754,5 +754,3 @@ class Drafts1 implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

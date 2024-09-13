@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PostCalendarsFreeBusy200ResponseDataInnerTimeSlotsInner Class Doc Comment
@@ -61,7 +61,7 @@ class PostCalendarsFreeBusy200ResponseDataInnerTimeSlotsInner implements ModelIn
         'start_time' => 'int',
         'end_time' => 'int',
         'status' => 'string',
-        'object' => 'string'
+        'object' => 'string',
     ];
 
     /**
@@ -73,7 +73,7 @@ class PostCalendarsFreeBusy200ResponseDataInnerTimeSlotsInner implements ModelIn
         'start_time' => null,
         'end_time' => null,
         'status' => null,
-        'object' => null
+        'object' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class PostCalendarsFreeBusy200ResponseDataInnerTimeSlotsInner implements ModelIn
         'start_time' => false,
         'end_time' => false,
         'status' => false,
-        'object' => false
+        'object' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class PostCalendarsFreeBusy200ResponseDataInnerTimeSlotsInner implements ModelIn
         'start_time' => 'start_time',
         'end_time' => 'end_time',
         'status' => 'status',
-        'object' => 'object'
+        'object' => 'object',
     ];
 
     /**
@@ -189,7 +189,7 @@ class PostCalendarsFreeBusy200ResponseDataInnerTimeSlotsInner implements ModelIn
         'start_time' => 'setStartTime',
         'end_time' => 'setEndTime',
         'status' => 'setStatus',
-        'object' => 'setObject'
+        'object' => 'setObject',
     ];
 
     /**
@@ -201,7 +201,7 @@ class PostCalendarsFreeBusy200ResponseDataInnerTimeSlotsInner implements ModelIn
         'start_time' => 'getStartTime',
         'end_time' => 'getEndTime',
         'status' => 'getStatus',
-        'object' => 'getObject'
+        'object' => 'getObject',
     ];
 
     /**
@@ -306,7 +306,6 @@ class PostCalendarsFreeBusy200ResponseDataInnerTimeSlotsInner implements ModelIn
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets start_time
@@ -415,12 +414,13 @@ class PostCalendarsFreeBusy200ResponseDataInnerTimeSlotsInner implements ModelIn
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -430,7 +430,7 @@ class PostCalendarsFreeBusy200ResponseDataInnerTimeSlotsInner implements ModelIn
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -460,7 +460,7 @@ class PostCalendarsFreeBusy200ResponseDataInnerTimeSlotsInner implements ModelIn
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -479,7 +479,7 @@ class PostCalendarsFreeBusy200ResponseDataInnerTimeSlotsInner implements ModelIn
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -505,5 +505,3 @@ class PostCalendarsFreeBusy200ResponseDataInnerTimeSlotsInner implements ModelIn
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

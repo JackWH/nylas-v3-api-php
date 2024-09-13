@@ -32,14 +32,13 @@ use PHPUnit\Framework\TestCase;
 /**
  * GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentDeliveryStatusTest Class Doc Comment
  *
- * @description 
+ * @description
  * @package     JackWH\NylasV3\EmailCalendar
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
 class GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentDeliveryStatusTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

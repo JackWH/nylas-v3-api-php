@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PostContactRequest Class Doc Comment
@@ -74,7 +74,7 @@ class PostContactRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         'physical_addresses' => '\JackWH\NylasV3\EmailCalendar\Model\ContactPhysicalAddress[]',
         'suffix' => 'string',
         'surname' => 'string',
-        'web_pages' => '\JackWH\NylasV3\EmailCalendar\Model\ContactWebPage[]'
+        'web_pages' => '\JackWH\NylasV3\EmailCalendar\Model\ContactWebPage[]',
     ];
 
     /**
@@ -99,7 +99,7 @@ class PostContactRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         'physical_addresses' => null,
         'suffix' => null,
         'surname' => null,
-        'web_pages' => null
+        'web_pages' => null,
     ];
 
     /**
@@ -124,7 +124,7 @@ class PostContactRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         'physical_addresses' => false,
         'suffix' => false,
         'surname' => false,
-        'web_pages' => false
+        'web_pages' => false,
     ];
 
     /**
@@ -229,7 +229,7 @@ class PostContactRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         'physical_addresses' => 'physical_addresses',
         'suffix' => 'suffix',
         'surname' => 'surname',
-        'web_pages' => 'web_pages'
+        'web_pages' => 'web_pages',
     ];
 
     /**
@@ -254,7 +254,7 @@ class PostContactRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         'physical_addresses' => 'setPhysicalAddresses',
         'suffix' => 'setSuffix',
         'surname' => 'setSurname',
-        'web_pages' => 'setWebPages'
+        'web_pages' => 'setWebPages',
     ];
 
     /**
@@ -279,7 +279,7 @@ class PostContactRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         'physical_addresses' => 'getPhysicalAddresses',
         'suffix' => 'getSuffix',
         'surname' => 'getSurname',
-        'web_pages' => 'getWebPages'
+        'web_pages' => 'getWebPages',
     ];
 
     /**
@@ -387,6 +387,7 @@ class PostContactRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         if ($this->container['given_name'] === null) {
             $invalidProperties[] = "'given_name' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -400,7 +401,6 @@ class PostContactRequest implements ModelInterface, ArrayAccess, JsonSerializabl
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets birthday
@@ -860,12 +860,13 @@ class PostContactRequest implements ModelInterface, ArrayAccess, JsonSerializabl
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -875,7 +876,7 @@ class PostContactRequest implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -905,7 +906,7 @@ class PostContactRequest implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -924,7 +925,7 @@ class PostContactRequest implements ModelInterface, ArrayAccess, JsonSerializabl
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -950,5 +951,3 @@ class PostContactRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConsolidatedOrder400Response Class Doc Comment
@@ -59,7 +59,7 @@ class GetConsolidatedOrder400Response implements ModelInterface, ArrayAccess, Js
       */
     protected static array $openAPITypes = [
         'error' => '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedOrder400ResponseError',
-        'request_id' => 'string'
+        'request_id' => 'string',
     ];
 
     /**
@@ -69,7 +69,7 @@ class GetConsolidatedOrder400Response implements ModelInterface, ArrayAccess, Js
       */
     protected static array $openAPIFormats = [
         'error' => null,
-        'request_id' => null
+        'request_id' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class GetConsolidatedOrder400Response implements ModelInterface, ArrayAccess, Js
       */
     protected static array $openAPINullables = [
         'error' => false,
-        'request_id' => false
+        'request_id' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class GetConsolidatedOrder400Response implements ModelInterface, ArrayAccess, Js
      */
     protected static array $attributeMap = [
         'error' => 'error',
-        'request_id' => 'request_id'
+        'request_id' => 'request_id',
     ];
 
     /**
@@ -179,7 +179,7 @@ class GetConsolidatedOrder400Response implements ModelInterface, ArrayAccess, Js
      */
     protected static array $setters = [
         'error' => 'setError',
-        'request_id' => 'setRequestId'
+        'request_id' => 'setRequestId',
     ];
 
     /**
@@ -189,7 +189,7 @@ class GetConsolidatedOrder400Response implements ModelInterface, ArrayAccess, Js
      */
     protected static array $getters = [
         'error' => 'getError',
-        'request_id' => 'getRequestId'
+        'request_id' => 'getRequestId',
     ];
 
     /**
@@ -293,7 +293,6 @@ class GetConsolidatedOrder400Response implements ModelInterface, ArrayAccess, Js
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets error
      *
@@ -347,12 +346,13 @@ class GetConsolidatedOrder400Response implements ModelInterface, ArrayAccess, Js
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -362,7 +362,7 @@ class GetConsolidatedOrder400Response implements ModelInterface, ArrayAccess, Js
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -392,7 +392,7 @@ class GetConsolidatedOrder400Response implements ModelInterface, ArrayAccess, Js
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -411,7 +411,7 @@ class GetConsolidatedOrder400Response implements ModelInterface, ArrayAccess, Js
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -437,5 +437,3 @@ class GetConsolidatedOrder400Response implements ModelInterface, ArrayAccess, Js
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

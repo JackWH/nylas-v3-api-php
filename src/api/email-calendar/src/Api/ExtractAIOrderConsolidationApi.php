@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\EmailCalendar\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\EmailCalendar\ApiException;
 use JackWH\NylasV3\EmailCalendar\Configuration;
 use JackWH\NylasV3\EmailCalendar\HeaderSelector;
@@ -69,7 +69,7 @@ class ExtractAIOrderConsolidationApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'getConsolidatedOrder' => [
             'application/json',
@@ -144,9 +144,9 @@ class ExtractAIOrderConsolidationApi
         ?int $limit = 50,
         ?string $page_token = null,
         string $contentType = self::contentTypes['getConsolidatedOrder'][0]
-    ): \JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedOrder200Response
-    {
+    ): \JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedOrder200Response {
         list($response) = $this->getConsolidatedOrderWithHttpInfo($grant_id, $limit, $page_token, $contentType);
+
         return $response;
     }
 
@@ -169,12 +169,12 @@ class ExtractAIOrderConsolidationApi
         ?int $limit = 50,
         ?string $page_token = null,
         string $contentType = self::contentTypes['getConsolidatedOrder'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getConsolidatedOrderRequest($grant_id, $limit, $page_token, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -208,7 +208,7 @@ class ExtractAIOrderConsolidationApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedOrder200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -234,7 +234,7 @@ class ExtractAIOrderConsolidationApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedOrder200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedOrder400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -261,7 +261,7 @@ class ExtractAIOrderConsolidationApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedOrder400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -288,7 +288,7 @@ class ExtractAIOrderConsolidationApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 500:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error3', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -315,7 +315,7 @@ class ExtractAIOrderConsolidationApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error3', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -344,7 +344,7 @@ class ExtractAIOrderConsolidationApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -356,6 +356,7 @@ class ExtractAIOrderConsolidationApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -364,6 +365,7 @@ class ExtractAIOrderConsolidationApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -372,6 +374,7 @@ class ExtractAIOrderConsolidationApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 500:
                     $data = ObjectSerializer::deserialize(
@@ -380,8 +383,10 @@ class ExtractAIOrderConsolidationApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -404,8 +409,7 @@ class ExtractAIOrderConsolidationApi
         ?int $limit = 50,
         ?string $page_token = null,
         string $contentType = self::contentTypes['getConsolidatedOrder'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getConsolidatedOrderAsyncWithHttpInfo($grant_id, $limit, $page_token, $contentType)
             ->then(
                 function ($response) {
@@ -432,8 +436,7 @@ class ExtractAIOrderConsolidationApi
         $limit = 50,
         $page_token = null,
         string $contentType = self::contentTypes['getConsolidatedOrder'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedOrder200Response';
         $request = $this->getConsolidatedOrderRequest($grant_id, $limit, $page_token, $contentType);
 
@@ -453,12 +456,13 @@ class ExtractAIOrderConsolidationApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -489,8 +493,7 @@ class ExtractAIOrderConsolidationApi
         $limit = 50,
         $page_token = null,
         string $contentType = self::contentTypes['getConsolidatedOrder'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -502,7 +505,7 @@ class ExtractAIOrderConsolidationApi
         if ($limit !== null && $limit > 200) {
             throw new InvalidArgumentException('invalid value for "$limit" when calling ExtractAIOrderConsolidationApi.getConsolidatedOrder, must be smaller than or equal to 200.');
         }
-        
+
 
 
         $resourcePath = '/v3/grants/{grant_id}/consolidated-order';
@@ -557,7 +560,7 @@ class ExtractAIOrderConsolidationApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -574,7 +577,7 @@ class ExtractAIOrderConsolidationApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -591,6 +594,7 @@ class ExtractAIOrderConsolidationApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -618,9 +622,9 @@ class ExtractAIOrderConsolidationApi
         ?int $limit = 50,
         ?string $page_token = null,
         string $contentType = self::contentTypes['getConsolidatedShipment'][0]
-    ): \JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200Response
-    {
+    ): \JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200Response {
         list($response) = $this->getConsolidatedShipmentWithHttpInfo($grant_id, $limit, $page_token, $contentType);
+
         return $response;
     }
 
@@ -643,12 +647,12 @@ class ExtractAIOrderConsolidationApi
         ?int $limit = 50,
         ?string $page_token = null,
         string $contentType = self::contentTypes['getConsolidatedShipment'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getConsolidatedShipmentRequest($grant_id, $limit, $page_token, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -682,7 +686,7 @@ class ExtractAIOrderConsolidationApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -708,7 +712,7 @@ class ExtractAIOrderConsolidationApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedOrder400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -735,7 +739,7 @@ class ExtractAIOrderConsolidationApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedOrder400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -762,7 +766,7 @@ class ExtractAIOrderConsolidationApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 500:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error3', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -789,7 +793,7 @@ class ExtractAIOrderConsolidationApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error3', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -818,7 +822,7 @@ class ExtractAIOrderConsolidationApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -830,6 +834,7 @@ class ExtractAIOrderConsolidationApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -838,6 +843,7 @@ class ExtractAIOrderConsolidationApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -846,6 +852,7 @@ class ExtractAIOrderConsolidationApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 500:
                     $data = ObjectSerializer::deserialize(
@@ -854,8 +861,10 @@ class ExtractAIOrderConsolidationApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -878,8 +887,7 @@ class ExtractAIOrderConsolidationApi
         ?int $limit = 50,
         ?string $page_token = null,
         string $contentType = self::contentTypes['getConsolidatedShipment'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getConsolidatedShipmentAsyncWithHttpInfo($grant_id, $limit, $page_token, $contentType)
             ->then(
                 function ($response) {
@@ -906,8 +914,7 @@ class ExtractAIOrderConsolidationApi
         $limit = 50,
         $page_token = null,
         string $contentType = self::contentTypes['getConsolidatedShipment'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200Response';
         $request = $this->getConsolidatedShipmentRequest($grant_id, $limit, $page_token, $contentType);
 
@@ -927,12 +934,13 @@ class ExtractAIOrderConsolidationApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -963,8 +971,7 @@ class ExtractAIOrderConsolidationApi
         $limit = 50,
         $page_token = null,
         string $contentType = self::contentTypes['getConsolidatedShipment'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -976,7 +983,7 @@ class ExtractAIOrderConsolidationApi
         if ($limit !== null && $limit > 200) {
             throw new InvalidArgumentException('invalid value for "$limit" when calling ExtractAIOrderConsolidationApi.getConsolidatedShipment, must be smaller than or equal to 200.');
         }
-        
+
 
 
         $resourcePath = '/v3/grants/{grant_id}/consolidated-shipment';
@@ -1031,7 +1038,7 @@ class ExtractAIOrderConsolidationApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1048,7 +1055,7 @@ class ExtractAIOrderConsolidationApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1065,6 +1072,7 @@ class ExtractAIOrderConsolidationApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1084,7 +1092,7 @@ class ExtractAIOrderConsolidationApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetCredentialAll200Response Class Doc Comment
@@ -61,7 +61,7 @@ class GetCredentialAll200Response implements ModelInterface, ArrayAccess, JsonSe
         'request_id' => 'string',
         'data' => '\JackWH\NylasV3\Administration\Model\GetCredentialAll200ResponseDataInner[]',
         'limit' => 'int',
-        'offset' => 'int'
+        'offset' => 'int',
     ];
 
     /**
@@ -73,7 +73,7 @@ class GetCredentialAll200Response implements ModelInterface, ArrayAccess, JsonSe
         'request_id' => null,
         'data' => null,
         'limit' => null,
-        'offset' => null
+        'offset' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class GetCredentialAll200Response implements ModelInterface, ArrayAccess, JsonSe
         'request_id' => false,
         'data' => false,
         'limit' => false,
-        'offset' => false
+        'offset' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class GetCredentialAll200Response implements ModelInterface, ArrayAccess, JsonSe
         'request_id' => 'request_id',
         'data' => 'data',
         'limit' => 'limit',
-        'offset' => 'offset'
+        'offset' => 'offset',
     ];
 
     /**
@@ -189,7 +189,7 @@ class GetCredentialAll200Response implements ModelInterface, ArrayAccess, JsonSe
         'request_id' => 'setRequestId',
         'data' => 'setData',
         'limit' => 'setLimit',
-        'offset' => 'setOffset'
+        'offset' => 'setOffset',
     ];
 
     /**
@@ -201,7 +201,7 @@ class GetCredentialAll200Response implements ModelInterface, ArrayAccess, JsonSe
         'request_id' => 'getRequestId',
         'data' => 'getData',
         'limit' => 'getLimit',
-        'offset' => 'getOffset'
+        'offset' => 'getOffset',
     ];
 
     /**
@@ -306,7 +306,6 @@ class GetCredentialAll200Response implements ModelInterface, ArrayAccess, JsonSe
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets request_id
@@ -415,12 +414,13 @@ class GetCredentialAll200Response implements ModelInterface, ArrayAccess, JsonSe
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -430,7 +430,7 @@ class GetCredentialAll200Response implements ModelInterface, ArrayAccess, JsonSe
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -460,7 +460,7 @@ class GetCredentialAll200Response implements ModelInterface, ArrayAccess, JsonSe
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -479,7 +479,7 @@ class GetCredentialAll200Response implements ModelInterface, ArrayAccess, JsonSe
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -505,5 +505,3 @@ class GetCredentialAll200Response implements ModelInterface, ArrayAccess, JsonSe
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

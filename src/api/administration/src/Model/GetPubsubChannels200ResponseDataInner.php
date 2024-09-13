@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetPubsubChannels200ResponseDataInner Class Doc Comment
@@ -63,7 +63,7 @@ class GetPubsubChannels200ResponseDataInner implements ModelInterface, ArrayAcce
         'trigger_types' => 'string[]',
         'topic' => 'string',
         'status' => 'string',
-        'notification_email_addresses' => 'string[]'
+        'notification_email_addresses' => 'string[]',
     ];
 
     /**
@@ -77,7 +77,7 @@ class GetPubsubChannels200ResponseDataInner implements ModelInterface, ArrayAcce
         'trigger_types' => null,
         'topic' => null,
         'status' => null,
-        'notification_email_addresses' => null
+        'notification_email_addresses' => null,
     ];
 
     /**
@@ -91,7 +91,7 @@ class GetPubsubChannels200ResponseDataInner implements ModelInterface, ArrayAcce
         'trigger_types' => false,
         'topic' => false,
         'status' => false,
-        'notification_email_addresses' => false
+        'notification_email_addresses' => false,
     ];
 
     /**
@@ -185,7 +185,7 @@ class GetPubsubChannels200ResponseDataInner implements ModelInterface, ArrayAcce
         'trigger_types' => 'trigger_types',
         'topic' => 'topic',
         'status' => 'status',
-        'notification_email_addresses' => 'notification_email_addresses'
+        'notification_email_addresses' => 'notification_email_addresses',
     ];
 
     /**
@@ -199,7 +199,7 @@ class GetPubsubChannels200ResponseDataInner implements ModelInterface, ArrayAcce
         'trigger_types' => 'setTriggerTypes',
         'topic' => 'setTopic',
         'status' => 'setStatus',
-        'notification_email_addresses' => 'setNotificationEmailAddresses'
+        'notification_email_addresses' => 'setNotificationEmailAddresses',
     ];
 
     /**
@@ -213,7 +213,7 @@ class GetPubsubChannels200ResponseDataInner implements ModelInterface, ArrayAcce
         'trigger_types' => 'getTriggerTypes',
         'topic' => 'getTopic',
         'status' => 'getStatus',
-        'notification_email_addresses' => 'getNotificationEmailAddresses'
+        'notification_email_addresses' => 'getNotificationEmailAddresses',
     ];
 
     /**
@@ -380,7 +380,7 @@ class GetPubsubChannels200ResponseDataInner implements ModelInterface, ArrayAcce
         $invalidProperties = [];
 
         $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+        if (! is_null($this->container['status']) && ! in_array($this->container['status'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
@@ -401,7 +401,6 @@ class GetPubsubChannels200ResponseDataInner implements ModelInterface, ArrayAcce
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets id
@@ -543,7 +542,7 @@ class GetPubsubChannels200ResponseDataInner implements ModelInterface, ArrayAcce
             throw new InvalidArgumentException('non-nullable status cannot be null');
         }
         $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
+        if (! in_array($status, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'status', must be one of '%s'",
@@ -583,12 +582,13 @@ class GetPubsubChannels200ResponseDataInner implements ModelInterface, ArrayAcce
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -598,7 +598,7 @@ class GetPubsubChannels200ResponseDataInner implements ModelInterface, ArrayAcce
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -628,7 +628,7 @@ class GetPubsubChannels200ResponseDataInner implements ModelInterface, ArrayAcce
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -647,7 +647,7 @@ class GetPubsubChannels200ResponseDataInner implements ModelInterface, ArrayAcce
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -673,5 +673,3 @@ class GetPubsubChannels200ResponseDataInner implements ModelInterface, ArrayAcce
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

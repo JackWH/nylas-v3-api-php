@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * AddApplicationRedirectUri200Response Class Doc Comment
@@ -59,7 +59,7 @@ class AddApplicationRedirectUri200Response implements ModelInterface, ArrayAcces
       */
     protected static array $openAPITypes = [
         'request_id' => 'string',
-        'data' => 'OneOf'
+        'data' => 'OneOf',
     ];
 
     /**
@@ -69,7 +69,7 @@ class AddApplicationRedirectUri200Response implements ModelInterface, ArrayAcces
       */
     protected static array $openAPIFormats = [
         'request_id' => null,
-        'data' => null
+        'data' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class AddApplicationRedirectUri200Response implements ModelInterface, ArrayAcces
       */
     protected static array $openAPINullables = [
         'request_id' => false,
-        'data' => true
+        'data' => true,
     ];
 
     /**
@@ -169,7 +169,7 @@ class AddApplicationRedirectUri200Response implements ModelInterface, ArrayAcces
      */
     protected static array $attributeMap = [
         'request_id' => 'request_id',
-        'data' => 'data'
+        'data' => 'data',
     ];
 
     /**
@@ -179,7 +179,7 @@ class AddApplicationRedirectUri200Response implements ModelInterface, ArrayAcces
      */
     protected static array $setters = [
         'request_id' => 'setRequestId',
-        'data' => 'setData'
+        'data' => 'setData',
     ];
 
     /**
@@ -189,7 +189,7 @@ class AddApplicationRedirectUri200Response implements ModelInterface, ArrayAcces
      */
     protected static array $getters = [
         'request_id' => 'getRequestId',
-        'data' => 'getData'
+        'data' => 'getData',
     ];
 
     /**
@@ -293,7 +293,6 @@ class AddApplicationRedirectUri200Response implements ModelInterface, ArrayAcces
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets request_id
      *
@@ -345,7 +344,7 @@ class AddApplicationRedirectUri200Response implements ModelInterface, ArrayAcces
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('data', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
@@ -354,12 +353,13 @@ class AddApplicationRedirectUri200Response implements ModelInterface, ArrayAcces
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -369,7 +369,7 @@ class AddApplicationRedirectUri200Response implements ModelInterface, ArrayAcces
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -399,7 +399,7 @@ class AddApplicationRedirectUri200Response implements ModelInterface, ArrayAcces
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -418,7 +418,7 @@ class AddApplicationRedirectUri200Response implements ModelInterface, ArrayAcces
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -444,5 +444,3 @@ class AddApplicationRedirectUri200Response implements ModelInterface, ArrayAcces
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

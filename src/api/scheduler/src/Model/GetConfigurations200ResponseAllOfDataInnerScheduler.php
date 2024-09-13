@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConfigurations200ResponseAllOfDataInnerScheduler Class Doc Comment
@@ -70,7 +70,7 @@ class GetConfigurations200ResponseAllOfDataInnerScheduler implements ModelInterf
         'hide_rescheduling_options' => 'bool',
         'hide_cancellation_options' => 'bool',
         'hide_additional_guests' => 'bool',
-        'email_template' => '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate'
+        'email_template' => '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate',
     ];
 
     /**
@@ -91,7 +91,7 @@ class GetConfigurations200ResponseAllOfDataInnerScheduler implements ModelInterf
         'hide_rescheduling_options' => null,
         'hide_cancellation_options' => null,
         'hide_additional_guests' => null,
-        'email_template' => null
+        'email_template' => null,
     ];
 
     /**
@@ -112,7 +112,7 @@ class GetConfigurations200ResponseAllOfDataInnerScheduler implements ModelInterf
         'hide_rescheduling_options' => false,
         'hide_cancellation_options' => false,
         'hide_additional_guests' => false,
-        'email_template' => false
+        'email_template' => false,
     ];
 
     /**
@@ -213,7 +213,7 @@ class GetConfigurations200ResponseAllOfDataInnerScheduler implements ModelInterf
         'hide_rescheduling_options' => 'hide_rescheduling_options',
         'hide_cancellation_options' => 'hide_cancellation_options',
         'hide_additional_guests' => 'hide_additional_guests',
-        'email_template' => 'email_template'
+        'email_template' => 'email_template',
     ];
 
     /**
@@ -234,7 +234,7 @@ class GetConfigurations200ResponseAllOfDataInnerScheduler implements ModelInterf
         'hide_rescheduling_options' => 'setHideReschedulingOptions',
         'hide_cancellation_options' => 'setHideCancellationOptions',
         'hide_additional_guests' => 'setHideAdditionalGuests',
-        'email_template' => 'setEmailTemplate'
+        'email_template' => 'setEmailTemplate',
     ];
 
     /**
@@ -255,7 +255,7 @@ class GetConfigurations200ResponseAllOfDataInnerScheduler implements ModelInterf
         'hide_rescheduling_options' => 'getHideReschedulingOptions',
         'hide_cancellation_options' => 'getHideCancellationOptions',
         'hide_additional_guests' => 'getHideAdditionalGuests',
-        'email_template' => 'getEmailTemplate'
+        'email_template' => 'getEmailTemplate',
     ];
 
     /**
@@ -369,7 +369,6 @@ class GetConfigurations200ResponseAllOfDataInnerScheduler implements ModelInterf
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets additional_fields
@@ -721,12 +720,13 @@ class GetConfigurations200ResponseAllOfDataInnerScheduler implements ModelInterf
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -736,7 +736,7 @@ class GetConfigurations200ResponseAllOfDataInnerScheduler implements ModelInterf
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -766,7 +766,7 @@ class GetConfigurations200ResponseAllOfDataInnerScheduler implements ModelInterf
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -785,7 +785,7 @@ class GetConfigurations200ResponseAllOfDataInnerScheduler implements ModelInterf
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -811,5 +811,3 @@ class GetConfigurations200ResponseAllOfDataInnerScheduler implements ModelInterf
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

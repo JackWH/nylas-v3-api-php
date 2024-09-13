@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PatchGrantByIdRequest Class Doc Comment
@@ -59,7 +59,7 @@ class PatchGrantByIdRequest implements ModelInterface, ArrayAccess, JsonSerializ
       */
     protected static array $openAPITypes = [
         'settings' => 'object',
-        'scope' => 'string[]'
+        'scope' => 'string[]',
     ];
 
     /**
@@ -69,7 +69,7 @@ class PatchGrantByIdRequest implements ModelInterface, ArrayAccess, JsonSerializ
       */
     protected static array $openAPIFormats = [
         'settings' => null,
-        'scope' => null
+        'scope' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class PatchGrantByIdRequest implements ModelInterface, ArrayAccess, JsonSerializ
       */
     protected static array $openAPINullables = [
         'settings' => false,
-        'scope' => false
+        'scope' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class PatchGrantByIdRequest implements ModelInterface, ArrayAccess, JsonSerializ
      */
     protected static array $attributeMap = [
         'settings' => 'settings',
-        'scope' => 'scope'
+        'scope' => 'scope',
     ];
 
     /**
@@ -179,7 +179,7 @@ class PatchGrantByIdRequest implements ModelInterface, ArrayAccess, JsonSerializ
      */
     protected static array $setters = [
         'settings' => 'setSettings',
-        'scope' => 'setScope'
+        'scope' => 'setScope',
     ];
 
     /**
@@ -189,7 +189,7 @@ class PatchGrantByIdRequest implements ModelInterface, ArrayAccess, JsonSerializ
      */
     protected static array $getters = [
         'settings' => 'getSettings',
-        'scope' => 'getScope'
+        'scope' => 'getScope',
     ];
 
     /**
@@ -293,7 +293,6 @@ class PatchGrantByIdRequest implements ModelInterface, ArrayAccess, JsonSerializ
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets settings
      *
@@ -347,12 +346,13 @@ class PatchGrantByIdRequest implements ModelInterface, ArrayAccess, JsonSerializ
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -362,7 +362,7 @@ class PatchGrantByIdRequest implements ModelInterface, ArrayAccess, JsonSerializ
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -392,7 +392,7 @@ class PatchGrantByIdRequest implements ModelInterface, ArrayAccess, JsonSerializ
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -411,7 +411,7 @@ class PatchGrantByIdRequest implements ModelInterface, ArrayAccess, JsonSerializ
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -437,5 +437,3 @@ class PatchGrantByIdRequest implements ModelInterface, ArrayAccess, JsonSerializ
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

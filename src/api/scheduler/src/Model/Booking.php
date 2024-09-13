@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Booking Class Doc Comment
@@ -63,7 +63,7 @@ class Booking implements ModelInterface, ArrayAccess, JsonSerializable
         'title' => 'string',
         'organizer' => '\JackWH\NylasV3\Scheduler\Model\PostBookings200ResponseAllOfDataOrganizer',
         'status' => 'string',
-        'description' => 'string'
+        'description' => 'string',
     ];
 
     /**
@@ -77,7 +77,7 @@ class Booking implements ModelInterface, ArrayAccess, JsonSerializable
         'title' => null,
         'organizer' => null,
         'status' => null,
-        'description' => null
+        'description' => null,
     ];
 
     /**
@@ -91,7 +91,7 @@ class Booking implements ModelInterface, ArrayAccess, JsonSerializable
         'title' => false,
         'organizer' => false,
         'status' => false,
-        'description' => false
+        'description' => false,
     ];
 
     /**
@@ -185,7 +185,7 @@ class Booking implements ModelInterface, ArrayAccess, JsonSerializable
         'title' => 'title',
         'organizer' => 'organizer',
         'status' => 'status',
-        'description' => 'description'
+        'description' => 'description',
     ];
 
     /**
@@ -199,7 +199,7 @@ class Booking implements ModelInterface, ArrayAccess, JsonSerializable
         'title' => 'setTitle',
         'organizer' => 'setOrganizer',
         'status' => 'setStatus',
-        'description' => 'setDescription'
+        'description' => 'setDescription',
     ];
 
     /**
@@ -213,7 +213,7 @@ class Booking implements ModelInterface, ArrayAccess, JsonSerializable
         'title' => 'getTitle',
         'organizer' => 'getOrganizer',
         'status' => 'getStatus',
-        'description' => 'getDescription'
+        'description' => 'getDescription',
     ];
 
     /**
@@ -340,7 +340,7 @@ class Booking implements ModelInterface, ArrayAccess, JsonSerializable
             $invalidProperties[] = "'status' can't be null";
         }
         $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+        if (! is_null($this->container['status']) && ! in_array($this->container['status'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
@@ -361,7 +361,6 @@ class Booking implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets booking_id
@@ -494,7 +493,7 @@ class Booking implements ModelInterface, ArrayAccess, JsonSerializable
             throw new InvalidArgumentException('non-nullable status cannot be null');
         }
         $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
+        if (! in_array($status, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'status', must be one of '%s'",
@@ -534,12 +533,13 @@ class Booking implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -549,7 +549,7 @@ class Booking implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -579,7 +579,7 @@ class Booking implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -598,7 +598,7 @@ class Booking implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -624,5 +624,3 @@ class Booking implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

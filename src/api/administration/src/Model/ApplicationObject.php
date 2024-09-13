@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ApplicationObject Class Doc Comment
@@ -65,7 +65,7 @@ class ApplicationObject implements ModelInterface, ArrayAccess, JsonSerializable
         'v2_application_id' => 'string',
         'branding' => '\JackWH\NylasV3\Administration\Model\GetApplication200ResponseDataBranding',
         'hosted_authentication' => '\JackWH\NylasV3\Administration\Model\GetApplication200ResponseDataHostedAuthentication',
-        'callback_uris' => 'OneOf[]'
+        'callback_uris' => 'OneOf[]',
     ];
 
     /**
@@ -81,7 +81,7 @@ class ApplicationObject implements ModelInterface, ArrayAccess, JsonSerializable
         'v2_application_id' => null,
         'branding' => null,
         'hosted_authentication' => null,
-        'callback_uris' => null
+        'callback_uris' => null,
     ];
 
     /**
@@ -97,7 +97,7 @@ class ApplicationObject implements ModelInterface, ArrayAccess, JsonSerializable
         'v2_application_id' => false,
         'branding' => false,
         'hosted_authentication' => false,
-        'callback_uris' => false
+        'callback_uris' => false,
     ];
 
     /**
@@ -193,7 +193,7 @@ class ApplicationObject implements ModelInterface, ArrayAccess, JsonSerializable
         'v2_application_id' => 'v2_application_id',
         'branding' => 'branding',
         'hosted_authentication' => 'hosted_authentication',
-        'callback_uris' => 'callback_uris'
+        'callback_uris' => 'callback_uris',
     ];
 
     /**
@@ -209,7 +209,7 @@ class ApplicationObject implements ModelInterface, ArrayAccess, JsonSerializable
         'v2_application_id' => 'setV2ApplicationId',
         'branding' => 'setBranding',
         'hosted_authentication' => 'setHostedAuthentication',
-        'callback_uris' => 'setCallbackUris'
+        'callback_uris' => 'setCallbackUris',
     ];
 
     /**
@@ -225,7 +225,7 @@ class ApplicationObject implements ModelInterface, ArrayAccess, JsonSerializable
         'v2_application_id' => 'getV2ApplicationId',
         'branding' => 'getBranding',
         'hosted_authentication' => 'getHostedAuthentication',
-        'callback_uris' => 'getCallbackUris'
+        'callback_uris' => 'getCallbackUris',
     ];
 
     /**
@@ -337,7 +337,7 @@ class ApplicationObject implements ModelInterface, ArrayAccess, JsonSerializable
         $invalidProperties = [];
 
         $allowedValues = $this->getEnvironmentAllowableValues();
-        if (!is_null($this->container['environment']) && !in_array($this->container['environment'], $allowedValues, true)) {
+        if (! is_null($this->container['environment']) && ! in_array($this->container['environment'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'environment', must be one of '%s'",
                 $this->container['environment'],
@@ -358,7 +358,6 @@ class ApplicationObject implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets application_id
@@ -464,7 +463,7 @@ class ApplicationObject implements ModelInterface, ArrayAccess, JsonSerializable
             throw new InvalidArgumentException('non-nullable environment cannot be null');
         }
         $allowedValues = $this->getEnvironmentAllowableValues();
-        if (!in_array($environment, $allowedValues, true)) {
+        if (! in_array($environment, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'environment', must be one of '%s'",
@@ -585,12 +584,13 @@ class ApplicationObject implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -600,7 +600,7 @@ class ApplicationObject implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -630,7 +630,7 @@ class ApplicationObject implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -649,7 +649,7 @@ class ApplicationObject implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -675,5 +675,3 @@ class ApplicationObject implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

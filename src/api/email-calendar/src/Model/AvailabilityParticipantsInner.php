@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * AvailabilityParticipantsInner Class Doc Comment
@@ -60,7 +60,7 @@ class AvailabilityParticipantsInner implements ModelInterface, ArrayAccess, Json
     protected static array $openAPITypes = [
         'email' => 'string',
         'calendar_ids' => 'string[]',
-        'open_hours' => '\JackWH\NylasV3\EmailCalendar\Model\OpenHours[]'
+        'open_hours' => '\JackWH\NylasV3\EmailCalendar\Model\OpenHours[]',
     ];
 
     /**
@@ -71,7 +71,7 @@ class AvailabilityParticipantsInner implements ModelInterface, ArrayAccess, Json
     protected static array $openAPIFormats = [
         'email' => null,
         'calendar_ids' => null,
-        'open_hours' => null
+        'open_hours' => null,
     ];
 
     /**
@@ -82,7 +82,7 @@ class AvailabilityParticipantsInner implements ModelInterface, ArrayAccess, Json
     protected static array $openAPINullables = [
         'email' => false,
         'calendar_ids' => false,
-        'open_hours' => false
+        'open_hours' => false,
     ];
 
     /**
@@ -173,7 +173,7 @@ class AvailabilityParticipantsInner implements ModelInterface, ArrayAccess, Json
     protected static array $attributeMap = [
         'email' => 'email',
         'calendar_ids' => 'calendar_ids',
-        'open_hours' => 'open_hours'
+        'open_hours' => 'open_hours',
     ];
 
     /**
@@ -184,7 +184,7 @@ class AvailabilityParticipantsInner implements ModelInterface, ArrayAccess, Json
     protected static array $setters = [
         'email' => 'setEmail',
         'calendar_ids' => 'setCalendarIds',
-        'open_hours' => 'setOpenHours'
+        'open_hours' => 'setOpenHours',
     ];
 
     /**
@@ -195,7 +195,7 @@ class AvailabilityParticipantsInner implements ModelInterface, ArrayAccess, Json
     protected static array $getters = [
         'email' => 'getEmail',
         'calendar_ids' => 'getCalendarIds',
-        'open_hours' => 'getOpenHours'
+        'open_hours' => 'getOpenHours',
     ];
 
     /**
@@ -300,7 +300,6 @@ class AvailabilityParticipantsInner implements ModelInterface, ArrayAccess, Json
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets email
      *
@@ -381,12 +380,13 @@ class AvailabilityParticipantsInner implements ModelInterface, ArrayAccess, Json
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -396,7 +396,7 @@ class AvailabilityParticipantsInner implements ModelInterface, ArrayAccess, Json
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -426,7 +426,7 @@ class AvailabilityParticipantsInner implements ModelInterface, ArrayAccess, Json
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -445,7 +445,7 @@ class AvailabilityParticipantsInner implements ModelInterface, ArrayAccess, Json
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -471,5 +471,3 @@ class AvailabilityParticipantsInner implements ModelInterface, ArrayAccess, Json
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

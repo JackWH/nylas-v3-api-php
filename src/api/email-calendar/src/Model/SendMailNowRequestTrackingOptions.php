@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * SendMailNowRequestTrackingOptions Class Doc Comment
@@ -61,7 +61,7 @@ class SendMailNowRequestTrackingOptions implements ModelInterface, ArrayAccess, 
         'opens' => 'bool',
         'thread_replies' => 'bool',
         'links' => 'bool',
-        'label' => 'string'
+        'label' => 'string',
     ];
 
     /**
@@ -73,7 +73,7 @@ class SendMailNowRequestTrackingOptions implements ModelInterface, ArrayAccess, 
         'opens' => null,
         'thread_replies' => null,
         'links' => null,
-        'label' => null
+        'label' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class SendMailNowRequestTrackingOptions implements ModelInterface, ArrayAccess, 
         'opens' => false,
         'thread_replies' => false,
         'links' => false,
-        'label' => false
+        'label' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class SendMailNowRequestTrackingOptions implements ModelInterface, ArrayAccess, 
         'opens' => 'opens',
         'thread_replies' => 'thread_replies',
         'links' => 'links',
-        'label' => 'label'
+        'label' => 'label',
     ];
 
     /**
@@ -189,7 +189,7 @@ class SendMailNowRequestTrackingOptions implements ModelInterface, ArrayAccess, 
         'opens' => 'setOpens',
         'thread_replies' => 'setThreadReplies',
         'links' => 'setLinks',
-        'label' => 'setLabel'
+        'label' => 'setLabel',
     ];
 
     /**
@@ -201,7 +201,7 @@ class SendMailNowRequestTrackingOptions implements ModelInterface, ArrayAccess, 
         'opens' => 'getOpens',
         'thread_replies' => 'getThreadReplies',
         'links' => 'getLinks',
-        'label' => 'getLabel'
+        'label' => 'getLabel',
     ];
 
     /**
@@ -293,7 +293,7 @@ class SendMailNowRequestTrackingOptions implements ModelInterface, ArrayAccess, 
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['label']) && (mb_strlen($this->container['label']) > 2048)) {
+        if (! is_null($this->container['label']) && (mb_strlen($this->container['label']) > 2048)) {
             $invalidProperties[] = "invalid value for 'label', the character length must be smaller than or equal to 2048.";
         }
 
@@ -310,7 +310,6 @@ class SendMailNowRequestTrackingOptions implements ModelInterface, ArrayAccess, 
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets opens
@@ -423,12 +422,13 @@ class SendMailNowRequestTrackingOptions implements ModelInterface, ArrayAccess, 
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -438,7 +438,7 @@ class SendMailNowRequestTrackingOptions implements ModelInterface, ArrayAccess, 
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -468,7 +468,7 @@ class SendMailNowRequestTrackingOptions implements ModelInterface, ArrayAccess, 
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -487,7 +487,7 @@ class SendMailNowRequestTrackingOptions implements ModelInterface, ArrayAccess, 
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -513,5 +513,3 @@ class SendMailNowRequestTrackingOptions implements ModelInterface, ArrayAccess, 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

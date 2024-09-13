@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate Class Doc Comment
@@ -60,7 +60,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate implement
       */
     protected static array $openAPITypes = [
         'logo' => 'string',
-        'booking_confirmed' => '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingConfirmed'
+        'booking_confirmed' => '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingConfirmed',
     ];
 
     /**
@@ -70,7 +70,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate implement
       */
     protected static array $openAPIFormats = [
         'logo' => null,
-        'booking_confirmed' => null
+        'booking_confirmed' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate implement
       */
     protected static array $openAPINullables = [
         'logo' => false,
-        'booking_confirmed' => false
+        'booking_confirmed' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate implement
      */
     protected static array $attributeMap = [
         'logo' => 'logo',
-        'booking_confirmed' => 'booking_confirmed'
+        'booking_confirmed' => 'booking_confirmed',
     ];
 
     /**
@@ -180,7 +180,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate implement
      */
     protected static array $setters = [
         'logo' => 'setLogo',
-        'booking_confirmed' => 'setBookingConfirmed'
+        'booking_confirmed' => 'setBookingConfirmed',
     ];
 
     /**
@@ -190,7 +190,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate implement
      */
     protected static array $getters = [
         'logo' => 'getLogo',
-        'booking_confirmed' => 'getBookingConfirmed'
+        'booking_confirmed' => 'getBookingConfirmed',
     ];
 
     /**
@@ -294,7 +294,6 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate implement
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets logo
      *
@@ -348,12 +347,13 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate implement
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -363,7 +363,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate implement
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -393,7 +393,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate implement
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -412,7 +412,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate implement
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -438,5 +438,3 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplate implement
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

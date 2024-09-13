@@ -28,15 +28,15 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Folder Class Doc Comment
  *
- * @description 
+ * @description
  * @package  JackWH\NylasV3\EmailCalendar
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -70,7 +70,7 @@ class Folder implements ModelInterface, ArrayAccess, JsonSerializable
         'text_color' => 'string',
         'total_count' => 'int',
         'unread_count' => 'int',
-        'attributes' => 'string[]'
+        'attributes' => 'string[]',
     ];
 
     /**
@@ -90,7 +90,7 @@ class Folder implements ModelInterface, ArrayAccess, JsonSerializable
         'text_color' => null,
         'total_count' => null,
         'unread_count' => null,
-        'attributes' => null
+        'attributes' => null,
     ];
 
     /**
@@ -110,7 +110,7 @@ class Folder implements ModelInterface, ArrayAccess, JsonSerializable
         'text_color' => false,
         'total_count' => false,
         'unread_count' => false,
-        'attributes' => false
+        'attributes' => false,
     ];
 
     /**
@@ -210,7 +210,7 @@ class Folder implements ModelInterface, ArrayAccess, JsonSerializable
         'text_color' => 'text_color',
         'total_count' => 'total_count',
         'unread_count' => 'unread_count',
-        'attributes' => 'attributes'
+        'attributes' => 'attributes',
     ];
 
     /**
@@ -230,7 +230,7 @@ class Folder implements ModelInterface, ArrayAccess, JsonSerializable
         'text_color' => 'setTextColor',
         'total_count' => 'setTotalCount',
         'unread_count' => 'setUnreadCount',
-        'attributes' => 'setAttributes'
+        'attributes' => 'setAttributes',
     ];
 
     /**
@@ -250,7 +250,7 @@ class Folder implements ModelInterface, ArrayAccess, JsonSerializable
         'text_color' => 'getTextColor',
         'total_count' => 'getTotalCount',
         'unread_count' => 'getUnreadCount',
-        'attributes' => 'getAttributes'
+        'attributes' => 'getAttributes',
     ];
 
     /**
@@ -350,7 +350,7 @@ class Folder implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
+        if (! is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
             $invalidProperties[] = "invalid value for 'id', the character length must be bigger than or equal to 1.";
         }
 
@@ -367,7 +367,6 @@ class Folder implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets background_color
@@ -697,12 +696,13 @@ class Folder implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -712,7 +712,7 @@ class Folder implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -742,7 +742,7 @@ class Folder implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -761,7 +761,7 @@ class Folder implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -787,5 +787,3 @@ class Folder implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetPubsubChannels400ResponseError Class Doc Comment
@@ -59,7 +59,7 @@ class GetPubsubChannels400ResponseError implements ModelInterface, ArrayAccess, 
       */
     protected static array $openAPITypes = [
         'type' => 'string',
-        'message' => 'string'
+        'message' => 'string',
     ];
 
     /**
@@ -69,7 +69,7 @@ class GetPubsubChannels400ResponseError implements ModelInterface, ArrayAccess, 
       */
     protected static array $openAPIFormats = [
         'type' => null,
-        'message' => null
+        'message' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class GetPubsubChannels400ResponseError implements ModelInterface, ArrayAccess, 
       */
     protected static array $openAPINullables = [
         'type' => false,
-        'message' => false
+        'message' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class GetPubsubChannels400ResponseError implements ModelInterface, ArrayAccess, 
      */
     protected static array $attributeMap = [
         'type' => 'type',
-        'message' => 'message'
+        'message' => 'message',
     ];
 
     /**
@@ -179,7 +179,7 @@ class GetPubsubChannels400ResponseError implements ModelInterface, ArrayAccess, 
      */
     protected static array $setters = [
         'type' => 'setType',
-        'message' => 'setMessage'
+        'message' => 'setMessage',
     ];
 
     /**
@@ -189,7 +189,7 @@ class GetPubsubChannels400ResponseError implements ModelInterface, ArrayAccess, 
      */
     protected static array $getters = [
         'type' => 'getType',
-        'message' => 'getMessage'
+        'message' => 'getMessage',
     ];
 
     /**
@@ -293,7 +293,6 @@ class GetPubsubChannels400ResponseError implements ModelInterface, ArrayAccess, 
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets type
      *
@@ -347,12 +346,13 @@ class GetPubsubChannels400ResponseError implements ModelInterface, ArrayAccess, 
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -362,7 +362,7 @@ class GetPubsubChannels400ResponseError implements ModelInterface, ArrayAccess, 
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -392,7 +392,7 @@ class GetPubsubChannels400ResponseError implements ModelInterface, ArrayAccess, 
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -411,7 +411,7 @@ class GetPubsubChannels400ResponseError implements ModelInterface, ArrayAccess, 
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -437,5 +437,3 @@ class GetPubsubChannels400ResponseError implements ModelInterface, ArrayAccess, 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

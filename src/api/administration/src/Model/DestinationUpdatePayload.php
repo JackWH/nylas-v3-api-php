@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * DestinationUpdatePayload Class Doc Comment
@@ -62,7 +62,7 @@ class DestinationUpdatePayload implements ModelInterface, ArrayAccess, JsonSeria
         'trigger_types' => 'string[]',
         'webhook_url' => 'string',
         'status' => 'string',
-        'notification_email_addresses' => 'string[]'
+        'notification_email_addresses' => 'string[]',
     ];
 
     /**
@@ -75,7 +75,7 @@ class DestinationUpdatePayload implements ModelInterface, ArrayAccess, JsonSeria
         'trigger_types' => null,
         'webhook_url' => null,
         'status' => null,
-        'notification_email_addresses' => null
+        'notification_email_addresses' => null,
     ];
 
     /**
@@ -88,7 +88,7 @@ class DestinationUpdatePayload implements ModelInterface, ArrayAccess, JsonSeria
         'trigger_types' => false,
         'webhook_url' => false,
         'status' => false,
-        'notification_email_addresses' => false
+        'notification_email_addresses' => false,
     ];
 
     /**
@@ -181,7 +181,7 @@ class DestinationUpdatePayload implements ModelInterface, ArrayAccess, JsonSeria
         'trigger_types' => 'trigger_types',
         'webhook_url' => 'webhook_url',
         'status' => 'status',
-        'notification_email_addresses' => 'notification_email_addresses'
+        'notification_email_addresses' => 'notification_email_addresses',
     ];
 
     /**
@@ -194,7 +194,7 @@ class DestinationUpdatePayload implements ModelInterface, ArrayAccess, JsonSeria
         'trigger_types' => 'setTriggerTypes',
         'webhook_url' => 'setWebhookUrl',
         'status' => 'setStatus',
-        'notification_email_addresses' => 'setNotificationEmailAddresses'
+        'notification_email_addresses' => 'setNotificationEmailAddresses',
     ];
 
     /**
@@ -207,7 +207,7 @@ class DestinationUpdatePayload implements ModelInterface, ArrayAccess, JsonSeria
         'trigger_types' => 'getTriggerTypes',
         'webhook_url' => 'getWebhookUrl',
         'status' => 'getStatus',
-        'notification_email_addresses' => 'getNotificationEmailAddresses'
+        'notification_email_addresses' => 'getNotificationEmailAddresses',
     ];
 
     /**
@@ -369,7 +369,7 @@ class DestinationUpdatePayload implements ModelInterface, ArrayAccess, JsonSeria
         $invalidProperties = [];
 
         $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+        if (! is_null($this->container['status']) && ! in_array($this->container['status'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
@@ -390,7 +390,6 @@ class DestinationUpdatePayload implements ModelInterface, ArrayAccess, JsonSeria
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets description
@@ -505,7 +504,7 @@ class DestinationUpdatePayload implements ModelInterface, ArrayAccess, JsonSeria
             throw new InvalidArgumentException('non-nullable status cannot be null');
         }
         $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
+        if (! in_array($status, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'status', must be one of '%s'",
@@ -545,12 +544,13 @@ class DestinationUpdatePayload implements ModelInterface, ArrayAccess, JsonSeria
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -560,7 +560,7 @@ class DestinationUpdatePayload implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -590,7 +590,7 @@ class DestinationUpdatePayload implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -609,7 +609,7 @@ class DestinationUpdatePayload implements ModelInterface, ArrayAccess, JsonSeria
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -635,5 +635,3 @@ class DestinationUpdatePayload implements ModelInterface, ArrayAccess, JsonSeria
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

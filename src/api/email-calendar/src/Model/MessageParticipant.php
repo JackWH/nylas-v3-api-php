@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * MessageParticipant Class Doc Comment
@@ -60,7 +60,7 @@ class MessageParticipant implements ModelInterface, ArrayAccess, JsonSerializabl
       */
     protected static array $openAPITypes = [
         'name' => 'string',
-        'email' => 'string'
+        'email' => 'string',
     ];
 
     /**
@@ -70,7 +70,7 @@ class MessageParticipant implements ModelInterface, ArrayAccess, JsonSerializabl
       */
     protected static array $openAPIFormats = [
         'name' => null,
-        'email' => 'email'
+        'email' => 'email',
     ];
 
     /**
@@ -80,7 +80,7 @@ class MessageParticipant implements ModelInterface, ArrayAccess, JsonSerializabl
       */
     protected static array $openAPINullables = [
         'name' => false,
-        'email' => false
+        'email' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class MessageParticipant implements ModelInterface, ArrayAccess, JsonSerializabl
      */
     protected static array $attributeMap = [
         'name' => 'name',
-        'email' => 'email'
+        'email' => 'email',
     ];
 
     /**
@@ -180,7 +180,7 @@ class MessageParticipant implements ModelInterface, ArrayAccess, JsonSerializabl
      */
     protected static array $setters = [
         'name' => 'setName',
-        'email' => 'setEmail'
+        'email' => 'setEmail',
     ];
 
     /**
@@ -190,7 +190,7 @@ class MessageParticipant implements ModelInterface, ArrayAccess, JsonSerializabl
      */
     protected static array $getters = [
         'name' => 'getName',
-        'email' => 'getEmail'
+        'email' => 'getEmail',
     ];
 
     /**
@@ -283,6 +283,7 @@ class MessageParticipant implements ModelInterface, ArrayAccess, JsonSerializabl
         if ($this->container['email'] === null) {
             $invalidProperties[] = "'email' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -296,7 +297,6 @@ class MessageParticipant implements ModelInterface, ArrayAccess, JsonSerializabl
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets name
@@ -351,12 +351,13 @@ class MessageParticipant implements ModelInterface, ArrayAccess, JsonSerializabl
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -366,7 +367,7 @@ class MessageParticipant implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -396,7 +397,7 @@ class MessageParticipant implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -415,7 +416,7 @@ class MessageParticipant implements ModelInterface, ArrayAccess, JsonSerializabl
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -441,5 +442,3 @@ class MessageParticipant implements ModelInterface, ArrayAccess, JsonSerializabl
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

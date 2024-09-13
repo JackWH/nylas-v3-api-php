@@ -28,10 +28,9 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
-use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Error4ErrorDetailsInnerLocInner Class Doc Comment
@@ -58,7 +57,7 @@ class Error4ErrorDetailsInnerLocInner implements ModelInterface, ArrayAccess, Js
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        
+
     ];
 
     /**
@@ -67,7 +66,7 @@ class Error4ErrorDetailsInnerLocInner implements ModelInterface, ArrayAccess, Js
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        
+
     ];
 
     /**
@@ -76,7 +75,7 @@ class Error4ErrorDetailsInnerLocInner implements ModelInterface, ArrayAccess, Js
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        
+
     ];
 
     /**
@@ -165,7 +164,7 @@ class Error4ErrorDetailsInnerLocInner implements ModelInterface, ArrayAccess, Js
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        
+
     ];
 
     /**
@@ -174,7 +173,7 @@ class Error4ErrorDetailsInnerLocInner implements ModelInterface, ArrayAccess, Js
      * @var array<string, string>
      */
     protected static array $setters = [
-        
+
     ];
 
     /**
@@ -183,7 +182,7 @@ class Error4ErrorDetailsInnerLocInner implements ModelInterface, ArrayAccess, Js
      * @var array<string, string>
      */
     protected static array $getters = [
-        
+
     ];
 
     /**
@@ -288,9 +287,9 @@ class Error4ErrorDetailsInnerLocInner implements ModelInterface, ArrayAccess, Js
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -300,7 +299,7 @@ class Error4ErrorDetailsInnerLocInner implements ModelInterface, ArrayAccess, Js
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -330,7 +329,7 @@ class Error4ErrorDetailsInnerLocInner implements ModelInterface, ArrayAccess, Js
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -349,7 +348,7 @@ class Error4ErrorDetailsInnerLocInner implements ModelInterface, ArrayAccess, Js
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -375,5 +374,3 @@ class Error4ErrorDetailsInnerLocInner implements ModelInterface, ArrayAccess, Js
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

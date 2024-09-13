@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetSchedules200ResponseInnerStatus Class Doc Comment
@@ -60,7 +60,7 @@ class GetSchedules200ResponseInnerStatus implements ModelInterface, ArrayAccess,
       */
     protected static array $openAPITypes = [
         'code' => 'string',
-        'description' => 'string'
+        'description' => 'string',
     ];
 
     /**
@@ -70,7 +70,7 @@ class GetSchedules200ResponseInnerStatus implements ModelInterface, ArrayAccess,
       */
     protected static array $openAPIFormats = [
         'code' => null,
-        'description' => null
+        'description' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class GetSchedules200ResponseInnerStatus implements ModelInterface, ArrayAccess,
       */
     protected static array $openAPINullables = [
         'code' => false,
-        'description' => false
+        'description' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class GetSchedules200ResponseInnerStatus implements ModelInterface, ArrayAccess,
      */
     protected static array $attributeMap = [
         'code' => 'code',
-        'description' => 'description'
+        'description' => 'description',
     ];
 
     /**
@@ -180,7 +180,7 @@ class GetSchedules200ResponseInnerStatus implements ModelInterface, ArrayAccess,
      */
     protected static array $setters = [
         'code' => 'setCode',
-        'description' => 'setDescription'
+        'description' => 'setDescription',
     ];
 
     /**
@@ -190,7 +190,7 @@ class GetSchedules200ResponseInnerStatus implements ModelInterface, ArrayAccess,
      */
     protected static array $getters = [
         'code' => 'getCode',
-        'description' => 'getDescription'
+        'description' => 'getDescription',
     ];
 
     /**
@@ -294,7 +294,6 @@ class GetSchedules200ResponseInnerStatus implements ModelInterface, ArrayAccess,
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets code
      *
@@ -348,12 +347,13 @@ class GetSchedules200ResponseInnerStatus implements ModelInterface, ArrayAccess,
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -363,7 +363,7 @@ class GetSchedules200ResponseInnerStatus implements ModelInterface, ArrayAccess,
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -393,7 +393,7 @@ class GetSchedules200ResponseInnerStatus implements ModelInterface, ArrayAccess,
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -412,7 +412,7 @@ class GetSchedules200ResponseInnerStatus implements ModelInterface, ArrayAccess,
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -438,5 +438,3 @@ class GetSchedules200ResponseInnerStatus implements ModelInterface, ArrayAccess,
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

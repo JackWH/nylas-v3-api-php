@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Administration\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Administration\ApiException;
 use JackWH\NylasV3\Administration\Configuration;
 use JackWH\NylasV3\Administration\HeaderSelector;
@@ -69,7 +69,7 @@ class ConnectorsIntegrationsApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'createConnector' => [
             'application/json',
@@ -152,9 +152,9 @@ class ConnectorsIntegrationsApi
     public function createConnector(
         \JackWH\NylasV3\Administration\Model\CreateConnectorRequest $create_connector_request,
         string $contentType = self::contentTypes['createConnector'][0]
-    ): \JackWH\NylasV3\Administration\Model\CreateConnector201Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\CreateConnector201Response {
         list($response) = $this->createConnectorWithHttpInfo($create_connector_request, $contentType);
+
         return $response;
     }
 
@@ -173,12 +173,12 @@ class ConnectorsIntegrationsApi
     public function createConnectorWithHttpInfo(
         \JackWH\NylasV3\Administration\Model\CreateConnectorRequest $create_connector_request,
         string $contentType = self::contentTypes['createConnector'][0]
-    ): array
-    {
+    ): array {
         $request = $this->createConnectorRequest($create_connector_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -212,7 +212,7 @@ class ConnectorsIntegrationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 201:
                     if (in_array('\JackWH\NylasV3\Administration\Model\CreateConnector201Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -238,7 +238,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\CreateConnector201Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -265,7 +265,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -292,7 +292,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -321,7 +321,7 @@ class ConnectorsIntegrationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -333,6 +333,7 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -341,6 +342,7 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -349,8 +351,10 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -369,8 +373,7 @@ class ConnectorsIntegrationsApi
     public function createConnectorAsync(
         \JackWH\NylasV3\Administration\Model\CreateConnectorRequest $create_connector_request,
         string $contentType = self::contentTypes['createConnector'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->createConnectorAsyncWithHttpInfo($create_connector_request, $contentType)
             ->then(
                 function ($response) {
@@ -393,8 +396,7 @@ class ConnectorsIntegrationsApi
     public function createConnectorAsyncWithHttpInfo(
         $create_connector_request,
         string $contentType = self::contentTypes['createConnector'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\CreateConnector201Response';
         $request = $this->createConnectorRequest($create_connector_request, $contentType);
 
@@ -414,12 +416,13 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -446,8 +449,7 @@ class ConnectorsIntegrationsApi
     public function createConnectorRequest(
         $create_connector_request,
         string $contentType = self::contentTypes['createConnector'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'create_connector_request' is set
         if ($create_connector_request === null || (is_array($create_connector_request) && count($create_connector_request) === 0)) {
@@ -490,7 +492,7 @@ class ConnectorsIntegrationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -507,7 +509,7 @@ class ConnectorsIntegrationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -524,6 +526,7 @@ class ConnectorsIntegrationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -547,9 +550,9 @@ class ConnectorsIntegrationsApi
     public function deleteConnectorByProvider(
         string $provider,
         string $contentType = self::contentTypes['deleteConnectorByProvider'][0]
-    ): \JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response {
         list($response) = $this->deleteConnectorByProviderWithHttpInfo($provider, $contentType);
+
         return $response;
     }
 
@@ -568,12 +571,12 @@ class ConnectorsIntegrationsApi
     public function deleteConnectorByProviderWithHttpInfo(
         string $provider,
         string $contentType = self::contentTypes['deleteConnectorByProvider'][0]
-    ): array
-    {
+    ): array {
         $request = $this->deleteConnectorByProviderRequest($provider, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -607,7 +610,7 @@ class ConnectorsIntegrationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -633,7 +636,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -660,7 +663,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -687,7 +690,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -716,7 +719,7 @@ class ConnectorsIntegrationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -728,6 +731,7 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -736,6 +740,7 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -744,8 +749,10 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -764,8 +771,7 @@ class ConnectorsIntegrationsApi
     public function deleteConnectorByProviderAsync(
         string $provider,
         string $contentType = self::contentTypes['deleteConnectorByProvider'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->deleteConnectorByProviderAsyncWithHttpInfo($provider, $contentType)
             ->then(
                 function ($response) {
@@ -788,8 +794,7 @@ class ConnectorsIntegrationsApi
     public function deleteConnectorByProviderAsyncWithHttpInfo(
         $provider,
         string $contentType = self::contentTypes['deleteConnectorByProvider'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\DeleteApplicationRedirectUriById200Response';
         $request = $this->deleteConnectorByProviderRequest($provider, $contentType);
 
@@ -809,12 +814,13 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -841,8 +847,7 @@ class ConnectorsIntegrationsApi
     public function deleteConnectorByProviderRequest(
         $provider,
         string $contentType = self::contentTypes['deleteConnectorByProvider'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
@@ -886,7 +891,7 @@ class ConnectorsIntegrationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -903,7 +908,7 @@ class ConnectorsIntegrationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -920,6 +925,7 @@ class ConnectorsIntegrationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -945,9 +951,9 @@ class ConnectorsIntegrationsApi
         string $email,
         ?bool $all_provider_types = false,
         string $contentType = self::contentTypes['detectProviderByEmail'][0]
-    ): \JackWH\NylasV3\Administration\Model\DetectProviderByEmail200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\DetectProviderByEmail200Response {
         list($response) = $this->detectProviderByEmailWithHttpInfo($email, $all_provider_types, $contentType);
+
         return $response;
     }
 
@@ -968,12 +974,12 @@ class ConnectorsIntegrationsApi
         string $email,
         ?bool $all_provider_types = false,
         string $contentType = self::contentTypes['detectProviderByEmail'][0]
-    ): array
-    {
+    ): array {
         $request = $this->detectProviderByEmailRequest($email, $all_provider_types, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1007,7 +1013,7 @@ class ConnectorsIntegrationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\DetectProviderByEmail200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1033,7 +1039,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\DetectProviderByEmail200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1060,7 +1066,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1089,7 +1095,7 @@ class ConnectorsIntegrationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1101,6 +1107,7 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1109,8 +1116,10 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1131,8 +1140,7 @@ class ConnectorsIntegrationsApi
         string $email,
         ?bool $all_provider_types = false,
         string $contentType = self::contentTypes['detectProviderByEmail'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->detectProviderByEmailAsyncWithHttpInfo($email, $all_provider_types, $contentType)
             ->then(
                 function ($response) {
@@ -1157,8 +1165,7 @@ class ConnectorsIntegrationsApi
         $email,
         $all_provider_types = false,
         string $contentType = self::contentTypes['detectProviderByEmail'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\DetectProviderByEmail200Response';
         $request = $this->detectProviderByEmailRequest($email, $all_provider_types, $contentType);
 
@@ -1178,12 +1185,13 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1212,8 +1220,7 @@ class ConnectorsIntegrationsApi
         $email,
         $all_provider_types = false,
         string $contentType = self::contentTypes['detectProviderByEmail'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'email' is set
         if ($email === null || (is_array($email) && count($email) === 0)) {
@@ -1268,7 +1275,7 @@ class ConnectorsIntegrationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1285,7 +1292,7 @@ class ConnectorsIntegrationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1302,6 +1309,7 @@ class ConnectorsIntegrationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1327,9 +1335,9 @@ class ConnectorsIntegrationsApi
         ?int $limit = null,
         ?int $offset = null,
         string $contentType = self::contentTypes['getConnectorAll'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetConnectorAll200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetConnectorAll200Response {
         list($response) = $this->getConnectorAllWithHttpInfo($limit, $offset, $contentType);
+
         return $response;
     }
 
@@ -1350,12 +1358,12 @@ class ConnectorsIntegrationsApi
         ?int $limit = null,
         ?int $offset = null,
         string $contentType = self::contentTypes['getConnectorAll'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getConnectorAllRequest($limit, $offset, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1389,7 +1397,7 @@ class ConnectorsIntegrationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetConnectorAll200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1415,7 +1423,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetConnectorAll200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1442,7 +1450,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1469,7 +1477,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1498,7 +1506,7 @@ class ConnectorsIntegrationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1510,6 +1518,7 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1518,6 +1527,7 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -1526,8 +1536,10 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1548,8 +1560,7 @@ class ConnectorsIntegrationsApi
         ?int $limit = null,
         ?int $offset = null,
         string $contentType = self::contentTypes['getConnectorAll'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getConnectorAllAsyncWithHttpInfo($limit, $offset, $contentType)
             ->then(
                 function ($response) {
@@ -1574,8 +1585,7 @@ class ConnectorsIntegrationsApi
         $limit = null,
         $offset = null,
         string $contentType = self::contentTypes['getConnectorAll'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetConnectorAll200Response';
         $request = $this->getConnectorAllRequest($limit, $offset, $contentType);
 
@@ -1595,12 +1605,13 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1629,8 +1640,7 @@ class ConnectorsIntegrationsApi
         $limit = null,
         $offset = null,
         string $contentType = self::contentTypes['getConnectorAll'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -1679,7 +1689,7 @@ class ConnectorsIntegrationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1696,7 +1706,7 @@ class ConnectorsIntegrationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1713,6 +1723,7 @@ class ConnectorsIntegrationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1736,9 +1747,9 @@ class ConnectorsIntegrationsApi
     public function getConnectorByProvider(
         string $provider,
         string $contentType = self::contentTypes['getConnectorByProvider'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetConnectorByProvider200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetConnectorByProvider200Response {
         list($response) = $this->getConnectorByProviderWithHttpInfo($provider, $contentType);
+
         return $response;
     }
 
@@ -1757,12 +1768,12 @@ class ConnectorsIntegrationsApi
     public function getConnectorByProviderWithHttpInfo(
         string $provider,
         string $contentType = self::contentTypes['getConnectorByProvider'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getConnectorByProviderRequest($provider, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1796,7 +1807,7 @@ class ConnectorsIntegrationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetConnectorByProvider200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1822,7 +1833,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetConnectorByProvider200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1849,7 +1860,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1876,7 +1887,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1905,7 +1916,7 @@ class ConnectorsIntegrationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1917,6 +1928,7 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1925,6 +1937,7 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -1933,8 +1946,10 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1953,8 +1968,7 @@ class ConnectorsIntegrationsApi
     public function getConnectorByProviderAsync(
         string $provider,
         string $contentType = self::contentTypes['getConnectorByProvider'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getConnectorByProviderAsyncWithHttpInfo($provider, $contentType)
             ->then(
                 function ($response) {
@@ -1977,8 +1991,7 @@ class ConnectorsIntegrationsApi
     public function getConnectorByProviderAsyncWithHttpInfo(
         $provider,
         string $contentType = self::contentTypes['getConnectorByProvider'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetConnectorByProvider200Response';
         $request = $this->getConnectorByProviderRequest($provider, $contentType);
 
@@ -1998,12 +2011,13 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2030,8 +2044,7 @@ class ConnectorsIntegrationsApi
     public function getConnectorByProviderRequest(
         $provider,
         string $contentType = self::contentTypes['getConnectorByProvider'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
@@ -2075,7 +2088,7 @@ class ConnectorsIntegrationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2092,7 +2105,7 @@ class ConnectorsIntegrationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2109,6 +2122,7 @@ class ConnectorsIntegrationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2134,9 +2148,9 @@ class ConnectorsIntegrationsApi
         string $provider,
         \JackWH\NylasV3\Administration\Model\UpdateConnectorByProviderRequest $update_connector_by_provider_request,
         string $contentType = self::contentTypes['updateConnectorByProvider'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetConnectorByProvider200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetConnectorByProvider200Response {
         list($response) = $this->updateConnectorByProviderWithHttpInfo($provider, $update_connector_by_provider_request, $contentType);
+
         return $response;
     }
 
@@ -2157,12 +2171,12 @@ class ConnectorsIntegrationsApi
         string $provider,
         \JackWH\NylasV3\Administration\Model\UpdateConnectorByProviderRequest $update_connector_by_provider_request,
         string $contentType = self::contentTypes['updateConnectorByProvider'][0]
-    ): array
-    {
+    ): array {
         $request = $this->updateConnectorByProviderRequest($provider, $update_connector_by_provider_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -2196,7 +2210,7 @@ class ConnectorsIntegrationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetConnectorByProvider200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -2222,7 +2236,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetConnectorByProvider200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2249,7 +2263,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2276,7 +2290,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2303,7 +2317,7 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2332,7 +2346,7 @@ class ConnectorsIntegrationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2344,6 +2358,7 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -2352,6 +2367,7 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -2360,6 +2376,7 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -2368,8 +2385,10 @@ class ConnectorsIntegrationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2390,8 +2409,7 @@ class ConnectorsIntegrationsApi
         string $provider,
         \JackWH\NylasV3\Administration\Model\UpdateConnectorByProviderRequest $update_connector_by_provider_request,
         string $contentType = self::contentTypes['updateConnectorByProvider'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->updateConnectorByProviderAsyncWithHttpInfo($provider, $update_connector_by_provider_request, $contentType)
             ->then(
                 function ($response) {
@@ -2416,8 +2434,7 @@ class ConnectorsIntegrationsApi
         $provider,
         $update_connector_by_provider_request,
         string $contentType = self::contentTypes['updateConnectorByProvider'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetConnectorByProvider200Response';
         $request = $this->updateConnectorByProviderRequest($provider, $update_connector_by_provider_request, $contentType);
 
@@ -2437,12 +2454,13 @@ class ConnectorsIntegrationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2471,8 +2489,7 @@ class ConnectorsIntegrationsApi
         $provider,
         $update_connector_by_provider_request,
         string $contentType = self::contentTypes['updateConnectorByProvider'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
@@ -2530,7 +2547,7 @@ class ConnectorsIntegrationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2547,7 +2564,7 @@ class ConnectorsIntegrationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2564,6 +2581,7 @@ class ConnectorsIntegrationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PATCH',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2583,7 +2601,7 @@ class ConnectorsIntegrationsApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

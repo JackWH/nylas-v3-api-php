@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Drafts1AttachmentsInner Class Doc Comment
@@ -62,7 +62,7 @@ class Drafts1AttachmentsInner implements ModelInterface, ArrayAccess, JsonSerial
         'content' => 'string',
         'content_type' => 'string',
         'content_id' => 'string',
-        'content_disposition' => 'string'
+        'content_disposition' => 'string',
     ];
 
     /**
@@ -75,7 +75,7 @@ class Drafts1AttachmentsInner implements ModelInterface, ArrayAccess, JsonSerial
         'content' => null,
         'content_type' => null,
         'content_id' => null,
-        'content_disposition' => null
+        'content_disposition' => null,
     ];
 
     /**
@@ -88,7 +88,7 @@ class Drafts1AttachmentsInner implements ModelInterface, ArrayAccess, JsonSerial
         'content' => false,
         'content_type' => false,
         'content_id' => false,
-        'content_disposition' => false
+        'content_disposition' => false,
     ];
 
     /**
@@ -181,7 +181,7 @@ class Drafts1AttachmentsInner implements ModelInterface, ArrayAccess, JsonSerial
         'content' => 'content',
         'content_type' => 'content_type',
         'content_id' => 'content_id',
-        'content_disposition' => 'content_disposition'
+        'content_disposition' => 'content_disposition',
     ];
 
     /**
@@ -194,7 +194,7 @@ class Drafts1AttachmentsInner implements ModelInterface, ArrayAccess, JsonSerial
         'content' => 'setContent',
         'content_type' => 'setContentType',
         'content_id' => 'setContentId',
-        'content_disposition' => 'setContentDisposition'
+        'content_disposition' => 'setContentDisposition',
     ];
 
     /**
@@ -207,7 +207,7 @@ class Drafts1AttachmentsInner implements ModelInterface, ArrayAccess, JsonSerial
         'content' => 'getContent',
         'content_type' => 'getContentType',
         'content_id' => 'getContentId',
-        'content_disposition' => 'getContentDisposition'
+        'content_disposition' => 'getContentDisposition',
     ];
 
     /**
@@ -313,7 +313,6 @@ class Drafts1AttachmentsInner implements ModelInterface, ArrayAccess, JsonSerial
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets filename
@@ -449,12 +448,13 @@ class Drafts1AttachmentsInner implements ModelInterface, ArrayAccess, JsonSerial
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -464,7 +464,7 @@ class Drafts1AttachmentsInner implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -494,7 +494,7 @@ class Drafts1AttachmentsInner implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -513,7 +513,7 @@ class Drafts1AttachmentsInner implements ModelInterface, ArrayAccess, JsonSerial
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -539,5 +539,3 @@ class Drafts1AttachmentsInner implements ModelInterface, ArrayAccess, JsonSerial
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

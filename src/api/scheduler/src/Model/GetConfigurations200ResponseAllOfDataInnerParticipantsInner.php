@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConfigurations200ResponseAllOfDataInnerParticipantsInner Class Doc Comment
@@ -63,7 +63,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInner implements Mod
         'is_organizer' => 'bool',
         'availability' => '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability',
         'booking' => '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerParticipantsInnerBooking',
-        'timezone' => 'string'
+        'timezone' => 'string',
     ];
 
     /**
@@ -77,7 +77,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInner implements Mod
         'is_organizer' => null,
         'availability' => null,
         'booking' => null,
-        'timezone' => null
+        'timezone' => null,
     ];
 
     /**
@@ -91,7 +91,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInner implements Mod
         'is_organizer' => false,
         'availability' => false,
         'booking' => false,
-        'timezone' => false
+        'timezone' => false,
     ];
 
     /**
@@ -185,7 +185,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInner implements Mod
         'is_organizer' => 'is_organizer',
         'availability' => 'availability',
         'booking' => 'booking',
-        'timezone' => 'timezone'
+        'timezone' => 'timezone',
     ];
 
     /**
@@ -199,7 +199,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInner implements Mod
         'is_organizer' => 'setIsOrganizer',
         'availability' => 'setAvailability',
         'booking' => 'setBooking',
-        'timezone' => 'setTimezone'
+        'timezone' => 'setTimezone',
     ];
 
     /**
@@ -213,7 +213,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInner implements Mod
         'is_organizer' => 'getIsOrganizer',
         'availability' => 'getAvailability',
         'booking' => 'getBooking',
-        'timezone' => 'getTimezone'
+        'timezone' => 'getTimezone',
     ];
 
     /**
@@ -310,6 +310,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInner implements Mod
         if ($this->container['email'] === null) {
             $invalidProperties[] = "'email' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -323,7 +324,6 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInner implements Mod
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets name
@@ -486,12 +486,13 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInner implements Mod
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -501,7 +502,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInner implements Mod
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -531,7 +532,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInner implements Mod
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -550,7 +551,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInner implements Mod
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -576,5 +577,3 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInner implements Mod
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

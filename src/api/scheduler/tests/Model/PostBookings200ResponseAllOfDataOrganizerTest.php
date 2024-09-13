@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class PostBookings200ResponseAllOfDataOrganizerTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

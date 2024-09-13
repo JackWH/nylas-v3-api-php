@@ -44,5 +44,3 @@ enum EventStatus: string
     case MAYBE = 'maybe';
 
 }
-
-

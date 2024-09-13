@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ContactGroup Class Doc Comment
@@ -63,7 +63,7 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => 'string',
         'name' => 'string',
         'object' => 'string',
-        'path' => 'string'
+        'path' => 'string',
     ];
 
     /**
@@ -77,7 +77,7 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => null,
         'name' => null,
         'object' => null,
-        'path' => null
+        'path' => null,
     ];
 
     /**
@@ -91,7 +91,7 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => false,
         'name' => false,
         'object' => false,
-        'path' => false
+        'path' => false,
     ];
 
     /**
@@ -185,7 +185,7 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => 'id',
         'name' => 'name',
         'object' => 'object',
-        'path' => 'path'
+        'path' => 'path',
     ];
 
     /**
@@ -199,7 +199,7 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => 'setId',
         'name' => 'setName',
         'object' => 'setObject',
-        'path' => 'setPath'
+        'path' => 'setPath',
     ];
 
     /**
@@ -213,7 +213,7 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => 'getId',
         'name' => 'getName',
         'object' => 'getObject',
-        'path' => 'getPath'
+        'path' => 'getPath',
     ];
 
     /**
@@ -325,7 +325,7 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
         $invalidProperties = [];
 
         $allowedValues = $this->getGroupTypeAllowableValues();
-        if (!is_null($this->container['group_type']) && !in_array($this->container['group_type'], $allowedValues, true)) {
+        if (! is_null($this->container['group_type']) && ! in_array($this->container['group_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'group_type', must be one of '%s'",
                 $this->container['group_type'],
@@ -333,7 +333,7 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
             );
         }
 
-        if (!is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
+        if (! is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
             $invalidProperties[] = "invalid value for 'id', the character length must be bigger than or equal to 1.";
         }
 
@@ -350,7 +350,6 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets grant_id
@@ -402,7 +401,7 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
             throw new InvalidArgumentException('non-nullable group_type cannot be null');
         }
         $allowedValues = $this->getGroupTypeAllowableValues();
-        if (!in_array($group_type, $allowedValues, true)) {
+        if (! in_array($group_type, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'group_type', must be one of '%s'",
@@ -528,12 +527,13 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -543,7 +543,7 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -573,7 +573,7 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -592,7 +592,7 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -618,5 +618,3 @@ class ContactGroup implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

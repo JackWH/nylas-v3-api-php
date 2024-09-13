@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PubsubInputPayload Class Doc Comment
@@ -61,7 +61,7 @@ class PubsubInputPayload implements ModelInterface, ArrayAccess, JsonSerializabl
         'description' => 'string',
         'trigger_types' => 'string[]',
         'topic' => 'string',
-        'notification_email_addresses' => 'string[]'
+        'notification_email_addresses' => 'string[]',
     ];
 
     /**
@@ -73,7 +73,7 @@ class PubsubInputPayload implements ModelInterface, ArrayAccess, JsonSerializabl
         'description' => null,
         'trigger_types' => null,
         'topic' => null,
-        'notification_email_addresses' => null
+        'notification_email_addresses' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class PubsubInputPayload implements ModelInterface, ArrayAccess, JsonSerializabl
         'description' => false,
         'trigger_types' => false,
         'topic' => false,
-        'notification_email_addresses' => false
+        'notification_email_addresses' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class PubsubInputPayload implements ModelInterface, ArrayAccess, JsonSerializabl
         'description' => 'description',
         'trigger_types' => 'trigger_types',
         'topic' => 'topic',
-        'notification_email_addresses' => 'notification_email_addresses'
+        'notification_email_addresses' => 'notification_email_addresses',
     ];
 
     /**
@@ -189,7 +189,7 @@ class PubsubInputPayload implements ModelInterface, ArrayAccess, JsonSerializabl
         'description' => 'setDescription',
         'trigger_types' => 'setTriggerTypes',
         'topic' => 'setTopic',
-        'notification_email_addresses' => 'setNotificationEmailAddresses'
+        'notification_email_addresses' => 'setNotificationEmailAddresses',
     ];
 
     /**
@@ -201,7 +201,7 @@ class PubsubInputPayload implements ModelInterface, ArrayAccess, JsonSerializabl
         'description' => 'getDescription',
         'trigger_types' => 'getTriggerTypes',
         'topic' => 'getTopic',
-        'notification_email_addresses' => 'getNotificationEmailAddresses'
+        'notification_email_addresses' => 'getNotificationEmailAddresses',
     ];
 
     /**
@@ -349,6 +349,7 @@ class PubsubInputPayload implements ModelInterface, ArrayAccess, JsonSerializabl
         if ($this->container['trigger_types'] === null) {
             $invalidProperties[] = "'trigger_types' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -362,7 +363,6 @@ class PubsubInputPayload implements ModelInterface, ArrayAccess, JsonSerializabl
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets description
@@ -480,12 +480,13 @@ class PubsubInputPayload implements ModelInterface, ArrayAccess, JsonSerializabl
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -495,7 +496,7 @@ class PubsubInputPayload implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -525,7 +526,7 @@ class PubsubInputPayload implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -544,7 +545,7 @@ class PubsubInputPayload implements ModelInterface, ArrayAccess, JsonSerializabl
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -570,5 +571,3 @@ class PubsubInputPayload implements ModelInterface, ArrayAccess, JsonSerializabl
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

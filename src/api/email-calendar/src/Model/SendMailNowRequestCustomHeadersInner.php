@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * SendMailNowRequestCustomHeadersInner Class Doc Comment
@@ -59,7 +59,7 @@ class SendMailNowRequestCustomHeadersInner implements ModelInterface, ArrayAcces
       */
     protected static array $openAPITypes = [
         'name' => 'string',
-        'value' => 'string'
+        'value' => 'string',
     ];
 
     /**
@@ -69,7 +69,7 @@ class SendMailNowRequestCustomHeadersInner implements ModelInterface, ArrayAcces
       */
     protected static array $openAPIFormats = [
         'name' => null,
-        'value' => null
+        'value' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class SendMailNowRequestCustomHeadersInner implements ModelInterface, ArrayAcces
       */
     protected static array $openAPINullables = [
         'name' => false,
-        'value' => false
+        'value' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class SendMailNowRequestCustomHeadersInner implements ModelInterface, ArrayAcces
      */
     protected static array $attributeMap = [
         'name' => 'name',
-        'value' => 'value'
+        'value' => 'value',
     ];
 
     /**
@@ -179,7 +179,7 @@ class SendMailNowRequestCustomHeadersInner implements ModelInterface, ArrayAcces
      */
     protected static array $setters = [
         'name' => 'setName',
-        'value' => 'setValue'
+        'value' => 'setValue',
     ];
 
     /**
@@ -189,7 +189,7 @@ class SendMailNowRequestCustomHeadersInner implements ModelInterface, ArrayAcces
      */
     protected static array $getters = [
         'name' => 'getName',
-        'value' => 'getValue'
+        'value' => 'getValue',
     ];
 
     /**
@@ -293,7 +293,6 @@ class SendMailNowRequestCustomHeadersInner implements ModelInterface, ArrayAcces
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets name
      *
@@ -347,12 +346,13 @@ class SendMailNowRequestCustomHeadersInner implements ModelInterface, ArrayAcces
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -362,7 +362,7 @@ class SendMailNowRequestCustomHeadersInner implements ModelInterface, ArrayAcces
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -392,7 +392,7 @@ class SendMailNowRequestCustomHeadersInner implements ModelInterface, ArrayAcces
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -411,7 +411,7 @@ class SendMailNowRequestCustomHeadersInner implements ModelInterface, ArrayAcces
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -437,5 +437,3 @@ class SendMailNowRequestCustomHeadersInner implements ModelInterface, ArrayAcces
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

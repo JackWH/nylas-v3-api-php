@@ -28,15 +28,15 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Attachment Class Doc Comment
  *
- * @description 
+ * @description
  * @package  JackWH\NylasV3\EmailCalendar
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -62,7 +62,7 @@ class Attachment implements ModelInterface, ArrayAccess, JsonSerializable
         'content_type' => 'string',
         'filename' => 'string',
         'content_id' => 'string',
-        'content_disposition' => 'string'
+        'content_disposition' => 'string',
     ];
 
     /**
@@ -74,7 +74,7 @@ class Attachment implements ModelInterface, ArrayAccess, JsonSerializable
         'content_type' => null,
         'filename' => null,
         'content_id' => null,
-        'content_disposition' => null
+        'content_disposition' => null,
     ];
 
     /**
@@ -86,7 +86,7 @@ class Attachment implements ModelInterface, ArrayAccess, JsonSerializable
         'content_type' => false,
         'filename' => false,
         'content_id' => false,
-        'content_disposition' => false
+        'content_disposition' => false,
     ];
 
     /**
@@ -178,7 +178,7 @@ class Attachment implements ModelInterface, ArrayAccess, JsonSerializable
         'content_type' => 'content_type',
         'filename' => 'filename',
         'content_id' => 'content_id',
-        'content_disposition' => 'content_disposition'
+        'content_disposition' => 'content_disposition',
     ];
 
     /**
@@ -190,7 +190,7 @@ class Attachment implements ModelInterface, ArrayAccess, JsonSerializable
         'content_type' => 'setContentType',
         'filename' => 'setFilename',
         'content_id' => 'setContentId',
-        'content_disposition' => 'setContentDisposition'
+        'content_disposition' => 'setContentDisposition',
     ];
 
     /**
@@ -202,7 +202,7 @@ class Attachment implements ModelInterface, ArrayAccess, JsonSerializable
         'content_type' => 'getContentType',
         'filename' => 'getFilename',
         'content_id' => 'getContentId',
-        'content_disposition' => 'getContentDisposition'
+        'content_disposition' => 'getContentDisposition',
     ];
 
     /**
@@ -294,11 +294,11 @@ class Attachment implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['content_type']) && (mb_strlen($this->container['content_type']) < 1)) {
+        if (! is_null($this->container['content_type']) && (mb_strlen($this->container['content_type']) < 1)) {
             $invalidProperties[] = "invalid value for 'content_type', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['filename']) && (mb_strlen($this->container['filename']) < 1)) {
+        if (! is_null($this->container['filename']) && (mb_strlen($this->container['filename']) < 1)) {
             $invalidProperties[] = "invalid value for 'filename', the character length must be bigger than or equal to 1.";
         }
 
@@ -315,7 +315,6 @@ class Attachment implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets content_type
@@ -434,12 +433,13 @@ class Attachment implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -449,7 +449,7 @@ class Attachment implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -479,7 +479,7 @@ class Attachment implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -498,7 +498,7 @@ class Attachment implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -524,5 +524,3 @@ class Attachment implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

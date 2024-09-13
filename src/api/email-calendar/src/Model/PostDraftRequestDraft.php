@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PostDraftRequestDraft Class Doc Comment
@@ -67,7 +67,7 @@ class PostDraftRequestDraft implements ModelInterface, ArrayAccess, JsonSerializ
         'subject' => 'string',
         'thread_id' => 'string',
         'to' => '\JackWH\NylasV3\EmailCalendar\Model\MessageParticipant[]',
-        'custom_headers' => '\JackWH\NylasV3\EmailCalendar\Model\SendMailNowRequestCustomHeadersInner[]'
+        'custom_headers' => '\JackWH\NylasV3\EmailCalendar\Model\SendMailNowRequestCustomHeadersInner[]',
     ];
 
     /**
@@ -84,7 +84,7 @@ class PostDraftRequestDraft implements ModelInterface, ArrayAccess, JsonSerializ
         'subject' => null,
         'thread_id' => null,
         'to' => null,
-        'custom_headers' => null
+        'custom_headers' => null,
     ];
 
     /**
@@ -101,7 +101,7 @@ class PostDraftRequestDraft implements ModelInterface, ArrayAccess, JsonSerializ
         'subject' => false,
         'thread_id' => false,
         'to' => false,
-        'custom_headers' => false
+        'custom_headers' => false,
     ];
 
     /**
@@ -198,7 +198,7 @@ class PostDraftRequestDraft implements ModelInterface, ArrayAccess, JsonSerializ
         'subject' => 'subject',
         'thread_id' => 'thread_id',
         'to' => 'to',
-        'custom_headers' => 'custom_headers'
+        'custom_headers' => 'custom_headers',
     ];
 
     /**
@@ -215,7 +215,7 @@ class PostDraftRequestDraft implements ModelInterface, ArrayAccess, JsonSerializ
         'subject' => 'setSubject',
         'thread_id' => 'setThreadId',
         'to' => 'setTo',
-        'custom_headers' => 'setCustomHeaders'
+        'custom_headers' => 'setCustomHeaders',
     ];
 
     /**
@@ -232,7 +232,7 @@ class PostDraftRequestDraft implements ModelInterface, ArrayAccess, JsonSerializ
         'subject' => 'getSubject',
         'thread_id' => 'getThreadId',
         'to' => 'getTo',
-        'custom_headers' => 'getCustomHeaders'
+        'custom_headers' => 'getCustomHeaders',
     ];
 
     /**
@@ -342,7 +342,6 @@ class PostDraftRequestDraft implements ModelInterface, ArrayAccess, JsonSerializ
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets bcc
@@ -594,12 +593,13 @@ class PostDraftRequestDraft implements ModelInterface, ArrayAccess, JsonSerializ
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -609,7 +609,7 @@ class PostDraftRequestDraft implements ModelInterface, ArrayAccess, JsonSerializ
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -639,7 +639,7 @@ class PostDraftRequestDraft implements ModelInterface, ArrayAccess, JsonSerializ
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -658,7 +658,7 @@ class PostDraftRequestDraft implements ModelInterface, ArrayAccess, JsonSerializ
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -684,5 +684,3 @@ class PostDraftRequestDraft implements ModelInterface, ArrayAccess, JsonSerializ
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

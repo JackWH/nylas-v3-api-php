@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CustomAuthFlowRequest Class Doc Comment
@@ -61,7 +61,7 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
         'provider' => 'string',
         'settings' => '\JackWH\NylasV3\Administration\Model\CustomAuthFlowRequestOneOf8Settings',
         'scope' => 'string[]',
-        'state' => 'string'
+        'state' => 'string',
     ];
 
     /**
@@ -73,7 +73,7 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
         'provider' => null,
         'settings' => null,
         'scope' => null,
-        'state' => null
+        'state' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
         'provider' => false,
         'settings' => false,
         'scope' => false,
-        'state' => false
+        'state' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
         'provider' => 'provider',
         'settings' => 'settings',
         'scope' => 'scope',
-        'state' => 'state'
+        'state' => 'state',
     ];
 
     /**
@@ -189,7 +189,7 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
         'provider' => 'setProvider',
         'settings' => 'setSettings',
         'scope' => 'setScope',
-        'state' => 'setState'
+        'state' => 'setState',
     ];
 
     /**
@@ -201,7 +201,7 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
         'provider' => 'getProvider',
         'settings' => 'getSettings',
         'scope' => 'getScope',
-        'state' => 'getState'
+        'state' => 'getState',
     ];
 
     /**
@@ -310,7 +310,7 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
             $invalidProperties[] = "'provider' can't be null";
         }
         $allowedValues = $this->getProviderAllowableValues();
-        if (!is_null($this->container['provider']) && !in_array($this->container['provider'], $allowedValues, true)) {
+        if (! is_null($this->container['provider']) && ! in_array($this->container['provider'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'provider', must be one of '%s'",
                 $this->container['provider'],
@@ -321,6 +321,7 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
         if ($this->container['settings'] === null) {
             $invalidProperties[] = "'settings' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -334,7 +335,6 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets provider
@@ -359,7 +359,7 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
             throw new InvalidArgumentException('non-nullable provider cannot be null');
         }
         $allowedValues = $this->getProviderAllowableValues();
-        if (!in_array($provider, $allowedValues, true)) {
+        if (! in_array($provider, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'provider', must be one of '%s'",
@@ -453,12 +453,13 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -468,7 +469,7 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -498,7 +499,7 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -517,7 +518,7 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -543,5 +544,3 @@ class CustomAuthFlowRequest implements ModelInterface, ArrayAccess, JsonSerializ
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

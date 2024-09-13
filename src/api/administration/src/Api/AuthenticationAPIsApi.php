@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Administration\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Administration\ApiException;
 use JackWH\NylasV3\Administration\Configuration;
 use JackWH\NylasV3\Administration\HeaderSelector;
@@ -69,7 +69,7 @@ class AuthenticationAPIsApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'customAuthFlow' => [
             'application/json',
@@ -149,9 +149,9 @@ class AuthenticationAPIsApi
     public function customAuthFlow(
         \JackWH\NylasV3\Administration\Model\CustomAuthFlowRequest $custom_auth_flow_request,
         string $contentType = self::contentTypes['customAuthFlow'][0]
-    ): \JackWH\NylasV3\Administration\Model\CustomAuthFlow201Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\CustomAuthFlow201Response {
         list($response) = $this->customAuthFlowWithHttpInfo($custom_auth_flow_request, $contentType);
+
         return $response;
     }
 
@@ -170,12 +170,12 @@ class AuthenticationAPIsApi
     public function customAuthFlowWithHttpInfo(
         \JackWH\NylasV3\Administration\Model\CustomAuthFlowRequest $custom_auth_flow_request,
         string $contentType = self::contentTypes['customAuthFlow'][0]
-    ): array
-    {
+    ): array {
         $request = $this->customAuthFlowRequest($custom_auth_flow_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -209,7 +209,7 @@ class AuthenticationAPIsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 201:
                     if (in_array('\JackWH\NylasV3\Administration\Model\CustomAuthFlow201Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -235,7 +235,7 @@ class AuthenticationAPIsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\CustomAuthFlow201Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -262,7 +262,7 @@ class AuthenticationAPIsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -289,7 +289,7 @@ class AuthenticationAPIsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -318,7 +318,7 @@ class AuthenticationAPIsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -330,6 +330,7 @@ class AuthenticationAPIsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -338,6 +339,7 @@ class AuthenticationAPIsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -346,8 +348,10 @@ class AuthenticationAPIsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -366,8 +370,7 @@ class AuthenticationAPIsApi
     public function customAuthFlowAsync(
         \JackWH\NylasV3\Administration\Model\CustomAuthFlowRequest $custom_auth_flow_request,
         string $contentType = self::contentTypes['customAuthFlow'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->customAuthFlowAsyncWithHttpInfo($custom_auth_flow_request, $contentType)
             ->then(
                 function ($response) {
@@ -390,8 +393,7 @@ class AuthenticationAPIsApi
     public function customAuthFlowAsyncWithHttpInfo(
         $custom_auth_flow_request,
         string $contentType = self::contentTypes['customAuthFlow'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\CustomAuthFlow201Response';
         $request = $this->customAuthFlowRequest($custom_auth_flow_request, $contentType);
 
@@ -411,12 +413,13 @@ class AuthenticationAPIsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -443,8 +446,7 @@ class AuthenticationAPIsApi
     public function customAuthFlowRequest(
         $custom_auth_flow_request,
         string $contentType = self::contentTypes['customAuthFlow'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'custom_auth_flow_request' is set
         if ($custom_auth_flow_request === null || (is_array($custom_auth_flow_request) && count($custom_auth_flow_request) === 0)) {
@@ -487,7 +489,7 @@ class AuthenticationAPIsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -504,7 +506,7 @@ class AuthenticationAPIsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -521,6 +523,7 @@ class AuthenticationAPIsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -544,9 +547,9 @@ class AuthenticationAPIsApi
     public function exchangeOauth2Token(
         \JackWH\NylasV3\Administration\Model\ExchangeOauth2TokenRequest $exchange_oauth2_token_request,
         string $contentType = self::contentTypes['exchangeOauth2Token'][0]
-    ): \JackWH\NylasV3\Administration\Model\Data
-    {
+    ): \JackWH\NylasV3\Administration\Model\Data {
         list($response) = $this->exchangeOauth2TokenWithHttpInfo($exchange_oauth2_token_request, $contentType);
+
         return $response;
     }
 
@@ -565,12 +568,12 @@ class AuthenticationAPIsApi
     public function exchangeOauth2TokenWithHttpInfo(
         \JackWH\NylasV3\Administration\Model\ExchangeOauth2TokenRequest $exchange_oauth2_token_request,
         string $contentType = self::contentTypes['exchangeOauth2Token'][0]
-    ): array
-    {
+    ): array {
         $request = $this->exchangeOauth2TokenRequest($exchange_oauth2_token_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -604,7 +607,7 @@ class AuthenticationAPIsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\Data', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -630,7 +633,7 @@ class AuthenticationAPIsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\Data', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\Data1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -657,7 +660,7 @@ class AuthenticationAPIsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\Data1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -686,7 +689,7 @@ class AuthenticationAPIsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -698,6 +701,7 @@ class AuthenticationAPIsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -706,8 +710,10 @@ class AuthenticationAPIsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -726,8 +732,7 @@ class AuthenticationAPIsApi
     public function exchangeOauth2TokenAsync(
         \JackWH\NylasV3\Administration\Model\ExchangeOauth2TokenRequest $exchange_oauth2_token_request,
         string $contentType = self::contentTypes['exchangeOauth2Token'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->exchangeOauth2TokenAsyncWithHttpInfo($exchange_oauth2_token_request, $contentType)
             ->then(
                 function ($response) {
@@ -750,8 +755,7 @@ class AuthenticationAPIsApi
     public function exchangeOauth2TokenAsyncWithHttpInfo(
         $exchange_oauth2_token_request,
         string $contentType = self::contentTypes['exchangeOauth2Token'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\Data';
         $request = $this->exchangeOauth2TokenRequest($exchange_oauth2_token_request, $contentType);
 
@@ -771,12 +775,13 @@ class AuthenticationAPIsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -803,8 +808,7 @@ class AuthenticationAPIsApi
     public function exchangeOauth2TokenRequest(
         $exchange_oauth2_token_request,
         string $contentType = self::contentTypes['exchangeOauth2Token'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'exchange_oauth2_token_request' is set
         if ($exchange_oauth2_token_request === null || (is_array($exchange_oauth2_token_request) && count($exchange_oauth2_token_request) === 0)) {
@@ -847,7 +851,7 @@ class AuthenticationAPIsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -864,11 +868,11 @@ class AuthenticationAPIsApi
         }
 
         // this endpoint requires Bearer (Access token) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -885,6 +889,7 @@ class AuthenticationAPIsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -930,8 +935,7 @@ class AuthenticationAPIsApi
         ?string $code_challenge_method = 'plain',
         ?string $credential_id = null,
         string $contentType = self::contentTypes['getOauth2Flow'][0]
-    ): void
-    {
+    ): void {
         $this->getOauth2FlowWithHttpInfo($client_id, $redirect_uri, $response_type, $provider, $scope, $prompt, $state, $login_hint, $access_type, $code_challenge, $code_challenge_method, $credential_id, $contentType);
     }
 
@@ -972,12 +976,12 @@ class AuthenticationAPIsApi
         ?string $code_challenge_method = 'plain',
         ?string $credential_id = null,
         string $contentType = self::contentTypes['getOauth2Flow'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getOauth2FlowRequest($client_id, $redirect_uri, $response_type, $provider, $scope, $prompt, $state, $login_hint, $access_type, $code_challenge, $code_challenge_method, $credential_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1016,6 +1020,7 @@ class AuthenticationAPIsApi
         } catch (ApiException $e) {
             switch ($e->getCode()) {
             }
+
             throw $e;
         }
     }
@@ -1056,8 +1061,7 @@ class AuthenticationAPIsApi
         ?string $code_challenge_method = 'plain',
         ?string $credential_id = null,
         string $contentType = self::contentTypes['getOauth2Flow'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getOauth2FlowAsyncWithHttpInfo($client_id, $redirect_uri, $response_type, $provider, $scope, $prompt, $state, $login_hint, $access_type, $code_challenge, $code_challenge_method, $credential_id, $contentType)
             ->then(
                 function ($response) {
@@ -1102,8 +1106,7 @@ class AuthenticationAPIsApi
         $code_challenge_method = 'plain',
         $credential_id = null,
         string $contentType = self::contentTypes['getOauth2Flow'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '';
         $request = $this->getOauth2FlowRequest($client_id, $redirect_uri, $response_type, $provider, $scope, $prompt, $state, $login_hint, $access_type, $code_challenge, $code_challenge_method, $credential_id, $contentType);
 
@@ -1116,6 +1119,7 @@ class AuthenticationAPIsApi
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1164,8 +1168,7 @@ class AuthenticationAPIsApi
         $code_challenge_method = 'plain',
         $credential_id = null,
         string $contentType = self::contentTypes['getOauth2Flow'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'client_id' is set
         if ($client_id === null || (is_array($client_id) && count($client_id) === 0)) {
@@ -1332,7 +1335,7 @@ class AuthenticationAPIsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1349,11 +1352,11 @@ class AuthenticationAPIsApi
         }
 
         // this endpoint requires Bearer (Access token) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1370,6 +1373,7 @@ class AuthenticationAPIsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1395,9 +1399,9 @@ class AuthenticationAPIsApi
         ?string $id_token = null,
         ?string $access_token = null,
         string $contentType = self::contentTypes['infoOauth2Token'][0]
-    ): \JackWH\NylasV3\Administration\Model\InfoOauth2Token200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\InfoOauth2Token200Response {
         list($response) = $this->infoOauth2TokenWithHttpInfo($id_token, $access_token, $contentType);
+
         return $response;
     }
 
@@ -1418,12 +1422,12 @@ class AuthenticationAPIsApi
         ?string $id_token = null,
         ?string $access_token = null,
         string $contentType = self::contentTypes['infoOauth2Token'][0]
-    ): array
-    {
+    ): array {
         $request = $this->infoOauth2TokenRequest($id_token, $access_token, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1457,7 +1461,7 @@ class AuthenticationAPIsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\InfoOauth2Token200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1483,7 +1487,7 @@ class AuthenticationAPIsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\InfoOauth2Token200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\Data2', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1510,7 +1514,7 @@ class AuthenticationAPIsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\Data2', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1539,7 +1543,7 @@ class AuthenticationAPIsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1551,6 +1555,7 @@ class AuthenticationAPIsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1559,8 +1564,10 @@ class AuthenticationAPIsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1581,8 +1588,7 @@ class AuthenticationAPIsApi
         ?string $id_token = null,
         ?string $access_token = null,
         string $contentType = self::contentTypes['infoOauth2Token'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->infoOauth2TokenAsyncWithHttpInfo($id_token, $access_token, $contentType)
             ->then(
                 function ($response) {
@@ -1607,8 +1613,7 @@ class AuthenticationAPIsApi
         $id_token = null,
         $access_token = null,
         string $contentType = self::contentTypes['infoOauth2Token'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\InfoOauth2Token200Response';
         $request = $this->infoOauth2TokenRequest($id_token, $access_token, $contentType);
 
@@ -1628,12 +1633,13 @@ class AuthenticationAPIsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1662,8 +1668,7 @@ class AuthenticationAPIsApi
         $id_token = null,
         $access_token = null,
         string $contentType = self::contentTypes['infoOauth2Token'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -1712,7 +1717,7 @@ class AuthenticationAPIsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1729,11 +1734,11 @@ class AuthenticationAPIsApi
         }
 
         // this endpoint requires Bearer (Access token) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1750,6 +1755,7 @@ class AuthenticationAPIsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1773,9 +1779,9 @@ class AuthenticationAPIsApi
     public function revokeOauth2TokenAndGrant(
         string $token,
         string $contentType = self::contentTypes['revokeOauth2TokenAndGrant'][0]
-    ): object
-    {
+    ): object {
         list($response) = $this->revokeOauth2TokenAndGrantWithHttpInfo($token, $contentType);
+
         return $response;
     }
 
@@ -1794,12 +1800,12 @@ class AuthenticationAPIsApi
     public function revokeOauth2TokenAndGrantWithHttpInfo(
         string $token,
         string $contentType = self::contentTypes['revokeOauth2TokenAndGrant'][0]
-    ): array
-    {
+    ): array {
         $request = $this->revokeOauth2TokenAndGrantRequest($token, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1833,7 +1839,7 @@ class AuthenticationAPIsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('object', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1859,7 +1865,7 @@ class AuthenticationAPIsApi
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\Data2', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1886,7 +1892,7 @@ class AuthenticationAPIsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\Data2', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1915,7 +1921,7 @@ class AuthenticationAPIsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1927,6 +1933,7 @@ class AuthenticationAPIsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1935,8 +1942,10 @@ class AuthenticationAPIsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1955,8 +1964,7 @@ class AuthenticationAPIsApi
     public function revokeOauth2TokenAndGrantAsync(
         string $token,
         string $contentType = self::contentTypes['revokeOauth2TokenAndGrant'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->revokeOauth2TokenAndGrantAsyncWithHttpInfo($token, $contentType)
             ->then(
                 function ($response) {
@@ -1979,8 +1987,7 @@ class AuthenticationAPIsApi
     public function revokeOauth2TokenAndGrantAsyncWithHttpInfo(
         $token,
         string $contentType = self::contentTypes['revokeOauth2TokenAndGrant'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = 'object';
         $request = $this->revokeOauth2TokenAndGrantRequest($token, $contentType);
 
@@ -2000,12 +2007,13 @@ class AuthenticationAPIsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2032,8 +2040,7 @@ class AuthenticationAPIsApi
     public function revokeOauth2TokenAndGrantRequest(
         $token,
         string $contentType = self::contentTypes['revokeOauth2TokenAndGrant'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'token' is set
         if ($token === null || (is_array($token) && count($token) === 0)) {
@@ -2078,7 +2085,7 @@ class AuthenticationAPIsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2095,11 +2102,11 @@ class AuthenticationAPIsApi
         }
 
         // this endpoint requires Bearer (Access token) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2116,6 +2123,7 @@ class AuthenticationAPIsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2135,7 +2143,7 @@ class AuthenticationAPIsApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

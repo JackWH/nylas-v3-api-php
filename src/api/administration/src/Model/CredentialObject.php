@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CredentialObject Class Doc Comment
@@ -61,7 +61,7 @@ class CredentialObject implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => 'string',
         'name' => 'string',
         'created_at' => 'int',
-        'updated_at' => 'int'
+        'updated_at' => 'int',
     ];
 
     /**
@@ -73,7 +73,7 @@ class CredentialObject implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => null,
         'name' => null,
         'created_at' => null,
-        'updated_at' => null
+        'updated_at' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class CredentialObject implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => false,
         'name' => false,
         'created_at' => false,
-        'updated_at' => false
+        'updated_at' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class CredentialObject implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => 'id',
         'name' => 'name',
         'created_at' => 'created_at',
-        'updated_at' => 'updated_at'
+        'updated_at' => 'updated_at',
     ];
 
     /**
@@ -189,7 +189,7 @@ class CredentialObject implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => 'setId',
         'name' => 'setName',
         'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'updated_at' => 'setUpdatedAt',
     ];
 
     /**
@@ -201,7 +201,7 @@ class CredentialObject implements ModelInterface, ArrayAccess, JsonSerializable
         'id' => 'getId',
         'name' => 'getName',
         'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'updated_at' => 'getUpdatedAt',
     ];
 
     /**
@@ -305,6 +305,7 @@ class CredentialObject implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['updated_at'] === null) {
             $invalidProperties[] = "'updated_at' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -318,7 +319,6 @@ class CredentialObject implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets id
@@ -427,12 +427,13 @@ class CredentialObject implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -442,7 +443,7 @@ class CredentialObject implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -472,7 +473,7 @@ class CredentialObject implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -491,7 +492,7 @@ class CredentialObject implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -517,5 +518,3 @@ class CredentialObject implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

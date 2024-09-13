@@ -28,15 +28,15 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAddress Class Doc Comment
  *
- * @description 
+ * @description
  * @package  JackWH\NylasV3\EmailCalendar
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -63,7 +63,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAdd
         'postal_code' => 'string',
         'state_province_code' => 'string',
         'country_code' => 'string',
-        'country_name' => 'string'
+        'country_name' => 'string',
     ];
 
     /**
@@ -76,7 +76,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAdd
         'postal_code' => null,
         'state_province_code' => null,
         'country_code' => null,
-        'country_name' => null
+        'country_name' => null,
     ];
 
     /**
@@ -89,7 +89,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAdd
         'postal_code' => false,
         'state_province_code' => false,
         'country_code' => false,
-        'country_name' => false
+        'country_name' => false,
     ];
 
     /**
@@ -182,7 +182,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAdd
         'postal_code' => 'postal_code',
         'state_province_code' => 'state_province_code',
         'country_code' => 'country_code',
-        'country_name' => 'country_name'
+        'country_name' => 'country_name',
     ];
 
     /**
@@ -195,7 +195,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAdd
         'postal_code' => 'setPostalCode',
         'state_province_code' => 'setStateProvinceCode',
         'country_code' => 'setCountryCode',
-        'country_name' => 'setCountryName'
+        'country_name' => 'setCountryName',
     ];
 
     /**
@@ -208,7 +208,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAdd
         'postal_code' => 'getPostalCode',
         'state_province_code' => 'getStateProvinceCode',
         'country_code' => 'getCountryCode',
-        'country_name' => 'getCountryName'
+        'country_name' => 'getCountryName',
     ];
 
     /**
@@ -316,6 +316,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAdd
         if ($this->container['country_name'] === null) {
             $invalidProperties[] = "'country_name' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -329,7 +330,6 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAdd
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets city
@@ -465,12 +465,13 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAdd
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -480,7 +481,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAdd
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -510,7 +511,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAdd
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -529,7 +530,7 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAdd
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -555,5 +556,3 @@ class GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAdd
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

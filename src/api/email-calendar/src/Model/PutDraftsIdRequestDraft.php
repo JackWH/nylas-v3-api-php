@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PutDraftsIdRequestDraft Class Doc Comment
@@ -66,7 +66,7 @@ class PutDraftsIdRequestDraft implements ModelInterface, ArrayAccess, JsonSerial
         'starred' => 'bool',
         'subject' => 'string',
         'thread_id' => 'string',
-        'to' => '\JackWH\NylasV3\EmailCalendar\Model\MessageParticipant[]'
+        'to' => '\JackWH\NylasV3\EmailCalendar\Model\MessageParticipant[]',
     ];
 
     /**
@@ -82,7 +82,7 @@ class PutDraftsIdRequestDraft implements ModelInterface, ArrayAccess, JsonSerial
         'starred' => null,
         'subject' => null,
         'thread_id' => null,
-        'to' => null
+        'to' => null,
     ];
 
     /**
@@ -98,7 +98,7 @@ class PutDraftsIdRequestDraft implements ModelInterface, ArrayAccess, JsonSerial
         'starred' => false,
         'subject' => false,
         'thread_id' => false,
-        'to' => false
+        'to' => false,
     ];
 
     /**
@@ -194,7 +194,7 @@ class PutDraftsIdRequestDraft implements ModelInterface, ArrayAccess, JsonSerial
         'starred' => 'starred',
         'subject' => 'subject',
         'thread_id' => 'thread_id',
-        'to' => 'to'
+        'to' => 'to',
     ];
 
     /**
@@ -210,7 +210,7 @@ class PutDraftsIdRequestDraft implements ModelInterface, ArrayAccess, JsonSerial
         'starred' => 'setStarred',
         'subject' => 'setSubject',
         'thread_id' => 'setThreadId',
-        'to' => 'setTo'
+        'to' => 'setTo',
     ];
 
     /**
@@ -226,7 +226,7 @@ class PutDraftsIdRequestDraft implements ModelInterface, ArrayAccess, JsonSerial
         'starred' => 'getStarred',
         'subject' => 'getSubject',
         'thread_id' => 'getThreadId',
-        'to' => 'getTo'
+        'to' => 'getTo',
     ];
 
     /**
@@ -335,7 +335,6 @@ class PutDraftsIdRequestDraft implements ModelInterface, ArrayAccess, JsonSerial
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets bcc
@@ -560,12 +559,13 @@ class PutDraftsIdRequestDraft implements ModelInterface, ArrayAccess, JsonSerial
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -575,7 +575,7 @@ class PutDraftsIdRequestDraft implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -605,7 +605,7 @@ class PutDraftsIdRequestDraft implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -624,7 +624,7 @@ class PutDraftsIdRequestDraft implements ModelInterface, ArrayAccess, JsonSerial
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -650,5 +650,3 @@ class PutDraftsIdRequestDraft implements ModelInterface, ArrayAccess, JsonSerial
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

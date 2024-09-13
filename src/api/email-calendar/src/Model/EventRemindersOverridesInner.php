@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * EventRemindersOverridesInner Class Doc Comment
@@ -59,7 +59,7 @@ class EventRemindersOverridesInner implements ModelInterface, ArrayAccess, JsonS
       */
     protected static array $openAPITypes = [
         'reminder_minutes' => 'int',
-        'reminder_method' => 'string'
+        'reminder_method' => 'string',
     ];
 
     /**
@@ -69,7 +69,7 @@ class EventRemindersOverridesInner implements ModelInterface, ArrayAccess, JsonS
       */
     protected static array $openAPIFormats = [
         'reminder_minutes' => null,
-        'reminder_method' => null
+        'reminder_method' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class EventRemindersOverridesInner implements ModelInterface, ArrayAccess, JsonS
       */
     protected static array $openAPINullables = [
         'reminder_minutes' => false,
-        'reminder_method' => false
+        'reminder_method' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class EventRemindersOverridesInner implements ModelInterface, ArrayAccess, JsonS
      */
     protected static array $attributeMap = [
         'reminder_minutes' => 'reminder_minutes',
-        'reminder_method' => 'reminder_method'
+        'reminder_method' => 'reminder_method',
     ];
 
     /**
@@ -179,7 +179,7 @@ class EventRemindersOverridesInner implements ModelInterface, ArrayAccess, JsonS
      */
     protected static array $setters = [
         'reminder_minutes' => 'setReminderMinutes',
-        'reminder_method' => 'setReminderMethod'
+        'reminder_method' => 'setReminderMethod',
     ];
 
     /**
@@ -189,7 +189,7 @@ class EventRemindersOverridesInner implements ModelInterface, ArrayAccess, JsonS
      */
     protected static array $getters = [
         'reminder_minutes' => 'getReminderMinutes',
-        'reminder_method' => 'getReminderMethod'
+        'reminder_method' => 'getReminderMethod',
     ];
 
     /**
@@ -299,7 +299,7 @@ class EventRemindersOverridesInner implements ModelInterface, ArrayAccess, JsonS
         $invalidProperties = [];
 
         $allowedValues = $this->getReminderMethodAllowableValues();
-        if (!is_null($this->container['reminder_method']) && !in_array($this->container['reminder_method'], $allowedValues, true)) {
+        if (! is_null($this->container['reminder_method']) && ! in_array($this->container['reminder_method'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'reminder_method', must be one of '%s'",
                 $this->container['reminder_method'],
@@ -320,7 +320,6 @@ class EventRemindersOverridesInner implements ModelInterface, ArrayAccess, JsonS
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets reminder_minutes
@@ -372,7 +371,7 @@ class EventRemindersOverridesInner implements ModelInterface, ArrayAccess, JsonS
             throw new InvalidArgumentException('non-nullable reminder_method cannot be null');
         }
         $allowedValues = $this->getReminderMethodAllowableValues();
-        if (!in_array($reminder_method, $allowedValues, true)) {
+        if (! in_array($reminder_method, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'reminder_method', must be one of '%s'",
@@ -385,12 +384,13 @@ class EventRemindersOverridesInner implements ModelInterface, ArrayAccess, JsonS
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -400,7 +400,7 @@ class EventRemindersOverridesInner implements ModelInterface, ArrayAccess, JsonS
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -430,7 +430,7 @@ class EventRemindersOverridesInner implements ModelInterface, ArrayAccess, JsonS
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -449,7 +449,7 @@ class EventRemindersOverridesInner implements ModelInterface, ArrayAccess, JsonS
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -475,5 +475,3 @@ class EventRemindersOverridesInner implements ModelInterface, ArrayAccess, JsonS
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

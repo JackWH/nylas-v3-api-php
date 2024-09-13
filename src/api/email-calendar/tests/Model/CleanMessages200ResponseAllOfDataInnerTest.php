@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class CleanMessages200ResponseAllOfDataInnerTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ListContactGroups200Response Class Doc Comment
@@ -60,7 +60,7 @@ class ListContactGroups200Response implements ModelInterface, ArrayAccess, JsonS
     protected static array $openAPITypes = [
         'request_id' => 'string',
         'data' => '\JackWH\NylasV3\EmailCalendar\Model\ContactGroup[]',
-        'next_cursor' => 'string'
+        'next_cursor' => 'string',
     ];
 
     /**
@@ -71,7 +71,7 @@ class ListContactGroups200Response implements ModelInterface, ArrayAccess, JsonS
     protected static array $openAPIFormats = [
         'request_id' => null,
         'data' => null,
-        'next_cursor' => null
+        'next_cursor' => null,
     ];
 
     /**
@@ -82,7 +82,7 @@ class ListContactGroups200Response implements ModelInterface, ArrayAccess, JsonS
     protected static array $openAPINullables = [
         'request_id' => false,
         'data' => false,
-        'next_cursor' => false
+        'next_cursor' => false,
     ];
 
     /**
@@ -173,7 +173,7 @@ class ListContactGroups200Response implements ModelInterface, ArrayAccess, JsonS
     protected static array $attributeMap = [
         'request_id' => 'request_id',
         'data' => 'data',
-        'next_cursor' => 'next_cursor'
+        'next_cursor' => 'next_cursor',
     ];
 
     /**
@@ -184,7 +184,7 @@ class ListContactGroups200Response implements ModelInterface, ArrayAccess, JsonS
     protected static array $setters = [
         'request_id' => 'setRequestId',
         'data' => 'setData',
-        'next_cursor' => 'setNextCursor'
+        'next_cursor' => 'setNextCursor',
     ];
 
     /**
@@ -195,7 +195,7 @@ class ListContactGroups200Response implements ModelInterface, ArrayAccess, JsonS
     protected static array $getters = [
         'request_id' => 'getRequestId',
         'data' => 'getData',
-        'next_cursor' => 'getNextCursor'
+        'next_cursor' => 'getNextCursor',
     ];
 
     /**
@@ -300,7 +300,6 @@ class ListContactGroups200Response implements ModelInterface, ArrayAccess, JsonS
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets request_id
      *
@@ -381,12 +380,13 @@ class ListContactGroups200Response implements ModelInterface, ArrayAccess, JsonS
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -396,7 +396,7 @@ class ListContactGroups200Response implements ModelInterface, ArrayAccess, JsonS
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -426,7 +426,7 @@ class ListContactGroups200Response implements ModelInterface, ArrayAccess, JsonS
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -445,7 +445,7 @@ class ListContactGroups200Response implements ModelInterface, ArrayAccess, JsonS
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -471,5 +471,3 @@ class ListContactGroups200Response implements ModelInterface, ArrayAccess, JsonS
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

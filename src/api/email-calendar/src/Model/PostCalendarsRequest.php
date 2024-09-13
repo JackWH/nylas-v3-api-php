@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PostCalendarsRequest Class Doc Comment
@@ -62,7 +62,7 @@ class PostCalendarsRequest implements ModelInterface, ArrayAccess, JsonSerializa
         'location' => 'string',
         'metadata' => '\JackWH\NylasV3\EmailCalendar\Model\CalendarMetadata',
         'name' => 'string',
-        'timezone' => 'string'
+        'timezone' => 'string',
     ];
 
     /**
@@ -75,7 +75,7 @@ class PostCalendarsRequest implements ModelInterface, ArrayAccess, JsonSerializa
         'location' => null,
         'metadata' => null,
         'name' => null,
-        'timezone' => null
+        'timezone' => null,
     ];
 
     /**
@@ -88,7 +88,7 @@ class PostCalendarsRequest implements ModelInterface, ArrayAccess, JsonSerializa
         'location' => false,
         'metadata' => false,
         'name' => false,
-        'timezone' => false
+        'timezone' => false,
     ];
 
     /**
@@ -181,7 +181,7 @@ class PostCalendarsRequest implements ModelInterface, ArrayAccess, JsonSerializa
         'location' => 'location',
         'metadata' => 'metadata',
         'name' => 'name',
-        'timezone' => 'timezone'
+        'timezone' => 'timezone',
     ];
 
     /**
@@ -194,7 +194,7 @@ class PostCalendarsRequest implements ModelInterface, ArrayAccess, JsonSerializa
         'location' => 'setLocation',
         'metadata' => 'setMetadata',
         'name' => 'setName',
-        'timezone' => 'setTimezone'
+        'timezone' => 'setTimezone',
     ];
 
     /**
@@ -207,7 +207,7 @@ class PostCalendarsRequest implements ModelInterface, ArrayAccess, JsonSerializa
         'location' => 'getLocation',
         'metadata' => 'getMetadata',
         'name' => 'getName',
-        'timezone' => 'getTimezone'
+        'timezone' => 'getTimezone',
     ];
 
     /**
@@ -303,6 +303,7 @@ class PostCalendarsRequest implements ModelInterface, ArrayAccess, JsonSerializa
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -316,7 +317,6 @@ class PostCalendarsRequest implements ModelInterface, ArrayAccess, JsonSerializa
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets description
@@ -452,12 +452,13 @@ class PostCalendarsRequest implements ModelInterface, ArrayAccess, JsonSerializa
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -467,7 +468,7 @@ class PostCalendarsRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -497,7 +498,7 @@ class PostCalendarsRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -516,7 +517,7 @@ class PostCalendarsRequest implements ModelInterface, ArrayAccess, JsonSerializa
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -542,5 +543,3 @@ class PostCalendarsRequest implements ModelInterface, ArrayAccess, JsonSerializa
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

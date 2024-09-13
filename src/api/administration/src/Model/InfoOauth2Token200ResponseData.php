@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * InfoOauth2Token200ResponseData Class Doc Comment
@@ -63,7 +63,7 @@ class InfoOauth2Token200ResponseData implements ModelInterface, ArrayAccess, Jso
         'sub' => 'string',
         'email' => 'string',
         'iat' => 'int',
-        'exp' => 'int'
+        'exp' => 'int',
     ];
 
     /**
@@ -77,7 +77,7 @@ class InfoOauth2Token200ResponseData implements ModelInterface, ArrayAccess, Jso
         'sub' => null,
         'email' => null,
         'iat' => null,
-        'exp' => null
+        'exp' => null,
     ];
 
     /**
@@ -91,7 +91,7 @@ class InfoOauth2Token200ResponseData implements ModelInterface, ArrayAccess, Jso
         'sub' => false,
         'email' => false,
         'iat' => false,
-        'exp' => false
+        'exp' => false,
     ];
 
     /**
@@ -185,7 +185,7 @@ class InfoOauth2Token200ResponseData implements ModelInterface, ArrayAccess, Jso
         'sub' => 'sub',
         'email' => 'email',
         'iat' => 'iat',
-        'exp' => 'exp'
+        'exp' => 'exp',
     ];
 
     /**
@@ -199,7 +199,7 @@ class InfoOauth2Token200ResponseData implements ModelInterface, ArrayAccess, Jso
         'sub' => 'setSub',
         'email' => 'setEmail',
         'iat' => 'setIat',
-        'exp' => 'setExp'
+        'exp' => 'setExp',
     ];
 
     /**
@@ -213,7 +213,7 @@ class InfoOauth2Token200ResponseData implements ModelInterface, ArrayAccess, Jso
         'sub' => 'getSub',
         'email' => 'getEmail',
         'iat' => 'getIat',
-        'exp' => 'getExp'
+        'exp' => 'getExp',
     ];
 
     /**
@@ -320,7 +320,6 @@ class InfoOauth2Token200ResponseData implements ModelInterface, ArrayAccess, Jso
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets iss
@@ -483,12 +482,13 @@ class InfoOauth2Token200ResponseData implements ModelInterface, ArrayAccess, Jso
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -498,7 +498,7 @@ class InfoOauth2Token200ResponseData implements ModelInterface, ArrayAccess, Jso
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -528,7 +528,7 @@ class InfoOauth2Token200ResponseData implements ModelInterface, ArrayAccess, Jso
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -547,7 +547,7 @@ class InfoOauth2Token200ResponseData implements ModelInterface, ArrayAccess, Jso
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -573,5 +573,3 @@ class InfoOauth2Token200ResponseData implements ModelInterface, ArrayAccess, Jso
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

@@ -28,15 +28,15 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Status Class Doc Comment
  *
- * @description 
+ * @description
  * @package  JackWH\NylasV3\EmailCalendar
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -60,7 +60,7 @@ class Status implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPITypes = [
         'description' => 'string',
-        'carrier_description' => 'string'
+        'carrier_description' => 'string',
     ];
 
     /**
@@ -70,7 +70,7 @@ class Status implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPIFormats = [
         'description' => null,
-        'carrier_description' => null
+        'carrier_description' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class Status implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPINullables = [
         'description' => false,
-        'carrier_description' => false
+        'carrier_description' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class Status implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $attributeMap = [
         'description' => 'description',
-        'carrier_description' => 'carrier_description'
+        'carrier_description' => 'carrier_description',
     ];
 
     /**
@@ -180,7 +180,7 @@ class Status implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $setters = [
         'description' => 'setDescription',
-        'carrier_description' => 'setCarrierDescription'
+        'carrier_description' => 'setCarrierDescription',
     ];
 
     /**
@@ -190,7 +190,7 @@ class Status implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $getters = [
         'description' => 'getDescription',
-        'carrier_description' => 'getCarrierDescription'
+        'carrier_description' => 'getCarrierDescription',
     ];
 
     /**
@@ -286,6 +286,7 @@ class Status implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['carrier_description'] === null) {
             $invalidProperties[] = "'carrier_description' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -299,7 +300,6 @@ class Status implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets description
@@ -354,12 +354,13 @@ class Status implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -369,7 +370,7 @@ class Status implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -399,7 +400,7 @@ class Status implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -418,7 +419,7 @@ class Status implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -444,5 +445,3 @@ class Status implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

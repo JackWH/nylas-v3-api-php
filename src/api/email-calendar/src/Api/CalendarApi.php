@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\EmailCalendar\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\EmailCalendar\ApiException;
 use JackWH\NylasV3\EmailCalendar\Configuration;
 use JackWH\NylasV3\EmailCalendar\HeaderSelector;
@@ -69,7 +69,7 @@ class CalendarApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'deleteCalendarsId' => [
             'application/json',
@@ -157,9 +157,9 @@ class CalendarApi
         string $grant_id,
         string $calendar_id,
         string $contentType = self::contentTypes['deleteCalendarsId'][0]
-    ): \JackWH\NylasV3\EmailCalendar\Model\DeleteCalendarsId200Response
-    {
+    ): \JackWH\NylasV3\EmailCalendar\Model\DeleteCalendarsId200Response {
         list($response) = $this->deleteCalendarsIdWithHttpInfo($grant_id, $calendar_id, $contentType);
+
         return $response;
     }
 
@@ -180,12 +180,12 @@ class CalendarApi
         string $grant_id,
         string $calendar_id,
         string $contentType = self::contentTypes['deleteCalendarsId'][0]
-    ): array
-    {
+    ): array {
         $request = $this->deleteCalendarsIdRequest($grant_id, $calendar_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -219,7 +219,7 @@ class CalendarApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\DeleteCalendarsId200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -245,7 +245,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\DeleteCalendarsId200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -272,7 +272,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -299,7 +299,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -326,7 +326,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -353,7 +353,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -380,7 +380,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -409,7 +409,7 @@ class CalendarApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -421,6 +421,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -429,6 +430,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -437,6 +439,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -445,6 +448,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -453,6 +457,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -461,8 +466,10 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -483,8 +490,7 @@ class CalendarApi
         string $grant_id,
         string $calendar_id,
         string $contentType = self::contentTypes['deleteCalendarsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->deleteCalendarsIdAsyncWithHttpInfo($grant_id, $calendar_id, $contentType)
             ->then(
                 function ($response) {
@@ -509,8 +515,7 @@ class CalendarApi
         $grant_id,
         $calendar_id,
         string $contentType = self::contentTypes['deleteCalendarsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\EmailCalendar\Model\DeleteCalendarsId200Response';
         $request = $this->deleteCalendarsIdRequest($grant_id, $calendar_id, $contentType);
 
@@ -530,12 +535,13 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -564,8 +570,7 @@ class CalendarApi
         $grant_id,
         $calendar_id,
         string $contentType = self::contentTypes['deleteCalendarsId'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -624,7 +629,7 @@ class CalendarApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -641,11 +646,11 @@ class CalendarApi
         }
 
         // this endpoint requires Bearer (Access token) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -662,6 +667,7 @@ class CalendarApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -693,9 +699,9 @@ class CalendarApi
         ?string $metadata_pair = null,
         ?string $select = null,
         string $contentType = self::contentTypes['getCalendars'][0]
-    ): \JackWH\NylasV3\EmailCalendar\Model\GetCalendars200Response
-    {
+    ): \JackWH\NylasV3\EmailCalendar\Model\GetCalendars200Response {
         list($response) = $this->getCalendarsWithHttpInfo($grant_id, $limit, $page_token, $metadata_pair, $select, $contentType);
+
         return $response;
     }
 
@@ -722,12 +728,12 @@ class CalendarApi
         ?string $metadata_pair = null,
         ?string $select = null,
         string $contentType = self::contentTypes['getCalendars'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getCalendarsRequest($grant_id, $limit, $page_token, $metadata_pair, $select, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -761,7 +767,7 @@ class CalendarApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\GetCalendars200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -787,7 +793,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\GetCalendars200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -814,7 +820,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -841,7 +847,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -868,7 +874,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -895,7 +901,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -924,7 +930,7 @@ class CalendarApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -936,6 +942,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -944,6 +951,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -952,6 +960,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -960,6 +969,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -968,8 +978,10 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -996,8 +1008,7 @@ class CalendarApi
         ?string $metadata_pair = null,
         ?string $select = null,
         string $contentType = self::contentTypes['getCalendars'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getCalendarsAsyncWithHttpInfo($grant_id, $limit, $page_token, $metadata_pair, $select, $contentType)
             ->then(
                 function ($response) {
@@ -1028,8 +1039,7 @@ class CalendarApi
         $metadata_pair = null,
         $select = null,
         string $contentType = self::contentTypes['getCalendars'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\EmailCalendar\Model\GetCalendars200Response';
         $request = $this->getCalendarsRequest($grant_id, $limit, $page_token, $metadata_pair, $select, $contentType);
 
@@ -1049,12 +1059,13 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1089,8 +1100,7 @@ class CalendarApi
         $metadata_pair = null,
         $select = null,
         string $contentType = self::contentTypes['getCalendars'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -1102,7 +1112,7 @@ class CalendarApi
         if ($limit !== null && $limit > 200) {
             throw new InvalidArgumentException('invalid value for "$limit" when calling CalendarApi.getCalendars, must be smaller than or equal to 200.');
         }
-        
+
 
 
 
@@ -1177,7 +1187,7 @@ class CalendarApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1194,11 +1204,11 @@ class CalendarApi
         }
 
         // this endpoint requires Bearer (Access token) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1215,6 +1225,7 @@ class CalendarApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1242,9 +1253,9 @@ class CalendarApi
         string $calendar_id,
         ?string $select = null,
         string $contentType = self::contentTypes['getCalendarsId'][0]
-    ): \JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response
-    {
+    ): \JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response {
         list($response) = $this->getCalendarsIdWithHttpInfo($grant_id, $calendar_id, $select, $contentType);
+
         return $response;
     }
 
@@ -1267,12 +1278,12 @@ class CalendarApi
         string $calendar_id,
         ?string $select = null,
         string $contentType = self::contentTypes['getCalendarsId'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getCalendarsIdRequest($grant_id, $calendar_id, $select, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1306,7 +1317,7 @@ class CalendarApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1332,7 +1343,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1359,7 +1370,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1386,7 +1397,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1413,7 +1424,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1440,7 +1451,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1467,7 +1478,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1496,7 +1507,7 @@ class CalendarApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1508,6 +1519,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1516,6 +1528,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1524,6 +1537,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -1532,6 +1546,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -1540,6 +1555,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -1548,8 +1564,10 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1572,8 +1590,7 @@ class CalendarApi
         string $calendar_id,
         ?string $select = null,
         string $contentType = self::contentTypes['getCalendarsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getCalendarsIdAsyncWithHttpInfo($grant_id, $calendar_id, $select, $contentType)
             ->then(
                 function ($response) {
@@ -1600,8 +1617,7 @@ class CalendarApi
         $calendar_id,
         $select = null,
         string $contentType = self::contentTypes['getCalendarsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response';
         $request = $this->getCalendarsIdRequest($grant_id, $calendar_id, $select, $contentType);
 
@@ -1621,12 +1637,13 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1657,8 +1674,7 @@ class CalendarApi
         $calendar_id,
         $select = null,
         string $contentType = self::contentTypes['getCalendarsId'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -1727,7 +1743,7 @@ class CalendarApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1744,11 +1760,11 @@ class CalendarApi
         }
 
         // this endpoint requires Bearer (Access token) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1765,6 +1781,7 @@ class CalendarApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1788,9 +1805,9 @@ class CalendarApi
     public function postAvailability(
         ?\JackWH\NylasV3\EmailCalendar\Model\Availability $availability = null,
         string $contentType = self::contentTypes['postAvailability'][0]
-    ): \JackWH\NylasV3\EmailCalendar\Model\PostAvailability200Response
-    {
+    ): \JackWH\NylasV3\EmailCalendar\Model\PostAvailability200Response {
         list($response) = $this->postAvailabilityWithHttpInfo($availability, $contentType);
+
         return $response;
     }
 
@@ -1809,12 +1826,12 @@ class CalendarApi
     public function postAvailabilityWithHttpInfo(
         ?\JackWH\NylasV3\EmailCalendar\Model\Availability $availability = null,
         string $contentType = self::contentTypes['postAvailability'][0]
-    ): array
-    {
+    ): array {
         $request = $this->postAvailabilityRequest($availability, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1848,7 +1865,7 @@ class CalendarApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\PostAvailability200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1874,7 +1891,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\PostAvailability200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1901,7 +1918,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1928,7 +1945,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1955,7 +1972,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1982,7 +1999,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2011,7 +2028,7 @@ class CalendarApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2023,6 +2040,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -2031,6 +2049,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -2039,6 +2058,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -2047,6 +2067,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -2055,8 +2076,10 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2075,8 +2098,7 @@ class CalendarApi
     public function postAvailabilityAsync(
         ?\JackWH\NylasV3\EmailCalendar\Model\Availability $availability = null,
         string $contentType = self::contentTypes['postAvailability'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->postAvailabilityAsyncWithHttpInfo($availability, $contentType)
             ->then(
                 function ($response) {
@@ -2099,8 +2121,7 @@ class CalendarApi
     public function postAvailabilityAsyncWithHttpInfo(
         $availability = null,
         string $contentType = self::contentTypes['postAvailability'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\EmailCalendar\Model\PostAvailability200Response';
         $request = $this->postAvailabilityRequest($availability, $contentType);
 
@@ -2120,12 +2141,13 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2152,8 +2174,7 @@ class CalendarApi
     public function postAvailabilityRequest(
         $availability = null,
         string $contentType = self::contentTypes['postAvailability'][0]
-    ): Request
-    {
+    ): Request {
 
 
 
@@ -2190,7 +2211,7 @@ class CalendarApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2207,11 +2228,11 @@ class CalendarApi
         }
 
         // this endpoint requires Bearer (Access token) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2228,6 +2249,7 @@ class CalendarApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2255,9 +2277,9 @@ class CalendarApi
         ?string $select = null,
         ?\JackWH\NylasV3\EmailCalendar\Model\PostCalendarsRequest $post_calendars_request = null,
         string $contentType = self::contentTypes['postCalendars'][0]
-    ): \JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response
-    {
+    ): \JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response {
         list($response) = $this->postCalendarsWithHttpInfo($grant_id, $select, $post_calendars_request, $contentType);
+
         return $response;
     }
 
@@ -2280,12 +2302,12 @@ class CalendarApi
         ?string $select = null,
         ?\JackWH\NylasV3\EmailCalendar\Model\PostCalendarsRequest $post_calendars_request = null,
         string $contentType = self::contentTypes['postCalendars'][0]
-    ): array
-    {
+    ): array {
         $request = $this->postCalendarsRequest($grant_id, $select, $post_calendars_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -2319,7 +2341,7 @@ class CalendarApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -2345,7 +2367,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2372,7 +2394,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2399,7 +2421,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2426,7 +2448,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2453,7 +2475,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2482,7 +2504,7 @@ class CalendarApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2494,6 +2516,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -2502,6 +2525,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -2510,6 +2534,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -2518,6 +2543,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -2526,8 +2552,10 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2550,8 +2578,7 @@ class CalendarApi
         ?string $select = null,
         ?\JackWH\NylasV3\EmailCalendar\Model\PostCalendarsRequest $post_calendars_request = null,
         string $contentType = self::contentTypes['postCalendars'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->postCalendarsAsyncWithHttpInfo($grant_id, $select, $post_calendars_request, $contentType)
             ->then(
                 function ($response) {
@@ -2578,8 +2605,7 @@ class CalendarApi
         $select = null,
         $post_calendars_request = null,
         string $contentType = self::contentTypes['postCalendars'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response';
         $request = $this->postCalendarsRequest($grant_id, $select, $post_calendars_request, $contentType);
 
@@ -2599,12 +2625,13 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2635,8 +2662,7 @@ class CalendarApi
         $select = null,
         $post_calendars_request = null,
         string $contentType = self::contentTypes['postCalendars'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -2698,7 +2724,7 @@ class CalendarApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2715,11 +2741,11 @@ class CalendarApi
         }
 
         // this endpoint requires Bearer (Access token) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2736,6 +2762,7 @@ class CalendarApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2761,9 +2788,9 @@ class CalendarApi
         string $grant_id,
         ?\JackWH\NylasV3\EmailCalendar\Model\FreeBusy $free_busy = null,
         string $contentType = self::contentTypes['postCalendarsFreeBusy'][0]
-    ): \JackWH\NylasV3\EmailCalendar\Model\PostCalendarsFreeBusy200Response
-    {
+    ): \JackWH\NylasV3\EmailCalendar\Model\PostCalendarsFreeBusy200Response {
         list($response) = $this->postCalendarsFreeBusyWithHttpInfo($grant_id, $free_busy, $contentType);
+
         return $response;
     }
 
@@ -2784,12 +2811,12 @@ class CalendarApi
         string $grant_id,
         ?\JackWH\NylasV3\EmailCalendar\Model\FreeBusy $free_busy = null,
         string $contentType = self::contentTypes['postCalendarsFreeBusy'][0]
-    ): array
-    {
+    ): array {
         $request = $this->postCalendarsFreeBusyRequest($grant_id, $free_busy, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -2823,7 +2850,7 @@ class CalendarApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\PostCalendarsFreeBusy200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -2849,7 +2876,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\PostCalendarsFreeBusy200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2876,7 +2903,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2903,7 +2930,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2930,7 +2957,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2957,7 +2984,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2986,7 +3013,7 @@ class CalendarApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2998,6 +3025,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -3006,6 +3034,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -3014,6 +3043,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -3022,6 +3052,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -3030,8 +3061,10 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -3052,8 +3085,7 @@ class CalendarApi
         string $grant_id,
         ?\JackWH\NylasV3\EmailCalendar\Model\FreeBusy $free_busy = null,
         string $contentType = self::contentTypes['postCalendarsFreeBusy'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->postCalendarsFreeBusyAsyncWithHttpInfo($grant_id, $free_busy, $contentType)
             ->then(
                 function ($response) {
@@ -3078,8 +3110,7 @@ class CalendarApi
         $grant_id,
         $free_busy = null,
         string $contentType = self::contentTypes['postCalendarsFreeBusy'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\EmailCalendar\Model\PostCalendarsFreeBusy200Response';
         $request = $this->postCalendarsFreeBusyRequest($grant_id, $free_busy, $contentType);
 
@@ -3099,12 +3130,13 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -3133,8 +3165,7 @@ class CalendarApi
         $grant_id,
         $free_busy = null,
         string $contentType = self::contentTypes['postCalendarsFreeBusy'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -3186,7 +3217,7 @@ class CalendarApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -3203,11 +3234,11 @@ class CalendarApi
         }
 
         // this endpoint requires Bearer (Access token) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -3224,6 +3255,7 @@ class CalendarApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -3253,9 +3285,9 @@ class CalendarApi
         ?string $select = null,
         ?\JackWH\NylasV3\EmailCalendar\Model\PutCalendarsIdRequest $put_calendars_id_request = null,
         string $contentType = self::contentTypes['putCalendarsId'][0]
-    ): \JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response
-    {
+    ): \JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response {
         list($response) = $this->putCalendarsIdWithHttpInfo($grant_id, $calendar_id, $select, $put_calendars_id_request, $contentType);
+
         return $response;
     }
 
@@ -3280,12 +3312,12 @@ class CalendarApi
         ?string $select = null,
         ?\JackWH\NylasV3\EmailCalendar\Model\PutCalendarsIdRequest $put_calendars_id_request = null,
         string $contentType = self::contentTypes['putCalendarsId'][0]
-    ): array
-    {
+    ): array {
         $request = $this->putCalendarsIdRequest($grant_id, $calendar_id, $select, $put_calendars_id_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -3319,7 +3351,7 @@ class CalendarApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -3345,7 +3377,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -3372,7 +3404,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -3399,7 +3431,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -3426,7 +3458,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -3453,7 +3485,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -3480,7 +3512,7 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -3509,7 +3541,7 @@ class CalendarApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -3521,6 +3553,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -3529,6 +3562,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -3537,6 +3571,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -3545,6 +3580,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -3553,6 +3589,7 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -3561,8 +3598,10 @@ class CalendarApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -3587,8 +3626,7 @@ class CalendarApi
         ?string $select = null,
         ?\JackWH\NylasV3\EmailCalendar\Model\PutCalendarsIdRequest $put_calendars_id_request = null,
         string $contentType = self::contentTypes['putCalendarsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->putCalendarsIdAsyncWithHttpInfo($grant_id, $calendar_id, $select, $put_calendars_id_request, $contentType)
             ->then(
                 function ($response) {
@@ -3617,8 +3655,7 @@ class CalendarApi
         $select = null,
         $put_calendars_id_request = null,
         string $contentType = self::contentTypes['putCalendarsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\EmailCalendar\Model\PostCalendars200Response';
         $request = $this->putCalendarsIdRequest($grant_id, $calendar_id, $select, $put_calendars_id_request, $contentType);
 
@@ -3638,12 +3675,13 @@ class CalendarApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -3676,8 +3714,7 @@ class CalendarApi
         $select = null,
         $put_calendars_id_request = null,
         string $contentType = self::contentTypes['putCalendarsId'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -3754,7 +3791,7 @@ class CalendarApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -3771,11 +3808,11 @@ class CalendarApi
         }
 
         // this endpoint requires Bearer (Access token) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -3792,6 +3829,7 @@ class CalendarApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PUT',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -3811,7 +3849,7 @@ class CalendarApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

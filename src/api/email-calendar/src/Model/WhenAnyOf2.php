@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * WhenAnyOf2 Class Doc Comment
@@ -59,7 +59,7 @@ class WhenAnyOf2 implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPITypes = [
         'start_date' => 'string',
-        'end_date' => 'string'
+        'end_date' => 'string',
     ];
 
     /**
@@ -69,7 +69,7 @@ class WhenAnyOf2 implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPIFormats = [
         'start_date' => null,
-        'end_date' => null
+        'end_date' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class WhenAnyOf2 implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPINullables = [
         'start_date' => false,
-        'end_date' => false
+        'end_date' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class WhenAnyOf2 implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $attributeMap = [
         'start_date' => 'start_date',
-        'end_date' => 'end_date'
+        'end_date' => 'end_date',
     ];
 
     /**
@@ -179,7 +179,7 @@ class WhenAnyOf2 implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $setters = [
         'start_date' => 'setStartDate',
-        'end_date' => 'setEndDate'
+        'end_date' => 'setEndDate',
     ];
 
     /**
@@ -189,7 +189,7 @@ class WhenAnyOf2 implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $getters = [
         'start_date' => 'getStartDate',
-        'end_date' => 'getEndDate'
+        'end_date' => 'getEndDate',
     ];
 
     /**
@@ -279,7 +279,7 @@ class WhenAnyOf2 implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['start_date']) && (mb_strlen($this->container['start_date']) < 1)) {
+        if (! is_null($this->container['start_date']) && (mb_strlen($this->container['start_date']) < 1)) {
             $invalidProperties[] = "invalid value for 'start_date', the character length must be bigger than or equal to 1.";
         }
 
@@ -296,7 +296,6 @@ class WhenAnyOf2 implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets start_date
@@ -356,12 +355,13 @@ class WhenAnyOf2 implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -371,7 +371,7 @@ class WhenAnyOf2 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -401,7 +401,7 @@ class WhenAnyOf2 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -420,7 +420,7 @@ class WhenAnyOf2 implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -446,5 +446,3 @@ class WhenAnyOf2 implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

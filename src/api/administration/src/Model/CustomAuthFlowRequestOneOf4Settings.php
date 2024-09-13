@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CustomAuthFlowRequestOneOf4Settings Class Doc Comment
@@ -64,7 +64,7 @@ class CustomAuthFlowRequestOneOf4Settings implements ModelInterface, ArrayAccess
         'imap_host' => 'string',
         'imap_port' => 'int',
         'smtp_host' => 'string',
-        'smtp_port' => 'int'
+        'smtp_port' => 'int',
     ];
 
     /**
@@ -78,7 +78,7 @@ class CustomAuthFlowRequestOneOf4Settings implements ModelInterface, ArrayAccess
         'imap_host' => null,
         'imap_port' => null,
         'smtp_host' => null,
-        'smtp_port' => null
+        'smtp_port' => null,
     ];
 
     /**
@@ -92,7 +92,7 @@ class CustomAuthFlowRequestOneOf4Settings implements ModelInterface, ArrayAccess
         'imap_host' => false,
         'imap_port' => false,
         'smtp_host' => false,
-        'smtp_port' => false
+        'smtp_port' => false,
     ];
 
     /**
@@ -186,7 +186,7 @@ class CustomAuthFlowRequestOneOf4Settings implements ModelInterface, ArrayAccess
         'imap_host' => 'imap_host',
         'imap_port' => 'imap_port',
         'smtp_host' => 'smtp_host',
-        'smtp_port' => 'smtp_port'
+        'smtp_port' => 'smtp_port',
     ];
 
     /**
@@ -200,7 +200,7 @@ class CustomAuthFlowRequestOneOf4Settings implements ModelInterface, ArrayAccess
         'imap_host' => 'setImapHost',
         'imap_port' => 'setImapPort',
         'smtp_host' => 'setSmtpHost',
-        'smtp_port' => 'setSmtpPort'
+        'smtp_port' => 'setSmtpPort',
     ];
 
     /**
@@ -214,7 +214,7 @@ class CustomAuthFlowRequestOneOf4Settings implements ModelInterface, ArrayAccess
         'imap_host' => 'getImapHost',
         'imap_port' => 'getImapPort',
         'smtp_host' => 'getSmtpHost',
-        'smtp_port' => 'getSmtpPort'
+        'smtp_port' => 'getSmtpPort',
     ];
 
     /**
@@ -321,7 +321,6 @@ class CustomAuthFlowRequestOneOf4Settings implements ModelInterface, ArrayAccess
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets imap_username
@@ -484,12 +483,13 @@ class CustomAuthFlowRequestOneOf4Settings implements ModelInterface, ArrayAccess
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -499,7 +499,7 @@ class CustomAuthFlowRequestOneOf4Settings implements ModelInterface, ArrayAccess
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -529,7 +529,7 @@ class CustomAuthFlowRequestOneOf4Settings implements ModelInterface, ArrayAccess
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -548,7 +548,7 @@ class CustomAuthFlowRequestOneOf4Settings implements ModelInterface, ArrayAccess
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -574,5 +574,3 @@ class CustomAuthFlowRequestOneOf4Settings implements ModelInterface, ArrayAccess
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

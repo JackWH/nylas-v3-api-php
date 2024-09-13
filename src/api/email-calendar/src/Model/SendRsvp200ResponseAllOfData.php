@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * SendRsvp200ResponseAllOfData Class Doc Comment
@@ -58,7 +58,7 @@ class SendRsvp200ResponseAllOfData implements ModelInterface, ArrayAccess, JsonS
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'send_ics_error' => '\JackWH\NylasV3\EmailCalendar\Model\SendRsvp200ResponseAllOfDataSendIcsError'
+        'send_ics_error' => '\JackWH\NylasV3\EmailCalendar\Model\SendRsvp200ResponseAllOfDataSendIcsError',
     ];
 
     /**
@@ -67,7 +67,7 @@ class SendRsvp200ResponseAllOfData implements ModelInterface, ArrayAccess, JsonS
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'send_ics_error' => null
+        'send_ics_error' => null,
     ];
 
     /**
@@ -76,7 +76,7 @@ class SendRsvp200ResponseAllOfData implements ModelInterface, ArrayAccess, JsonS
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'send_ics_error' => false
+        'send_ics_error' => false,
     ];
 
     /**
@@ -165,7 +165,7 @@ class SendRsvp200ResponseAllOfData implements ModelInterface, ArrayAccess, JsonS
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'send_ics_error' => 'send_ics_error'
+        'send_ics_error' => 'send_ics_error',
     ];
 
     /**
@@ -174,7 +174,7 @@ class SendRsvp200ResponseAllOfData implements ModelInterface, ArrayAccess, JsonS
      * @var array<string, string>
      */
     protected static array $setters = [
-        'send_ics_error' => 'setSendIcsError'
+        'send_ics_error' => 'setSendIcsError',
     ];
 
     /**
@@ -183,7 +183,7 @@ class SendRsvp200ResponseAllOfData implements ModelInterface, ArrayAccess, JsonS
      * @var array<string, string>
      */
     protected static array $getters = [
-        'send_ics_error' => 'getSendIcsError'
+        'send_ics_error' => 'getSendIcsError',
     ];
 
     /**
@@ -286,7 +286,6 @@ class SendRsvp200ResponseAllOfData implements ModelInterface, ArrayAccess, JsonS
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets send_ics_error
      *
@@ -313,12 +312,13 @@ class SendRsvp200ResponseAllOfData implements ModelInterface, ArrayAccess, JsonS
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -328,7 +328,7 @@ class SendRsvp200ResponseAllOfData implements ModelInterface, ArrayAccess, JsonS
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -358,7 +358,7 @@ class SendRsvp200ResponseAllOfData implements ModelInterface, ArrayAccess, JsonS
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -377,7 +377,7 @@ class SendRsvp200ResponseAllOfData implements ModelInterface, ArrayAccess, JsonS
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -403,5 +403,3 @@ class SendRsvp200ResponseAllOfData implements ModelInterface, ArrayAccess, JsonS
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

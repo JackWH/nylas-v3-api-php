@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ZoomSettings Class Doc Comment
@@ -60,7 +60,7 @@ class ZoomSettings implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPITypes = [
         'client_id' => 'string',
-        'client_secret' => 'string'
+        'client_secret' => 'string',
     ];
 
     /**
@@ -70,7 +70,7 @@ class ZoomSettings implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPIFormats = [
         'client_id' => null,
-        'client_secret' => null
+        'client_secret' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class ZoomSettings implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPINullables = [
         'client_id' => false,
-        'client_secret' => false
+        'client_secret' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class ZoomSettings implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $attributeMap = [
         'client_id' => 'client_id',
-        'client_secret' => 'client_secret'
+        'client_secret' => 'client_secret',
     ];
 
     /**
@@ -180,7 +180,7 @@ class ZoomSettings implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $setters = [
         'client_id' => 'setClientId',
-        'client_secret' => 'setClientSecret'
+        'client_secret' => 'setClientSecret',
     ];
 
     /**
@@ -190,7 +190,7 @@ class ZoomSettings implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $getters = [
         'client_id' => 'getClientId',
-        'client_secret' => 'getClientSecret'
+        'client_secret' => 'getClientSecret',
     ];
 
     /**
@@ -286,6 +286,7 @@ class ZoomSettings implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['client_secret'] === null) {
             $invalidProperties[] = "'client_secret' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -299,7 +300,6 @@ class ZoomSettings implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets client_id
@@ -354,12 +354,13 @@ class ZoomSettings implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -369,7 +370,7 @@ class ZoomSettings implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -399,7 +400,7 @@ class ZoomSettings implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -418,7 +419,7 @@ class ZoomSettings implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -444,5 +445,3 @@ class ZoomSettings implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetMockWebhookPayload200ResponseData Class Doc Comment
@@ -58,7 +58,7 @@ class GetMockWebhookPayload200ResponseData implements ModelInterface, ArrayAcces
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'data' => 'object'
+        'data' => 'object',
     ];
 
     /**
@@ -67,7 +67,7 @@ class GetMockWebhookPayload200ResponseData implements ModelInterface, ArrayAcces
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'data' => null
+        'data' => null,
     ];
 
     /**
@@ -76,7 +76,7 @@ class GetMockWebhookPayload200ResponseData implements ModelInterface, ArrayAcces
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'data' => false
+        'data' => false,
     ];
 
     /**
@@ -165,7 +165,7 @@ class GetMockWebhookPayload200ResponseData implements ModelInterface, ArrayAcces
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'data' => 'data'
+        'data' => 'data',
     ];
 
     /**
@@ -174,7 +174,7 @@ class GetMockWebhookPayload200ResponseData implements ModelInterface, ArrayAcces
      * @var array<string, string>
      */
     protected static array $setters = [
-        'data' => 'setData'
+        'data' => 'setData',
     ];
 
     /**
@@ -183,7 +183,7 @@ class GetMockWebhookPayload200ResponseData implements ModelInterface, ArrayAcces
      * @var array<string, string>
      */
     protected static array $getters = [
-        'data' => 'getData'
+        'data' => 'getData',
     ];
 
     /**
@@ -286,7 +286,6 @@ class GetMockWebhookPayload200ResponseData implements ModelInterface, ArrayAcces
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets data
      *
@@ -313,12 +312,13 @@ class GetMockWebhookPayload200ResponseData implements ModelInterface, ArrayAcces
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -328,7 +328,7 @@ class GetMockWebhookPayload200ResponseData implements ModelInterface, ArrayAcces
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -358,7 +358,7 @@ class GetMockWebhookPayload200ResponseData implements ModelInterface, ArrayAcces
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -377,7 +377,7 @@ class GetMockWebhookPayload200ResponseData implements ModelInterface, ArrayAcces
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -403,5 +403,3 @@ class GetMockWebhookPayload200ResponseData implements ModelInterface, ArrayAcces
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

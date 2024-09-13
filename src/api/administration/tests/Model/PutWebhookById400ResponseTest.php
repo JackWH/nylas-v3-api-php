@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class PutWebhookById400ResponseTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

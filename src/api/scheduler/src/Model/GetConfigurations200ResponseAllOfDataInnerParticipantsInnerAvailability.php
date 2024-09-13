@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability Class Doc Comment
@@ -60,7 +60,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability im
       */
     protected static array $openAPITypes = [
         'calendar_ids' => 'string[]',
-        'open_hours' => '\JackWH\NylasV3\Scheduler\Model\OpenHours[]'
+        'open_hours' => '\JackWH\NylasV3\Scheduler\Model\OpenHours[]',
     ];
 
     /**
@@ -70,7 +70,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability im
       */
     protected static array $openAPIFormats = [
         'calendar_ids' => null,
-        'open_hours' => null
+        'open_hours' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability im
       */
     protected static array $openAPINullables = [
         'calendar_ids' => false,
-        'open_hours' => false
+        'open_hours' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability im
      */
     protected static array $attributeMap = [
         'calendar_ids' => 'calendar_ids',
-        'open_hours' => 'open_hours'
+        'open_hours' => 'open_hours',
     ];
 
     /**
@@ -180,7 +180,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability im
      */
     protected static array $setters = [
         'calendar_ids' => 'setCalendarIds',
-        'open_hours' => 'setOpenHours'
+        'open_hours' => 'setOpenHours',
     ];
 
     /**
@@ -190,7 +190,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability im
      */
     protected static array $getters = [
         'calendar_ids' => 'getCalendarIds',
-        'open_hours' => 'getOpenHours'
+        'open_hours' => 'getOpenHours',
     ];
 
     /**
@@ -283,6 +283,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability im
         if ($this->container['calendar_ids'] === null) {
             $invalidProperties[] = "'calendar_ids' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -296,7 +297,6 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability im
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets calendar_ids
@@ -351,12 +351,13 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability im
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -366,7 +367,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability im
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -396,7 +397,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability im
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -415,7 +416,7 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability im
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -441,5 +442,3 @@ class GetConfigurations200ResponseAllOfDataInnerParticipantsInnerAvailability im
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

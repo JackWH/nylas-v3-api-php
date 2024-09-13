@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PostSessions200ResponseAllOfData Class Doc Comment
@@ -58,7 +58,7 @@ class PostSessions200ResponseAllOfData implements ModelInterface, ArrayAccess, J
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'session_id' => 'string'
+        'session_id' => 'string',
     ];
 
     /**
@@ -67,7 +67,7 @@ class PostSessions200ResponseAllOfData implements ModelInterface, ArrayAccess, J
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'session_id' => null
+        'session_id' => null,
     ];
 
     /**
@@ -76,7 +76,7 @@ class PostSessions200ResponseAllOfData implements ModelInterface, ArrayAccess, J
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'session_id' => false
+        'session_id' => false,
     ];
 
     /**
@@ -165,7 +165,7 @@ class PostSessions200ResponseAllOfData implements ModelInterface, ArrayAccess, J
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'session_id' => 'session_id'
+        'session_id' => 'session_id',
     ];
 
     /**
@@ -174,7 +174,7 @@ class PostSessions200ResponseAllOfData implements ModelInterface, ArrayAccess, J
      * @var array<string, string>
      */
     protected static array $setters = [
-        'session_id' => 'setSessionId'
+        'session_id' => 'setSessionId',
     ];
 
     /**
@@ -183,7 +183,7 @@ class PostSessions200ResponseAllOfData implements ModelInterface, ArrayAccess, J
      * @var array<string, string>
      */
     protected static array $getters = [
-        'session_id' => 'getSessionId'
+        'session_id' => 'getSessionId',
     ];
 
     /**
@@ -286,7 +286,6 @@ class PostSessions200ResponseAllOfData implements ModelInterface, ArrayAccess, J
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets session_id
      *
@@ -313,12 +312,13 @@ class PostSessions200ResponseAllOfData implements ModelInterface, ArrayAccess, J
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -328,7 +328,7 @@ class PostSessions200ResponseAllOfData implements ModelInterface, ArrayAccess, J
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -358,7 +358,7 @@ class PostSessions200ResponseAllOfData implements ModelInterface, ArrayAccess, J
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -377,7 +377,7 @@ class PostSessions200ResponseAllOfData implements ModelInterface, ArrayAccess, J
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -403,5 +403,3 @@ class PostSessions200ResponseAllOfData implements ModelInterface, ArrayAccess, J
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

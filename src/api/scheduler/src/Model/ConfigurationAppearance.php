@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ConfigurationAppearance Class Doc Comment
@@ -62,7 +62,7 @@ class ConfigurationAppearance implements ModelInterface, ArrayAccess, JsonSerial
         'company_logo_url' => 'string',
         'color' => 'string',
         'submit_button_label' => 'string',
-        'thank_you_message' => 'string'
+        'thank_you_message' => 'string',
     ];
 
     /**
@@ -74,7 +74,7 @@ class ConfigurationAppearance implements ModelInterface, ArrayAccess, JsonSerial
         'company_logo_url' => null,
         'color' => null,
         'submit_button_label' => null,
-        'thank_you_message' => null
+        'thank_you_message' => null,
     ];
 
     /**
@@ -86,7 +86,7 @@ class ConfigurationAppearance implements ModelInterface, ArrayAccess, JsonSerial
         'company_logo_url' => false,
         'color' => false,
         'submit_button_label' => false,
-        'thank_you_message' => false
+        'thank_you_message' => false,
     ];
 
     /**
@@ -178,7 +178,7 @@ class ConfigurationAppearance implements ModelInterface, ArrayAccess, JsonSerial
         'company_logo_url' => 'company_logo_url',
         'color' => 'color',
         'submit_button_label' => 'submit_button_label',
-        'thank_you_message' => 'thank_you_message'
+        'thank_you_message' => 'thank_you_message',
     ];
 
     /**
@@ -190,7 +190,7 @@ class ConfigurationAppearance implements ModelInterface, ArrayAccess, JsonSerial
         'company_logo_url' => 'setCompanyLogoUrl',
         'color' => 'setColor',
         'submit_button_label' => 'setSubmitButtonLabel',
-        'thank_you_message' => 'setThankYouMessage'
+        'thank_you_message' => 'setThankYouMessage',
     ];
 
     /**
@@ -202,7 +202,7 @@ class ConfigurationAppearance implements ModelInterface, ArrayAccess, JsonSerial
         'company_logo_url' => 'getCompanyLogoUrl',
         'color' => 'getColor',
         'submit_button_label' => 'getSubmitButtonLabel',
-        'thank_you_message' => 'getThankYouMessage'
+        'thank_you_message' => 'getThankYouMessage',
     ];
 
     /**
@@ -307,7 +307,6 @@ class ConfigurationAppearance implements ModelInterface, ArrayAccess, JsonSerial
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets company_logo_url
@@ -416,12 +415,13 @@ class ConfigurationAppearance implements ModelInterface, ArrayAccess, JsonSerial
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -431,7 +431,7 @@ class ConfigurationAppearance implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -461,7 +461,7 @@ class ConfigurationAppearance implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -480,7 +480,7 @@ class ConfigurationAppearance implements ModelInterface, ArrayAccess, JsonSerial
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -506,5 +506,3 @@ class ConfigurationAppearance implements ModelInterface, ArrayAccess, JsonSerial
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

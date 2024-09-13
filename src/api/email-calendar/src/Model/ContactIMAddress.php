@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ContactImAddress Class Doc Comment
@@ -60,7 +60,7 @@ class ContactImAddress implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPITypes = [
         'im_address' => 'string',
-        'type' => 'string'
+        'type' => 'string',
     ];
 
     /**
@@ -70,7 +70,7 @@ class ContactImAddress implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPIFormats = [
         'im_address' => null,
-        'type' => null
+        'type' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class ContactImAddress implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPINullables = [
         'im_address' => false,
-        'type' => false
+        'type' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class ContactImAddress implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $attributeMap = [
         'im_address' => 'im_address',
-        'type' => 'type'
+        'type' => 'type',
     ];
 
     /**
@@ -180,7 +180,7 @@ class ContactImAddress implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $setters = [
         'im_address' => 'setImAddress',
-        'type' => 'setType'
+        'type' => 'setType',
     ];
 
     /**
@@ -190,7 +190,7 @@ class ContactImAddress implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $getters = [
         'im_address' => 'getImAddress',
-        'type' => 'getType'
+        'type' => 'getType',
     ];
 
     /**
@@ -301,7 +301,6 @@ class ContactImAddress implements ModelInterface, ArrayAccess, JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets im_address
      *
@@ -359,12 +358,13 @@ class ContactImAddress implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -374,7 +374,7 @@ class ContactImAddress implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -404,7 +404,7 @@ class ContactImAddress implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -423,7 +423,7 @@ class ContactImAddress implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -449,5 +449,3 @@ class ContactImAddress implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

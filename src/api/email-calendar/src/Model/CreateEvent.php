@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CreateEvent Class Doc Comment
@@ -71,7 +71,7 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
         'reminders' => '\JackWH\NylasV3\EmailCalendar\Model\CreateEventReminders',
         'title' => 'string',
         'visibility' => 'string',
-        'when' => '\JackWH\NylasV3\EmailCalendar\Model\When1'
+        'when' => '\JackWH\NylasV3\EmailCalendar\Model\When1',
     ];
 
     /**
@@ -93,7 +93,7 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
         'reminders' => null,
         'title' => null,
         'visibility' => null,
-        'when' => null
+        'when' => null,
     ];
 
     /**
@@ -115,7 +115,7 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
         'reminders' => false,
         'title' => false,
         'visibility' => false,
-        'when' => false
+        'when' => false,
     ];
 
     /**
@@ -217,7 +217,7 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
         'reminders' => 'reminders',
         'title' => 'title',
         'visibility' => 'visibility',
-        'when' => 'when'
+        'when' => 'when',
     ];
 
     /**
@@ -239,7 +239,7 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
         'reminders' => 'setReminders',
         'title' => 'setTitle',
         'visibility' => 'setVisibility',
-        'when' => 'setWhen'
+        'when' => 'setWhen',
     ];
 
     /**
@@ -261,7 +261,7 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
         'reminders' => 'getReminders',
         'title' => 'getTitle',
         'visibility' => 'getVisibility',
-        'when' => 'getWhen'
+        'when' => 'getWhen',
     ];
 
     /**
@@ -378,20 +378,20 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 8192)) {
+        if (! is_null($this->container['description']) && (mb_strlen($this->container['description']) > 8192)) {
             $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 8192.";
         }
 
-        if (!is_null($this->container['location']) && (mb_strlen($this->container['location']) > 255)) {
+        if (! is_null($this->container['location']) && (mb_strlen($this->container['location']) > 255)) {
             $invalidProperties[] = "invalid value for 'location', the character length must be smaller than or equal to 255.";
         }
 
-        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 1024)) {
+        if (! is_null($this->container['title']) && (mb_strlen($this->container['title']) > 1024)) {
             $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 1024.";
         }
 
         $allowedValues = $this->getVisibilityAllowableValues();
-        if (!is_null($this->container['visibility']) && !in_array($this->container['visibility'], $allowedValues, true)) {
+        if (! is_null($this->container['visibility']) && ! in_array($this->container['visibility'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'visibility', must be one of '%s'",
                 $this->container['visibility'],
@@ -402,6 +402,7 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['when'] === null) {
             $invalidProperties[] = "'when' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -415,7 +416,6 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets busy
@@ -776,7 +776,7 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
             throw new InvalidArgumentException('non-nullable visibility cannot be null');
         }
         $allowedValues = $this->getVisibilityAllowableValues();
-        if (!in_array($visibility, $allowedValues, true)) {
+        if (! in_array($visibility, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'visibility', must be one of '%s'",
@@ -816,12 +816,13 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -831,7 +832,7 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -861,7 +862,7 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -880,7 +881,7 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -906,5 +907,3 @@ class CreateEvent implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Data2 Class Doc Comment
@@ -61,7 +61,7 @@ class Data2 implements ModelInterface, ArrayAccess, JsonSerializable
         'error' => 'string',
         'error_description' => 'string',
         'error_uri' => 'string',
-        'error_code' => 'string'
+        'error_code' => 'string',
     ];
 
     /**
@@ -73,7 +73,7 @@ class Data2 implements ModelInterface, ArrayAccess, JsonSerializable
         'error' => null,
         'error_description' => null,
         'error_uri' => null,
-        'error_code' => null
+        'error_code' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class Data2 implements ModelInterface, ArrayAccess, JsonSerializable
         'error' => false,
         'error_description' => false,
         'error_uri' => false,
-        'error_code' => false
+        'error_code' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class Data2 implements ModelInterface, ArrayAccess, JsonSerializable
         'error' => 'error',
         'error_description' => 'error_description',
         'error_uri' => 'error_uri',
-        'error_code' => 'error_code'
+        'error_code' => 'error_code',
     ];
 
     /**
@@ -189,7 +189,7 @@ class Data2 implements ModelInterface, ArrayAccess, JsonSerializable
         'error' => 'setError',
         'error_description' => 'setErrorDescription',
         'error_uri' => 'setErrorUri',
-        'error_code' => 'setErrorCode'
+        'error_code' => 'setErrorCode',
     ];
 
     /**
@@ -201,7 +201,7 @@ class Data2 implements ModelInterface, ArrayAccess, JsonSerializable
         'error' => 'getError',
         'error_description' => 'getErrorDescription',
         'error_uri' => 'getErrorUri',
-        'error_code' => 'getErrorCode'
+        'error_code' => 'getErrorCode',
     ];
 
     /**
@@ -306,7 +306,6 @@ class Data2 implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets error
@@ -415,12 +414,13 @@ class Data2 implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -430,7 +430,7 @@ class Data2 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -460,7 +460,7 @@ class Data2 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -479,7 +479,7 @@ class Data2 implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -505,5 +505,3 @@ class Data2 implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

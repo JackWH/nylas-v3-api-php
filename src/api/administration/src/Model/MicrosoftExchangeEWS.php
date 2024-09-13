@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * MicrosoftExchangeEWS Class Doc Comment
@@ -59,7 +59,7 @@ class MicrosoftExchangeEWS implements ModelInterface, ArrayAccess, JsonSerializa
       */
     protected static array $openAPITypes = [
         'provider' => 'string',
-        'scopes' => 'string'
+        'scopes' => 'string',
     ];
 
     /**
@@ -69,7 +69,7 @@ class MicrosoftExchangeEWS implements ModelInterface, ArrayAccess, JsonSerializa
       */
     protected static array $openAPIFormats = [
         'provider' => null,
-        'scopes' => null
+        'scopes' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class MicrosoftExchangeEWS implements ModelInterface, ArrayAccess, JsonSerializa
       */
     protected static array $openAPINullables = [
         'provider' => false,
-        'scopes' => false
+        'scopes' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class MicrosoftExchangeEWS implements ModelInterface, ArrayAccess, JsonSerializa
      */
     protected static array $attributeMap = [
         'provider' => 'provider',
-        'scopes' => 'scopes'
+        'scopes' => 'scopes',
     ];
 
     /**
@@ -179,7 +179,7 @@ class MicrosoftExchangeEWS implements ModelInterface, ArrayAccess, JsonSerializa
      */
     protected static array $setters = [
         'provider' => 'setProvider',
-        'scopes' => 'setScopes'
+        'scopes' => 'setScopes',
     ];
 
     /**
@@ -189,7 +189,7 @@ class MicrosoftExchangeEWS implements ModelInterface, ArrayAccess, JsonSerializa
      */
     protected static array $getters = [
         'provider' => 'getProvider',
-        'scopes' => 'getScopes'
+        'scopes' => 'getScopes',
     ];
 
     /**
@@ -300,7 +300,7 @@ class MicrosoftExchangeEWS implements ModelInterface, ArrayAccess, JsonSerializa
             $invalidProperties[] = "'provider' can't be null";
         }
         $allowedValues = $this->getScopesAllowableValues();
-        if (!is_null($this->container['scopes']) && !in_array($this->container['scopes'], $allowedValues, true)) {
+        if (! is_null($this->container['scopes']) && ! in_array($this->container['scopes'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'scopes', must be one of '%s'",
                 $this->container['scopes'],
@@ -321,7 +321,6 @@ class MicrosoftExchangeEWS implements ModelInterface, ArrayAccess, JsonSerializa
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets provider
@@ -373,7 +372,7 @@ class MicrosoftExchangeEWS implements ModelInterface, ArrayAccess, JsonSerializa
             throw new InvalidArgumentException('non-nullable scopes cannot be null');
         }
         $allowedValues = $this->getScopesAllowableValues();
-        if (!in_array($scopes, $allowedValues, true)) {
+        if (! in_array($scopes, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'scopes', must be one of '%s'",
@@ -386,12 +385,13 @@ class MicrosoftExchangeEWS implements ModelInterface, ArrayAccess, JsonSerializa
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -401,7 +401,7 @@ class MicrosoftExchangeEWS implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -431,7 +431,7 @@ class MicrosoftExchangeEWS implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -450,7 +450,7 @@ class MicrosoftExchangeEWS implements ModelInterface, ArrayAccess, JsonSerializa
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -476,5 +476,3 @@ class MicrosoftExchangeEWS implements ModelInterface, ArrayAccess, JsonSerializa
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

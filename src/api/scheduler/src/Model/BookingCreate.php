@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * BookingCreate Class Doc Comment
@@ -65,7 +65,7 @@ class BookingCreate implements ModelInterface, ArrayAccess, JsonSerializable
         'timezone' => 'string',
         'email_language' => 'string',
         'additional_guests' => '\JackWH\NylasV3\Scheduler\Model\PostBookingsRequestAdditionalGuestsInner[]',
-        'additional_fields' => 'array<string,string>'
+        'additional_fields' => 'array<string,string>',
     ];
 
     /**
@@ -81,7 +81,7 @@ class BookingCreate implements ModelInterface, ArrayAccess, JsonSerializable
         'timezone' => null,
         'email_language' => null,
         'additional_guests' => null,
-        'additional_fields' => null
+        'additional_fields' => null,
     ];
 
     /**
@@ -97,7 +97,7 @@ class BookingCreate implements ModelInterface, ArrayAccess, JsonSerializable
         'timezone' => false,
         'email_language' => false,
         'additional_guests' => false,
-        'additional_fields' => false
+        'additional_fields' => false,
     ];
 
     /**
@@ -193,7 +193,7 @@ class BookingCreate implements ModelInterface, ArrayAccess, JsonSerializable
         'timezone' => 'timezone',
         'email_language' => 'email_language',
         'additional_guests' => 'additional_guests',
-        'additional_fields' => 'additional_fields'
+        'additional_fields' => 'additional_fields',
     ];
 
     /**
@@ -209,7 +209,7 @@ class BookingCreate implements ModelInterface, ArrayAccess, JsonSerializable
         'timezone' => 'setTimezone',
         'email_language' => 'setEmailLanguage',
         'additional_guests' => 'setAdditionalGuests',
-        'additional_fields' => 'setAdditionalFields'
+        'additional_fields' => 'setAdditionalFields',
     ];
 
     /**
@@ -225,7 +225,7 @@ class BookingCreate implements ModelInterface, ArrayAccess, JsonSerializable
         'timezone' => 'getTimezone',
         'email_language' => 'getEmailLanguage',
         'additional_guests' => 'getAdditionalGuests',
-        'additional_fields' => 'getAdditionalFields'
+        'additional_fields' => 'getAdditionalFields',
     ];
 
     /**
@@ -358,7 +358,7 @@ class BookingCreate implements ModelInterface, ArrayAccess, JsonSerializable
             $invalidProperties[] = "'guest' can't be null";
         }
         $allowedValues = $this->getEmailLanguageAllowableValues();
-        if (!is_null($this->container['email_language']) && !in_array($this->container['email_language'], $allowedValues, true)) {
+        if (! is_null($this->container['email_language']) && ! in_array($this->container['email_language'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'email_language', must be one of '%s'",
                 $this->container['email_language'],
@@ -379,7 +379,6 @@ class BookingCreate implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets start_time
@@ -539,7 +538,7 @@ class BookingCreate implements ModelInterface, ArrayAccess, JsonSerializable
             throw new InvalidArgumentException('non-nullable email_language cannot be null');
         }
         $allowedValues = $this->getEmailLanguageAllowableValues();
-        if (!in_array($email_language, $allowedValues, true)) {
+        if (! in_array($email_language, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'email_language', must be one of '%s'",
@@ -606,12 +605,13 @@ class BookingCreate implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -621,7 +621,7 @@ class BookingCreate implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -651,7 +651,7 @@ class BookingCreate implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -670,7 +670,7 @@ class BookingCreate implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -696,5 +696,3 @@ class BookingCreate implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

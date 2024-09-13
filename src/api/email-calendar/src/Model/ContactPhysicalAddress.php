@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ContactPhysicalAddress Class Doc Comment
@@ -64,7 +64,7 @@ class ContactPhysicalAddress implements ModelInterface, ArrayAccess, JsonSeriali
         'state' => 'string',
         'country' => 'string',
         'city' => 'string',
-        'type' => 'string'
+        'type' => 'string',
     ];
 
     /**
@@ -78,7 +78,7 @@ class ContactPhysicalAddress implements ModelInterface, ArrayAccess, JsonSeriali
         'state' => null,
         'country' => null,
         'city' => null,
-        'type' => null
+        'type' => null,
     ];
 
     /**
@@ -92,7 +92,7 @@ class ContactPhysicalAddress implements ModelInterface, ArrayAccess, JsonSeriali
         'state' => false,
         'country' => false,
         'city' => false,
-        'type' => false
+        'type' => false,
     ];
 
     /**
@@ -186,7 +186,7 @@ class ContactPhysicalAddress implements ModelInterface, ArrayAccess, JsonSeriali
         'state' => 'state',
         'country' => 'country',
         'city' => 'city',
-        'type' => 'type'
+        'type' => 'type',
     ];
 
     /**
@@ -200,7 +200,7 @@ class ContactPhysicalAddress implements ModelInterface, ArrayAccess, JsonSeriali
         'state' => 'setState',
         'country' => 'setCountry',
         'city' => 'setCity',
-        'type' => 'setType'
+        'type' => 'setType',
     ];
 
     /**
@@ -214,7 +214,7 @@ class ContactPhysicalAddress implements ModelInterface, ArrayAccess, JsonSeriali
         'state' => 'getState',
         'country' => 'getCountry',
         'city' => 'getCity',
-        'type' => 'getType'
+        'type' => 'getType',
     ];
 
     /**
@@ -326,7 +326,7 @@ class ContactPhysicalAddress implements ModelInterface, ArrayAccess, JsonSeriali
         $invalidProperties = [];
 
         $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
+        if (! is_null($this->container['type']) && ! in_array($this->container['type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'type', must be one of '%s'",
                 $this->container['type'],
@@ -347,7 +347,6 @@ class ContactPhysicalAddress implements ModelInterface, ArrayAccess, JsonSeriali
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets street_address
@@ -507,7 +506,7 @@ class ContactPhysicalAddress implements ModelInterface, ArrayAccess, JsonSeriali
             throw new InvalidArgumentException('non-nullable type cannot be null');
         }
         $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
+        if (! in_array($type, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'type', must be one of '%s'",
@@ -520,12 +519,13 @@ class ContactPhysicalAddress implements ModelInterface, ArrayAccess, JsonSeriali
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -535,7 +535,7 @@ class ContactPhysicalAddress implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -565,7 +565,7 @@ class ContactPhysicalAddress implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -584,7 +584,7 @@ class ContactPhysicalAddress implements ModelInterface, ArrayAccess, JsonSeriali
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -610,5 +610,3 @@ class ContactPhysicalAddress implements ModelInterface, ArrayAccess, JsonSeriali
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

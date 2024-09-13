@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class EventVisibilityTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

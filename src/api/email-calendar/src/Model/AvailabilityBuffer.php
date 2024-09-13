@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * AvailabilityBuffer Class Doc Comment
@@ -59,7 +59,7 @@ class AvailabilityBuffer implements ModelInterface, ArrayAccess, JsonSerializabl
       */
     protected static array $openAPITypes = [
         'before' => 'int',
-        'after' => 'int'
+        'after' => 'int',
     ];
 
     /**
@@ -69,7 +69,7 @@ class AvailabilityBuffer implements ModelInterface, ArrayAccess, JsonSerializabl
       */
     protected static array $openAPIFormats = [
         'before' => null,
-        'after' => null
+        'after' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class AvailabilityBuffer implements ModelInterface, ArrayAccess, JsonSerializabl
       */
     protected static array $openAPINullables = [
         'before' => false,
-        'after' => false
+        'after' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class AvailabilityBuffer implements ModelInterface, ArrayAccess, JsonSerializabl
      */
     protected static array $attributeMap = [
         'before' => 'before',
-        'after' => 'after'
+        'after' => 'after',
     ];
 
     /**
@@ -179,7 +179,7 @@ class AvailabilityBuffer implements ModelInterface, ArrayAccess, JsonSerializabl
      */
     protected static array $setters = [
         'before' => 'setBefore',
-        'after' => 'setAfter'
+        'after' => 'setAfter',
     ];
 
     /**
@@ -189,7 +189,7 @@ class AvailabilityBuffer implements ModelInterface, ArrayAccess, JsonSerializabl
      */
     protected static array $getters = [
         'before' => 'getBefore',
-        'after' => 'getAfter'
+        'after' => 'getAfter',
     ];
 
     /**
@@ -279,19 +279,19 @@ class AvailabilityBuffer implements ModelInterface, ArrayAccess, JsonSerializabl
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['before']) && ($this->container['before'] > 120)) {
+        if (! is_null($this->container['before']) && ($this->container['before'] > 120)) {
             $invalidProperties[] = "invalid value for 'before', must be smaller than or equal to 120.";
         }
 
-        if (!is_null($this->container['before']) && ($this->container['before'] < 0)) {
+        if (! is_null($this->container['before']) && ($this->container['before'] < 0)) {
             $invalidProperties[] = "invalid value for 'before', must be bigger than or equal to 0.";
         }
 
-        if (!is_null($this->container['after']) && ($this->container['after'] > 120)) {
+        if (! is_null($this->container['after']) && ($this->container['after'] > 120)) {
             $invalidProperties[] = "invalid value for 'after', must be smaller than or equal to 120.";
         }
 
-        if (!is_null($this->container['after']) && ($this->container['after'] < 0)) {
+        if (! is_null($this->container['after']) && ($this->container['after'] < 0)) {
             $invalidProperties[] = "invalid value for 'after', must be bigger than or equal to 0.";
         }
 
@@ -308,7 +308,6 @@ class AvailabilityBuffer implements ModelInterface, ArrayAccess, JsonSerializabl
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets before
@@ -379,12 +378,13 @@ class AvailabilityBuffer implements ModelInterface, ArrayAccess, JsonSerializabl
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -394,7 +394,7 @@ class AvailabilityBuffer implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -424,7 +424,7 @@ class AvailabilityBuffer implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -443,7 +443,7 @@ class AvailabilityBuffer implements ModelInterface, ArrayAccess, JsonSerializabl
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -469,5 +469,3 @@ class AvailabilityBuffer implements ModelInterface, ArrayAccess, JsonSerializabl
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

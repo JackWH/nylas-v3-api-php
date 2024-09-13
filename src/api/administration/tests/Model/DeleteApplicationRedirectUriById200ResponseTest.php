@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class DeleteApplicationRedirectUriById200ResponseTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

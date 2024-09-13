@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Administration\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Administration\ApiException;
 use JackWH\NylasV3\Administration\Configuration;
 use JackWH\NylasV3\Administration\HeaderSelector;
@@ -69,7 +69,7 @@ class WebhookNotificationsApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'deleteWebhookById' => [
             'application/json',
@@ -158,9 +158,9 @@ class WebhookNotificationsApi
     public function deleteWebhookById(
         string $id,
         string $contentType = self::contentTypes['deleteWebhookById'][0]
-    ): \JackWH\NylasV3\Administration\Model\DeleteWebhookById200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\DeleteWebhookById200Response {
         list($response) = $this->deleteWebhookByIdWithHttpInfo($id, $contentType);
+
         return $response;
     }
 
@@ -179,12 +179,12 @@ class WebhookNotificationsApi
     public function deleteWebhookByIdWithHttpInfo(
         string $id,
         string $contentType = self::contentTypes['deleteWebhookById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->deleteWebhookByIdRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -218,7 +218,7 @@ class WebhookNotificationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\DeleteWebhookById200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -244,7 +244,7 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\DeleteWebhookById200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\PutWebhookById400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -271,7 +271,7 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\PutWebhookById400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -300,7 +300,7 @@ class WebhookNotificationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -312,6 +312,7 @@ class WebhookNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -320,8 +321,10 @@ class WebhookNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -340,8 +343,7 @@ class WebhookNotificationsApi
     public function deleteWebhookByIdAsync(
         string $id,
         string $contentType = self::contentTypes['deleteWebhookById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->deleteWebhookByIdAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
@@ -364,8 +366,7 @@ class WebhookNotificationsApi
     public function deleteWebhookByIdAsyncWithHttpInfo(
         $id,
         string $contentType = self::contentTypes['deleteWebhookById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\DeleteWebhookById200Response';
         $request = $this->deleteWebhookByIdRequest($id, $contentType);
 
@@ -385,12 +386,13 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -417,8 +419,7 @@ class WebhookNotificationsApi
     public function deleteWebhookByIdRequest(
         $id,
         string $contentType = self::contentTypes['deleteWebhookById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
@@ -462,7 +463,7 @@ class WebhookNotificationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -479,7 +480,7 @@ class WebhookNotificationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -496,6 +497,7 @@ class WebhookNotificationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -519,9 +521,9 @@ class WebhookNotificationsApi
     public function getMockWebhookPayload(
         \JackWH\NylasV3\Administration\Model\InputPayload $input_payload,
         string $contentType = self::contentTypes['getMockWebhookPayload'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetMockWebhookPayload200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetMockWebhookPayload200Response {
         list($response) = $this->getMockWebhookPayloadWithHttpInfo($input_payload, $contentType);
+
         return $response;
     }
 
@@ -540,12 +542,12 @@ class WebhookNotificationsApi
     public function getMockWebhookPayloadWithHttpInfo(
         \JackWH\NylasV3\Administration\Model\InputPayload $input_payload,
         string $contentType = self::contentTypes['getMockWebhookPayload'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getMockWebhookPayloadRequest($input_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -579,7 +581,7 @@ class WebhookNotificationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetMockWebhookPayload200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -605,7 +607,7 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetMockWebhookPayload200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -634,7 +636,7 @@ class WebhookNotificationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -646,8 +648,10 @@ class WebhookNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -666,8 +670,7 @@ class WebhookNotificationsApi
     public function getMockWebhookPayloadAsync(
         \JackWH\NylasV3\Administration\Model\InputPayload $input_payload,
         string $contentType = self::contentTypes['getMockWebhookPayload'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getMockWebhookPayloadAsyncWithHttpInfo($input_payload, $contentType)
             ->then(
                 function ($response) {
@@ -690,8 +693,7 @@ class WebhookNotificationsApi
     public function getMockWebhookPayloadAsyncWithHttpInfo(
         $input_payload,
         string $contentType = self::contentTypes['getMockWebhookPayload'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetMockWebhookPayload200Response';
         $request = $this->getMockWebhookPayloadRequest($input_payload, $contentType);
 
@@ -711,12 +713,13 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -743,8 +746,7 @@ class WebhookNotificationsApi
     public function getMockWebhookPayloadRequest(
         $input_payload,
         string $contentType = self::contentTypes['getMockWebhookPayload'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'input_payload' is set
         if ($input_payload === null || (is_array($input_payload) && count($input_payload) === 0)) {
@@ -787,7 +789,7 @@ class WebhookNotificationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -804,7 +806,7 @@ class WebhookNotificationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -821,6 +823,7 @@ class WebhookNotificationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -844,9 +847,9 @@ class WebhookNotificationsApi
     public function getWebhookById(
         string $id,
         string $contentType = self::contentTypes['getWebhookById'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetWebhookById200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetWebhookById200Response {
         list($response) = $this->getWebhookByIdWithHttpInfo($id, $contentType);
+
         return $response;
     }
 
@@ -865,12 +868,12 @@ class WebhookNotificationsApi
     public function getWebhookByIdWithHttpInfo(
         string $id,
         string $contentType = self::contentTypes['getWebhookById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getWebhookByIdRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -904,7 +907,7 @@ class WebhookNotificationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetWebhookById200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -930,7 +933,7 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetWebhookById200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetWebhookDestinationsApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -957,7 +960,7 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetWebhookDestinationsApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -986,7 +989,7 @@ class WebhookNotificationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -998,6 +1001,7 @@ class WebhookNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1006,8 +1010,10 @@ class WebhookNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1026,8 +1032,7 @@ class WebhookNotificationsApi
     public function getWebhookByIdAsync(
         string $id,
         string $contentType = self::contentTypes['getWebhookById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getWebhookByIdAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
@@ -1050,8 +1055,7 @@ class WebhookNotificationsApi
     public function getWebhookByIdAsyncWithHttpInfo(
         $id,
         string $contentType = self::contentTypes['getWebhookById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetWebhookById200Response';
         $request = $this->getWebhookByIdRequest($id, $contentType);
 
@@ -1071,12 +1075,13 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1103,8 +1108,7 @@ class WebhookNotificationsApi
     public function getWebhookByIdRequest(
         $id,
         string $contentType = self::contentTypes['getWebhookById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
@@ -1148,7 +1152,7 @@ class WebhookNotificationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1165,7 +1169,7 @@ class WebhookNotificationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1182,6 +1186,7 @@ class WebhookNotificationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1203,9 +1208,9 @@ class WebhookNotificationsApi
      */
     public function getWebhookDestinationsApplication(
         string $contentType = self::contentTypes['getWebhookDestinationsApplication'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetWebhookDestinationsApplication200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetWebhookDestinationsApplication200Response {
         list($response) = $this->getWebhookDestinationsApplicationWithHttpInfo($contentType);
+
         return $response;
     }
 
@@ -1222,12 +1227,12 @@ class WebhookNotificationsApi
      */
     public function getWebhookDestinationsApplicationWithHttpInfo(
         string $contentType = self::contentTypes['getWebhookDestinationsApplication'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getWebhookDestinationsApplicationRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1261,7 +1266,7 @@ class WebhookNotificationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetWebhookDestinationsApplication200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1287,7 +1292,7 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetWebhookDestinationsApplication200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetWebhookDestinationsApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1314,7 +1319,7 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetWebhookDestinationsApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1343,7 +1348,7 @@ class WebhookNotificationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1355,6 +1360,7 @@ class WebhookNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1363,8 +1369,10 @@ class WebhookNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1381,8 +1389,7 @@ class WebhookNotificationsApi
      */
     public function getWebhookDestinationsApplicationAsync(
         string $contentType = self::contentTypes['getWebhookDestinationsApplication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getWebhookDestinationsApplicationAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
@@ -1403,8 +1410,7 @@ class WebhookNotificationsApi
      */
     public function getWebhookDestinationsApplicationAsyncWithHttpInfo(
         string $contentType = self::contentTypes['getWebhookDestinationsApplication'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetWebhookDestinationsApplication200Response';
         $request = $this->getWebhookDestinationsApplicationRequest($contentType);
 
@@ -1424,12 +1430,13 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1454,8 +1461,7 @@ class WebhookNotificationsApi
      */
     public function getWebhookDestinationsApplicationRequest(
         string $contentType = self::contentTypes['getWebhookDestinationsApplication'][0]
-    ): Request
-    {
+    ): Request {
 
 
         $resourcePath = '/v3/webhooks';
@@ -1484,7 +1490,7 @@ class WebhookNotificationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1501,7 +1507,7 @@ class WebhookNotificationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1518,6 +1524,7 @@ class WebhookNotificationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1541,9 +1548,9 @@ class WebhookNotificationsApi
     public function postNewSecret(
         string $id,
         string $contentType = self::contentTypes['postNewSecret'][0]
-    ): \JackWH\NylasV3\Administration\Model\PostNewSecret200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\PostNewSecret200Response {
         list($response) = $this->postNewSecretWithHttpInfo($id, $contentType);
+
         return $response;
     }
 
@@ -1562,12 +1569,12 @@ class WebhookNotificationsApi
     public function postNewSecretWithHttpInfo(
         string $id,
         string $contentType = self::contentTypes['postNewSecret'][0]
-    ): array
-    {
+    ): array {
         $request = $this->postNewSecretRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1601,7 +1608,7 @@ class WebhookNotificationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\PostNewSecret200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1627,7 +1634,7 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\PostNewSecret200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\PutWebhookById400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1654,7 +1661,7 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\PutWebhookById400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1683,7 +1690,7 @@ class WebhookNotificationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1695,6 +1702,7 @@ class WebhookNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1703,8 +1711,10 @@ class WebhookNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1723,8 +1733,7 @@ class WebhookNotificationsApi
     public function postNewSecretAsync(
         string $id,
         string $contentType = self::contentTypes['postNewSecret'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->postNewSecretAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
@@ -1747,8 +1756,7 @@ class WebhookNotificationsApi
     public function postNewSecretAsyncWithHttpInfo(
         $id,
         string $contentType = self::contentTypes['postNewSecret'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\PostNewSecret200Response';
         $request = $this->postNewSecretRequest($id, $contentType);
 
@@ -1768,12 +1776,13 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1800,8 +1809,7 @@ class WebhookNotificationsApi
     public function postNewSecretRequest(
         $id,
         string $contentType = self::contentTypes['postNewSecret'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
@@ -1845,7 +1853,7 @@ class WebhookNotificationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1862,7 +1870,7 @@ class WebhookNotificationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1879,6 +1887,7 @@ class WebhookNotificationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1902,9 +1911,9 @@ class WebhookNotificationsApi
     public function postWebhookDestinations(
         \JackWH\NylasV3\Administration\Model\DestinationPayload $destination_payload,
         string $contentType = self::contentTypes['postWebhookDestinations'][0]
-    ): \JackWH\NylasV3\Administration\Model\PostWebhookDestinations200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\PostWebhookDestinations200Response {
         list($response) = $this->postWebhookDestinationsWithHttpInfo($destination_payload, $contentType);
+
         return $response;
     }
 
@@ -1923,12 +1932,12 @@ class WebhookNotificationsApi
     public function postWebhookDestinationsWithHttpInfo(
         \JackWH\NylasV3\Administration\Model\DestinationPayload $destination_payload,
         string $contentType = self::contentTypes['postWebhookDestinations'][0]
-    ): array
-    {
+    ): array {
         $request = $this->postWebhookDestinationsRequest($destination_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1962,7 +1971,7 @@ class WebhookNotificationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\PostWebhookDestinations200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1988,7 +1997,7 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\PostWebhookDestinations200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\PostWebhookDestinations400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2015,7 +2024,7 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\PostWebhookDestinations400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2044,7 +2053,7 @@ class WebhookNotificationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2056,6 +2065,7 @@ class WebhookNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -2064,8 +2074,10 @@ class WebhookNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2084,8 +2096,7 @@ class WebhookNotificationsApi
     public function postWebhookDestinationsAsync(
         \JackWH\NylasV3\Administration\Model\DestinationPayload $destination_payload,
         string $contentType = self::contentTypes['postWebhookDestinations'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->postWebhookDestinationsAsyncWithHttpInfo($destination_payload, $contentType)
             ->then(
                 function ($response) {
@@ -2108,8 +2119,7 @@ class WebhookNotificationsApi
     public function postWebhookDestinationsAsyncWithHttpInfo(
         $destination_payload,
         string $contentType = self::contentTypes['postWebhookDestinations'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\PostWebhookDestinations200Response';
         $request = $this->postWebhookDestinationsRequest($destination_payload, $contentType);
 
@@ -2129,12 +2139,13 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2161,8 +2172,7 @@ class WebhookNotificationsApi
     public function postWebhookDestinationsRequest(
         $destination_payload,
         string $contentType = self::contentTypes['postWebhookDestinations'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'destination_payload' is set
         if ($destination_payload === null || (is_array($destination_payload) && count($destination_payload) === 0)) {
@@ -2205,7 +2215,7 @@ class WebhookNotificationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2222,7 +2232,7 @@ class WebhookNotificationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2239,6 +2249,7 @@ class WebhookNotificationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2264,9 +2275,9 @@ class WebhookNotificationsApi
         string $id,
         \JackWH\NylasV3\Administration\Model\DestinationUpdatePayload $destination_update_payload,
         string $contentType = self::contentTypes['putWebhookById'][0]
-    ): \JackWH\NylasV3\Administration\Model\PutWebhookById200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\PutWebhookById200Response {
         list($response) = $this->putWebhookByIdWithHttpInfo($id, $destination_update_payload, $contentType);
+
         return $response;
     }
 
@@ -2287,12 +2298,12 @@ class WebhookNotificationsApi
         string $id,
         \JackWH\NylasV3\Administration\Model\DestinationUpdatePayload $destination_update_payload,
         string $contentType = self::contentTypes['putWebhookById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->putWebhookByIdRequest($id, $destination_update_payload, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -2326,7 +2337,7 @@ class WebhookNotificationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\PutWebhookById200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -2352,7 +2363,7 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\PutWebhookById200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\PutWebhookById400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2379,7 +2390,7 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\PutWebhookById400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2408,7 +2419,7 @@ class WebhookNotificationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2420,6 +2431,7 @@ class WebhookNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -2428,8 +2440,10 @@ class WebhookNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2450,8 +2464,7 @@ class WebhookNotificationsApi
         string $id,
         \JackWH\NylasV3\Administration\Model\DestinationUpdatePayload $destination_update_payload,
         string $contentType = self::contentTypes['putWebhookById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->putWebhookByIdAsyncWithHttpInfo($id, $destination_update_payload, $contentType)
             ->then(
                 function ($response) {
@@ -2476,8 +2489,7 @@ class WebhookNotificationsApi
         $id,
         $destination_update_payload,
         string $contentType = self::contentTypes['putWebhookById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\PutWebhookById200Response';
         $request = $this->putWebhookByIdRequest($id, $destination_update_payload, $contentType);
 
@@ -2497,12 +2509,13 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2531,8 +2544,7 @@ class WebhookNotificationsApi
         $id,
         $destination_update_payload,
         string $contentType = self::contentTypes['putWebhookById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
@@ -2590,7 +2602,7 @@ class WebhookNotificationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2607,7 +2619,7 @@ class WebhookNotificationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2624,6 +2636,7 @@ class WebhookNotificationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PUT',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2647,9 +2660,9 @@ class WebhookNotificationsApi
     public function sendTestEvent(
         \JackWH\NylasV3\Administration\Model\InputPayload1 $input_payload1,
         string $contentType = self::contentTypes['sendTestEvent'][0]
-    ): \JackWH\NylasV3\Administration\Model\SendTestEvent200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\SendTestEvent200Response {
         list($response) = $this->sendTestEventWithHttpInfo($input_payload1, $contentType);
+
         return $response;
     }
 
@@ -2668,12 +2681,12 @@ class WebhookNotificationsApi
     public function sendTestEventWithHttpInfo(
         \JackWH\NylasV3\Administration\Model\InputPayload1 $input_payload1,
         string $contentType = self::contentTypes['sendTestEvent'][0]
-    ): array
-    {
+    ): array {
         $request = $this->sendTestEventRequest($input_payload1, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -2707,7 +2720,7 @@ class WebhookNotificationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\SendTestEvent200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -2733,7 +2746,7 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\SendTestEvent200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2762,7 +2775,7 @@ class WebhookNotificationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2774,8 +2787,10 @@ class WebhookNotificationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2794,8 +2809,7 @@ class WebhookNotificationsApi
     public function sendTestEventAsync(
         \JackWH\NylasV3\Administration\Model\InputPayload1 $input_payload1,
         string $contentType = self::contentTypes['sendTestEvent'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->sendTestEventAsyncWithHttpInfo($input_payload1, $contentType)
             ->then(
                 function ($response) {
@@ -2818,8 +2832,7 @@ class WebhookNotificationsApi
     public function sendTestEventAsyncWithHttpInfo(
         $input_payload1,
         string $contentType = self::contentTypes['sendTestEvent'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\SendTestEvent200Response';
         $request = $this->sendTestEventRequest($input_payload1, $contentType);
 
@@ -2839,12 +2852,13 @@ class WebhookNotificationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2871,8 +2885,7 @@ class WebhookNotificationsApi
     public function sendTestEventRequest(
         $input_payload1,
         string $contentType = self::contentTypes['sendTestEvent'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'input_payload1' is set
         if ($input_payload1 === null || (is_array($input_payload1) && count($input_payload1) === 0)) {
@@ -2915,7 +2928,7 @@ class WebhookNotificationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2932,7 +2945,7 @@ class WebhookNotificationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2949,6 +2962,7 @@ class WebhookNotificationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2968,7 +2982,7 @@ class WebhookNotificationsApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

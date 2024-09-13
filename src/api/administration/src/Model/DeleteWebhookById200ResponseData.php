@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * DeleteWebhookById200ResponseData Class Doc Comment
@@ -58,7 +58,7 @@ class DeleteWebhookById200ResponseData implements ModelInterface, ArrayAccess, J
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'status' => 'string'
+        'status' => 'string',
     ];
 
     /**
@@ -67,7 +67,7 @@ class DeleteWebhookById200ResponseData implements ModelInterface, ArrayAccess, J
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'status' => null
+        'status' => null,
     ];
 
     /**
@@ -76,7 +76,7 @@ class DeleteWebhookById200ResponseData implements ModelInterface, ArrayAccess, J
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'status' => false
+        'status' => false,
     ];
 
     /**
@@ -165,7 +165,7 @@ class DeleteWebhookById200ResponseData implements ModelInterface, ArrayAccess, J
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'status' => 'status'
+        'status' => 'status',
     ];
 
     /**
@@ -174,7 +174,7 @@ class DeleteWebhookById200ResponseData implements ModelInterface, ArrayAccess, J
      * @var array<string, string>
      */
     protected static array $setters = [
-        'status' => 'setStatus'
+        'status' => 'setStatus',
     ];
 
     /**
@@ -183,7 +183,7 @@ class DeleteWebhookById200ResponseData implements ModelInterface, ArrayAccess, J
      * @var array<string, string>
      */
     protected static array $getters = [
-        'status' => 'getStatus'
+        'status' => 'getStatus',
     ];
 
     /**
@@ -286,7 +286,7 @@ class DeleteWebhookById200ResponseData implements ModelInterface, ArrayAccess, J
         $invalidProperties = [];
 
         $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+        if (! is_null($this->container['status']) && ! in_array($this->container['status'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
@@ -307,7 +307,6 @@ class DeleteWebhookById200ResponseData implements ModelInterface, ArrayAccess, J
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets status
@@ -332,7 +331,7 @@ class DeleteWebhookById200ResponseData implements ModelInterface, ArrayAccess, J
             throw new InvalidArgumentException('non-nullable status cannot be null');
         }
         $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
+        if (! in_array($status, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'status', must be one of '%s'",
@@ -345,12 +344,13 @@ class DeleteWebhookById200ResponseData implements ModelInterface, ArrayAccess, J
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -360,7 +360,7 @@ class DeleteWebhookById200ResponseData implements ModelInterface, ArrayAccess, J
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -390,7 +390,7 @@ class DeleteWebhookById200ResponseData implements ModelInterface, ArrayAccess, J
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -409,7 +409,7 @@ class DeleteWebhookById200ResponseData implements ModelInterface, ArrayAccess, J
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -435,5 +435,3 @@ class DeleteWebhookById200ResponseData implements ModelInterface, ArrayAccess, J
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ContactPhoneNumber Class Doc Comment
@@ -60,7 +60,7 @@ class ContactPhoneNumber implements ModelInterface, ArrayAccess, JsonSerializabl
       */
     protected static array $openAPITypes = [
         'number' => 'string',
-        'type' => 'string'
+        'type' => 'string',
     ];
 
     /**
@@ -70,7 +70,7 @@ class ContactPhoneNumber implements ModelInterface, ArrayAccess, JsonSerializabl
       */
     protected static array $openAPIFormats = [
         'number' => null,
-        'type' => null
+        'type' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class ContactPhoneNumber implements ModelInterface, ArrayAccess, JsonSerializabl
       */
     protected static array $openAPINullables = [
         'number' => false,
-        'type' => false
+        'type' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class ContactPhoneNumber implements ModelInterface, ArrayAccess, JsonSerializabl
      */
     protected static array $attributeMap = [
         'number' => 'number',
-        'type' => 'type'
+        'type' => 'type',
     ];
 
     /**
@@ -180,7 +180,7 @@ class ContactPhoneNumber implements ModelInterface, ArrayAccess, JsonSerializabl
      */
     protected static array $setters = [
         'number' => 'setNumber',
-        'type' => 'setType'
+        'type' => 'setType',
     ];
 
     /**
@@ -190,7 +190,7 @@ class ContactPhoneNumber implements ModelInterface, ArrayAccess, JsonSerializabl
      */
     protected static array $getters = [
         'number' => 'getNumber',
-        'type' => 'getType'
+        'type' => 'getType',
     ];
 
     /**
@@ -301,7 +301,7 @@ class ContactPhoneNumber implements ModelInterface, ArrayAccess, JsonSerializabl
             $invalidProperties[] = "'number' can't be null";
         }
         $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
+        if (! is_null($this->container['type']) && ! in_array($this->container['type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'type', must be one of '%s'",
                 $this->container['type'],
@@ -322,7 +322,6 @@ class ContactPhoneNumber implements ModelInterface, ArrayAccess, JsonSerializabl
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets number
@@ -374,7 +373,7 @@ class ContactPhoneNumber implements ModelInterface, ArrayAccess, JsonSerializabl
             throw new InvalidArgumentException('non-nullable type cannot be null');
         }
         $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
+        if (! in_array($type, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'type', must be one of '%s'",
@@ -387,12 +386,13 @@ class ContactPhoneNumber implements ModelInterface, ArrayAccess, JsonSerializabl
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -402,7 +402,7 @@ class ContactPhoneNumber implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -432,7 +432,7 @@ class ContactPhoneNumber implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -451,7 +451,7 @@ class ContactPhoneNumber implements ModelInterface, ArrayAccess, JsonSerializabl
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -477,5 +477,3 @@ class ContactPhoneNumber implements ModelInterface, ArrayAccess, JsonSerializabl
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

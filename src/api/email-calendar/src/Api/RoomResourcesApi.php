@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\EmailCalendar\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\EmailCalendar\ApiException;
 use JackWH\NylasV3\EmailCalendar\Configuration;
 use JackWH\NylasV3\EmailCalendar\HeaderSelector;
@@ -69,7 +69,7 @@ class RoomResourcesApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'listRoomResources' => [
             'application/json',
@@ -141,9 +141,9 @@ class RoomResourcesApi
         ?int $limit = 50,
         ?string $page_token = null,
         string $contentType = self::contentTypes['listRoomResources'][0]
-    ): \JackWH\NylasV3\EmailCalendar\Model\ListRoomResources200Response
-    {
+    ): \JackWH\NylasV3\EmailCalendar\Model\ListRoomResources200Response {
         list($response) = $this->listRoomResourcesWithHttpInfo($grant_id, $limit, $page_token, $contentType);
+
         return $response;
     }
 
@@ -166,12 +166,12 @@ class RoomResourcesApi
         ?int $limit = 50,
         ?string $page_token = null,
         string $contentType = self::contentTypes['listRoomResources'][0]
-    ): array
-    {
+    ): array {
         $request = $this->listRoomResourcesRequest($grant_id, $limit, $page_token, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -205,7 +205,7 @@ class RoomResourcesApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\ListRoomResources200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -231,7 +231,7 @@ class RoomResourcesApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\ListRoomResources200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -258,7 +258,7 @@ class RoomResourcesApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -285,7 +285,7 @@ class RoomResourcesApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -312,7 +312,7 @@ class RoomResourcesApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\EmailCalendar\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -339,7 +339,7 @@ class RoomResourcesApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\EmailCalendar\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -368,7 +368,7 @@ class RoomResourcesApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -380,6 +380,7 @@ class RoomResourcesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -388,6 +389,7 @@ class RoomResourcesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -396,6 +398,7 @@ class RoomResourcesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -404,6 +407,7 @@ class RoomResourcesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -412,8 +416,10 @@ class RoomResourcesApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -436,8 +442,7 @@ class RoomResourcesApi
         ?int $limit = 50,
         ?string $page_token = null,
         string $contentType = self::contentTypes['listRoomResources'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->listRoomResourcesAsyncWithHttpInfo($grant_id, $limit, $page_token, $contentType)
             ->then(
                 function ($response) {
@@ -464,8 +469,7 @@ class RoomResourcesApi
         $limit = 50,
         $page_token = null,
         string $contentType = self::contentTypes['listRoomResources'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\EmailCalendar\Model\ListRoomResources200Response';
         $request = $this->listRoomResourcesRequest($grant_id, $limit, $page_token, $contentType);
 
@@ -485,12 +489,13 @@ class RoomResourcesApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -521,8 +526,7 @@ class RoomResourcesApi
         $limit = 50,
         $page_token = null,
         string $contentType = self::contentTypes['listRoomResources'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -534,7 +538,7 @@ class RoomResourcesApi
         if ($limit !== null && $limit > 200) {
             throw new InvalidArgumentException('invalid value for "$limit" when calling RoomResourcesApi.listRoomResources, must be smaller than or equal to 200.');
         }
-        
+
 
 
         $resourcePath = '/v3/grants/{grant_id}/resources';
@@ -589,7 +593,7 @@ class RoomResourcesApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -606,11 +610,11 @@ class RoomResourcesApi
         }
 
         // this endpoint requires Bearer (Access token) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -627,6 +631,7 @@ class RoomResourcesApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -646,7 +651,7 @@ class RoomResourcesApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

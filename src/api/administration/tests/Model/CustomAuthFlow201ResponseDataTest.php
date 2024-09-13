@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class CustomAuthFlow201ResponseDataTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

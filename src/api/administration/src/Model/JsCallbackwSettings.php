@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * JsCallbackwSettings Class Doc Comment
@@ -61,7 +61,7 @@ class JsCallbackwSettings implements ModelInterface, ArrayAccess, JsonSerializab
         'platform' => 'string',
         'id' => 'string',
         'url' => 'string',
-        'settings' => '\JackWH\NylasV3\Administration\Model\JsCallbackwSettingsSettings'
+        'settings' => '\JackWH\NylasV3\Administration\Model\JsCallbackwSettingsSettings',
     ];
 
     /**
@@ -73,7 +73,7 @@ class JsCallbackwSettings implements ModelInterface, ArrayAccess, JsonSerializab
         'platform' => null,
         'id' => null,
         'url' => null,
-        'settings' => null
+        'settings' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class JsCallbackwSettings implements ModelInterface, ArrayAccess, JsonSerializab
         'platform' => false,
         'id' => false,
         'url' => false,
-        'settings' => false
+        'settings' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class JsCallbackwSettings implements ModelInterface, ArrayAccess, JsonSerializab
         'platform' => 'platform',
         'id' => 'id',
         'url' => 'url',
-        'settings' => 'settings'
+        'settings' => 'settings',
     ];
 
     /**
@@ -189,7 +189,7 @@ class JsCallbackwSettings implements ModelInterface, ArrayAccess, JsonSerializab
         'platform' => 'setPlatform',
         'id' => 'setId',
         'url' => 'setUrl',
-        'settings' => 'setSettings'
+        'settings' => 'setSettings',
     ];
 
     /**
@@ -201,7 +201,7 @@ class JsCallbackwSettings implements ModelInterface, ArrayAccess, JsonSerializab
         'platform' => 'getPlatform',
         'id' => 'getId',
         'url' => 'getUrl',
-        'settings' => 'getSettings'
+        'settings' => 'getSettings',
     ];
 
     /**
@@ -307,7 +307,7 @@ class JsCallbackwSettings implements ModelInterface, ArrayAccess, JsonSerializab
         $invalidProperties = [];
 
         $allowedValues = $this->getPlatformAllowableValues();
-        if (!is_null($this->container['platform']) && !in_array($this->container['platform'], $allowedValues, true)) {
+        if (! is_null($this->container['platform']) && ! in_array($this->container['platform'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'platform', must be one of '%s'",
                 $this->container['platform'],
@@ -328,7 +328,6 @@ class JsCallbackwSettings implements ModelInterface, ArrayAccess, JsonSerializab
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets platform
@@ -353,7 +352,7 @@ class JsCallbackwSettings implements ModelInterface, ArrayAccess, JsonSerializab
             throw new InvalidArgumentException('non-nullable platform cannot be null');
         }
         $allowedValues = $this->getPlatformAllowableValues();
-        if (!in_array($platform, $allowedValues, true)) {
+        if (! in_array($platform, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'platform', must be one of '%s'",
@@ -447,12 +446,13 @@ class JsCallbackwSettings implements ModelInterface, ArrayAccess, JsonSerializab
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -462,7 +462,7 @@ class JsCallbackwSettings implements ModelInterface, ArrayAccess, JsonSerializab
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -492,7 +492,7 @@ class JsCallbackwSettings implements ModelInterface, ArrayAccess, JsonSerializab
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -511,7 +511,7 @@ class JsCallbackwSettings implements ModelInterface, ArrayAccess, JsonSerializab
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -537,5 +537,3 @@ class JsCallbackwSettings implements ModelInterface, ArrayAccess, JsonSerializab
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

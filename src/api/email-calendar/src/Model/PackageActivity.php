@@ -28,15 +28,15 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PackageActivity Class Doc Comment
  *
- * @description 
+ * @description
  * @package  JackWH\NylasV3\EmailCalendar
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -62,7 +62,7 @@ class PackageActivity implements ModelInterface, ArrayAccess, JsonSerializable
         'status' => '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentDeliveryStatus',
         'location' => '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichmentSihpToAddress',
         'carrier_location' => 'string',
-        'timestamp' => 'int'
+        'timestamp' => 'int',
     ];
 
     /**
@@ -74,7 +74,7 @@ class PackageActivity implements ModelInterface, ArrayAccess, JsonSerializable
         'status' => null,
         'location' => null,
         'carrier_location' => null,
-        'timestamp' => null
+        'timestamp' => null,
     ];
 
     /**
@@ -86,7 +86,7 @@ class PackageActivity implements ModelInterface, ArrayAccess, JsonSerializable
         'status' => false,
         'location' => false,
         'carrier_location' => false,
-        'timestamp' => false
+        'timestamp' => false,
     ];
 
     /**
@@ -178,7 +178,7 @@ class PackageActivity implements ModelInterface, ArrayAccess, JsonSerializable
         'status' => 'status',
         'location' => 'location',
         'carrier_location' => 'carrier_location',
-        'timestamp' => 'timestamp'
+        'timestamp' => 'timestamp',
     ];
 
     /**
@@ -190,7 +190,7 @@ class PackageActivity implements ModelInterface, ArrayAccess, JsonSerializable
         'status' => 'setStatus',
         'location' => 'setLocation',
         'carrier_location' => 'setCarrierLocation',
-        'timestamp' => 'setTimestamp'
+        'timestamp' => 'setTimestamp',
     ];
 
     /**
@@ -202,7 +202,7 @@ class PackageActivity implements ModelInterface, ArrayAccess, JsonSerializable
         'status' => 'getStatus',
         'location' => 'getLocation',
         'carrier_location' => 'getCarrierLocation',
-        'timestamp' => 'getTimestamp'
+        'timestamp' => 'getTimestamp',
     ];
 
     /**
@@ -306,6 +306,7 @@ class PackageActivity implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['timestamp'] === null) {
             $invalidProperties[] = "'timestamp' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -319,7 +320,6 @@ class PackageActivity implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets status
@@ -428,12 +428,13 @@ class PackageActivity implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -443,7 +444,7 @@ class PackageActivity implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -473,7 +474,7 @@ class PackageActivity implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -492,7 +493,7 @@ class PackageActivity implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -518,5 +519,3 @@ class PackageActivity implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

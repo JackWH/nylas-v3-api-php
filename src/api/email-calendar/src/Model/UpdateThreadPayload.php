@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * UpdateThreadPayload Class Doc Comment
@@ -60,7 +60,7 @@ class UpdateThreadPayload implements ModelInterface, ArrayAccess, JsonSerializab
     protected static array $openAPITypes = [
         'starred' => 'bool',
         'unread' => 'bool',
-        'folders' => 'string[]'
+        'folders' => 'string[]',
     ];
 
     /**
@@ -71,7 +71,7 @@ class UpdateThreadPayload implements ModelInterface, ArrayAccess, JsonSerializab
     protected static array $openAPIFormats = [
         'starred' => null,
         'unread' => null,
-        'folders' => null
+        'folders' => null,
     ];
 
     /**
@@ -82,7 +82,7 @@ class UpdateThreadPayload implements ModelInterface, ArrayAccess, JsonSerializab
     protected static array $openAPINullables = [
         'starred' => false,
         'unread' => false,
-        'folders' => false
+        'folders' => false,
     ];
 
     /**
@@ -173,7 +173,7 @@ class UpdateThreadPayload implements ModelInterface, ArrayAccess, JsonSerializab
     protected static array $attributeMap = [
         'starred' => 'starred',
         'unread' => 'unread',
-        'folders' => 'folders'
+        'folders' => 'folders',
     ];
 
     /**
@@ -184,7 +184,7 @@ class UpdateThreadPayload implements ModelInterface, ArrayAccess, JsonSerializab
     protected static array $setters = [
         'starred' => 'setStarred',
         'unread' => 'setUnread',
-        'folders' => 'setFolders'
+        'folders' => 'setFolders',
     ];
 
     /**
@@ -195,7 +195,7 @@ class UpdateThreadPayload implements ModelInterface, ArrayAccess, JsonSerializab
     protected static array $getters = [
         'starred' => 'getStarred',
         'unread' => 'getUnread',
-        'folders' => 'getFolders'
+        'folders' => 'getFolders',
     ];
 
     /**
@@ -300,7 +300,6 @@ class UpdateThreadPayload implements ModelInterface, ArrayAccess, JsonSerializab
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets starred
      *
@@ -381,12 +380,13 @@ class UpdateThreadPayload implements ModelInterface, ArrayAccess, JsonSerializab
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -396,7 +396,7 @@ class UpdateThreadPayload implements ModelInterface, ArrayAccess, JsonSerializab
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -426,7 +426,7 @@ class UpdateThreadPayload implements ModelInterface, ArrayAccess, JsonSerializab
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -445,7 +445,7 @@ class UpdateThreadPayload implements ModelInterface, ArrayAccess, JsonSerializab
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -471,5 +471,3 @@ class UpdateThreadPayload implements ModelInterface, ArrayAccess, JsonSerializab
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

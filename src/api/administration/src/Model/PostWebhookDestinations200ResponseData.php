@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PostWebhookDestinations200ResponseData Class Doc Comment
@@ -64,7 +64,7 @@ class PostWebhookDestinations200ResponseData implements ModelInterface, ArrayAcc
         'webhook_url' => 'string',
         'webhook_secret' => 'string',
         'status' => 'string',
-        'notification_email_addresses' => 'string[]'
+        'notification_email_addresses' => 'string[]',
     ];
 
     /**
@@ -79,7 +79,7 @@ class PostWebhookDestinations200ResponseData implements ModelInterface, ArrayAcc
         'webhook_url' => null,
         'webhook_secret' => null,
         'status' => null,
-        'notification_email_addresses' => null
+        'notification_email_addresses' => null,
     ];
 
     /**
@@ -94,7 +94,7 @@ class PostWebhookDestinations200ResponseData implements ModelInterface, ArrayAcc
         'webhook_url' => false,
         'webhook_secret' => false,
         'status' => false,
-        'notification_email_addresses' => false
+        'notification_email_addresses' => false,
     ];
 
     /**
@@ -189,7 +189,7 @@ class PostWebhookDestinations200ResponseData implements ModelInterface, ArrayAcc
         'webhook_url' => 'webhook_url',
         'webhook_secret' => 'webhook_secret',
         'status' => 'status',
-        'notification_email_addresses' => 'notification_email_addresses'
+        'notification_email_addresses' => 'notification_email_addresses',
     ];
 
     /**
@@ -204,7 +204,7 @@ class PostWebhookDestinations200ResponseData implements ModelInterface, ArrayAcc
         'webhook_url' => 'setWebhookUrl',
         'webhook_secret' => 'setWebhookSecret',
         'status' => 'setStatus',
-        'notification_email_addresses' => 'setNotificationEmailAddresses'
+        'notification_email_addresses' => 'setNotificationEmailAddresses',
     ];
 
     /**
@@ -219,7 +219,7 @@ class PostWebhookDestinations200ResponseData implements ModelInterface, ArrayAcc
         'webhook_url' => 'getWebhookUrl',
         'webhook_secret' => 'getWebhookSecret',
         'status' => 'getStatus',
-        'notification_email_addresses' => 'getNotificationEmailAddresses'
+        'notification_email_addresses' => 'getNotificationEmailAddresses',
     ];
 
     /**
@@ -381,7 +381,7 @@ class PostWebhookDestinations200ResponseData implements ModelInterface, ArrayAcc
         $invalidProperties = [];
 
         $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+        if (! is_null($this->container['status']) && ! in_array($this->container['status'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
@@ -402,7 +402,6 @@ class PostWebhookDestinations200ResponseData implements ModelInterface, ArrayAcc
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets id
@@ -571,7 +570,7 @@ class PostWebhookDestinations200ResponseData implements ModelInterface, ArrayAcc
             throw new InvalidArgumentException('non-nullable status cannot be null');
         }
         $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
+        if (! in_array($status, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'status', must be one of '%s'",
@@ -611,12 +610,13 @@ class PostWebhookDestinations200ResponseData implements ModelInterface, ArrayAcc
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -626,7 +626,7 @@ class PostWebhookDestinations200ResponseData implements ModelInterface, ArrayAcc
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -656,7 +656,7 @@ class PostWebhookDestinations200ResponseData implements ModelInterface, ArrayAcc
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -675,7 +675,7 @@ class PostWebhookDestinations200ResponseData implements ModelInterface, ArrayAcc
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -701,5 +701,3 @@ class PostWebhookDestinations200ResponseData implements ModelInterface, ArrayAcc
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

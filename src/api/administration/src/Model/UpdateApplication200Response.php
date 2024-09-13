@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * UpdateApplication200Response Class Doc Comment
@@ -59,7 +59,7 @@ class UpdateApplication200Response implements ModelInterface, ArrayAccess, JsonS
       */
     protected static array $openAPITypes = [
         'success' => 'bool',
-        'data' => '\JackWH\NylasV3\Administration\Model\GetApplication200ResponseData'
+        'data' => '\JackWH\NylasV3\Administration\Model\GetApplication200ResponseData',
     ];
 
     /**
@@ -69,7 +69,7 @@ class UpdateApplication200Response implements ModelInterface, ArrayAccess, JsonS
       */
     protected static array $openAPIFormats = [
         'success' => null,
-        'data' => null
+        'data' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class UpdateApplication200Response implements ModelInterface, ArrayAccess, JsonS
       */
     protected static array $openAPINullables = [
         'success' => false,
-        'data' => false
+        'data' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class UpdateApplication200Response implements ModelInterface, ArrayAccess, JsonS
      */
     protected static array $attributeMap = [
         'success' => 'success',
-        'data' => 'data'
+        'data' => 'data',
     ];
 
     /**
@@ -179,7 +179,7 @@ class UpdateApplication200Response implements ModelInterface, ArrayAccess, JsonS
      */
     protected static array $setters = [
         'success' => 'setSuccess',
-        'data' => 'setData'
+        'data' => 'setData',
     ];
 
     /**
@@ -189,7 +189,7 @@ class UpdateApplication200Response implements ModelInterface, ArrayAccess, JsonS
      */
     protected static array $getters = [
         'success' => 'getSuccess',
-        'data' => 'getData'
+        'data' => 'getData',
     ];
 
     /**
@@ -293,7 +293,6 @@ class UpdateApplication200Response implements ModelInterface, ArrayAccess, JsonS
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets success
      *
@@ -347,12 +346,13 @@ class UpdateApplication200Response implements ModelInterface, ArrayAccess, JsonS
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -362,7 +362,7 @@ class UpdateApplication200Response implements ModelInterface, ArrayAccess, JsonS
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -392,7 +392,7 @@ class UpdateApplication200Response implements ModelInterface, ArrayAccess, JsonS
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -411,7 +411,7 @@ class UpdateApplication200Response implements ModelInterface, ArrayAccess, JsonS
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -437,5 +437,3 @@ class UpdateApplication200Response implements ModelInterface, ArrayAccess, JsonS
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

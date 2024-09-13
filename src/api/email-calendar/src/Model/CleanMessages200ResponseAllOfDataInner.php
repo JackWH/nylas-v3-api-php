@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CleanMessages200ResponseAllOfDataInner Class Doc Comment
@@ -77,7 +77,7 @@ class CleanMessages200ResponseAllOfDataInner implements ModelInterface, ArrayAcc
         'to' => '\JackWH\NylasV3\EmailCalendar\Model\MessageParticipant[]',
         'unread' => 'bool',
         'use_draft' => 'bool',
-        'conversation' => 'string'
+        'conversation' => 'string',
     ];
 
     /**
@@ -105,7 +105,7 @@ class CleanMessages200ResponseAllOfDataInner implements ModelInterface, ArrayAcc
         'to' => null,
         'unread' => null,
         'use_draft' => null,
-        'conversation' => null
+        'conversation' => null,
     ];
 
     /**
@@ -133,7 +133,7 @@ class CleanMessages200ResponseAllOfDataInner implements ModelInterface, ArrayAcc
         'to' => false,
         'unread' => false,
         'use_draft' => false,
-        'conversation' => false
+        'conversation' => false,
     ];
 
     /**
@@ -241,7 +241,7 @@ class CleanMessages200ResponseAllOfDataInner implements ModelInterface, ArrayAcc
         'to' => 'to',
         'unread' => 'unread',
         'use_draft' => 'use_draft',
-        'conversation' => 'conversation'
+        'conversation' => 'conversation',
     ];
 
     /**
@@ -269,7 +269,7 @@ class CleanMessages200ResponseAllOfDataInner implements ModelInterface, ArrayAcc
         'to' => 'setTo',
         'unread' => 'setUnread',
         'use_draft' => 'setUseDraft',
-        'conversation' => 'setConversation'
+        'conversation' => 'setConversation',
     ];
 
     /**
@@ -297,7 +297,7 @@ class CleanMessages200ResponseAllOfDataInner implements ModelInterface, ArrayAcc
         'to' => 'getTo',
         'unread' => 'getUnread',
         'use_draft' => 'getUseDraft',
-        'conversation' => 'getConversation'
+        'conversation' => 'getConversation',
     ];
 
     /**
@@ -405,15 +405,15 @@ class CleanMessages200ResponseAllOfDataInner implements ModelInterface, ArrayAcc
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
+        if (! is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
             $invalidProperties[] = "invalid value for 'id', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['snippet']) && (mb_strlen($this->container['snippet']) < 1)) {
+        if (! is_null($this->container['snippet']) && (mb_strlen($this->container['snippet']) < 1)) {
             $invalidProperties[] = "invalid value for 'snippet', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['thread_id']) && (mb_strlen($this->container['thread_id']) < 1)) {
+        if (! is_null($this->container['thread_id']) && (mb_strlen($this->container['thread_id']) < 1)) {
             $invalidProperties[] = "invalid value for 'thread_id', the character length must be bigger than or equal to 1.";
         }
 
@@ -430,7 +430,6 @@ class CleanMessages200ResponseAllOfDataInner implements ModelInterface, ArrayAcc
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets bcc
@@ -996,12 +995,13 @@ class CleanMessages200ResponseAllOfDataInner implements ModelInterface, ArrayAcc
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -1011,7 +1011,7 @@ class CleanMessages200ResponseAllOfDataInner implements ModelInterface, ArrayAcc
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -1041,7 +1041,7 @@ class CleanMessages200ResponseAllOfDataInner implements ModelInterface, ArrayAcc
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -1060,7 +1060,7 @@ class CleanMessages200ResponseAllOfDataInner implements ModelInterface, ArrayAcc
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -1086,5 +1086,3 @@ class CleanMessages200ResponseAllOfDataInner implements ModelInterface, ArrayAcc
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

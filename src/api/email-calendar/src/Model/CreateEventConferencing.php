@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CreateEventConferencing Class Doc Comment
@@ -59,7 +59,7 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'provider' => 'string'
+        'provider' => 'string',
     ];
 
     /**
@@ -68,7 +68,7 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'provider' => null
+        'provider' => null,
     ];
 
     /**
@@ -77,7 +77,7 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'provider' => false
+        'provider' => false,
     ];
 
     /**
@@ -166,7 +166,7 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'provider' => 'provider'
+        'provider' => 'provider',
     ];
 
     /**
@@ -175,7 +175,7 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
      * @var array<string, string>
      */
     protected static array $setters = [
-        'provider' => 'setProvider'
+        'provider' => 'setProvider',
     ];
 
     /**
@@ -184,7 +184,7 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
      * @var array<string, string>
      */
     protected static array $getters = [
-        'provider' => 'getProvider'
+        'provider' => 'getProvider',
     ];
 
     /**
@@ -291,7 +291,7 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
         $invalidProperties = [];
 
         $allowedValues = $this->getProviderAllowableValues();
-        if (!is_null($this->container['provider']) && !in_array($this->container['provider'], $allowedValues, true)) {
+        if (! is_null($this->container['provider']) && ! in_array($this->container['provider'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'provider', must be one of '%s'",
                 $this->container['provider'],
@@ -299,7 +299,7 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
             );
         }
 
-        if (!is_null($this->container['provider']) && (mb_strlen($this->container['provider']) < 1)) {
+        if (! is_null($this->container['provider']) && (mb_strlen($this->container['provider']) < 1)) {
             $invalidProperties[] = "invalid value for 'provider', the character length must be bigger than or equal to 1.";
         }
 
@@ -316,7 +316,6 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets provider
@@ -341,7 +340,7 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
             throw new InvalidArgumentException('non-nullable provider cannot be null');
         }
         $allowedValues = $this->getProviderAllowableValues();
-        if (!in_array($provider, $allowedValues, true)) {
+        if (! in_array($provider, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'provider', must be one of '%s'",
@@ -359,12 +358,13 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -374,7 +374,7 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -404,7 +404,7 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -423,7 +423,7 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -449,5 +449,3 @@ class CreateEventConferencing implements ModelInterface, ArrayAccess, JsonSerial
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

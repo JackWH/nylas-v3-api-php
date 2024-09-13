@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * AvailabilityRequest Class Doc Comment
@@ -64,7 +64,7 @@ class AvailabilityRequest implements ModelInterface, ArrayAccess, JsonSerializab
         'duration_minutes' => 'int',
         'interval_minutes' => 'int',
         'round_to' => 'int',
-        'availability_rules' => '\JackWH\NylasV3\EmailCalendar\Model\AvailabilityAvailabilityRules'
+        'availability_rules' => '\JackWH\NylasV3\EmailCalendar\Model\AvailabilityAvailabilityRules',
     ];
 
     /**
@@ -79,7 +79,7 @@ class AvailabilityRequest implements ModelInterface, ArrayAccess, JsonSerializab
         'duration_minutes' => null,
         'interval_minutes' => null,
         'round_to' => null,
-        'availability_rules' => null
+        'availability_rules' => null,
     ];
 
     /**
@@ -94,7 +94,7 @@ class AvailabilityRequest implements ModelInterface, ArrayAccess, JsonSerializab
         'duration_minutes' => false,
         'interval_minutes' => false,
         'round_to' => false,
-        'availability_rules' => false
+        'availability_rules' => false,
     ];
 
     /**
@@ -189,7 +189,7 @@ class AvailabilityRequest implements ModelInterface, ArrayAccess, JsonSerializab
         'duration_minutes' => 'duration_minutes',
         'interval_minutes' => 'interval_minutes',
         'round_to' => 'round_to',
-        'availability_rules' => 'availability_rules'
+        'availability_rules' => 'availability_rules',
     ];
 
     /**
@@ -204,7 +204,7 @@ class AvailabilityRequest implements ModelInterface, ArrayAccess, JsonSerializab
         'duration_minutes' => 'setDurationMinutes',
         'interval_minutes' => 'setIntervalMinutes',
         'round_to' => 'setRoundTo',
-        'availability_rules' => 'setAvailabilityRules'
+        'availability_rules' => 'setAvailabilityRules',
     ];
 
     /**
@@ -219,7 +219,7 @@ class AvailabilityRequest implements ModelInterface, ArrayAccess, JsonSerializab
         'duration_minutes' => 'getDurationMinutes',
         'interval_minutes' => 'getIntervalMinutes',
         'round_to' => 'getRoundTo',
-        'availability_rules' => 'getAvailabilityRules'
+        'availability_rules' => 'getAvailabilityRules',
     ];
 
     /**
@@ -326,6 +326,7 @@ class AvailabilityRequest implements ModelInterface, ArrayAccess, JsonSerializab
         if ($this->container['duration_minutes'] === null) {
             $invalidProperties[] = "'duration_minutes' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -339,7 +340,6 @@ class AvailabilityRequest implements ModelInterface, ArrayAccess, JsonSerializab
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets participants
@@ -529,12 +529,13 @@ class AvailabilityRequest implements ModelInterface, ArrayAccess, JsonSerializab
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -544,7 +545,7 @@ class AvailabilityRequest implements ModelInterface, ArrayAccess, JsonSerializab
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -574,7 +575,7 @@ class AvailabilityRequest implements ModelInterface, ArrayAccess, JsonSerializab
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -593,7 +594,7 @@ class AvailabilityRequest implements ModelInterface, ArrayAccess, JsonSerializab
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -619,5 +620,3 @@ class AvailabilityRequest implements ModelInterface, ArrayAccess, JsonSerializab
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

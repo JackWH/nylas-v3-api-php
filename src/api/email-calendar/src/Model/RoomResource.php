@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * RoomResource Class Doc Comment
@@ -65,7 +65,7 @@ class RoomResource implements ModelInterface, ArrayAccess, JsonSerializable
         'floor_number' => 'int',
         'floor_section' => 'string',
         'grant_id' => 'string',
-        'object' => 'string'
+        'object' => 'string',
     ];
 
     /**
@@ -81,7 +81,7 @@ class RoomResource implements ModelInterface, ArrayAccess, JsonSerializable
         'floor_number' => null,
         'floor_section' => null,
         'grant_id' => null,
-        'object' => null
+        'object' => null,
     ];
 
     /**
@@ -97,7 +97,7 @@ class RoomResource implements ModelInterface, ArrayAccess, JsonSerializable
         'floor_number' => false,
         'floor_section' => false,
         'grant_id' => false,
-        'object' => false
+        'object' => false,
     ];
 
     /**
@@ -193,7 +193,7 @@ class RoomResource implements ModelInterface, ArrayAccess, JsonSerializable
         'floor_number' => 'floor_number',
         'floor_section' => 'floor_section',
         'grant_id' => 'grant_id',
-        'object' => 'object'
+        'object' => 'object',
     ];
 
     /**
@@ -209,7 +209,7 @@ class RoomResource implements ModelInterface, ArrayAccess, JsonSerializable
         'floor_number' => 'setFloorNumber',
         'floor_section' => 'setFloorSection',
         'grant_id' => 'setGrantId',
-        'object' => 'setObject'
+        'object' => 'setObject',
     ];
 
     /**
@@ -225,7 +225,7 @@ class RoomResource implements ModelInterface, ArrayAccess, JsonSerializable
         'floor_number' => 'getFloorNumber',
         'floor_section' => 'getFloorSection',
         'grant_id' => 'getGrantId',
-        'object' => 'getObject'
+        'object' => 'getObject',
     ];
 
     /**
@@ -334,7 +334,6 @@ class RoomResource implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets building
@@ -551,12 +550,13 @@ class RoomResource implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -566,7 +566,7 @@ class RoomResource implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -596,7 +596,7 @@ class RoomResource implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -615,7 +615,7 @@ class RoomResource implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -641,5 +641,3 @@ class RoomResource implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

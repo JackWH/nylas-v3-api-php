@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Yahoo Class Doc Comment
@@ -60,7 +60,7 @@ class Yahoo implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPITypes = [
         'provider' => 'string',
         'settings' => '\JackWH\NylasV3\Administration\Model\YahooSettings',
-        'scope' => 'string[]'
+        'scope' => 'string[]',
     ];
 
     /**
@@ -71,7 +71,7 @@ class Yahoo implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPIFormats = [
         'provider' => null,
         'settings' => null,
-        'scope' => null
+        'scope' => null,
     ];
 
     /**
@@ -82,7 +82,7 @@ class Yahoo implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPINullables = [
         'provider' => false,
         'settings' => false,
-        'scope' => false
+        'scope' => false,
     ];
 
     /**
@@ -173,7 +173,7 @@ class Yahoo implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $attributeMap = [
         'provider' => 'provider',
         'settings' => 'settings',
-        'scope' => 'scope'
+        'scope' => 'scope',
     ];
 
     /**
@@ -184,7 +184,7 @@ class Yahoo implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $setters = [
         'provider' => 'setProvider',
         'settings' => 'setSettings',
-        'scope' => 'setScope'
+        'scope' => 'setScope',
     ];
 
     /**
@@ -195,7 +195,7 @@ class Yahoo implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $getters = [
         'provider' => 'getProvider',
         'settings' => 'getSettings',
-        'scope' => 'getScope'
+        'scope' => 'getScope',
     ];
 
     /**
@@ -289,6 +289,7 @@ class Yahoo implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['provider'] === null) {
             $invalidProperties[] = "'provider' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -302,7 +303,6 @@ class Yahoo implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets provider
@@ -384,12 +384,13 @@ class Yahoo implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -399,7 +400,7 @@ class Yahoo implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -429,7 +430,7 @@ class Yahoo implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -448,7 +449,7 @@ class Yahoo implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -474,5 +475,3 @@ class Yahoo implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PostBookingsRequestParticipantsInner Class Doc Comment
@@ -58,7 +58,7 @@ class PostBookingsRequestParticipantsInner implements ModelInterface, ArrayAcces
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'email' => 'string'
+        'email' => 'string',
     ];
 
     /**
@@ -67,7 +67,7 @@ class PostBookingsRequestParticipantsInner implements ModelInterface, ArrayAcces
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'email' => null
+        'email' => null,
     ];
 
     /**
@@ -76,7 +76,7 @@ class PostBookingsRequestParticipantsInner implements ModelInterface, ArrayAcces
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'email' => false
+        'email' => false,
     ];
 
     /**
@@ -165,7 +165,7 @@ class PostBookingsRequestParticipantsInner implements ModelInterface, ArrayAcces
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'email' => 'email'
+        'email' => 'email',
     ];
 
     /**
@@ -174,7 +174,7 @@ class PostBookingsRequestParticipantsInner implements ModelInterface, ArrayAcces
      * @var array<string, string>
      */
     protected static array $setters = [
-        'email' => 'setEmail'
+        'email' => 'setEmail',
     ];
 
     /**
@@ -183,7 +183,7 @@ class PostBookingsRequestParticipantsInner implements ModelInterface, ArrayAcces
      * @var array<string, string>
      */
     protected static array $getters = [
-        'email' => 'getEmail'
+        'email' => 'getEmail',
     ];
 
     /**
@@ -286,7 +286,6 @@ class PostBookingsRequestParticipantsInner implements ModelInterface, ArrayAcces
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets email
      *
@@ -313,12 +312,13 @@ class PostBookingsRequestParticipantsInner implements ModelInterface, ArrayAcces
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -328,7 +328,7 @@ class PostBookingsRequestParticipantsInner implements ModelInterface, ArrayAcces
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -358,7 +358,7 @@ class PostBookingsRequestParticipantsInner implements ModelInterface, ArrayAcces
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -377,7 +377,7 @@ class PostBookingsRequestParticipantsInner implements ModelInterface, ArrayAcces
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -403,5 +403,3 @@ class PostBookingsRequestParticipantsInner implements ModelInterface, ArrayAcces
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

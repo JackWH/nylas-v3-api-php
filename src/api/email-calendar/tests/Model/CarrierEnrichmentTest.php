@@ -32,14 +32,13 @@ use PHPUnit\Framework\TestCase;
 /**
  * CarrierEnrichmentTest Class Doc Comment
  *
- * @description 
+ * @description
  * @package     JackWH\NylasV3\EmailCalendar
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
 class CarrierEnrichmentTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

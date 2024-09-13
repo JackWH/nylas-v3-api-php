@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * DeleteBookingsIdRequest Class Doc Comment
@@ -58,7 +58,7 @@ class DeleteBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSerial
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'cancellation_reason' => 'string'
+        'cancellation_reason' => 'string',
     ];
 
     /**
@@ -67,7 +67,7 @@ class DeleteBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSerial
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'cancellation_reason' => null
+        'cancellation_reason' => null,
     ];
 
     /**
@@ -76,7 +76,7 @@ class DeleteBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSerial
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'cancellation_reason' => false
+        'cancellation_reason' => false,
     ];
 
     /**
@@ -165,7 +165,7 @@ class DeleteBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSerial
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'cancellation_reason' => 'cancellation_reason'
+        'cancellation_reason' => 'cancellation_reason',
     ];
 
     /**
@@ -174,7 +174,7 @@ class DeleteBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSerial
      * @var array<string, string>
      */
     protected static array $setters = [
-        'cancellation_reason' => 'setCancellationReason'
+        'cancellation_reason' => 'setCancellationReason',
     ];
 
     /**
@@ -183,7 +183,7 @@ class DeleteBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSerial
      * @var array<string, string>
      */
     protected static array $getters = [
-        'cancellation_reason' => 'getCancellationReason'
+        'cancellation_reason' => 'getCancellationReason',
     ];
 
     /**
@@ -286,7 +286,6 @@ class DeleteBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSerial
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets cancellation_reason
      *
@@ -313,12 +312,13 @@ class DeleteBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSerial
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -328,7 +328,7 @@ class DeleteBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -358,7 +358,7 @@ class DeleteBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -377,7 +377,7 @@ class DeleteBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSerial
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -403,5 +403,3 @@ class DeleteBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSerial
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

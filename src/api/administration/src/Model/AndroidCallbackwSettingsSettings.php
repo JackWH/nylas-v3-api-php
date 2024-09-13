@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * AndroidCallbackwSettingsSettings Class Doc Comment
@@ -60,7 +60,7 @@ class AndroidCallbackwSettingsSettings implements ModelInterface, ArrayAccess, J
       */
     protected static array $openAPITypes = [
         'package_name' => 'string',
-        'sha1_certificate_fingerprint' => 'string'
+        'sha1_certificate_fingerprint' => 'string',
     ];
 
     /**
@@ -70,7 +70,7 @@ class AndroidCallbackwSettingsSettings implements ModelInterface, ArrayAccess, J
       */
     protected static array $openAPIFormats = [
         'package_name' => null,
-        'sha1_certificate_fingerprint' => null
+        'sha1_certificate_fingerprint' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class AndroidCallbackwSettingsSettings implements ModelInterface, ArrayAccess, J
       */
     protected static array $openAPINullables = [
         'package_name' => false,
-        'sha1_certificate_fingerprint' => false
+        'sha1_certificate_fingerprint' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class AndroidCallbackwSettingsSettings implements ModelInterface, ArrayAccess, J
      */
     protected static array $attributeMap = [
         'package_name' => 'package_name',
-        'sha1_certificate_fingerprint' => 'sha1_certificate_fingerprint'
+        'sha1_certificate_fingerprint' => 'sha1_certificate_fingerprint',
     ];
 
     /**
@@ -180,7 +180,7 @@ class AndroidCallbackwSettingsSettings implements ModelInterface, ArrayAccess, J
      */
     protected static array $setters = [
         'package_name' => 'setPackageName',
-        'sha1_certificate_fingerprint' => 'setSha1CertificateFingerprint'
+        'sha1_certificate_fingerprint' => 'setSha1CertificateFingerprint',
     ];
 
     /**
@@ -190,7 +190,7 @@ class AndroidCallbackwSettingsSettings implements ModelInterface, ArrayAccess, J
      */
     protected static array $getters = [
         'package_name' => 'getPackageName',
-        'sha1_certificate_fingerprint' => 'getSha1CertificateFingerprint'
+        'sha1_certificate_fingerprint' => 'getSha1CertificateFingerprint',
     ];
 
     /**
@@ -286,6 +286,7 @@ class AndroidCallbackwSettingsSettings implements ModelInterface, ArrayAccess, J
         if ($this->container['sha1_certificate_fingerprint'] === null) {
             $invalidProperties[] = "'sha1_certificate_fingerprint' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -299,7 +300,6 @@ class AndroidCallbackwSettingsSettings implements ModelInterface, ArrayAccess, J
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets package_name
@@ -354,12 +354,13 @@ class AndroidCallbackwSettingsSettings implements ModelInterface, ArrayAccess, J
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -369,7 +370,7 @@ class AndroidCallbackwSettingsSettings implements ModelInterface, ArrayAccess, J
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -399,7 +400,7 @@ class AndroidCallbackwSettingsSettings implements ModelInterface, ArrayAccess, J
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -418,7 +419,7 @@ class AndroidCallbackwSettingsSettings implements ModelInterface, ArrayAccess, J
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -444,5 +445,3 @@ class AndroidCallbackwSettingsSettings implements ModelInterface, ArrayAccess, J
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CreateCredentialRequest Class Doc Comment
@@ -60,7 +60,7 @@ class CreateCredentialRequest implements ModelInterface, ArrayAccess, JsonSerial
     protected static array $openAPITypes = [
         'name' => 'string',
         'credential_type' => 'string',
-        'credential_data' => 'object'
+        'credential_data' => 'object',
     ];
 
     /**
@@ -71,7 +71,7 @@ class CreateCredentialRequest implements ModelInterface, ArrayAccess, JsonSerial
     protected static array $openAPIFormats = [
         'name' => null,
         'credential_type' => null,
-        'credential_data' => null
+        'credential_data' => null,
     ];
 
     /**
@@ -82,7 +82,7 @@ class CreateCredentialRequest implements ModelInterface, ArrayAccess, JsonSerial
     protected static array $openAPINullables = [
         'name' => false,
         'credential_type' => false,
-        'credential_data' => false
+        'credential_data' => false,
     ];
 
     /**
@@ -173,7 +173,7 @@ class CreateCredentialRequest implements ModelInterface, ArrayAccess, JsonSerial
     protected static array $attributeMap = [
         'name' => 'name',
         'credential_type' => 'credential_type',
-        'credential_data' => 'credential_data'
+        'credential_data' => 'credential_data',
     ];
 
     /**
@@ -184,7 +184,7 @@ class CreateCredentialRequest implements ModelInterface, ArrayAccess, JsonSerial
     protected static array $setters = [
         'name' => 'setName',
         'credential_type' => 'setCredentialType',
-        'credential_data' => 'setCredentialData'
+        'credential_data' => 'setCredentialData',
     ];
 
     /**
@@ -195,7 +195,7 @@ class CreateCredentialRequest implements ModelInterface, ArrayAccess, JsonSerial
     protected static array $getters = [
         'name' => 'getName',
         'credential_type' => 'getCredentialType',
-        'credential_data' => 'getCredentialData'
+        'credential_data' => 'getCredentialData',
     ];
 
     /**
@@ -295,6 +295,7 @@ class CreateCredentialRequest implements ModelInterface, ArrayAccess, JsonSerial
         if ($this->container['credential_data'] === null) {
             $invalidProperties[] = "'credential_data' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -308,7 +309,6 @@ class CreateCredentialRequest implements ModelInterface, ArrayAccess, JsonSerial
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets name
@@ -390,12 +390,13 @@ class CreateCredentialRequest implements ModelInterface, ArrayAccess, JsonSerial
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -405,7 +406,7 @@ class CreateCredentialRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -435,7 +436,7 @@ class CreateCredentialRequest implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -454,7 +455,7 @@ class CreateCredentialRequest implements ModelInterface, ArrayAccess, JsonSerial
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -480,5 +481,3 @@ class CreateCredentialRequest implements ModelInterface, ArrayAccess, JsonSerial
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

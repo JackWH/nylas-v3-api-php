@@ -32,14 +32,13 @@ use PHPUnit\Framework\TestCase;
 /**
  * AttachmentMetadataTest Class Doc Comment
  *
- * @description 
+ * @description
  * @package     JackWH\NylasV3\EmailCalendar
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
 class AttachmentMetadataTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

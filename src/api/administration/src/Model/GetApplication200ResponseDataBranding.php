@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetApplication200ResponseDataBranding Class Doc Comment
@@ -61,7 +61,7 @@ class GetApplication200ResponseDataBranding implements ModelInterface, ArrayAcce
         'name' => 'string',
         'icon_url' => 'string',
         'website_url' => 'string',
-        'description' => 'string'
+        'description' => 'string',
     ];
 
     /**
@@ -73,7 +73,7 @@ class GetApplication200ResponseDataBranding implements ModelInterface, ArrayAcce
         'name' => null,
         'icon_url' => null,
         'website_url' => null,
-        'description' => null
+        'description' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class GetApplication200ResponseDataBranding implements ModelInterface, ArrayAcce
         'name' => false,
         'icon_url' => false,
         'website_url' => false,
-        'description' => false
+        'description' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class GetApplication200ResponseDataBranding implements ModelInterface, ArrayAcce
         'name' => 'name',
         'icon_url' => 'icon_url',
         'website_url' => 'website_url',
-        'description' => 'description'
+        'description' => 'description',
     ];
 
     /**
@@ -189,7 +189,7 @@ class GetApplication200ResponseDataBranding implements ModelInterface, ArrayAcce
         'name' => 'setName',
         'icon_url' => 'setIconUrl',
         'website_url' => 'setWebsiteUrl',
-        'description' => 'setDescription'
+        'description' => 'setDescription',
     ];
 
     /**
@@ -201,7 +201,7 @@ class GetApplication200ResponseDataBranding implements ModelInterface, ArrayAcce
         'name' => 'getName',
         'icon_url' => 'getIconUrl',
         'website_url' => 'getWebsiteUrl',
-        'description' => 'getDescription'
+        'description' => 'getDescription',
     ];
 
     /**
@@ -306,7 +306,6 @@ class GetApplication200ResponseDataBranding implements ModelInterface, ArrayAcce
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets name
@@ -415,12 +414,13 @@ class GetApplication200ResponseDataBranding implements ModelInterface, ArrayAcce
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -430,7 +430,7 @@ class GetApplication200ResponseDataBranding implements ModelInterface, ArrayAcce
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -460,7 +460,7 @@ class GetApplication200ResponseDataBranding implements ModelInterface, ArrayAcce
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -479,7 +479,7 @@ class GetApplication200ResponseDataBranding implements ModelInterface, ArrayAcce
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -505,5 +505,3 @@ class GetApplication200ResponseDataBranding implements ModelInterface, ArrayAcce
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

@@ -32,14 +32,13 @@ use PHPUnit\Framework\TestCase;
 /**
  * ConfigurationAvailabilityOpenHoursTest Class Doc Comment
  *
- * @description 
+ * @description
  * @package     JackWH\NylasV3\Scheduler
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
 class ConfigurationAvailabilityOpenHoursTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

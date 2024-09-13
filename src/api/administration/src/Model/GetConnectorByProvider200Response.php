@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConnectorByProvider200Response Class Doc Comment
@@ -59,7 +59,7 @@ class GetConnectorByProvider200Response implements ModelInterface, ArrayAccess, 
       */
     protected static array $openAPITypes = [
         'request_id' => 'string',
-        'data' => '\JackWH\NylasV3\Administration\Model\CreateConnector201ResponseData'
+        'data' => '\JackWH\NylasV3\Administration\Model\CreateConnector201ResponseData',
     ];
 
     /**
@@ -69,7 +69,7 @@ class GetConnectorByProvider200Response implements ModelInterface, ArrayAccess, 
       */
     protected static array $openAPIFormats = [
         'request_id' => null,
-        'data' => null
+        'data' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class GetConnectorByProvider200Response implements ModelInterface, ArrayAccess, 
       */
     protected static array $openAPINullables = [
         'request_id' => false,
-        'data' => false
+        'data' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class GetConnectorByProvider200Response implements ModelInterface, ArrayAccess, 
      */
     protected static array $attributeMap = [
         'request_id' => 'request_id',
-        'data' => 'data'
+        'data' => 'data',
     ];
 
     /**
@@ -179,7 +179,7 @@ class GetConnectorByProvider200Response implements ModelInterface, ArrayAccess, 
      */
     protected static array $setters = [
         'request_id' => 'setRequestId',
-        'data' => 'setData'
+        'data' => 'setData',
     ];
 
     /**
@@ -189,7 +189,7 @@ class GetConnectorByProvider200Response implements ModelInterface, ArrayAccess, 
      */
     protected static array $getters = [
         'request_id' => 'getRequestId',
-        'data' => 'getData'
+        'data' => 'getData',
     ];
 
     /**
@@ -293,7 +293,6 @@ class GetConnectorByProvider200Response implements ModelInterface, ArrayAccess, 
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets request_id
      *
@@ -347,12 +346,13 @@ class GetConnectorByProvider200Response implements ModelInterface, ArrayAccess, 
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -362,7 +362,7 @@ class GetConnectorByProvider200Response implements ModelInterface, ArrayAccess, 
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -392,7 +392,7 @@ class GetConnectorByProvider200Response implements ModelInterface, ArrayAccess, 
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -411,7 +411,7 @@ class GetConnectorByProvider200Response implements ModelInterface, ArrayAccess, 
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -437,5 +437,3 @@ class GetConnectorByProvider200Response implements ModelInterface, ArrayAccess, 
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

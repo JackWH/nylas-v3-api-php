@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CreatePubsubChannel200Response Class Doc Comment
@@ -59,7 +59,7 @@ class CreatePubsubChannel200Response implements ModelInterface, ArrayAccess, Jso
       */
     protected static array $openAPITypes = [
         'data' => '\JackWH\NylasV3\Administration\Model\CreatePubsubChannel200ResponseData',
-        'request_id' => 'string'
+        'request_id' => 'string',
     ];
 
     /**
@@ -69,7 +69,7 @@ class CreatePubsubChannel200Response implements ModelInterface, ArrayAccess, Jso
       */
     protected static array $openAPIFormats = [
         'data' => null,
-        'request_id' => null
+        'request_id' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class CreatePubsubChannel200Response implements ModelInterface, ArrayAccess, Jso
       */
     protected static array $openAPINullables = [
         'data' => false,
-        'request_id' => false
+        'request_id' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class CreatePubsubChannel200Response implements ModelInterface, ArrayAccess, Jso
      */
     protected static array $attributeMap = [
         'data' => 'data',
-        'request_id' => 'request_id'
+        'request_id' => 'request_id',
     ];
 
     /**
@@ -179,7 +179,7 @@ class CreatePubsubChannel200Response implements ModelInterface, ArrayAccess, Jso
      */
     protected static array $setters = [
         'data' => 'setData',
-        'request_id' => 'setRequestId'
+        'request_id' => 'setRequestId',
     ];
 
     /**
@@ -189,7 +189,7 @@ class CreatePubsubChannel200Response implements ModelInterface, ArrayAccess, Jso
      */
     protected static array $getters = [
         'data' => 'getData',
-        'request_id' => 'getRequestId'
+        'request_id' => 'getRequestId',
     ];
 
     /**
@@ -293,7 +293,6 @@ class CreatePubsubChannel200Response implements ModelInterface, ArrayAccess, Jso
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets data
      *
@@ -347,12 +346,13 @@ class CreatePubsubChannel200Response implements ModelInterface, ArrayAccess, Jso
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -362,7 +362,7 @@ class CreatePubsubChannel200Response implements ModelInterface, ArrayAccess, Jso
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -392,7 +392,7 @@ class CreatePubsubChannel200Response implements ModelInterface, ArrayAccess, Jso
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -411,7 +411,7 @@ class CreatePubsubChannel200Response implements ModelInterface, ArrayAccess, Jso
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -437,5 +437,3 @@ class CreatePubsubChannel200Response implements ModelInterface, ArrayAccess, Jso
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

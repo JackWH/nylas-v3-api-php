@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetApplication200ResponseDataHostedAuthentication Class Doc Comment
@@ -65,7 +65,7 @@ class GetApplication200ResponseDataHostedAuthentication implements ModelInterfac
         'title' => 'string',
         'subtitle' => 'string',
         'background_color' => 'string',
-        'spacing' => 'int'
+        'spacing' => 'int',
     ];
 
     /**
@@ -81,7 +81,7 @@ class GetApplication200ResponseDataHostedAuthentication implements ModelInterfac
         'title' => null,
         'subtitle' => null,
         'background_color' => null,
-        'spacing' => null
+        'spacing' => null,
     ];
 
     /**
@@ -97,7 +97,7 @@ class GetApplication200ResponseDataHostedAuthentication implements ModelInterfac
         'title' => false,
         'subtitle' => false,
         'background_color' => false,
-        'spacing' => false
+        'spacing' => false,
     ];
 
     /**
@@ -193,7 +193,7 @@ class GetApplication200ResponseDataHostedAuthentication implements ModelInterfac
         'title' => 'title',
         'subtitle' => 'subtitle',
         'background_color' => 'background_color',
-        'spacing' => 'spacing'
+        'spacing' => 'spacing',
     ];
 
     /**
@@ -209,7 +209,7 @@ class GetApplication200ResponseDataHostedAuthentication implements ModelInterfac
         'title' => 'setTitle',
         'subtitle' => 'setSubtitle',
         'background_color' => 'setBackgroundColor',
-        'spacing' => 'setSpacing'
+        'spacing' => 'setSpacing',
     ];
 
     /**
@@ -225,7 +225,7 @@ class GetApplication200ResponseDataHostedAuthentication implements ModelInterfac
         'title' => 'getTitle',
         'subtitle' => 'getSubtitle',
         'background_color' => 'getBackgroundColor',
-        'spacing' => 'getSpacing'
+        'spacing' => 'getSpacing',
     ];
 
     /**
@@ -339,7 +339,7 @@ class GetApplication200ResponseDataHostedAuthentication implements ModelInterfac
         $invalidProperties = [];
 
         $allowedValues = $this->getAlignmentAllowableValues();
-        if (!is_null($this->container['alignment']) && !in_array($this->container['alignment'], $allowedValues, true)) {
+        if (! is_null($this->container['alignment']) && ! in_array($this->container['alignment'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'alignment', must be one of '%s'",
                 $this->container['alignment'],
@@ -360,7 +360,6 @@ class GetApplication200ResponseDataHostedAuthentication implements ModelInterfac
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets background_image_url
@@ -412,7 +411,7 @@ class GetApplication200ResponseDataHostedAuthentication implements ModelInterfac
             throw new InvalidArgumentException('non-nullable alignment cannot be null');
         }
         $allowedValues = $this->getAlignmentAllowableValues();
-        if (!in_array($alignment, $allowedValues, true)) {
+        if (! in_array($alignment, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'alignment', must be one of '%s'",
@@ -587,12 +586,13 @@ class GetApplication200ResponseDataHostedAuthentication implements ModelInterfac
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -602,7 +602,7 @@ class GetApplication200ResponseDataHostedAuthentication implements ModelInterfac
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -632,7 +632,7 @@ class GetApplication200ResponseDataHostedAuthentication implements ModelInterfac
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -651,7 +651,7 @@ class GetApplication200ResponseDataHostedAuthentication implements ModelInterfac
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -677,5 +677,3 @@ class GetApplication200ResponseDataHostedAuthentication implements ModelInterfac
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

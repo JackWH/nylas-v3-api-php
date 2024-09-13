@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Drafts Class Doc Comment
@@ -73,7 +73,7 @@ class Drafts implements ModelInterface, ArrayAccess, JsonSerializable
         'starred' => 'bool',
         'subject' => 'string',
         'thread_id' => 'string',
-        'to' => '\JackWH\NylasV3\EmailCalendar\Model\MessageParticipant[]'
+        'to' => '\JackWH\NylasV3\EmailCalendar\Model\MessageParticipant[]',
     ];
 
     /**
@@ -96,7 +96,7 @@ class Drafts implements ModelInterface, ArrayAccess, JsonSerializable
         'starred' => null,
         'subject' => null,
         'thread_id' => null,
-        'to' => null
+        'to' => null,
     ];
 
     /**
@@ -119,7 +119,7 @@ class Drafts implements ModelInterface, ArrayAccess, JsonSerializable
         'starred' => false,
         'subject' => false,
         'thread_id' => false,
-        'to' => false
+        'to' => false,
     ];
 
     /**
@@ -222,7 +222,7 @@ class Drafts implements ModelInterface, ArrayAccess, JsonSerializable
         'starred' => 'starred',
         'subject' => 'subject',
         'thread_id' => 'thread_id',
-        'to' => 'to'
+        'to' => 'to',
     ];
 
     /**
@@ -245,7 +245,7 @@ class Drafts implements ModelInterface, ArrayAccess, JsonSerializable
         'starred' => 'setStarred',
         'subject' => 'setSubject',
         'thread_id' => 'setThreadId',
-        'to' => 'setTo'
+        'to' => 'setTo',
     ];
 
     /**
@@ -268,7 +268,7 @@ class Drafts implements ModelInterface, ArrayAccess, JsonSerializable
         'starred' => 'getStarred',
         'subject' => 'getSubject',
         'thread_id' => 'getThreadId',
-        'to' => 'getTo'
+        'to' => 'getTo',
     ];
 
     /**
@@ -371,15 +371,15 @@ class Drafts implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
+        if (! is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
             $invalidProperties[] = "invalid value for 'id', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['snippet']) && (mb_strlen($this->container['snippet']) < 1)) {
+        if (! is_null($this->container['snippet']) && (mb_strlen($this->container['snippet']) < 1)) {
             $invalidProperties[] = "invalid value for 'snippet', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['to']) && (count($this->container['to']) < 1)) {
+        if (! is_null($this->container['to']) && (count($this->container['to']) < 1)) {
             $invalidProperties[] = "invalid value for 'to', number of items must be greater than or equal to 1.";
         }
 
@@ -396,7 +396,6 @@ class Drafts implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets bcc
@@ -823,12 +822,13 @@ class Drafts implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -838,7 +838,7 @@ class Drafts implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -868,7 +868,7 @@ class Drafts implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -887,7 +887,7 @@ class Drafts implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -913,5 +913,3 @@ class Drafts implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

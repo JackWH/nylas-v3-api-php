@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class PostWebhookDestinations400ResponseErrorTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

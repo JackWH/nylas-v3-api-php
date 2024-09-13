@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetMockPayloadInput Class Doc Comment
@@ -58,7 +58,7 @@ class GetMockPayloadInput implements ModelInterface, ArrayAccess, JsonSerializab
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'trigger_type' => 'string'
+        'trigger_type' => 'string',
     ];
 
     /**
@@ -67,7 +67,7 @@ class GetMockPayloadInput implements ModelInterface, ArrayAccess, JsonSerializab
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'trigger_type' => null
+        'trigger_type' => null,
     ];
 
     /**
@@ -76,7 +76,7 @@ class GetMockPayloadInput implements ModelInterface, ArrayAccess, JsonSerializab
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'trigger_type' => false
+        'trigger_type' => false,
     ];
 
     /**
@@ -165,7 +165,7 @@ class GetMockPayloadInput implements ModelInterface, ArrayAccess, JsonSerializab
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'trigger_type' => 'trigger_type'
+        'trigger_type' => 'trigger_type',
     ];
 
     /**
@@ -174,7 +174,7 @@ class GetMockPayloadInput implements ModelInterface, ArrayAccess, JsonSerializab
      * @var array<string, string>
      */
     protected static array $setters = [
-        'trigger_type' => 'setTriggerType'
+        'trigger_type' => 'setTriggerType',
     ];
 
     /**
@@ -183,7 +183,7 @@ class GetMockPayloadInput implements ModelInterface, ArrayAccess, JsonSerializab
      * @var array<string, string>
      */
     protected static array $getters = [
-        'trigger_type' => 'getTriggerType'
+        'trigger_type' => 'getTriggerType',
     ];
 
     /**
@@ -331,7 +331,7 @@ class GetMockPayloadInput implements ModelInterface, ArrayAccess, JsonSerializab
             $invalidProperties[] = "'trigger_type' can't be null";
         }
         $allowedValues = $this->getTriggerTypeAllowableValues();
-        if (!is_null($this->container['trigger_type']) && !in_array($this->container['trigger_type'], $allowedValues, true)) {
+        if (! is_null($this->container['trigger_type']) && ! in_array($this->container['trigger_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'trigger_type', must be one of '%s'",
                 $this->container['trigger_type'],
@@ -352,7 +352,6 @@ class GetMockPayloadInput implements ModelInterface, ArrayAccess, JsonSerializab
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets trigger_type
@@ -377,7 +376,7 @@ class GetMockPayloadInput implements ModelInterface, ArrayAccess, JsonSerializab
             throw new InvalidArgumentException('non-nullable trigger_type cannot be null');
         }
         $allowedValues = $this->getTriggerTypeAllowableValues();
-        if (!in_array($trigger_type, $allowedValues, true)) {
+        if (! in_array($trigger_type, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'trigger_type', must be one of '%s'",
@@ -390,12 +389,13 @@ class GetMockPayloadInput implements ModelInterface, ArrayAccess, JsonSerializab
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -405,7 +405,7 @@ class GetMockPayloadInput implements ModelInterface, ArrayAccess, JsonSerializab
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -435,7 +435,7 @@ class GetMockPayloadInput implements ModelInterface, ArrayAccess, JsonSerializab
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -454,7 +454,7 @@ class GetMockPayloadInput implements ModelInterface, ArrayAccess, JsonSerializab
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -480,5 +480,3 @@ class GetMockPayloadInput implements ModelInterface, ArrayAccess, JsonSerializab
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

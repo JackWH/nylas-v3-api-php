@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class GetConsolidatedOrder200ResponseAllOfDataTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

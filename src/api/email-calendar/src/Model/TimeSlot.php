@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * TimeSlot Class Doc Comment
@@ -60,7 +60,7 @@ class TimeSlot implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPITypes = [
         'emails' => 'string[]',
         'start_time' => 'int',
-        'end_time' => 'int'
+        'end_time' => 'int',
     ];
 
     /**
@@ -71,7 +71,7 @@ class TimeSlot implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPIFormats = [
         'emails' => null,
         'start_time' => null,
-        'end_time' => null
+        'end_time' => null,
     ];
 
     /**
@@ -82,7 +82,7 @@ class TimeSlot implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPINullables = [
         'emails' => false,
         'start_time' => false,
-        'end_time' => false
+        'end_time' => false,
     ];
 
     /**
@@ -173,7 +173,7 @@ class TimeSlot implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $attributeMap = [
         'emails' => 'emails',
         'start_time' => 'start_time',
-        'end_time' => 'end_time'
+        'end_time' => 'end_time',
     ];
 
     /**
@@ -184,7 +184,7 @@ class TimeSlot implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $setters = [
         'emails' => 'setEmails',
         'start_time' => 'setStartTime',
-        'end_time' => 'setEndTime'
+        'end_time' => 'setEndTime',
     ];
 
     /**
@@ -195,7 +195,7 @@ class TimeSlot implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $getters = [
         'emails' => 'getEmails',
         'start_time' => 'getStartTime',
-        'end_time' => 'getEndTime'
+        'end_time' => 'getEndTime',
     ];
 
     /**
@@ -300,7 +300,6 @@ class TimeSlot implements ModelInterface, ArrayAccess, JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets emails
      *
@@ -381,12 +380,13 @@ class TimeSlot implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -396,7 +396,7 @@ class TimeSlot implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -426,7 +426,7 @@ class TimeSlot implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -445,7 +445,7 @@ class TimeSlot implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -471,5 +471,3 @@ class TimeSlot implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

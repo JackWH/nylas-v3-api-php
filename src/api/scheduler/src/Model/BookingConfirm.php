@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * BookingConfirm Class Doc Comment
@@ -60,7 +60,7 @@ class BookingConfirm implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPITypes = [
         'salt' => 'string',
         'status' => 'string',
-        'cancellation_reason' => 'string'
+        'cancellation_reason' => 'string',
     ];
 
     /**
@@ -71,7 +71,7 @@ class BookingConfirm implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPIFormats = [
         'salt' => null,
         'status' => null,
-        'cancellation_reason' => null
+        'cancellation_reason' => null,
     ];
 
     /**
@@ -82,7 +82,7 @@ class BookingConfirm implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPINullables = [
         'salt' => false,
         'status' => false,
-        'cancellation_reason' => false
+        'cancellation_reason' => false,
     ];
 
     /**
@@ -173,7 +173,7 @@ class BookingConfirm implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $attributeMap = [
         'salt' => 'salt',
         'status' => 'status',
-        'cancellation_reason' => 'cancellation_reason'
+        'cancellation_reason' => 'cancellation_reason',
     ];
 
     /**
@@ -184,7 +184,7 @@ class BookingConfirm implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $setters = [
         'salt' => 'setSalt',
         'status' => 'setStatus',
-        'cancellation_reason' => 'setCancellationReason'
+        'cancellation_reason' => 'setCancellationReason',
     ];
 
     /**
@@ -195,7 +195,7 @@ class BookingConfirm implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $getters = [
         'salt' => 'getSalt',
         'status' => 'getStatus',
-        'cancellation_reason' => 'getCancellationReason'
+        'cancellation_reason' => 'getCancellationReason',
     ];
 
     /**
@@ -308,7 +308,7 @@ class BookingConfirm implements ModelInterface, ArrayAccess, JsonSerializable
             $invalidProperties[] = "'status' can't be null";
         }
         $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+        if (! is_null($this->container['status']) && ! in_array($this->container['status'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
@@ -329,7 +329,6 @@ class BookingConfirm implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets salt
@@ -381,7 +380,7 @@ class BookingConfirm implements ModelInterface, ArrayAccess, JsonSerializable
             throw new InvalidArgumentException('non-nullable status cannot be null');
         }
         $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
+        if (! in_array($status, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'status', must be one of '%s'",
@@ -421,12 +420,13 @@ class BookingConfirm implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -436,7 +436,7 @@ class BookingConfirm implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -466,7 +466,7 @@ class BookingConfirm implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -485,7 +485,7 @@ class BookingConfirm implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -511,5 +511,3 @@ class BookingConfirm implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

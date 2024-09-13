@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PostConfigurations200Response Class Doc Comment
@@ -65,7 +65,7 @@ class PostConfigurations200Response implements ModelInterface, ArrayAccess, Json
         'availability' => '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerAvailability',
         'event_booking' => '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerEventBooking',
         'scheduler' => '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerScheduler',
-        'appearance' => 'array<string,\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerAppearanceValue>'
+        'appearance' => 'array<string,\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInnerAppearanceValue>',
     ];
 
     /**
@@ -81,7 +81,7 @@ class PostConfigurations200Response implements ModelInterface, ArrayAccess, Json
         'availability' => null,
         'event_booking' => null,
         'scheduler' => null,
-        'appearance' => null
+        'appearance' => null,
     ];
 
     /**
@@ -97,7 +97,7 @@ class PostConfigurations200Response implements ModelInterface, ArrayAccess, Json
         'availability' => false,
         'event_booking' => false,
         'scheduler' => false,
-        'appearance' => false
+        'appearance' => false,
     ];
 
     /**
@@ -193,7 +193,7 @@ class PostConfigurations200Response implements ModelInterface, ArrayAccess, Json
         'availability' => 'availability',
         'event_booking' => 'event_booking',
         'scheduler' => 'scheduler',
-        'appearance' => 'appearance'
+        'appearance' => 'appearance',
     ];
 
     /**
@@ -209,7 +209,7 @@ class PostConfigurations200Response implements ModelInterface, ArrayAccess, Json
         'availability' => 'setAvailability',
         'event_booking' => 'setEventBooking',
         'scheduler' => 'setScheduler',
-        'appearance' => 'setAppearance'
+        'appearance' => 'setAppearance',
     ];
 
     /**
@@ -225,7 +225,7 @@ class PostConfigurations200Response implements ModelInterface, ArrayAccess, Json
         'availability' => 'getAvailability',
         'event_booking' => 'getEventBooking',
         'scheduler' => 'getScheduler',
-        'appearance' => 'getAppearance'
+        'appearance' => 'getAppearance',
     ];
 
     /**
@@ -330,6 +330,7 @@ class PostConfigurations200Response implements ModelInterface, ArrayAccess, Json
         if ($this->container['event_booking'] === null) {
             $invalidProperties[] = "'event_booking' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -343,7 +344,6 @@ class PostConfigurations200Response implements ModelInterface, ArrayAccess, Json
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets id
@@ -560,12 +560,13 @@ class PostConfigurations200Response implements ModelInterface, ArrayAccess, Json
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -575,7 +576,7 @@ class PostConfigurations200Response implements ModelInterface, ArrayAccess, Json
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -605,7 +606,7 @@ class PostConfigurations200Response implements ModelInterface, ArrayAccess, Json
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -624,7 +625,7 @@ class PostConfigurations200Response implements ModelInterface, ArrayAccess, Json
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -650,5 +651,3 @@ class PostConfigurations200Response implements ModelInterface, ArrayAccess, Json
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

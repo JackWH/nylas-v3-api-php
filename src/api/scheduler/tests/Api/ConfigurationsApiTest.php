@@ -27,8 +27,6 @@
 namespace JackWH\NylasV3\Scheduler\Test\Api;
 
 use JackWH\NylasV3\Scheduler\Configuration;
-use JackWH\NylasV3\Scheduler\ApiException;
-use JackWH\NylasV3\Scheduler\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -40,7 +38,6 @@ use PHPUnit\Framework\TestCase;
  */
 class ConfigurationsApiTest extends TestCase
 {
-
     /**
      * Setup before running any test cases
      */

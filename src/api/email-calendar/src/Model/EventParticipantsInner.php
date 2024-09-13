@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * EventParticipantsInner Class Doc Comment
@@ -62,7 +62,7 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
         'email' => 'string',
         'name' => 'string',
         'phone_number' => 'string',
-        'status' => 'string'
+        'status' => 'string',
     ];
 
     /**
@@ -75,7 +75,7 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
         'email' => null,
         'name' => null,
         'phone_number' => null,
-        'status' => null
+        'status' => null,
     ];
 
     /**
@@ -88,7 +88,7 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
         'email' => false,
         'name' => true,
         'phone_number' => true,
-        'status' => false
+        'status' => false,
     ];
 
     /**
@@ -181,7 +181,7 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
         'email' => 'email',
         'name' => 'name',
         'phone_number' => 'phone_number',
-        'status' => 'status'
+        'status' => 'status',
     ];
 
     /**
@@ -194,7 +194,7 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
         'email' => 'setEmail',
         'name' => 'setName',
         'phone_number' => 'setPhoneNumber',
-        'status' => 'setStatus'
+        'status' => 'setStatus',
     ];
 
     /**
@@ -207,7 +207,7 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
         'email' => 'getEmail',
         'name' => 'getName',
         'phone_number' => 'getPhoneNumber',
-        'status' => 'getStatus'
+        'status' => 'getStatus',
     ];
 
     /**
@@ -323,7 +323,7 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
             $invalidProperties[] = "'email' can't be null";
         }
         $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+        if (! is_null($this->container['status']) && ! in_array($this->container['status'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
@@ -344,7 +344,6 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets comment
@@ -370,7 +369,7 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('comment', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
@@ -431,7 +430,7 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('name', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
@@ -465,7 +464,7 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('phone_number', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
@@ -498,7 +497,7 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
             throw new InvalidArgumentException('non-nullable status cannot be null');
         }
         $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
+        if (! in_array($status, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'status', must be one of '%s'",
@@ -511,12 +510,13 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -526,7 +526,7 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -556,7 +556,7 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -575,7 +575,7 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -601,5 +601,3 @@ class EventParticipantsInner implements ModelInterface, ArrayAccess, JsonSeriali
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

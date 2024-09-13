@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GoogleSettings Class Doc Comment
@@ -61,7 +61,7 @@ class GoogleSettings implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPITypes = [
         'client_id' => 'string',
         'client_secret' => 'string',
-        'topic_name' => 'string'
+        'topic_name' => 'string',
     ];
 
     /**
@@ -72,7 +72,7 @@ class GoogleSettings implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPIFormats = [
         'client_id' => null,
         'client_secret' => null,
-        'topic_name' => null
+        'topic_name' => null,
     ];
 
     /**
@@ -83,7 +83,7 @@ class GoogleSettings implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPINullables = [
         'client_id' => false,
         'client_secret' => false,
-        'topic_name' => false
+        'topic_name' => false,
     ];
 
     /**
@@ -174,7 +174,7 @@ class GoogleSettings implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $attributeMap = [
         'client_id' => 'client_id',
         'client_secret' => 'client_secret',
-        'topic_name' => 'topic_name'
+        'topic_name' => 'topic_name',
     ];
 
     /**
@@ -185,7 +185,7 @@ class GoogleSettings implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $setters = [
         'client_id' => 'setClientId',
         'client_secret' => 'setClientSecret',
-        'topic_name' => 'setTopicName'
+        'topic_name' => 'setTopicName',
     ];
 
     /**
@@ -196,7 +196,7 @@ class GoogleSettings implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $getters = [
         'client_id' => 'getClientId',
         'client_secret' => 'getClientSecret',
-        'topic_name' => 'getTopicName'
+        'topic_name' => 'getTopicName',
     ];
 
     /**
@@ -293,6 +293,7 @@ class GoogleSettings implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['client_secret'] === null) {
             $invalidProperties[] = "'client_secret' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -306,7 +307,6 @@ class GoogleSettings implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets client_id
@@ -388,12 +388,13 @@ class GoogleSettings implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -403,7 +404,7 @@ class GoogleSettings implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -433,7 +434,7 @@ class GoogleSettings implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -452,7 +453,7 @@ class GoogleSettings implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -478,5 +479,3 @@ class GoogleSettings implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

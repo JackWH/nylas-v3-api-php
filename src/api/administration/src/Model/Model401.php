@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Model401 Class Doc Comment
@@ -59,7 +59,7 @@ class Model401 implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPITypes = [
         'request_id' => 'string',
-        'error' => '\JackWH\NylasV3\Administration\Model\GetApplication401ResponseError'
+        'error' => '\JackWH\NylasV3\Administration\Model\GetApplication401ResponseError',
     ];
 
     /**
@@ -69,7 +69,7 @@ class Model401 implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPIFormats = [
         'request_id' => null,
-        'error' => null
+        'error' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class Model401 implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPINullables = [
         'request_id' => false,
-        'error' => false
+        'error' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class Model401 implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $attributeMap = [
         'request_id' => 'request_id',
-        'error' => 'error'
+        'error' => 'error',
     ];
 
     /**
@@ -179,7 +179,7 @@ class Model401 implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $setters = [
         'request_id' => 'setRequestId',
-        'error' => 'setError'
+        'error' => 'setError',
     ];
 
     /**
@@ -189,7 +189,7 @@ class Model401 implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $getters = [
         'request_id' => 'getRequestId',
-        'error' => 'getError'
+        'error' => 'getError',
     ];
 
     /**
@@ -285,6 +285,7 @@ class Model401 implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['error'] === null) {
             $invalidProperties[] = "'error' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -298,7 +299,6 @@ class Model401 implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets request_id
@@ -353,12 +353,13 @@ class Model401 implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -368,7 +369,7 @@ class Model401 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -398,7 +399,7 @@ class Model401 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -417,7 +418,7 @@ class Model401 implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -443,5 +444,3 @@ class Model401 implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

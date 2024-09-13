@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class Error4ErrorDetailsInnerTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

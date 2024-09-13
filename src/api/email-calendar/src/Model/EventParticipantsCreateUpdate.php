@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * EventParticipantsCreateUpdate Class Doc Comment
@@ -61,7 +61,7 @@ class EventParticipantsCreateUpdate implements ModelInterface, ArrayAccess, Json
         'comment' => 'string',
         'email' => 'string',
         'name' => 'string',
-        'phone_number' => 'string'
+        'phone_number' => 'string',
     ];
 
     /**
@@ -73,7 +73,7 @@ class EventParticipantsCreateUpdate implements ModelInterface, ArrayAccess, Json
         'comment' => null,
         'email' => null,
         'name' => null,
-        'phone_number' => null
+        'phone_number' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class EventParticipantsCreateUpdate implements ModelInterface, ArrayAccess, Json
         'comment' => false,
         'email' => false,
         'name' => false,
-        'phone_number' => false
+        'phone_number' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class EventParticipantsCreateUpdate implements ModelInterface, ArrayAccess, Json
         'comment' => 'comment',
         'email' => 'email',
         'name' => 'name',
-        'phone_number' => 'phone_number'
+        'phone_number' => 'phone_number',
     ];
 
     /**
@@ -189,7 +189,7 @@ class EventParticipantsCreateUpdate implements ModelInterface, ArrayAccess, Json
         'comment' => 'setComment',
         'email' => 'setEmail',
         'name' => 'setName',
-        'phone_number' => 'setPhoneNumber'
+        'phone_number' => 'setPhoneNumber',
     ];
 
     /**
@@ -201,7 +201,7 @@ class EventParticipantsCreateUpdate implements ModelInterface, ArrayAccess, Json
         'comment' => 'getComment',
         'email' => 'getEmail',
         'name' => 'getName',
-        'phone_number' => 'getPhoneNumber'
+        'phone_number' => 'getPhoneNumber',
     ];
 
     /**
@@ -296,6 +296,7 @@ class EventParticipantsCreateUpdate implements ModelInterface, ArrayAccess, Json
         if ($this->container['email'] === null) {
             $invalidProperties[] = "'email' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -309,7 +310,6 @@ class EventParticipantsCreateUpdate implements ModelInterface, ArrayAccess, Json
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets comment
@@ -418,12 +418,13 @@ class EventParticipantsCreateUpdate implements ModelInterface, ArrayAccess, Json
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -433,7 +434,7 @@ class EventParticipantsCreateUpdate implements ModelInterface, ArrayAccess, Json
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -463,7 +464,7 @@ class EventParticipantsCreateUpdate implements ModelInterface, ArrayAccess, Json
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -482,7 +483,7 @@ class EventParticipantsCreateUpdate implements ModelInterface, ArrayAccess, Json
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -508,5 +509,3 @@ class EventParticipantsCreateUpdate implements ModelInterface, ArrayAccess, Json
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

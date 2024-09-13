@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class CustomAuthFlowRequestOneOf7SettingsTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

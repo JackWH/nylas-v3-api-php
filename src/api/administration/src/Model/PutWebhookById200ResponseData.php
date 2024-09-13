@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PutWebhookById200ResponseData Class Doc Comment
@@ -66,7 +66,7 @@ class PutWebhookById200ResponseData implements ModelInterface, ArrayAccess, Json
         'notification_email_addresses' => 'string[]',
         'status_updated_at' => 'int',
         'created_at' => 'int',
-        'updated_at' => 'int'
+        'updated_at' => 'int',
     ];
 
     /**
@@ -83,7 +83,7 @@ class PutWebhookById200ResponseData implements ModelInterface, ArrayAccess, Json
         'notification_email_addresses' => null,
         'status_updated_at' => null,
         'created_at' => null,
-        'updated_at' => null
+        'updated_at' => null,
     ];
 
     /**
@@ -100,7 +100,7 @@ class PutWebhookById200ResponseData implements ModelInterface, ArrayAccess, Json
         'notification_email_addresses' => false,
         'status_updated_at' => false,
         'created_at' => false,
-        'updated_at' => false
+        'updated_at' => false,
     ];
 
     /**
@@ -197,7 +197,7 @@ class PutWebhookById200ResponseData implements ModelInterface, ArrayAccess, Json
         'notification_email_addresses' => 'notification_email_addresses',
         'status_updated_at' => 'status_updated_at',
         'created_at' => 'created_at',
-        'updated_at' => 'updated_at'
+        'updated_at' => 'updated_at',
     ];
 
     /**
@@ -214,7 +214,7 @@ class PutWebhookById200ResponseData implements ModelInterface, ArrayAccess, Json
         'notification_email_addresses' => 'setNotificationEmailAddresses',
         'status_updated_at' => 'setStatusUpdatedAt',
         'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'updated_at' => 'setUpdatedAt',
     ];
 
     /**
@@ -231,7 +231,7 @@ class PutWebhookById200ResponseData implements ModelInterface, ArrayAccess, Json
         'notification_email_addresses' => 'getNotificationEmailAddresses',
         'status_updated_at' => 'getStatusUpdatedAt',
         'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'updated_at' => 'getUpdatedAt',
     ];
 
     /**
@@ -401,7 +401,7 @@ class PutWebhookById200ResponseData implements ModelInterface, ArrayAccess, Json
         $invalidProperties = [];
 
         $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+        if (! is_null($this->container['status']) && ! in_array($this->container['status'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
@@ -422,7 +422,6 @@ class PutWebhookById200ResponseData implements ModelInterface, ArrayAccess, Json
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets id
@@ -564,7 +563,7 @@ class PutWebhookById200ResponseData implements ModelInterface, ArrayAccess, Json
             throw new InvalidArgumentException('non-nullable status cannot be null');
         }
         $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
+        if (! in_array($status, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'status', must be one of '%s'",
@@ -685,12 +684,13 @@ class PutWebhookById200ResponseData implements ModelInterface, ArrayAccess, Json
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -700,7 +700,7 @@ class PutWebhookById200ResponseData implements ModelInterface, ArrayAccess, Json
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -730,7 +730,7 @@ class PutWebhookById200ResponseData implements ModelInterface, ArrayAccess, Json
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -749,7 +749,7 @@ class PutWebhookById200ResponseData implements ModelInterface, ArrayAccess, Json
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -775,5 +775,3 @@ class PutWebhookById200ResponseData implements ModelInterface, ArrayAccess, Json
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

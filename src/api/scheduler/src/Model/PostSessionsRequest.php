@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PostSessionsRequest Class Doc Comment
@@ -60,7 +60,7 @@ class PostSessionsRequest implements ModelInterface, ArrayAccess, JsonSerializab
     protected static array $openAPITypes = [
         'configuration_id' => 'string',
         'slug' => 'string',
-        'time_to_live' => 'Int'
+        'time_to_live' => 'Int',
     ];
 
     /**
@@ -71,7 +71,7 @@ class PostSessionsRequest implements ModelInterface, ArrayAccess, JsonSerializab
     protected static array $openAPIFormats = [
         'configuration_id' => null,
         'slug' => null,
-        'time_to_live' => null
+        'time_to_live' => null,
     ];
 
     /**
@@ -82,7 +82,7 @@ class PostSessionsRequest implements ModelInterface, ArrayAccess, JsonSerializab
     protected static array $openAPINullables = [
         'configuration_id' => false,
         'slug' => false,
-        'time_to_live' => false
+        'time_to_live' => false,
     ];
 
     /**
@@ -173,7 +173,7 @@ class PostSessionsRequest implements ModelInterface, ArrayAccess, JsonSerializab
     protected static array $attributeMap = [
         'configuration_id' => 'configuration_id',
         'slug' => 'slug',
-        'time_to_live' => 'time_to_live'
+        'time_to_live' => 'time_to_live',
     ];
 
     /**
@@ -184,7 +184,7 @@ class PostSessionsRequest implements ModelInterface, ArrayAccess, JsonSerializab
     protected static array $setters = [
         'configuration_id' => 'setConfigurationId',
         'slug' => 'setSlug',
-        'time_to_live' => 'setTimeToLive'
+        'time_to_live' => 'setTimeToLive',
     ];
 
     /**
@@ -195,7 +195,7 @@ class PostSessionsRequest implements ModelInterface, ArrayAccess, JsonSerializab
     protected static array $getters = [
         'configuration_id' => 'getConfigurationId',
         'slug' => 'getSlug',
-        'time_to_live' => 'getTimeToLive'
+        'time_to_live' => 'getTimeToLive',
     ];
 
     /**
@@ -300,7 +300,6 @@ class PostSessionsRequest implements ModelInterface, ArrayAccess, JsonSerializab
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets configuration_id
      *
@@ -381,12 +380,13 @@ class PostSessionsRequest implements ModelInterface, ArrayAccess, JsonSerializab
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -396,7 +396,7 @@ class PostSessionsRequest implements ModelInterface, ArrayAccess, JsonSerializab
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -426,7 +426,7 @@ class PostSessionsRequest implements ModelInterface, ArrayAccess, JsonSerializab
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -445,7 +445,7 @@ class PostSessionsRequest implements ModelInterface, ArrayAccess, JsonSerializab
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -471,5 +471,3 @@ class PostSessionsRequest implements ModelInterface, ArrayAccess, JsonSerializab
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

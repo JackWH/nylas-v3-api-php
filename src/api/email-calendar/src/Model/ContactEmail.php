@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ContactEmail Class Doc Comment
@@ -60,7 +60,7 @@ class ContactEmail implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPITypes = [
         'email' => 'string',
-        'type' => 'string'
+        'type' => 'string',
     ];
 
     /**
@@ -70,7 +70,7 @@ class ContactEmail implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPIFormats = [
         'email' => null,
-        'type' => null
+        'type' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class ContactEmail implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPINullables = [
         'email' => false,
-        'type' => false
+        'type' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class ContactEmail implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $attributeMap = [
         'email' => 'email',
-        'type' => 'type'
+        'type' => 'type',
     ];
 
     /**
@@ -180,7 +180,7 @@ class ContactEmail implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $setters = [
         'email' => 'setEmail',
-        'type' => 'setType'
+        'type' => 'setType',
     ];
 
     /**
@@ -190,7 +190,7 @@ class ContactEmail implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $getters = [
         'email' => 'getEmail',
-        'type' => 'getType'
+        'type' => 'getType',
     ];
 
     /**
@@ -305,7 +305,7 @@ class ContactEmail implements ModelInterface, ArrayAccess, JsonSerializable
         }
 
         $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
+        if (! is_null($this->container['type']) && ! in_array($this->container['type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'type', must be one of '%s'",
                 $this->container['type'],
@@ -326,7 +326,6 @@ class ContactEmail implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets email
@@ -382,7 +381,7 @@ class ContactEmail implements ModelInterface, ArrayAccess, JsonSerializable
             throw new InvalidArgumentException('non-nullable type cannot be null');
         }
         $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
+        if (! in_array($type, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'type', must be one of '%s'",
@@ -395,12 +394,13 @@ class ContactEmail implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -410,7 +410,7 @@ class ContactEmail implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -440,7 +440,7 @@ class ContactEmail implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -459,7 +459,7 @@ class ContactEmail implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -485,5 +485,3 @@ class ContactEmail implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

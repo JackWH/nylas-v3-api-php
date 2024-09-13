@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Drafts2 Class Doc Comment
@@ -66,7 +66,7 @@ class Drafts2 implements ModelInterface, ArrayAccess, JsonSerializable
         'reply_to' => '\JackWH\NylasV3\EmailCalendar\Model\MessageParticipant[]',
         'starred' => 'bool',
         'subject' => 'string',
-        'to' => '\JackWH\NylasV3\EmailCalendar\Model\MessageParticipant[]'
+        'to' => '\JackWH\NylasV3\EmailCalendar\Model\MessageParticipant[]',
     ];
 
     /**
@@ -82,7 +82,7 @@ class Drafts2 implements ModelInterface, ArrayAccess, JsonSerializable
         'reply_to' => null,
         'starred' => null,
         'subject' => null,
-        'to' => null
+        'to' => null,
     ];
 
     /**
@@ -98,7 +98,7 @@ class Drafts2 implements ModelInterface, ArrayAccess, JsonSerializable
         'reply_to' => false,
         'starred' => false,
         'subject' => false,
-        'to' => false
+        'to' => false,
     ];
 
     /**
@@ -194,7 +194,7 @@ class Drafts2 implements ModelInterface, ArrayAccess, JsonSerializable
         'reply_to' => 'reply_to',
         'starred' => 'starred',
         'subject' => 'subject',
-        'to' => 'to'
+        'to' => 'to',
     ];
 
     /**
@@ -210,7 +210,7 @@ class Drafts2 implements ModelInterface, ArrayAccess, JsonSerializable
         'reply_to' => 'setReplyTo',
         'starred' => 'setStarred',
         'subject' => 'setSubject',
-        'to' => 'setTo'
+        'to' => 'setTo',
     ];
 
     /**
@@ -226,7 +226,7 @@ class Drafts2 implements ModelInterface, ArrayAccess, JsonSerializable
         'reply_to' => 'getReplyTo',
         'starred' => 'getStarred',
         'subject' => 'getSubject',
-        'to' => 'getTo'
+        'to' => 'getTo',
     ];
 
     /**
@@ -335,7 +335,6 @@ class Drafts2 implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets bcc
@@ -562,12 +561,13 @@ class Drafts2 implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -577,7 +577,7 @@ class Drafts2 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -607,7 +607,7 @@ class Drafts2 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -626,7 +626,7 @@ class Drafts2 implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -652,5 +652,3 @@ class Drafts2 implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

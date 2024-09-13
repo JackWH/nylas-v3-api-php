@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PatchBookingsIdRequest Class Doc Comment
@@ -59,7 +59,7 @@ class PatchBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSeriali
       */
     protected static array $openAPITypes = [
         'start_time' => 'string',
-        'end_time' => 'string'
+        'end_time' => 'string',
     ];
 
     /**
@@ -69,7 +69,7 @@ class PatchBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSeriali
       */
     protected static array $openAPIFormats = [
         'start_time' => null,
-        'end_time' => null
+        'end_time' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class PatchBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSeriali
       */
     protected static array $openAPINullables = [
         'start_time' => false,
-        'end_time' => false
+        'end_time' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class PatchBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSeriali
      */
     protected static array $attributeMap = [
         'start_time' => 'start_time',
-        'end_time' => 'end_time'
+        'end_time' => 'end_time',
     ];
 
     /**
@@ -179,7 +179,7 @@ class PatchBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSeriali
      */
     protected static array $setters = [
         'start_time' => 'setStartTime',
-        'end_time' => 'setEndTime'
+        'end_time' => 'setEndTime',
     ];
 
     /**
@@ -189,7 +189,7 @@ class PatchBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSeriali
      */
     protected static array $getters = [
         'start_time' => 'getStartTime',
-        'end_time' => 'getEndTime'
+        'end_time' => 'getEndTime',
     ];
 
     /**
@@ -285,6 +285,7 @@ class PatchBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSeriali
         if ($this->container['end_time'] === null) {
             $invalidProperties[] = "'end_time' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -298,7 +299,6 @@ class PatchBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSeriali
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets start_time
@@ -353,12 +353,13 @@ class PatchBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSeriali
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -368,7 +369,7 @@ class PatchBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -398,7 +399,7 @@ class PatchBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -417,7 +418,7 @@ class PatchBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSeriali
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -443,5 +444,3 @@ class PatchBookingsIdRequest implements ModelInterface, ArrayAccess, JsonSeriali
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

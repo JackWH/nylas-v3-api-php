@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner Class Doc Comment
@@ -61,7 +61,7 @@ class GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner implements Mode
         'name' => 'string',
         'image_url' => 'string',
         'quantity' => 'int',
-        'unit_price' => 'float'
+        'unit_price' => 'float',
     ];
 
     /**
@@ -73,7 +73,7 @@ class GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner implements Mode
         'name' => null,
         'image_url' => null,
         'quantity' => null,
-        'unit_price' => null
+        'unit_price' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner implements Mode
         'name' => false,
         'image_url' => false,
         'quantity' => false,
-        'unit_price' => false
+        'unit_price' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner implements Mode
         'name' => 'name',
         'image_url' => 'image_url',
         'quantity' => 'quantity',
-        'unit_price' => 'unit_price'
+        'unit_price' => 'unit_price',
     ];
 
     /**
@@ -189,7 +189,7 @@ class GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner implements Mode
         'name' => 'setName',
         'image_url' => 'setImageUrl',
         'quantity' => 'setQuantity',
-        'unit_price' => 'setUnitPrice'
+        'unit_price' => 'setUnitPrice',
     ];
 
     /**
@@ -201,7 +201,7 @@ class GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner implements Mode
         'name' => 'getName',
         'image_url' => 'getImageUrl',
         'quantity' => 'getQuantity',
-        'unit_price' => 'getUnitPrice'
+        'unit_price' => 'getUnitPrice',
     ];
 
     /**
@@ -296,6 +296,7 @@ class GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner implements Mode
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -309,7 +310,6 @@ class GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner implements Mode
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets name
@@ -418,12 +418,13 @@ class GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner implements Mode
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -433,7 +434,7 @@ class GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner implements Mode
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -463,7 +464,7 @@ class GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner implements Mode
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -482,7 +483,7 @@ class GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner implements Mode
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -508,5 +509,3 @@ class GetConsolidatedOrder200ResponseAllOfDataAllOfProductsInner implements Mode
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

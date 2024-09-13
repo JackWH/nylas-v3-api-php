@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Schedules Class Doc Comment
@@ -60,7 +60,7 @@ class Schedules implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPITypes = [
         'schedule_id' => 'string',
         'status' => '\JackWH\NylasV3\EmailCalendar\Model\GetSchedules200ResponseInnerStatus',
-        'close_time' => 'int'
+        'close_time' => 'int',
     ];
 
     /**
@@ -71,7 +71,7 @@ class Schedules implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPIFormats = [
         'schedule_id' => null,
         'status' => null,
-        'close_time' => null
+        'close_time' => null,
     ];
 
     /**
@@ -82,7 +82,7 @@ class Schedules implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPINullables = [
         'schedule_id' => false,
         'status' => false,
-        'close_time' => false
+        'close_time' => false,
     ];
 
     /**
@@ -173,7 +173,7 @@ class Schedules implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $attributeMap = [
         'schedule_id' => 'schedule_id',
         'status' => 'status',
-        'close_time' => 'close_time'
+        'close_time' => 'close_time',
     ];
 
     /**
@@ -184,7 +184,7 @@ class Schedules implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $setters = [
         'schedule_id' => 'setScheduleId',
         'status' => 'setStatus',
-        'close_time' => 'setCloseTime'
+        'close_time' => 'setCloseTime',
     ];
 
     /**
@@ -195,7 +195,7 @@ class Schedules implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $getters = [
         'schedule_id' => 'getScheduleId',
         'status' => 'getStatus',
-        'close_time' => 'getCloseTime'
+        'close_time' => 'getCloseTime',
     ];
 
     /**
@@ -292,6 +292,7 @@ class Schedules implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -305,7 +306,6 @@ class Schedules implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets schedule_id
@@ -387,12 +387,13 @@ class Schedules implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -402,7 +403,7 @@ class Schedules implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -432,7 +433,7 @@ class Schedules implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -451,7 +452,7 @@ class Schedules implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -477,5 +478,3 @@ class Schedules implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

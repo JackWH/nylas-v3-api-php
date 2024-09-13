@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CustomAuthFlowRequestOneOf6Settings Class Doc Comment
@@ -63,7 +63,7 @@ class CustomAuthFlowRequestOneOf6Settings implements ModelInterface, ArrayAccess
         'ews_username' => 'string',
         'ews_password' => 'string',
         'ews_host' => 'string',
-        'ews_port' => 'int'
+        'ews_port' => 'int',
     ];
 
     /**
@@ -76,7 +76,7 @@ class CustomAuthFlowRequestOneOf6Settings implements ModelInterface, ArrayAccess
         'ews_username' => null,
         'ews_password' => null,
         'ews_host' => null,
-        'ews_port' => null
+        'ews_port' => null,
     ];
 
     /**
@@ -89,7 +89,7 @@ class CustomAuthFlowRequestOneOf6Settings implements ModelInterface, ArrayAccess
         'ews_username' => false,
         'ews_password' => false,
         'ews_host' => false,
-        'ews_port' => false
+        'ews_port' => false,
     ];
 
     /**
@@ -182,7 +182,7 @@ class CustomAuthFlowRequestOneOf6Settings implements ModelInterface, ArrayAccess
         'ews_username' => 'ews_username',
         'ews_password' => 'ews_password',
         'ews_host' => 'ews_host',
-        'ews_port' => 'ews_port'
+        'ews_port' => 'ews_port',
     ];
 
     /**
@@ -195,7 +195,7 @@ class CustomAuthFlowRequestOneOf6Settings implements ModelInterface, ArrayAccess
         'ews_username' => 'setEwsUsername',
         'ews_password' => 'setEwsPassword',
         'ews_host' => 'setEwsHost',
-        'ews_port' => 'setEwsPort'
+        'ews_port' => 'setEwsPort',
     ];
 
     /**
@@ -208,7 +208,7 @@ class CustomAuthFlowRequestOneOf6Settings implements ModelInterface, ArrayAccess
         'ews_username' => 'getEwsUsername',
         'ews_password' => 'getEwsPassword',
         'ews_host' => 'getEwsHost',
-        'ews_port' => 'getEwsPort'
+        'ews_port' => 'getEwsPort',
     ];
 
     /**
@@ -314,7 +314,6 @@ class CustomAuthFlowRequestOneOf6Settings implements ModelInterface, ArrayAccess
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets email
@@ -450,12 +449,13 @@ class CustomAuthFlowRequestOneOf6Settings implements ModelInterface, ArrayAccess
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -465,7 +465,7 @@ class CustomAuthFlowRequestOneOf6Settings implements ModelInterface, ArrayAccess
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -495,7 +495,7 @@ class CustomAuthFlowRequestOneOf6Settings implements ModelInterface, ArrayAccess
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -514,7 +514,7 @@ class CustomAuthFlowRequestOneOf6Settings implements ModelInterface, ArrayAccess
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -540,5 +540,3 @@ class CustomAuthFlowRequestOneOf6Settings implements ModelInterface, ArrayAccess
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class GetPubsubChannels400ResponseTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

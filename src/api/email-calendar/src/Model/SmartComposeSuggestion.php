@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * SmartComposeSuggestion Class Doc Comment
@@ -58,7 +58,7 @@ class SmartComposeSuggestion implements ModelInterface, ArrayAccess, JsonSeriali
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'suggestion' => 'string'
+        'suggestion' => 'string',
     ];
 
     /**
@@ -67,7 +67,7 @@ class SmartComposeSuggestion implements ModelInterface, ArrayAccess, JsonSeriali
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'suggestion' => null
+        'suggestion' => null,
     ];
 
     /**
@@ -76,7 +76,7 @@ class SmartComposeSuggestion implements ModelInterface, ArrayAccess, JsonSeriali
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'suggestion' => false
+        'suggestion' => false,
     ];
 
     /**
@@ -165,7 +165,7 @@ class SmartComposeSuggestion implements ModelInterface, ArrayAccess, JsonSeriali
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'suggestion' => 'suggestion'
+        'suggestion' => 'suggestion',
     ];
 
     /**
@@ -174,7 +174,7 @@ class SmartComposeSuggestion implements ModelInterface, ArrayAccess, JsonSeriali
      * @var array<string, string>
      */
     protected static array $setters = [
-        'suggestion' => 'setSuggestion'
+        'suggestion' => 'setSuggestion',
     ];
 
     /**
@@ -183,7 +183,7 @@ class SmartComposeSuggestion implements ModelInterface, ArrayAccess, JsonSeriali
      * @var array<string, string>
      */
     protected static array $getters = [
-        'suggestion' => 'getSuggestion'
+        'suggestion' => 'getSuggestion',
     ];
 
     /**
@@ -275,6 +275,7 @@ class SmartComposeSuggestion implements ModelInterface, ArrayAccess, JsonSeriali
         if ($this->container['suggestion'] === null) {
             $invalidProperties[] = "'suggestion' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -288,7 +289,6 @@ class SmartComposeSuggestion implements ModelInterface, ArrayAccess, JsonSeriali
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets suggestion
@@ -316,12 +316,13 @@ class SmartComposeSuggestion implements ModelInterface, ArrayAccess, JsonSeriali
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -331,7 +332,7 @@ class SmartComposeSuggestion implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -361,7 +362,7 @@ class SmartComposeSuggestion implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -380,7 +381,7 @@ class SmartComposeSuggestion implements ModelInterface, ArrayAccess, JsonSeriali
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -406,5 +407,3 @@ class SmartComposeSuggestion implements ModelInterface, ArrayAccess, JsonSeriali
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

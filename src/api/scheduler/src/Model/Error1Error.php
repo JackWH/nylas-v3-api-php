@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Error1Error Class Doc Comment
@@ -60,7 +60,7 @@ class Error1Error implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPITypes = [
         'type' => 'string',
-        'message' => 'string'
+        'message' => 'string',
     ];
 
     /**
@@ -70,7 +70,7 @@ class Error1Error implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPIFormats = [
         'type' => null,
-        'message' => null
+        'message' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class Error1Error implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPINullables = [
         'type' => false,
-        'message' => false
+        'message' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class Error1Error implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $attributeMap = [
         'type' => 'type',
-        'message' => 'message'
+        'message' => 'message',
     ];
 
     /**
@@ -180,7 +180,7 @@ class Error1Error implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $setters = [
         'type' => 'setType',
-        'message' => 'setMessage'
+        'message' => 'setMessage',
     ];
 
     /**
@@ -190,7 +190,7 @@ class Error1Error implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $getters = [
         'type' => 'getType',
-        'message' => 'getMessage'
+        'message' => 'getMessage',
     ];
 
     /**
@@ -294,7 +294,6 @@ class Error1Error implements ModelInterface, ArrayAccess, JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets type
      *
@@ -348,12 +347,13 @@ class Error1Error implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -363,7 +363,7 @@ class Error1Error implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -393,7 +393,7 @@ class Error1Error implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -412,7 +412,7 @@ class Error1Error implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -438,5 +438,3 @@ class Error1Error implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

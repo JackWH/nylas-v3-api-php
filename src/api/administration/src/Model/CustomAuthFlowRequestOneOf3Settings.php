@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CustomAuthFlowRequestOneOf3Settings Class Doc Comment
@@ -61,7 +61,7 @@ class CustomAuthFlowRequestOneOf3Settings implements ModelInterface, ArrayAccess
     protected static array $openAPITypes = [
         'email_address' => 'string',
         'credential_id' => 'string',
-        'scopes' => 'string[]'
+        'scopes' => 'string[]',
     ];
 
     /**
@@ -72,7 +72,7 @@ class CustomAuthFlowRequestOneOf3Settings implements ModelInterface, ArrayAccess
     protected static array $openAPIFormats = [
         'email_address' => null,
         'credential_id' => null,
-        'scopes' => null
+        'scopes' => null,
     ];
 
     /**
@@ -83,7 +83,7 @@ class CustomAuthFlowRequestOneOf3Settings implements ModelInterface, ArrayAccess
     protected static array $openAPINullables = [
         'email_address' => false,
         'credential_id' => false,
-        'scopes' => false
+        'scopes' => false,
     ];
 
     /**
@@ -174,7 +174,7 @@ class CustomAuthFlowRequestOneOf3Settings implements ModelInterface, ArrayAccess
     protected static array $attributeMap = [
         'email_address' => 'email_address',
         'credential_id' => 'credential_id',
-        'scopes' => 'scopes'
+        'scopes' => 'scopes',
     ];
 
     /**
@@ -185,7 +185,7 @@ class CustomAuthFlowRequestOneOf3Settings implements ModelInterface, ArrayAccess
     protected static array $setters = [
         'email_address' => 'setEmailAddress',
         'credential_id' => 'setCredentialId',
-        'scopes' => 'setScopes'
+        'scopes' => 'setScopes',
     ];
 
     /**
@@ -196,7 +196,7 @@ class CustomAuthFlowRequestOneOf3Settings implements ModelInterface, ArrayAccess
     protected static array $getters = [
         'email_address' => 'getEmailAddress',
         'credential_id' => 'getCredentialId',
-        'scopes' => 'getScopes'
+        'scopes' => 'getScopes',
     ];
 
     /**
@@ -301,7 +301,6 @@ class CustomAuthFlowRequestOneOf3Settings implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets email_address
      *
@@ -382,12 +381,13 @@ class CustomAuthFlowRequestOneOf3Settings implements ModelInterface, ArrayAccess
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -397,7 +397,7 @@ class CustomAuthFlowRequestOneOf3Settings implements ModelInterface, ArrayAccess
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -427,7 +427,7 @@ class CustomAuthFlowRequestOneOf3Settings implements ModelInterface, ArrayAccess
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -446,7 +446,7 @@ class CustomAuthFlowRequestOneOf3Settings implements ModelInterface, ArrayAccess
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -472,5 +472,3 @@ class CustomAuthFlowRequestOneOf3Settings implements ModelInterface, ArrayAccess
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ConfigurationParticipantsBooking Class Doc Comment
@@ -59,7 +59,7 @@ class ConfigurationParticipantsBooking implements ModelInterface, ArrayAccess, J
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'calendar_id' => 'string'
+        'calendar_id' => 'string',
     ];
 
     /**
@@ -68,7 +68,7 @@ class ConfigurationParticipantsBooking implements ModelInterface, ArrayAccess, J
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'calendar_id' => null
+        'calendar_id' => null,
     ];
 
     /**
@@ -77,7 +77,7 @@ class ConfigurationParticipantsBooking implements ModelInterface, ArrayAccess, J
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'calendar_id' => false
+        'calendar_id' => false,
     ];
 
     /**
@@ -166,7 +166,7 @@ class ConfigurationParticipantsBooking implements ModelInterface, ArrayAccess, J
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'calendar_id' => 'calendar_id'
+        'calendar_id' => 'calendar_id',
     ];
 
     /**
@@ -175,7 +175,7 @@ class ConfigurationParticipantsBooking implements ModelInterface, ArrayAccess, J
      * @var array<string, string>
      */
     protected static array $setters = [
-        'calendar_id' => 'setCalendarId'
+        'calendar_id' => 'setCalendarId',
     ];
 
     /**
@@ -184,7 +184,7 @@ class ConfigurationParticipantsBooking implements ModelInterface, ArrayAccess, J
      * @var array<string, string>
      */
     protected static array $getters = [
-        'calendar_id' => 'getCalendarId'
+        'calendar_id' => 'getCalendarId',
     ];
 
     /**
@@ -276,6 +276,7 @@ class ConfigurationParticipantsBooking implements ModelInterface, ArrayAccess, J
         if ($this->container['calendar_id'] === null) {
             $invalidProperties[] = "'calendar_id' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -289,7 +290,6 @@ class ConfigurationParticipantsBooking implements ModelInterface, ArrayAccess, J
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets calendar_id
@@ -317,12 +317,13 @@ class ConfigurationParticipantsBooking implements ModelInterface, ArrayAccess, J
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -332,7 +333,7 @@ class ConfigurationParticipantsBooking implements ModelInterface, ArrayAccess, J
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -362,7 +363,7 @@ class ConfigurationParticipantsBooking implements ModelInterface, ArrayAccess, J
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -381,7 +382,7 @@ class ConfigurationParticipantsBooking implements ModelInterface, ArrayAccess, J
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -407,5 +408,3 @@ class ConfigurationParticipantsBooking implements ModelInterface, ArrayAccess, J
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Calendar Class Doc Comment
@@ -71,7 +71,7 @@ class Calendar implements ModelInterface, ArrayAccess, JsonSerializable
         'name' => 'string',
         'object' => 'string',
         'read_only' => 'bool',
-        'timezone' => 'string'
+        'timezone' => 'string',
     ];
 
     /**
@@ -92,7 +92,7 @@ class Calendar implements ModelInterface, ArrayAccess, JsonSerializable
         'name' => null,
         'object' => null,
         'read_only' => null,
-        'timezone' => null
+        'timezone' => null,
     ];
 
     /**
@@ -113,7 +113,7 @@ class Calendar implements ModelInterface, ArrayAccess, JsonSerializable
         'name' => false,
         'object' => false,
         'read_only' => false,
-        'timezone' => false
+        'timezone' => false,
     ];
 
     /**
@@ -214,7 +214,7 @@ class Calendar implements ModelInterface, ArrayAccess, JsonSerializable
         'name' => 'name',
         'object' => 'object',
         'read_only' => 'read_only',
-        'timezone' => 'timezone'
+        'timezone' => 'timezone',
     ];
 
     /**
@@ -235,7 +235,7 @@ class Calendar implements ModelInterface, ArrayAccess, JsonSerializable
         'name' => 'setName',
         'object' => 'setObject',
         'read_only' => 'setReadOnly',
-        'timezone' => 'setTimezone'
+        'timezone' => 'setTimezone',
     ];
 
     /**
@@ -256,7 +256,7 @@ class Calendar implements ModelInterface, ArrayAccess, JsonSerializable
         'name' => 'getName',
         'object' => 'getObject',
         'read_only' => 'getReadOnly',
-        'timezone' => 'getTimezone'
+        'timezone' => 'getTimezone',
     ];
 
     /**
@@ -357,7 +357,7 @@ class Calendar implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
+        if (! is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
             $invalidProperties[] = "invalid value for 'id', the character length must be bigger than or equal to 1.";
         }
 
@@ -374,7 +374,6 @@ class Calendar implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets description
@@ -731,12 +730,13 @@ class Calendar implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -746,7 +746,7 @@ class Calendar implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -776,7 +776,7 @@ class Calendar implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -795,7 +795,7 @@ class Calendar implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -821,5 +821,3 @@ class Calendar implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

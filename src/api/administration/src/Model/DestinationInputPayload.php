@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * DestinationInputPayload Class Doc Comment
@@ -61,7 +61,7 @@ class DestinationInputPayload implements ModelInterface, ArrayAccess, JsonSerial
         'description' => 'string',
         'trigger_types' => 'string[]',
         'webhook_url' => 'string',
-        'notification_email_addresses' => 'string[]'
+        'notification_email_addresses' => 'string[]',
     ];
 
     /**
@@ -73,7 +73,7 @@ class DestinationInputPayload implements ModelInterface, ArrayAccess, JsonSerial
         'description' => null,
         'trigger_types' => null,
         'webhook_url' => null,
-        'notification_email_addresses' => null
+        'notification_email_addresses' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class DestinationInputPayload implements ModelInterface, ArrayAccess, JsonSerial
         'description' => false,
         'trigger_types' => false,
         'webhook_url' => false,
-        'notification_email_addresses' => false
+        'notification_email_addresses' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class DestinationInputPayload implements ModelInterface, ArrayAccess, JsonSerial
         'description' => 'description',
         'trigger_types' => 'trigger_types',
         'webhook_url' => 'webhook_url',
-        'notification_email_addresses' => 'notification_email_addresses'
+        'notification_email_addresses' => 'notification_email_addresses',
     ];
 
     /**
@@ -189,7 +189,7 @@ class DestinationInputPayload implements ModelInterface, ArrayAccess, JsonSerial
         'description' => 'setDescription',
         'trigger_types' => 'setTriggerTypes',
         'webhook_url' => 'setWebhookUrl',
-        'notification_email_addresses' => 'setNotificationEmailAddresses'
+        'notification_email_addresses' => 'setNotificationEmailAddresses',
     ];
 
     /**
@@ -201,7 +201,7 @@ class DestinationInputPayload implements ModelInterface, ArrayAccess, JsonSerial
         'description' => 'getDescription',
         'trigger_types' => 'getTriggerTypes',
         'webhook_url' => 'getWebhookUrl',
-        'notification_email_addresses' => 'getNotificationEmailAddresses'
+        'notification_email_addresses' => 'getNotificationEmailAddresses',
     ];
 
     /**
@@ -352,6 +352,7 @@ class DestinationInputPayload implements ModelInterface, ArrayAccess, JsonSerial
         if ($this->container['webhook_url'] === null) {
             $invalidProperties[] = "'webhook_url' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -365,7 +366,6 @@ class DestinationInputPayload implements ModelInterface, ArrayAccess, JsonSerial
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets description
@@ -483,12 +483,13 @@ class DestinationInputPayload implements ModelInterface, ArrayAccess, JsonSerial
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -498,7 +499,7 @@ class DestinationInputPayload implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -528,7 +529,7 @@ class DestinationInputPayload implements ModelInterface, ArrayAccess, JsonSerial
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -547,7 +548,7 @@ class DestinationInputPayload implements ModelInterface, ArrayAccess, JsonSerial
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -573,5 +574,3 @@ class DestinationInputPayload implements ModelInterface, ArrayAccess, JsonSerial
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

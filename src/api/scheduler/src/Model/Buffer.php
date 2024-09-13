@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Buffer Class Doc Comment
@@ -60,7 +60,7 @@ class Buffer implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPITypes = [
         'before' => 'int',
-        'after' => 'int'
+        'after' => 'int',
     ];
 
     /**
@@ -70,7 +70,7 @@ class Buffer implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPIFormats = [
         'before' => null,
-        'after' => null
+        'after' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class Buffer implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPINullables = [
         'before' => false,
-        'after' => false
+        'after' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class Buffer implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $attributeMap = [
         'before' => 'before',
-        'after' => 'after'
+        'after' => 'after',
     ];
 
     /**
@@ -180,7 +180,7 @@ class Buffer implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $setters = [
         'before' => 'setBefore',
-        'after' => 'setAfter'
+        'after' => 'setAfter',
     ];
 
     /**
@@ -190,7 +190,7 @@ class Buffer implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $getters = [
         'before' => 'getBefore',
-        'after' => 'getAfter'
+        'after' => 'getAfter',
     ];
 
     /**
@@ -280,19 +280,19 @@ class Buffer implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['before']) && ($this->container['before'] > 120)) {
+        if (! is_null($this->container['before']) && ($this->container['before'] > 120)) {
             $invalidProperties[] = "invalid value for 'before', must be smaller than or equal to 120.";
         }
 
-        if (!is_null($this->container['before']) && ($this->container['before'] < 0)) {
+        if (! is_null($this->container['before']) && ($this->container['before'] < 0)) {
             $invalidProperties[] = "invalid value for 'before', must be bigger than or equal to 0.";
         }
 
-        if (!is_null($this->container['after']) && ($this->container['after'] > 120)) {
+        if (! is_null($this->container['after']) && ($this->container['after'] > 120)) {
             $invalidProperties[] = "invalid value for 'after', must be smaller than or equal to 120.";
         }
 
-        if (!is_null($this->container['after']) && ($this->container['after'] < 0)) {
+        if (! is_null($this->container['after']) && ($this->container['after'] < 0)) {
             $invalidProperties[] = "invalid value for 'after', must be bigger than or equal to 0.";
         }
 
@@ -309,7 +309,6 @@ class Buffer implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets before
@@ -380,12 +379,13 @@ class Buffer implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -395,7 +395,7 @@ class Buffer implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -425,7 +425,7 @@ class Buffer implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -444,7 +444,7 @@ class Buffer implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -470,5 +470,3 @@ class Buffer implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

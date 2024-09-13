@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Data Class Doc Comment
@@ -66,7 +66,7 @@ class Data implements ModelInterface, ArrayAccess, JsonSerializable
         'scope' => 'string',
         'token_type' => 'string',
         'grant_id' => 'string',
-        'provider' => 'string'
+        'provider' => 'string',
     ];
 
     /**
@@ -83,7 +83,7 @@ class Data implements ModelInterface, ArrayAccess, JsonSerializable
         'scope' => null,
         'token_type' => null,
         'grant_id' => null,
-        'provider' => null
+        'provider' => null,
     ];
 
     /**
@@ -100,7 +100,7 @@ class Data implements ModelInterface, ArrayAccess, JsonSerializable
         'scope' => false,
         'token_type' => false,
         'grant_id' => false,
-        'provider' => false
+        'provider' => false,
     ];
 
     /**
@@ -197,7 +197,7 @@ class Data implements ModelInterface, ArrayAccess, JsonSerializable
         'scope' => 'scope',
         'token_type' => 'token_type',
         'grant_id' => 'grant_id',
-        'provider' => 'provider'
+        'provider' => 'provider',
     ];
 
     /**
@@ -214,7 +214,7 @@ class Data implements ModelInterface, ArrayAccess, JsonSerializable
         'scope' => 'setScope',
         'token_type' => 'setTokenType',
         'grant_id' => 'setGrantId',
-        'provider' => 'setProvider'
+        'provider' => 'setProvider',
     ];
 
     /**
@@ -231,7 +231,7 @@ class Data implements ModelInterface, ArrayAccess, JsonSerializable
         'scope' => 'getScope',
         'token_type' => 'getTokenType',
         'grant_id' => 'getGrantId',
-        'provider' => 'getProvider'
+        'provider' => 'getProvider',
     ];
 
     /**
@@ -354,7 +354,7 @@ class Data implements ModelInterface, ArrayAccess, JsonSerializable
         $invalidProperties = [];
 
         $allowedValues = $this->getProviderAllowableValues();
-        if (!is_null($this->container['provider']) && !in_array($this->container['provider'], $allowedValues, true)) {
+        if (! is_null($this->container['provider']) && ! in_array($this->container['provider'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'provider', must be one of '%s'",
                 $this->container['provider'],
@@ -375,7 +375,6 @@ class Data implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets access_token
@@ -616,7 +615,7 @@ class Data implements ModelInterface, ArrayAccess, JsonSerializable
             throw new InvalidArgumentException('non-nullable provider cannot be null');
         }
         $allowedValues = $this->getProviderAllowableValues();
-        if (!in_array($provider, $allowedValues, true)) {
+        if (! in_array($provider, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'provider', must be one of '%s'",
@@ -629,12 +628,13 @@ class Data implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -644,7 +644,7 @@ class Data implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -674,7 +674,7 @@ class Data implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -693,7 +693,7 @@ class Data implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -719,5 +719,3 @@ class Data implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

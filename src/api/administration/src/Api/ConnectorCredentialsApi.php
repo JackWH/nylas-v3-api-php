@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Administration\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Administration\ApiException;
 use JackWH\NylasV3\Administration\Configuration;
 use JackWH\NylasV3\Administration\HeaderSelector;
@@ -69,7 +69,7 @@ class ConnectorCredentialsApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'createCredential' => [
             'application/json',
@@ -151,9 +151,9 @@ class ConnectorCredentialsApi
         string $provider,
         \JackWH\NylasV3\Administration\Model\CreateCredentialRequest $create_credential_request,
         string $contentType = self::contentTypes['createCredential'][0]
-    ): \JackWH\NylasV3\Administration\Model\CreateCredential201Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\CreateCredential201Response {
         list($response) = $this->createCredentialWithHttpInfo($provider, $create_credential_request, $contentType);
+
         return $response;
     }
 
@@ -174,12 +174,12 @@ class ConnectorCredentialsApi
         string $provider,
         \JackWH\NylasV3\Administration\Model\CreateCredentialRequest $create_credential_request,
         string $contentType = self::contentTypes['createCredential'][0]
-    ): array
-    {
+    ): array {
         $request = $this->createCredentialRequest($provider, $create_credential_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -213,7 +213,7 @@ class ConnectorCredentialsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 201:
                     if (in_array('\JackWH\NylasV3\Administration\Model\CreateCredential201Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -239,7 +239,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\CreateCredential201Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -266,7 +266,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -293,7 +293,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -322,7 +322,7 @@ class ConnectorCredentialsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -334,6 +334,7 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -342,6 +343,7 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -350,8 +352,10 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -372,8 +376,7 @@ class ConnectorCredentialsApi
         string $provider,
         \JackWH\NylasV3\Administration\Model\CreateCredentialRequest $create_credential_request,
         string $contentType = self::contentTypes['createCredential'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->createCredentialAsyncWithHttpInfo($provider, $create_credential_request, $contentType)
             ->then(
                 function ($response) {
@@ -398,8 +401,7 @@ class ConnectorCredentialsApi
         $provider,
         $create_credential_request,
         string $contentType = self::contentTypes['createCredential'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\CreateCredential201Response';
         $request = $this->createCredentialRequest($provider, $create_credential_request, $contentType);
 
@@ -419,12 +421,13 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -453,8 +456,7 @@ class ConnectorCredentialsApi
         $provider,
         $create_credential_request,
         string $contentType = self::contentTypes['createCredential'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
@@ -512,7 +514,7 @@ class ConnectorCredentialsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -529,7 +531,7 @@ class ConnectorCredentialsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -546,6 +548,7 @@ class ConnectorCredentialsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -571,9 +574,9 @@ class ConnectorCredentialsApi
         string $provider,
         string $id,
         string $contentType = self::contentTypes['deleteCredentialById'][0]
-    ): \JackWH\NylasV3\Administration\Model\DeleteCredentialById200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\DeleteCredentialById200Response {
         list($response) = $this->deleteCredentialByIdWithHttpInfo($provider, $id, $contentType);
+
         return $response;
     }
 
@@ -594,12 +597,12 @@ class ConnectorCredentialsApi
         string $provider,
         string $id,
         string $contentType = self::contentTypes['deleteCredentialById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->deleteCredentialByIdRequest($provider, $id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -633,7 +636,7 @@ class ConnectorCredentialsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\DeleteCredentialById200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -659,7 +662,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\DeleteCredentialById200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -686,7 +689,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -713,7 +716,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -742,7 +745,7 @@ class ConnectorCredentialsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -754,6 +757,7 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -762,6 +766,7 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -770,8 +775,10 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -792,8 +799,7 @@ class ConnectorCredentialsApi
         string $provider,
         string $id,
         string $contentType = self::contentTypes['deleteCredentialById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->deleteCredentialByIdAsyncWithHttpInfo($provider, $id, $contentType)
             ->then(
                 function ($response) {
@@ -818,8 +824,7 @@ class ConnectorCredentialsApi
         $provider,
         $id,
         string $contentType = self::contentTypes['deleteCredentialById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\DeleteCredentialById200Response';
         $request = $this->deleteCredentialByIdRequest($provider, $id, $contentType);
 
@@ -839,12 +844,13 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -873,8 +879,7 @@ class ConnectorCredentialsApi
         $provider,
         $id,
         string $contentType = self::contentTypes['deleteCredentialById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
@@ -933,7 +938,7 @@ class ConnectorCredentialsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -950,7 +955,7 @@ class ConnectorCredentialsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -967,6 +972,7 @@ class ConnectorCredentialsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -998,9 +1004,9 @@ class ConnectorCredentialsApi
         ?string $sort_by = 'created_at',
         ?string $order_by = 'desc',
         string $contentType = self::contentTypes['getCredentialAll'][0]
-    ): \JackWH\NylasV3\Administration\Model\GetCredentialAll200Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\GetCredentialAll200Response {
         list($response) = $this->getCredentialAllWithHttpInfo($provider, $limit, $offset, $sort_by, $order_by, $contentType);
+
         return $response;
     }
 
@@ -1027,12 +1033,12 @@ class ConnectorCredentialsApi
         ?string $sort_by = 'created_at',
         ?string $order_by = 'desc',
         string $contentType = self::contentTypes['getCredentialAll'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getCredentialAllRequest($provider, $limit, $offset, $sort_by, $order_by, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1066,7 +1072,7 @@ class ConnectorCredentialsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetCredentialAll200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1092,7 +1098,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetCredentialAll200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1119,7 +1125,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1146,7 +1152,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication404Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1175,7 +1181,7 @@ class ConnectorCredentialsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1187,6 +1193,7 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1195,6 +1202,7 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -1203,8 +1211,10 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1231,8 +1241,7 @@ class ConnectorCredentialsApi
         ?string $sort_by = 'created_at',
         ?string $order_by = 'desc',
         string $contentType = self::contentTypes['getCredentialAll'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getCredentialAllAsyncWithHttpInfo($provider, $limit, $offset, $sort_by, $order_by, $contentType)
             ->then(
                 function ($response) {
@@ -1263,8 +1272,7 @@ class ConnectorCredentialsApi
         $sort_by = 'created_at',
         $order_by = 'desc',
         string $contentType = self::contentTypes['getCredentialAll'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\GetCredentialAll200Response';
         $request = $this->getCredentialAllRequest($provider, $limit, $offset, $sort_by, $order_by, $contentType);
 
@@ -1284,12 +1292,13 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1324,8 +1333,7 @@ class ConnectorCredentialsApi
         $sort_by = 'created_at',
         $order_by = 'desc',
         string $contentType = self::contentTypes['getCredentialAll'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
@@ -1409,7 +1417,7 @@ class ConnectorCredentialsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1426,7 +1434,7 @@ class ConnectorCredentialsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1443,6 +1451,7 @@ class ConnectorCredentialsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1468,9 +1477,9 @@ class ConnectorCredentialsApi
         string $provider,
         string $id,
         string $contentType = self::contentTypes['getCredentialById'][0]
-    ): \JackWH\NylasV3\Administration\Model\CreateCredential201Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\CreateCredential201Response {
         list($response) = $this->getCredentialByIdWithHttpInfo($provider, $id, $contentType);
+
         return $response;
     }
 
@@ -1491,12 +1500,12 @@ class ConnectorCredentialsApi
         string $provider,
         string $id,
         string $contentType = self::contentTypes['getCredentialById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getCredentialByIdRequest($provider, $id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1530,7 +1539,7 @@ class ConnectorCredentialsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\CreateCredential201Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1556,7 +1565,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\CreateCredential201Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1583,7 +1592,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1610,7 +1619,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1639,7 +1648,7 @@ class ConnectorCredentialsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1651,6 +1660,7 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1659,6 +1669,7 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1667,8 +1678,10 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1689,8 +1702,7 @@ class ConnectorCredentialsApi
         string $provider,
         string $id,
         string $contentType = self::contentTypes['getCredentialById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getCredentialByIdAsyncWithHttpInfo($provider, $id, $contentType)
             ->then(
                 function ($response) {
@@ -1715,8 +1727,7 @@ class ConnectorCredentialsApi
         $provider,
         $id,
         string $contentType = self::contentTypes['getCredentialById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\CreateCredential201Response';
         $request = $this->getCredentialByIdRequest($provider, $id, $contentType);
 
@@ -1736,12 +1747,13 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1770,8 +1782,7 @@ class ConnectorCredentialsApi
         $provider,
         $id,
         string $contentType = self::contentTypes['getCredentialById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
@@ -1830,7 +1841,7 @@ class ConnectorCredentialsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1847,7 +1858,7 @@ class ConnectorCredentialsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1864,6 +1875,7 @@ class ConnectorCredentialsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1891,9 +1903,9 @@ class ConnectorCredentialsApi
         string $id,
         \JackWH\NylasV3\Administration\Model\PatchCredentialByIdRequest $patch_credential_by_id_request,
         string $contentType = self::contentTypes['patchCredentialById'][0]
-    ): \JackWH\NylasV3\Administration\Model\CreateCredential201Response
-    {
+    ): \JackWH\NylasV3\Administration\Model\CreateCredential201Response {
         list($response) = $this->patchCredentialByIdWithHttpInfo($provider, $id, $patch_credential_by_id_request, $contentType);
+
         return $response;
     }
 
@@ -1916,12 +1928,12 @@ class ConnectorCredentialsApi
         string $id,
         \JackWH\NylasV3\Administration\Model\PatchCredentialByIdRequest $patch_credential_by_id_request,
         string $contentType = self::contentTypes['patchCredentialById'][0]
-    ): array
-    {
+    ): array {
         $request = $this->patchCredentialByIdRequest($provider, $id, $patch_credential_by_id_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1955,7 +1967,7 @@ class ConnectorCredentialsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Administration\Model\CreateCredential201Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1981,7 +1993,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\CreateCredential201Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2008,7 +2020,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\UpdateApplication400Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Administration\Model\GetApplication401Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2035,7 +2047,7 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Administration\Model\GetApplication401Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2064,7 +2076,7 @@ class ConnectorCredentialsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2076,6 +2088,7 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -2084,6 +2097,7 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -2092,8 +2106,10 @@ class ConnectorCredentialsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2116,8 +2132,7 @@ class ConnectorCredentialsApi
         string $id,
         \JackWH\NylasV3\Administration\Model\PatchCredentialByIdRequest $patch_credential_by_id_request,
         string $contentType = self::contentTypes['patchCredentialById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->patchCredentialByIdAsyncWithHttpInfo($provider, $id, $patch_credential_by_id_request, $contentType)
             ->then(
                 function ($response) {
@@ -2144,8 +2159,7 @@ class ConnectorCredentialsApi
         $id,
         $patch_credential_by_id_request,
         string $contentType = self::contentTypes['patchCredentialById'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Administration\Model\CreateCredential201Response';
         $request = $this->patchCredentialByIdRequest($provider, $id, $patch_credential_by_id_request, $contentType);
 
@@ -2165,12 +2179,13 @@ class ConnectorCredentialsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2201,8 +2216,7 @@ class ConnectorCredentialsApi
         $id,
         $patch_credential_by_id_request,
         string $contentType = self::contentTypes['patchCredentialById'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'provider' is set
         if ($provider === null || (is_array($provider) && count($provider) === 0)) {
@@ -2275,7 +2289,7 @@ class ConnectorCredentialsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2292,7 +2306,7 @@ class ConnectorCredentialsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2309,6 +2323,7 @@ class ConnectorCredentialsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PATCH',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2328,7 +2343,7 @@ class ConnectorCredentialsApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PostBookingsRequestGuest Class Doc Comment
@@ -60,7 +60,7 @@ class PostBookingsRequestGuest implements ModelInterface, ArrayAccess, JsonSeria
       */
     protected static array $openAPITypes = [
         'email' => 'string',
-        'name' => 'string'
+        'name' => 'string',
     ];
 
     /**
@@ -70,7 +70,7 @@ class PostBookingsRequestGuest implements ModelInterface, ArrayAccess, JsonSeria
       */
     protected static array $openAPIFormats = [
         'email' => null,
-        'name' => null
+        'name' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class PostBookingsRequestGuest implements ModelInterface, ArrayAccess, JsonSeria
       */
     protected static array $openAPINullables = [
         'email' => false,
-        'name' => false
+        'name' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class PostBookingsRequestGuest implements ModelInterface, ArrayAccess, JsonSeria
      */
     protected static array $attributeMap = [
         'email' => 'email',
-        'name' => 'name'
+        'name' => 'name',
     ];
 
     /**
@@ -180,7 +180,7 @@ class PostBookingsRequestGuest implements ModelInterface, ArrayAccess, JsonSeria
      */
     protected static array $setters = [
         'email' => 'setEmail',
-        'name' => 'setName'
+        'name' => 'setName',
     ];
 
     /**
@@ -190,7 +190,7 @@ class PostBookingsRequestGuest implements ModelInterface, ArrayAccess, JsonSeria
      */
     protected static array $getters = [
         'email' => 'getEmail',
-        'name' => 'getName'
+        'name' => 'getName',
     ];
 
     /**
@@ -294,7 +294,6 @@ class PostBookingsRequestGuest implements ModelInterface, ArrayAccess, JsonSeria
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets email
      *
@@ -348,12 +347,13 @@ class PostBookingsRequestGuest implements ModelInterface, ArrayAccess, JsonSeria
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -363,7 +363,7 @@ class PostBookingsRequestGuest implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -393,7 +393,7 @@ class PostBookingsRequestGuest implements ModelInterface, ArrayAccess, JsonSeria
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -412,7 +412,7 @@ class PostBookingsRequestGuest implements ModelInterface, ArrayAccess, JsonSeria
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -438,5 +438,3 @@ class PostBookingsRequestGuest implements ModelInterface, ArrayAccess, JsonSeria
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

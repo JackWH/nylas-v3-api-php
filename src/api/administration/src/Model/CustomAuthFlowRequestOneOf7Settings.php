@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CustomAuthFlowRequestOneOf7Settings Class Doc Comment
@@ -59,7 +59,7 @@ class CustomAuthFlowRequestOneOf7Settings implements ModelInterface, ArrayAccess
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'email' => 'string'
+        'email' => 'string',
     ];
 
     /**
@@ -68,7 +68,7 @@ class CustomAuthFlowRequestOneOf7Settings implements ModelInterface, ArrayAccess
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'email' => null
+        'email' => null,
     ];
 
     /**
@@ -77,7 +77,7 @@ class CustomAuthFlowRequestOneOf7Settings implements ModelInterface, ArrayAccess
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'email' => false
+        'email' => false,
     ];
 
     /**
@@ -166,7 +166,7 @@ class CustomAuthFlowRequestOneOf7Settings implements ModelInterface, ArrayAccess
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'email' => 'email'
+        'email' => 'email',
     ];
 
     /**
@@ -175,7 +175,7 @@ class CustomAuthFlowRequestOneOf7Settings implements ModelInterface, ArrayAccess
      * @var array<string, string>
      */
     protected static array $setters = [
-        'email' => 'setEmail'
+        'email' => 'setEmail',
     ];
 
     /**
@@ -184,7 +184,7 @@ class CustomAuthFlowRequestOneOf7Settings implements ModelInterface, ArrayAccess
      * @var array<string, string>
      */
     protected static array $getters = [
-        'email' => 'getEmail'
+        'email' => 'getEmail',
     ];
 
     /**
@@ -287,7 +287,6 @@ class CustomAuthFlowRequestOneOf7Settings implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets email
      *
@@ -314,12 +313,13 @@ class CustomAuthFlowRequestOneOf7Settings implements ModelInterface, ArrayAccess
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -329,7 +329,7 @@ class CustomAuthFlowRequestOneOf7Settings implements ModelInterface, ArrayAccess
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -359,7 +359,7 @@ class CustomAuthFlowRequestOneOf7Settings implements ModelInterface, ArrayAccess
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -378,7 +378,7 @@ class CustomAuthFlowRequestOneOf7Settings implements ModelInterface, ArrayAccess
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -404,5 +404,3 @@ class CustomAuthFlowRequestOneOf7Settings implements ModelInterface, ArrayAccess
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

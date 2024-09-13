@@ -28,15 +28,15 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * OpenHours Class Doc Comment
  *
- * @description 
+ * @description
  * @package  JackWH\NylasV3\Scheduler
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -62,7 +62,7 @@ class OpenHours implements ModelInterface, ArrayAccess, JsonSerializable
         'days' => 'int[]',
         'start' => 'string',
         'end' => 'string',
-        'exdates' => 'string[]'
+        'exdates' => 'string[]',
     ];
 
     /**
@@ -74,7 +74,7 @@ class OpenHours implements ModelInterface, ArrayAccess, JsonSerializable
         'days' => null,
         'start' => null,
         'end' => null,
-        'exdates' => null
+        'exdates' => null,
     ];
 
     /**
@@ -86,7 +86,7 @@ class OpenHours implements ModelInterface, ArrayAccess, JsonSerializable
         'days' => false,
         'start' => false,
         'end' => false,
-        'exdates' => false
+        'exdates' => false,
     ];
 
     /**
@@ -178,7 +178,7 @@ class OpenHours implements ModelInterface, ArrayAccess, JsonSerializable
         'days' => 'days',
         'start' => 'start',
         'end' => 'end',
-        'exdates' => 'exdates'
+        'exdates' => 'exdates',
     ];
 
     /**
@@ -190,7 +190,7 @@ class OpenHours implements ModelInterface, ArrayAccess, JsonSerializable
         'days' => 'setDays',
         'start' => 'setStart',
         'end' => 'setEnd',
-        'exdates' => 'setExdates'
+        'exdates' => 'setExdates',
     ];
 
     /**
@@ -202,7 +202,7 @@ class OpenHours implements ModelInterface, ArrayAccess, JsonSerializable
         'days' => 'getDays',
         'start' => 'getStart',
         'end' => 'getEnd',
-        'exdates' => 'getExdates'
+        'exdates' => 'getExdates',
     ];
 
     /**
@@ -294,11 +294,11 @@ class OpenHours implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['start']) && (mb_strlen($this->container['start']) < 1)) {
+        if (! is_null($this->container['start']) && (mb_strlen($this->container['start']) < 1)) {
             $invalidProperties[] = "invalid value for 'start', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['end']) && (mb_strlen($this->container['end']) < 1)) {
+        if (! is_null($this->container['end']) && (mb_strlen($this->container['end']) < 1)) {
             $invalidProperties[] = "invalid value for 'end', the character length must be bigger than or equal to 1.";
         }
 
@@ -315,7 +315,6 @@ class OpenHours implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets days
@@ -434,12 +433,13 @@ class OpenHours implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -449,7 +449,7 @@ class OpenHours implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -479,7 +479,7 @@ class OpenHours implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -498,7 +498,7 @@ class OpenHours implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -524,5 +524,3 @@ class OpenHours implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

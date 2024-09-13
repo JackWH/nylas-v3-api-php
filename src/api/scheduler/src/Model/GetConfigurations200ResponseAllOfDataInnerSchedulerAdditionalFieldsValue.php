@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConfigurations200ResponseAllOfDataInnerSchedulerAdditionalFieldsValue Class Doc Comment
@@ -64,7 +64,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerAdditionalFieldsValue i
         'required' => 'bool',
         'pattern' => 'string',
         'order' => 'int',
-        'options' => 'string[]'
+        'options' => 'string[]',
     ];
 
     /**
@@ -78,7 +78,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerAdditionalFieldsValue i
         'required' => null,
         'pattern' => null,
         'order' => null,
-        'options' => null
+        'options' => null,
     ];
 
     /**
@@ -92,7 +92,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerAdditionalFieldsValue i
         'required' => false,
         'pattern' => false,
         'order' => false,
-        'options' => false
+        'options' => false,
     ];
 
     /**
@@ -186,7 +186,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerAdditionalFieldsValue i
         'required' => 'required',
         'pattern' => 'pattern',
         'order' => 'order',
-        'options' => 'options'
+        'options' => 'options',
     ];
 
     /**
@@ -200,7 +200,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerAdditionalFieldsValue i
         'required' => 'setRequired',
         'pattern' => 'setPattern',
         'order' => 'setOrder',
-        'options' => 'setOptions'
+        'options' => 'setOptions',
     ];
 
     /**
@@ -214,7 +214,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerAdditionalFieldsValue i
         'required' => 'getRequired',
         'pattern' => 'getPattern',
         'order' => 'getOrder',
-        'options' => 'getOptions'
+        'options' => 'getOptions',
     ];
 
     /**
@@ -317,6 +317,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerAdditionalFieldsValue i
         if ($this->container['required'] === null) {
             $invalidProperties[] = "'required' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -330,7 +331,6 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerAdditionalFieldsValue i
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets label
@@ -493,12 +493,13 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerAdditionalFieldsValue i
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -508,7 +509,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerAdditionalFieldsValue i
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -538,7 +539,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerAdditionalFieldsValue i
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -557,7 +558,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerAdditionalFieldsValue i
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -583,5 +584,3 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerAdditionalFieldsValue i
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

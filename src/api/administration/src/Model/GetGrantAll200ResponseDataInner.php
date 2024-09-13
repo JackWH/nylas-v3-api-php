@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetGrantAll200ResponseDataInner Class Doc Comment
@@ -68,7 +68,7 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
         'ip' => 'string',
         'state' => 'string',
         'created_at' => 'int',
-        'updated_at' => 'int'
+        'updated_at' => 'int',
     ];
 
     /**
@@ -87,7 +87,7 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
         'ip' => null,
         'state' => null,
         'created_at' => null,
-        'updated_at' => null
+        'updated_at' => null,
     ];
 
     /**
@@ -106,7 +106,7 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
         'ip' => false,
         'state' => false,
         'created_at' => false,
-        'updated_at' => false
+        'updated_at' => false,
     ];
 
     /**
@@ -205,7 +205,7 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
         'ip' => 'ip',
         'state' => 'state',
         'created_at' => 'created_at',
-        'updated_at' => 'updated_at'
+        'updated_at' => 'updated_at',
     ];
 
     /**
@@ -224,7 +224,7 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
         'ip' => 'setIp',
         'state' => 'setState',
         'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'updated_at' => 'setUpdatedAt',
     ];
 
     /**
@@ -243,7 +243,7 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
         'ip' => 'getIp',
         'state' => 'getState',
         'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'updated_at' => 'getUpdatedAt',
     ];
 
     /**
@@ -391,7 +391,7 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
             $invalidProperties[] = "'provider' can't be null";
         }
         $allowedValues = $this->getProviderAllowableValues();
-        if (!is_null($this->container['provider']) && !in_array($this->container['provider'], $allowedValues, true)) {
+        if (! is_null($this->container['provider']) && ! in_array($this->container['provider'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'provider', must be one of '%s'",
                 $this->container['provider'],
@@ -400,7 +400,7 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
         }
 
         $allowedValues = $this->getGrantStatusAllowableValues();
-        if (!is_null($this->container['grant_status']) && !in_array($this->container['grant_status'], $allowedValues, true)) {
+        if (! is_null($this->container['grant_status']) && ! in_array($this->container['grant_status'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'grant_status', must be one of '%s'",
                 $this->container['grant_status'],
@@ -414,6 +414,7 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -427,7 +428,6 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets id
@@ -479,7 +479,7 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
             throw new InvalidArgumentException('non-nullable provider cannot be null');
         }
         $allowedValues = $this->getProviderAllowableValues();
-        if (!in_array($provider, $allowedValues, true)) {
+        if (! in_array($provider, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'provider', must be one of '%s'",
@@ -543,7 +543,7 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
             throw new InvalidArgumentException('non-nullable grant_status cannot be null');
         }
         $allowedValues = $this->getGrantStatusAllowableValues();
-        if (!in_array($grant_status, $allowedValues, true)) {
+        if (! in_array($grant_status, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'grant_status', must be one of '%s'",
@@ -745,12 +745,13 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -760,7 +761,7 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -790,7 +791,7 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -809,7 +810,7 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -835,5 +836,3 @@ class GetGrantAll200ResponseDataInner implements ModelInterface, ArrayAccess, Js
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

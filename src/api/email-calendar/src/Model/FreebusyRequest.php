@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * FreebusyRequest Class Doc Comment
@@ -60,7 +60,7 @@ class FreebusyRequest implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPITypes = [
         'start_time' => 'int',
         'end_time' => 'int',
-        'emails' => 'string[]'
+        'emails' => 'string[]',
     ];
 
     /**
@@ -71,7 +71,7 @@ class FreebusyRequest implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPIFormats = [
         'start_time' => null,
         'end_time' => null,
-        'emails' => null
+        'emails' => null,
     ];
 
     /**
@@ -82,7 +82,7 @@ class FreebusyRequest implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPINullables = [
         'start_time' => false,
         'end_time' => false,
-        'emails' => false
+        'emails' => false,
     ];
 
     /**
@@ -173,7 +173,7 @@ class FreebusyRequest implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $attributeMap = [
         'start_time' => 'start_time',
         'end_time' => 'end_time',
-        'emails' => 'emails'
+        'emails' => 'emails',
     ];
 
     /**
@@ -184,7 +184,7 @@ class FreebusyRequest implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $setters = [
         'start_time' => 'setStartTime',
         'end_time' => 'setEndTime',
-        'emails' => 'setEmails'
+        'emails' => 'setEmails',
     ];
 
     /**
@@ -195,7 +195,7 @@ class FreebusyRequest implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $getters = [
         'start_time' => 'getStartTime',
         'end_time' => 'getEndTime',
-        'emails' => 'getEmails'
+        'emails' => 'getEmails',
     ];
 
     /**
@@ -295,6 +295,7 @@ class FreebusyRequest implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['emails'] === null) {
             $invalidProperties[] = "'emails' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -308,7 +309,6 @@ class FreebusyRequest implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets start_time
@@ -390,12 +390,13 @@ class FreebusyRequest implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -405,7 +406,7 @@ class FreebusyRequest implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -435,7 +436,7 @@ class FreebusyRequest implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -454,7 +455,7 @@ class FreebusyRequest implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -480,5 +481,3 @@ class FreebusyRequest implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

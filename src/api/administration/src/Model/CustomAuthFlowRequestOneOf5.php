@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CustomAuthFlowRequestOneOf5 Class Doc Comment
@@ -60,7 +60,7 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
       */
     protected static array $openAPITypes = [
         'provider' => 'string',
-        'settings' => '\JackWH\NylasV3\Administration\Model\CustomAuthFlowRequestOneOf5Settings'
+        'settings' => '\JackWH\NylasV3\Administration\Model\CustomAuthFlowRequestOneOf5Settings',
     ];
 
     /**
@@ -70,7 +70,7 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
       */
     protected static array $openAPIFormats = [
         'provider' => null,
-        'settings' => null
+        'settings' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
       */
     protected static array $openAPINullables = [
         'provider' => false,
-        'settings' => false
+        'settings' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
      */
     protected static array $attributeMap = [
         'provider' => 'provider',
-        'settings' => 'settings'
+        'settings' => 'settings',
     ];
 
     /**
@@ -180,7 +180,7 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
      */
     protected static array $setters = [
         'provider' => 'setProvider',
-        'settings' => 'setSettings'
+        'settings' => 'setSettings',
     ];
 
     /**
@@ -190,7 +190,7 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
      */
     protected static array $getters = [
         'provider' => 'getProvider',
-        'settings' => 'getSettings'
+        'settings' => 'getSettings',
     ];
 
     /**
@@ -297,7 +297,7 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
             $invalidProperties[] = "'provider' can't be null";
         }
         $allowedValues = $this->getProviderAllowableValues();
-        if (!is_null($this->container['provider']) && !in_array($this->container['provider'], $allowedValues, true)) {
+        if (! is_null($this->container['provider']) && ! in_array($this->container['provider'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'provider', must be one of '%s'",
                 $this->container['provider'],
@@ -308,6 +308,7 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
         if ($this->container['settings'] === null) {
             $invalidProperties[] = "'settings' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -321,7 +322,6 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets provider
@@ -346,7 +346,7 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
             throw new InvalidArgumentException('non-nullable provider cannot be null');
         }
         $allowedValues = $this->getProviderAllowableValues();
-        if (!in_array($provider, $allowedValues, true)) {
+        if (! in_array($provider, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'provider', must be one of '%s'",
@@ -386,12 +386,13 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -401,7 +402,7 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -431,7 +432,7 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -450,7 +451,7 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -476,5 +477,3 @@ class CustomAuthFlowRequestOneOf5 implements ModelInterface, ArrayAccess, JsonSe
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

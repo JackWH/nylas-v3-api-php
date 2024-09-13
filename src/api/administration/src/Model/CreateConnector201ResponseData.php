@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CreateConnector201ResponseData Class Doc Comment
@@ -60,7 +60,7 @@ class CreateConnector201ResponseData implements ModelInterface, ArrayAccess, Jso
     protected static array $openAPITypes = [
         'provider' => 'string',
         'settings' => 'object',
-        'scope' => 'string[]'
+        'scope' => 'string[]',
     ];
 
     /**
@@ -71,7 +71,7 @@ class CreateConnector201ResponseData implements ModelInterface, ArrayAccess, Jso
     protected static array $openAPIFormats = [
         'provider' => null,
         'settings' => null,
-        'scope' => null
+        'scope' => null,
     ];
 
     /**
@@ -82,7 +82,7 @@ class CreateConnector201ResponseData implements ModelInterface, ArrayAccess, Jso
     protected static array $openAPINullables = [
         'provider' => false,
         'settings' => false,
-        'scope' => false
+        'scope' => false,
     ];
 
     /**
@@ -173,7 +173,7 @@ class CreateConnector201ResponseData implements ModelInterface, ArrayAccess, Jso
     protected static array $attributeMap = [
         'provider' => 'provider',
         'settings' => 'settings',
-        'scope' => 'scope'
+        'scope' => 'scope',
     ];
 
     /**
@@ -184,7 +184,7 @@ class CreateConnector201ResponseData implements ModelInterface, ArrayAccess, Jso
     protected static array $setters = [
         'provider' => 'setProvider',
         'settings' => 'setSettings',
-        'scope' => 'setScope'
+        'scope' => 'setScope',
     ];
 
     /**
@@ -195,7 +195,7 @@ class CreateConnector201ResponseData implements ModelInterface, ArrayAccess, Jso
     protected static array $getters = [
         'provider' => 'getProvider',
         'settings' => 'getSettings',
-        'scope' => 'getScope'
+        'scope' => 'getScope',
     ];
 
     /**
@@ -317,7 +317,7 @@ class CreateConnector201ResponseData implements ModelInterface, ArrayAccess, Jso
             $invalidProperties[] = "'provider' can't be null";
         }
         $allowedValues = $this->getProviderAllowableValues();
-        if (!is_null($this->container['provider']) && !in_array($this->container['provider'], $allowedValues, true)) {
+        if (! is_null($this->container['provider']) && ! in_array($this->container['provider'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'provider', must be one of '%s'",
                 $this->container['provider'],
@@ -338,7 +338,6 @@ class CreateConnector201ResponseData implements ModelInterface, ArrayAccess, Jso
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets provider
@@ -363,7 +362,7 @@ class CreateConnector201ResponseData implements ModelInterface, ArrayAccess, Jso
             throw new InvalidArgumentException('non-nullable provider cannot be null');
         }
         $allowedValues = $this->getProviderAllowableValues();
-        if (!in_array($provider, $allowedValues, true)) {
+        if (! in_array($provider, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'provider', must be one of '%s'",
@@ -430,12 +429,13 @@ class CreateConnector201ResponseData implements ModelInterface, ArrayAccess, Jso
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -445,7 +445,7 @@ class CreateConnector201ResponseData implements ModelInterface, ArrayAccess, Jso
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -475,7 +475,7 @@ class CreateConnector201ResponseData implements ModelInterface, ArrayAccess, Jso
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -494,7 +494,7 @@ class CreateConnector201ResponseData implements ModelInterface, ArrayAccess, Jso
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -520,5 +520,3 @@ class CreateConnector201ResponseData implements ModelInterface, ArrayAccess, Jso
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

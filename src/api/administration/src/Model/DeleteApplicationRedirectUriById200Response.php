@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * DeleteApplicationRedirectUriById200Response Class Doc Comment
@@ -58,7 +58,7 @@ class DeleteApplicationRedirectUriById200Response implements ModelInterface, Arr
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'request_id' => 'string'
+        'request_id' => 'string',
     ];
 
     /**
@@ -67,7 +67,7 @@ class DeleteApplicationRedirectUriById200Response implements ModelInterface, Arr
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'request_id' => null
+        'request_id' => null,
     ];
 
     /**
@@ -76,7 +76,7 @@ class DeleteApplicationRedirectUriById200Response implements ModelInterface, Arr
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'request_id' => false
+        'request_id' => false,
     ];
 
     /**
@@ -165,7 +165,7 @@ class DeleteApplicationRedirectUriById200Response implements ModelInterface, Arr
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'request_id' => 'request_id'
+        'request_id' => 'request_id',
     ];
 
     /**
@@ -174,7 +174,7 @@ class DeleteApplicationRedirectUriById200Response implements ModelInterface, Arr
      * @var array<string, string>
      */
     protected static array $setters = [
-        'request_id' => 'setRequestId'
+        'request_id' => 'setRequestId',
     ];
 
     /**
@@ -183,7 +183,7 @@ class DeleteApplicationRedirectUriById200Response implements ModelInterface, Arr
      * @var array<string, string>
      */
     protected static array $getters = [
-        'request_id' => 'getRequestId'
+        'request_id' => 'getRequestId',
     ];
 
     /**
@@ -275,6 +275,7 @@ class DeleteApplicationRedirectUriById200Response implements ModelInterface, Arr
         if ($this->container['request_id'] === null) {
             $invalidProperties[] = "'request_id' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -288,7 +289,6 @@ class DeleteApplicationRedirectUriById200Response implements ModelInterface, Arr
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets request_id
@@ -316,12 +316,13 @@ class DeleteApplicationRedirectUriById200Response implements ModelInterface, Arr
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -331,7 +332,7 @@ class DeleteApplicationRedirectUriById200Response implements ModelInterface, Arr
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -361,7 +362,7 @@ class DeleteApplicationRedirectUriById200Response implements ModelInterface, Arr
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -380,7 +381,7 @@ class DeleteApplicationRedirectUriById200Response implements ModelInterface, Arr
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -406,5 +407,3 @@ class DeleteApplicationRedirectUriById200Response implements ModelInterface, Arr
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

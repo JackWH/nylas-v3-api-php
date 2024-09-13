@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class SendMailNowRequest1MessageTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

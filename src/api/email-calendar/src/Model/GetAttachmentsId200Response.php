@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetAttachmentsId200Response Class Doc Comment
@@ -59,7 +59,7 @@ class GetAttachmentsId200Response implements ModelInterface, ArrayAccess, JsonSe
       */
     protected static array $openAPITypes = [
         'request_id' => 'string',
-        'data' => '\JackWH\NylasV3\EmailCalendar\Model\GetAttachmentsId200ResponseAllOfData'
+        'data' => '\JackWH\NylasV3\EmailCalendar\Model\GetAttachmentsId200ResponseAllOfData',
     ];
 
     /**
@@ -69,7 +69,7 @@ class GetAttachmentsId200Response implements ModelInterface, ArrayAccess, JsonSe
       */
     protected static array $openAPIFormats = [
         'request_id' => null,
-        'data' => null
+        'data' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class GetAttachmentsId200Response implements ModelInterface, ArrayAccess, JsonSe
       */
     protected static array $openAPINullables = [
         'request_id' => false,
-        'data' => false
+        'data' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class GetAttachmentsId200Response implements ModelInterface, ArrayAccess, JsonSe
      */
     protected static array $attributeMap = [
         'request_id' => 'request_id',
-        'data' => 'data'
+        'data' => 'data',
     ];
 
     /**
@@ -179,7 +179,7 @@ class GetAttachmentsId200Response implements ModelInterface, ArrayAccess, JsonSe
      */
     protected static array $setters = [
         'request_id' => 'setRequestId',
-        'data' => 'setData'
+        'data' => 'setData',
     ];
 
     /**
@@ -189,7 +189,7 @@ class GetAttachmentsId200Response implements ModelInterface, ArrayAccess, JsonSe
      */
     protected static array $getters = [
         'request_id' => 'getRequestId',
-        'data' => 'getData'
+        'data' => 'getData',
     ];
 
     /**
@@ -293,7 +293,6 @@ class GetAttachmentsId200Response implements ModelInterface, ArrayAccess, JsonSe
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets request_id
      *
@@ -347,12 +346,13 @@ class GetAttachmentsId200Response implements ModelInterface, ArrayAccess, JsonSe
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -362,7 +362,7 @@ class GetAttachmentsId200Response implements ModelInterface, ArrayAccess, JsonSe
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -392,7 +392,7 @@ class GetAttachmentsId200Response implements ModelInterface, ArrayAccess, JsonSe
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -411,7 +411,7 @@ class GetAttachmentsId200Response implements ModelInterface, ArrayAccess, JsonSe
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -437,5 +437,3 @@ class GetAttachmentsId200Response implements ModelInterface, ArrayAccess, JsonSe
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

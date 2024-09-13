@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * DetectProviderByEmail200ResponseData Class Doc Comment
@@ -61,7 +61,7 @@ class DetectProviderByEmail200ResponseData implements ModelInterface, ArrayAcces
         'provider' => 'string',
         'type' => 'string',
         'email_address' => 'string',
-        'detected' => 'bool'
+        'detected' => 'bool',
     ];
 
     /**
@@ -73,7 +73,7 @@ class DetectProviderByEmail200ResponseData implements ModelInterface, ArrayAcces
         'provider' => null,
         'type' => null,
         'email_address' => null,
-        'detected' => null
+        'detected' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class DetectProviderByEmail200ResponseData implements ModelInterface, ArrayAcces
         'provider' => false,
         'type' => false,
         'email_address' => false,
-        'detected' => false
+        'detected' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class DetectProviderByEmail200ResponseData implements ModelInterface, ArrayAcces
         'provider' => 'provider',
         'type' => 'type',
         'email_address' => 'email_address',
-        'detected' => 'detected'
+        'detected' => 'detected',
     ];
 
     /**
@@ -189,7 +189,7 @@ class DetectProviderByEmail200ResponseData implements ModelInterface, ArrayAcces
         'provider' => 'setProvider',
         'type' => 'setType',
         'email_address' => 'setEmailAddress',
-        'detected' => 'setDetected'
+        'detected' => 'setDetected',
     ];
 
     /**
@@ -201,7 +201,7 @@ class DetectProviderByEmail200ResponseData implements ModelInterface, ArrayAcces
         'provider' => 'getProvider',
         'type' => 'getType',
         'email_address' => 'getEmailAddress',
-        'detected' => 'getDetected'
+        'detected' => 'getDetected',
     ];
 
     /**
@@ -299,6 +299,7 @@ class DetectProviderByEmail200ResponseData implements ModelInterface, ArrayAcces
         if ($this->container['detected'] === null) {
             $invalidProperties[] = "'detected' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -312,7 +313,6 @@ class DetectProviderByEmail200ResponseData implements ModelInterface, ArrayAcces
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets provider
@@ -421,12 +421,13 @@ class DetectProviderByEmail200ResponseData implements ModelInterface, ArrayAcces
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -436,7 +437,7 @@ class DetectProviderByEmail200ResponseData implements ModelInterface, ArrayAcces
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -466,7 +467,7 @@ class DetectProviderByEmail200ResponseData implements ModelInterface, ArrayAcces
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -485,7 +486,7 @@ class DetectProviderByEmail200ResponseData implements ModelInterface, ArrayAcces
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -511,5 +512,3 @@ class DetectProviderByEmail200ResponseData implements ModelInterface, ArrayAcces
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

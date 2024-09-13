@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * WebDesktopCallbackNoSettings Class Doc Comment
@@ -61,7 +61,7 @@ class WebDesktopCallbackNoSettings implements ModelInterface, ArrayAccess, JsonS
     protected static array $openAPITypes = [
         'platform' => 'string',
         'id' => 'string',
-        'url' => 'string'
+        'url' => 'string',
     ];
 
     /**
@@ -72,7 +72,7 @@ class WebDesktopCallbackNoSettings implements ModelInterface, ArrayAccess, JsonS
     protected static array $openAPIFormats = [
         'platform' => null,
         'id' => null,
-        'url' => null
+        'url' => null,
     ];
 
     /**
@@ -83,7 +83,7 @@ class WebDesktopCallbackNoSettings implements ModelInterface, ArrayAccess, JsonS
     protected static array $openAPINullables = [
         'platform' => false,
         'id' => false,
-        'url' => false
+        'url' => false,
     ];
 
     /**
@@ -174,7 +174,7 @@ class WebDesktopCallbackNoSettings implements ModelInterface, ArrayAccess, JsonS
     protected static array $attributeMap = [
         'platform' => 'platform',
         'id' => 'id',
-        'url' => 'url'
+        'url' => 'url',
     ];
 
     /**
@@ -185,7 +185,7 @@ class WebDesktopCallbackNoSettings implements ModelInterface, ArrayAccess, JsonS
     protected static array $setters = [
         'platform' => 'setPlatform',
         'id' => 'setId',
-        'url' => 'setUrl'
+        'url' => 'setUrl',
     ];
 
     /**
@@ -196,7 +196,7 @@ class WebDesktopCallbackNoSettings implements ModelInterface, ArrayAccess, JsonS
     protected static array $getters = [
         'platform' => 'getPlatform',
         'id' => 'getId',
-        'url' => 'getUrl'
+        'url' => 'getUrl',
     ];
 
     /**
@@ -303,7 +303,7 @@ class WebDesktopCallbackNoSettings implements ModelInterface, ArrayAccess, JsonS
         $invalidProperties = [];
 
         $allowedValues = $this->getPlatformAllowableValues();
-        if (!is_null($this->container['platform']) && !in_array($this->container['platform'], $allowedValues, true)) {
+        if (! is_null($this->container['platform']) && ! in_array($this->container['platform'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'platform', must be one of '%s'",
                 $this->container['platform'],
@@ -324,7 +324,6 @@ class WebDesktopCallbackNoSettings implements ModelInterface, ArrayAccess, JsonS
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets platform
@@ -349,7 +348,7 @@ class WebDesktopCallbackNoSettings implements ModelInterface, ArrayAccess, JsonS
             throw new InvalidArgumentException('non-nullable platform cannot be null');
         }
         $allowedValues = $this->getPlatformAllowableValues();
-        if (!in_array($platform, $allowedValues, true)) {
+        if (! in_array($platform, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'platform', must be one of '%s'",
@@ -416,12 +415,13 @@ class WebDesktopCallbackNoSettings implements ModelInterface, ArrayAccess, JsonS
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -431,7 +431,7 @@ class WebDesktopCallbackNoSettings implements ModelInterface, ArrayAccess, JsonS
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -461,7 +461,7 @@ class WebDesktopCallbackNoSettings implements ModelInterface, ArrayAccess, JsonS
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -480,7 +480,7 @@ class WebDesktopCallbackNoSettings implements ModelInterface, ArrayAccess, JsonS
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -506,5 +506,3 @@ class WebDesktopCallbackNoSettings implements ModelInterface, ArrayAccess, JsonS
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConsolidatedShipment200ResponseAllOfData Class Doc Comment
@@ -69,7 +69,7 @@ class GetConsolidatedShipment200ResponseAllOfData implements ModelInterface, Arr
         'tracking_number' => 'string',
         'tracking_link' => 'string',
         'carrier_enrichment' => '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichment',
-        'order' => '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200ResponseAllOfDataAllOfOrder'
+        'order' => '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200ResponseAllOfDataAllOfOrder',
     ];
 
     /**
@@ -89,7 +89,7 @@ class GetConsolidatedShipment200ResponseAllOfData implements ModelInterface, Arr
         'tracking_number' => null,
         'tracking_link' => null,
         'carrier_enrichment' => null,
-        'order' => null
+        'order' => null,
     ];
 
     /**
@@ -109,7 +109,7 @@ class GetConsolidatedShipment200ResponseAllOfData implements ModelInterface, Arr
         'tracking_number' => false,
         'tracking_link' => false,
         'carrier_enrichment' => false,
-        'order' => false
+        'order' => false,
     ];
 
     /**
@@ -209,7 +209,7 @@ class GetConsolidatedShipment200ResponseAllOfData implements ModelInterface, Arr
         'tracking_number' => 'tracking_number',
         'tracking_link' => 'tracking_link',
         'carrier_enrichment' => 'carrier_enrichment',
-        'order' => 'order'
+        'order' => 'order',
     ];
 
     /**
@@ -229,7 +229,7 @@ class GetConsolidatedShipment200ResponseAllOfData implements ModelInterface, Arr
         'tracking_number' => 'setTrackingNumber',
         'tracking_link' => 'setTrackingLink',
         'carrier_enrichment' => 'setCarrierEnrichment',
-        'order' => 'setOrder'
+        'order' => 'setOrder',
     ];
 
     /**
@@ -249,7 +249,7 @@ class GetConsolidatedShipment200ResponseAllOfData implements ModelInterface, Arr
         'tracking_number' => 'getTrackingNumber',
         'tracking_link' => 'getTrackingLink',
         'carrier_enrichment' => 'getCarrierEnrichment',
-        'order' => 'getOrder'
+        'order' => 'getOrder',
     ];
 
     /**
@@ -371,6 +371,7 @@ class GetConsolidatedShipment200ResponseAllOfData implements ModelInterface, Arr
         if ($this->container['updated_at'] === null) {
             $invalidProperties[] = "'updated_at' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -384,7 +385,6 @@ class GetConsolidatedShipment200ResponseAllOfData implements ModelInterface, Arr
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets id
@@ -714,12 +714,13 @@ class GetConsolidatedShipment200ResponseAllOfData implements ModelInterface, Arr
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -729,7 +730,7 @@ class GetConsolidatedShipment200ResponseAllOfData implements ModelInterface, Arr
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -759,7 +760,7 @@ class GetConsolidatedShipment200ResponseAllOfData implements ModelInterface, Arr
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -778,7 +779,7 @@ class GetConsolidatedShipment200ResponseAllOfData implements ModelInterface, Arr
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -804,5 +805,3 @@ class GetConsolidatedShipment200ResponseAllOfData implements ModelInterface, Arr
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

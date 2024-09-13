@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class Drafts1AttachmentsInnerTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

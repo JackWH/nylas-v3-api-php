@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CreateConnectorRequest Class Doc Comment
@@ -61,7 +61,7 @@ class CreateConnectorRequest implements ModelInterface, ArrayAccess, JsonSeriali
         'provider' => 'string',
         'settings' => '\JackWH\NylasV3\Administration\Model\YahooSettings',
         'scope' => 'string[]',
-        'scopes' => 'string'
+        'scopes' => 'string',
     ];
 
     /**
@@ -73,7 +73,7 @@ class CreateConnectorRequest implements ModelInterface, ArrayAccess, JsonSeriali
         'provider' => null,
         'settings' => null,
         'scope' => null,
-        'scopes' => null
+        'scopes' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class CreateConnectorRequest implements ModelInterface, ArrayAccess, JsonSeriali
         'provider' => false,
         'settings' => false,
         'scope' => false,
-        'scopes' => false
+        'scopes' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class CreateConnectorRequest implements ModelInterface, ArrayAccess, JsonSeriali
         'provider' => 'provider',
         'settings' => 'settings',
         'scope' => 'scope',
-        'scopes' => 'scopes'
+        'scopes' => 'scopes',
     ];
 
     /**
@@ -189,7 +189,7 @@ class CreateConnectorRequest implements ModelInterface, ArrayAccess, JsonSeriali
         'provider' => 'setProvider',
         'settings' => 'setSettings',
         'scope' => 'setScope',
-        'scopes' => 'setScopes'
+        'scopes' => 'setScopes',
     ];
 
     /**
@@ -201,7 +201,7 @@ class CreateConnectorRequest implements ModelInterface, ArrayAccess, JsonSeriali
         'provider' => 'getProvider',
         'settings' => 'getSettings',
         'scope' => 'getScope',
-        'scopes' => 'getScopes'
+        'scopes' => 'getScopes',
     ];
 
     /**
@@ -317,7 +317,7 @@ class CreateConnectorRequest implements ModelInterface, ArrayAccess, JsonSeriali
             $invalidProperties[] = "'settings' can't be null";
         }
         $allowedValues = $this->getScopesAllowableValues();
-        if (!is_null($this->container['scopes']) && !in_array($this->container['scopes'], $allowedValues, true)) {
+        if (! is_null($this->container['scopes']) && ! in_array($this->container['scopes'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'scopes', must be one of '%s'",
                 $this->container['scopes'],
@@ -338,7 +338,6 @@ class CreateConnectorRequest implements ModelInterface, ArrayAccess, JsonSeriali
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets provider
@@ -444,7 +443,7 @@ class CreateConnectorRequest implements ModelInterface, ArrayAccess, JsonSeriali
             throw new InvalidArgumentException('non-nullable scopes cannot be null');
         }
         $allowedValues = $this->getScopesAllowableValues();
-        if (!in_array($scopes, $allowedValues, true)) {
+        if (! in_array($scopes, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'scopes', must be one of '%s'",
@@ -457,12 +456,13 @@ class CreateConnectorRequest implements ModelInterface, ArrayAccess, JsonSeriali
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -472,7 +472,7 @@ class CreateConnectorRequest implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -502,7 +502,7 @@ class CreateConnectorRequest implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -521,7 +521,7 @@ class CreateConnectorRequest implements ModelInterface, ArrayAccess, JsonSeriali
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -547,5 +547,3 @@ class CreateConnectorRequest implements ModelInterface, ArrayAccess, JsonSeriali
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

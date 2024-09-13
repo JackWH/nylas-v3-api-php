@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Contact Class Doc Comment
@@ -79,7 +79,7 @@ class Contact implements ModelInterface, ArrayAccess, JsonSerializable
         'source' => 'string',
         'suffix' => 'string',
         'surname' => 'string',
-        'web_pages' => '\JackWH\NylasV3\EmailCalendar\Model\ContactWebPage[]'
+        'web_pages' => '\JackWH\NylasV3\EmailCalendar\Model\ContactWebPage[]',
     ];
 
     /**
@@ -109,7 +109,7 @@ class Contact implements ModelInterface, ArrayAccess, JsonSerializable
         'source' => null,
         'suffix' => null,
         'surname' => null,
-        'web_pages' => null
+        'web_pages' => null,
     ];
 
     /**
@@ -139,7 +139,7 @@ class Contact implements ModelInterface, ArrayAccess, JsonSerializable
         'source' => false,
         'suffix' => false,
         'surname' => false,
-        'web_pages' => false
+        'web_pages' => false,
     ];
 
     /**
@@ -249,7 +249,7 @@ class Contact implements ModelInterface, ArrayAccess, JsonSerializable
         'source' => 'source',
         'suffix' => 'suffix',
         'surname' => 'surname',
-        'web_pages' => 'web_pages'
+        'web_pages' => 'web_pages',
     ];
 
     /**
@@ -279,7 +279,7 @@ class Contact implements ModelInterface, ArrayAccess, JsonSerializable
         'source' => 'setSource',
         'suffix' => 'setSuffix',
         'surname' => 'setSurname',
-        'web_pages' => 'setWebPages'
+        'web_pages' => 'setWebPages',
     ];
 
     /**
@@ -309,7 +309,7 @@ class Contact implements ModelInterface, ArrayAccess, JsonSerializable
         'source' => 'getSource',
         'suffix' => 'getSuffix',
         'surname' => 'getSurname',
-        'web_pages' => 'getWebPages'
+        'web_pages' => 'getWebPages',
     ];
 
     /**
@@ -419,7 +419,7 @@ class Contact implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
+        if (! is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
             $invalidProperties[] = "invalid value for 'id', the character length must be bigger than or equal to 1.";
         }
 
@@ -436,7 +436,6 @@ class Contact implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets birthday
@@ -1036,12 +1035,13 @@ class Contact implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -1051,7 +1051,7 @@ class Contact implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -1081,7 +1081,7 @@ class Contact implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -1100,7 +1100,7 @@ class Contact implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -1126,5 +1126,3 @@ class Contact implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

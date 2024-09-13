@@ -42,5 +42,3 @@ enum EventVisibility: string
     case _PUBLIC = 'public';
 
 }
-
-

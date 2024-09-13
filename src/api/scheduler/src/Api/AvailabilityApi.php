@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Scheduler\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Scheduler\ApiException;
 use JackWH\NylasV3\Scheduler\Configuration;
 use JackWH\NylasV3\Scheduler\HeaderSelector;
@@ -69,7 +69,7 @@ class AvailabilityApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'getAvailability' => [
             'application/json',
@@ -147,9 +147,9 @@ class AvailabilityApi
         ?string $client_id = null,
         ?string $booking_id = null,
         string $contentType = self::contentTypes['getAvailability'][0]
-    ): \JackWH\NylasV3\Scheduler\Model\GetAvailability200Response
-    {
+    ): \JackWH\NylasV3\Scheduler\Model\GetAvailability200Response {
         list($response) = $this->getAvailabilityWithHttpInfo($start_time, $end_time, $configuration_id, $slug, $client_id, $booking_id, $contentType);
+
         return $response;
     }
 
@@ -178,12 +178,12 @@ class AvailabilityApi
         ?string $client_id = null,
         ?string $booking_id = null,
         string $contentType = self::contentTypes['getAvailability'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getAvailabilityRequest($start_time, $end_time, $configuration_id, $slug, $client_id, $booking_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -217,7 +217,7 @@ class AvailabilityApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\GetAvailability200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -243,7 +243,7 @@ class AvailabilityApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\GetAvailability200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -270,7 +270,7 @@ class AvailabilityApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -297,7 +297,7 @@ class AvailabilityApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -324,7 +324,7 @@ class AvailabilityApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -351,7 +351,7 @@ class AvailabilityApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -378,7 +378,7 @@ class AvailabilityApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -407,7 +407,7 @@ class AvailabilityApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -419,6 +419,7 @@ class AvailabilityApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -427,6 +428,7 @@ class AvailabilityApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -435,6 +437,7 @@ class AvailabilityApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -443,6 +446,7 @@ class AvailabilityApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -451,6 +455,7 @@ class AvailabilityApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -459,8 +464,10 @@ class AvailabilityApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -489,8 +496,7 @@ class AvailabilityApi
         ?string $client_id = null,
         ?string $booking_id = null,
         string $contentType = self::contentTypes['getAvailability'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getAvailabilityAsyncWithHttpInfo($start_time, $end_time, $configuration_id, $slug, $client_id, $booking_id, $contentType)
             ->then(
                 function ($response) {
@@ -523,8 +529,7 @@ class AvailabilityApi
         $client_id = null,
         $booking_id = null,
         string $contentType = self::contentTypes['getAvailability'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Scheduler\Model\GetAvailability200Response';
         $request = $this->getAvailabilityRequest($start_time, $end_time, $configuration_id, $slug, $client_id, $booking_id, $contentType);
 
@@ -544,12 +549,13 @@ class AvailabilityApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -586,8 +592,7 @@ class AvailabilityApi
         $client_id = null,
         $booking_id = null,
         string $contentType = self::contentTypes['getAvailability'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'start_time' is set
         if ($start_time === null || (is_array($start_time) && count($start_time) === 0)) {
@@ -688,7 +693,7 @@ class AvailabilityApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -705,7 +710,7 @@ class AvailabilityApi
         }
 
         // this endpoint requires Bearer (Session ID) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -722,6 +727,7 @@ class AvailabilityApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -741,7 +747,7 @@ class AvailabilityApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ContactWithPicture Class Doc Comment
@@ -80,7 +80,7 @@ class ContactWithPicture implements ModelInterface, ArrayAccess, JsonSerializabl
         'suffix' => 'string',
         'surname' => 'string',
         'web_pages' => '\JackWH\NylasV3\EmailCalendar\Model\ContactWebPage[]',
-        'picture' => 'string'
+        'picture' => 'string',
     ];
 
     /**
@@ -111,7 +111,7 @@ class ContactWithPicture implements ModelInterface, ArrayAccess, JsonSerializabl
         'suffix' => null,
         'surname' => null,
         'web_pages' => null,
-        'picture' => null
+        'picture' => null,
     ];
 
     /**
@@ -142,7 +142,7 @@ class ContactWithPicture implements ModelInterface, ArrayAccess, JsonSerializabl
         'suffix' => false,
         'surname' => false,
         'web_pages' => false,
-        'picture' => false
+        'picture' => false,
     ];
 
     /**
@@ -253,7 +253,7 @@ class ContactWithPicture implements ModelInterface, ArrayAccess, JsonSerializabl
         'suffix' => 'suffix',
         'surname' => 'surname',
         'web_pages' => 'web_pages',
-        'picture' => 'picture'
+        'picture' => 'picture',
     ];
 
     /**
@@ -284,7 +284,7 @@ class ContactWithPicture implements ModelInterface, ArrayAccess, JsonSerializabl
         'suffix' => 'setSuffix',
         'surname' => 'setSurname',
         'web_pages' => 'setWebPages',
-        'picture' => 'setPicture'
+        'picture' => 'setPicture',
     ];
 
     /**
@@ -315,7 +315,7 @@ class ContactWithPicture implements ModelInterface, ArrayAccess, JsonSerializabl
         'suffix' => 'getSuffix',
         'surname' => 'getSurname',
         'web_pages' => 'getWebPages',
-        'picture' => 'getPicture'
+        'picture' => 'getPicture',
     ];
 
     /**
@@ -426,7 +426,7 @@ class ContactWithPicture implements ModelInterface, ArrayAccess, JsonSerializabl
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
+        if (! is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
             $invalidProperties[] = "invalid value for 'id', the character length must be bigger than or equal to 1.";
         }
 
@@ -443,7 +443,6 @@ class ContactWithPicture implements ModelInterface, ArrayAccess, JsonSerializabl
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets birthday
@@ -1070,12 +1069,13 @@ class ContactWithPicture implements ModelInterface, ArrayAccess, JsonSerializabl
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -1085,7 +1085,7 @@ class ContactWithPicture implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -1115,7 +1115,7 @@ class ContactWithPicture implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -1134,7 +1134,7 @@ class ContactWithPicture implements ModelInterface, ArrayAccess, JsonSerializabl
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -1160,5 +1160,3 @@ class ContactWithPicture implements ModelInterface, ArrayAccess, JsonSerializabl
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

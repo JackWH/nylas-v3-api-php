@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Scheduler\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Scheduler\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingConfirmed Class Doc Comment
@@ -60,7 +60,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingCon
       */
     protected static array $openAPITypes = [
         'title' => 'string',
-        'body' => 'string'
+        'body' => 'string',
     ];
 
     /**
@@ -70,7 +70,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingCon
       */
     protected static array $openAPIFormats = [
         'title' => null,
-        'body' => null
+        'body' => null,
     ];
 
     /**
@@ -80,7 +80,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingCon
       */
     protected static array $openAPINullables = [
         'title' => false,
-        'body' => false
+        'body' => false,
     ];
 
     /**
@@ -170,7 +170,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingCon
      */
     protected static array $attributeMap = [
         'title' => 'title',
-        'body' => 'body'
+        'body' => 'body',
     ];
 
     /**
@@ -180,7 +180,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingCon
      */
     protected static array $setters = [
         'title' => 'setTitle',
-        'body' => 'setBody'
+        'body' => 'setBody',
     ];
 
     /**
@@ -190,7 +190,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingCon
      */
     protected static array $getters = [
         'title' => 'getTitle',
-        'body' => 'getBody'
+        'body' => 'getBody',
     ];
 
     /**
@@ -294,7 +294,6 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingCon
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets title
      *
@@ -348,12 +347,13 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingCon
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -363,7 +363,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingCon
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -393,7 +393,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingCon
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -412,7 +412,7 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingCon
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -438,5 +438,3 @@ class GetConfigurations200ResponseAllOfDataInnerSchedulerEmailTemplateBookingCon
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

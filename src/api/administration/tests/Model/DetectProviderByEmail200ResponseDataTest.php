@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class DetectProviderByEmail200ResponseDataTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

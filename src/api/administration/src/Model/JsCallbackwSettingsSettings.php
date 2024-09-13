@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * JsCallbackwSettingsSettings Class Doc Comment
@@ -59,7 +59,7 @@ class JsCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonSe
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'origin' => 'string'
+        'origin' => 'string',
     ];
 
     /**
@@ -68,7 +68,7 @@ class JsCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonSe
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'origin' => null
+        'origin' => null,
     ];
 
     /**
@@ -77,7 +77,7 @@ class JsCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonSe
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'origin' => false
+        'origin' => false,
     ];
 
     /**
@@ -166,7 +166,7 @@ class JsCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonSe
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'origin' => 'origin'
+        'origin' => 'origin',
     ];
 
     /**
@@ -175,7 +175,7 @@ class JsCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonSe
      * @var array<string, string>
      */
     protected static array $setters = [
-        'origin' => 'setOrigin'
+        'origin' => 'setOrigin',
     ];
 
     /**
@@ -184,7 +184,7 @@ class JsCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonSe
      * @var array<string, string>
      */
     protected static array $getters = [
-        'origin' => 'getOrigin'
+        'origin' => 'getOrigin',
     ];
 
     /**
@@ -276,6 +276,7 @@ class JsCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonSe
         if ($this->container['origin'] === null) {
             $invalidProperties[] = "'origin' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -289,7 +290,6 @@ class JsCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonSe
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets origin
@@ -317,12 +317,13 @@ class JsCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonSe
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -332,7 +333,7 @@ class JsCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonSe
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -362,7 +363,7 @@ class JsCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonSe
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -381,7 +382,7 @@ class JsCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonSe
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -407,5 +408,3 @@ class JsCallbackwSettingsSettings implements ModelInterface, ArrayAccess, JsonSe
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

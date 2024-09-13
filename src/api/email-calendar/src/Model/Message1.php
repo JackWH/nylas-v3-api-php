@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Message1 Class Doc Comment
@@ -77,7 +77,7 @@ class Message1 implements ModelInterface, ArrayAccess, JsonSerializable
         'thread_id' => 'string',
         'to' => '\JackWH\NylasV3\EmailCalendar\Model\MessageParticipant[]',
         'unread' => 'bool',
-        'use_draft' => 'bool'
+        'use_draft' => 'bool',
     ];
 
     /**
@@ -104,7 +104,7 @@ class Message1 implements ModelInterface, ArrayAccess, JsonSerializable
         'thread_id' => null,
         'to' => null,
         'unread' => null,
-        'use_draft' => null
+        'use_draft' => null,
     ];
 
     /**
@@ -131,7 +131,7 @@ class Message1 implements ModelInterface, ArrayAccess, JsonSerializable
         'thread_id' => false,
         'to' => false,
         'unread' => false,
-        'use_draft' => false
+        'use_draft' => false,
     ];
 
     /**
@@ -238,7 +238,7 @@ class Message1 implements ModelInterface, ArrayAccess, JsonSerializable
         'thread_id' => 'thread_id',
         'to' => 'to',
         'unread' => 'unread',
-        'use_draft' => 'use_draft'
+        'use_draft' => 'use_draft',
     ];
 
     /**
@@ -265,7 +265,7 @@ class Message1 implements ModelInterface, ArrayAccess, JsonSerializable
         'thread_id' => 'setThreadId',
         'to' => 'setTo',
         'unread' => 'setUnread',
-        'use_draft' => 'setUseDraft'
+        'use_draft' => 'setUseDraft',
     ];
 
     /**
@@ -292,7 +292,7 @@ class Message1 implements ModelInterface, ArrayAccess, JsonSerializable
         'thread_id' => 'getThreadId',
         'to' => 'getTo',
         'unread' => 'getUnread',
-        'use_draft' => 'getUseDraft'
+        'use_draft' => 'getUseDraft',
     ];
 
     /**
@@ -399,15 +399,15 @@ class Message1 implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
+        if (! is_null($this->container['id']) && (mb_strlen($this->container['id']) < 1)) {
             $invalidProperties[] = "invalid value for 'id', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['snippet']) && (mb_strlen($this->container['snippet']) < 1)) {
+        if (! is_null($this->container['snippet']) && (mb_strlen($this->container['snippet']) < 1)) {
             $invalidProperties[] = "invalid value for 'snippet', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['thread_id']) && (mb_strlen($this->container['thread_id']) < 1)) {
+        if (! is_null($this->container['thread_id']) && (mb_strlen($this->container['thread_id']) < 1)) {
             $invalidProperties[] = "invalid value for 'thread_id', the character length must be bigger than or equal to 1.";
         }
 
@@ -424,7 +424,6 @@ class Message1 implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets bcc
@@ -963,12 +962,13 @@ class Message1 implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -978,7 +978,7 @@ class Message1 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -1008,7 +1008,7 @@ class Message1 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -1027,7 +1027,7 @@ class Message1 implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -1053,5 +1053,3 @@ class Message1 implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

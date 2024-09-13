@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * SendMailNow200Response Class Doc Comment
@@ -60,7 +60,7 @@ class SendMailNow200Response implements ModelInterface, ArrayAccess, JsonSeriali
     protected static array $openAPITypes = [
         'grant_id' => 'string',
         'request_id' => 'string',
-        'data' => '\JackWH\NylasV3\EmailCalendar\Model\Message'
+        'data' => '\JackWH\NylasV3\EmailCalendar\Model\Message',
     ];
 
     /**
@@ -71,7 +71,7 @@ class SendMailNow200Response implements ModelInterface, ArrayAccess, JsonSeriali
     protected static array $openAPIFormats = [
         'grant_id' => null,
         'request_id' => null,
-        'data' => null
+        'data' => null,
     ];
 
     /**
@@ -82,7 +82,7 @@ class SendMailNow200Response implements ModelInterface, ArrayAccess, JsonSeriali
     protected static array $openAPINullables = [
         'grant_id' => false,
         'request_id' => false,
-        'data' => false
+        'data' => false,
     ];
 
     /**
@@ -173,7 +173,7 @@ class SendMailNow200Response implements ModelInterface, ArrayAccess, JsonSeriali
     protected static array $attributeMap = [
         'grant_id' => 'grant_id',
         'request_id' => 'request_id',
-        'data' => 'data'
+        'data' => 'data',
     ];
 
     /**
@@ -184,7 +184,7 @@ class SendMailNow200Response implements ModelInterface, ArrayAccess, JsonSeriali
     protected static array $setters = [
         'grant_id' => 'setGrantId',
         'request_id' => 'setRequestId',
-        'data' => 'setData'
+        'data' => 'setData',
     ];
 
     /**
@@ -195,7 +195,7 @@ class SendMailNow200Response implements ModelInterface, ArrayAccess, JsonSeriali
     protected static array $getters = [
         'grant_id' => 'getGrantId',
         'request_id' => 'getRequestId',
-        'data' => 'getData'
+        'data' => 'getData',
     ];
 
     /**
@@ -295,6 +295,7 @@ class SendMailNow200Response implements ModelInterface, ArrayAccess, JsonSeriali
         if ($this->container['data'] === null) {
             $invalidProperties[] = "'data' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -308,7 +309,6 @@ class SendMailNow200Response implements ModelInterface, ArrayAccess, JsonSeriali
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets grant_id
@@ -390,12 +390,13 @@ class SendMailNow200Response implements ModelInterface, ArrayAccess, JsonSeriali
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -405,7 +406,7 @@ class SendMailNow200Response implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -435,7 +436,7 @@ class SendMailNow200Response implements ModelInterface, ArrayAccess, JsonSeriali
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -454,7 +455,7 @@ class SendMailNow200Response implements ModelInterface, ArrayAccess, JsonSeriali
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -480,5 +481,3 @@ class SendMailNow200Response implements ModelInterface, ArrayAccess, JsonSeriali
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

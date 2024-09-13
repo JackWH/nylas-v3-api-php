@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * AvailabilityResponse Class Doc Comment
@@ -59,7 +59,7 @@ class AvailabilityResponse implements ModelInterface, ArrayAccess, JsonSerializa
       */
     protected static array $openAPITypes = [
         'order' => 'string[]',
-        'time_slots' => '\JackWH\NylasV3\EmailCalendar\Model\TimeSlot[]'
+        'time_slots' => '\JackWH\NylasV3\EmailCalendar\Model\TimeSlot[]',
     ];
 
     /**
@@ -69,7 +69,7 @@ class AvailabilityResponse implements ModelInterface, ArrayAccess, JsonSerializa
       */
     protected static array $openAPIFormats = [
         'order' => null,
-        'time_slots' => null
+        'time_slots' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class AvailabilityResponse implements ModelInterface, ArrayAccess, JsonSerializa
       */
     protected static array $openAPINullables = [
         'order' => false,
-        'time_slots' => false
+        'time_slots' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class AvailabilityResponse implements ModelInterface, ArrayAccess, JsonSerializa
      */
     protected static array $attributeMap = [
         'order' => 'order',
-        'time_slots' => 'time_slots'
+        'time_slots' => 'time_slots',
     ];
 
     /**
@@ -179,7 +179,7 @@ class AvailabilityResponse implements ModelInterface, ArrayAccess, JsonSerializa
      */
     protected static array $setters = [
         'order' => 'setOrder',
-        'time_slots' => 'setTimeSlots'
+        'time_slots' => 'setTimeSlots',
     ];
 
     /**
@@ -189,7 +189,7 @@ class AvailabilityResponse implements ModelInterface, ArrayAccess, JsonSerializa
      */
     protected static array $getters = [
         'order' => 'getOrder',
-        'time_slots' => 'getTimeSlots'
+        'time_slots' => 'getTimeSlots',
     ];
 
     /**
@@ -293,7 +293,6 @@ class AvailabilityResponse implements ModelInterface, ArrayAccess, JsonSerializa
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets order
      *
@@ -347,12 +346,13 @@ class AvailabilityResponse implements ModelInterface, ArrayAccess, JsonSerializa
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -362,7 +362,7 @@ class AvailabilityResponse implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -392,7 +392,7 @@ class AvailabilityResponse implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -411,7 +411,7 @@ class AvailabilityResponse implements ModelInterface, ArrayAccess, JsonSerializa
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -437,5 +437,3 @@ class AvailabilityResponse implements ModelInterface, ArrayAccess, JsonSerializa
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

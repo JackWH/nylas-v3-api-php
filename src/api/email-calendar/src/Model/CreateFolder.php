@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CreateFolder Class Doc Comment
@@ -61,7 +61,7 @@ class CreateFolder implements ModelInterface, ArrayAccess, JsonSerializable
         'name' => 'string',
         'parent_id' => 'string',
         'text_color' => 'string',
-        'background_color' => 'string'
+        'background_color' => 'string',
     ];
 
     /**
@@ -73,7 +73,7 @@ class CreateFolder implements ModelInterface, ArrayAccess, JsonSerializable
         'name' => null,
         'parent_id' => null,
         'text_color' => null,
-        'background_color' => null
+        'background_color' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class CreateFolder implements ModelInterface, ArrayAccess, JsonSerializable
         'name' => false,
         'parent_id' => false,
         'text_color' => false,
-        'background_color' => false
+        'background_color' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class CreateFolder implements ModelInterface, ArrayAccess, JsonSerializable
         'name' => 'name',
         'parent_id' => 'parent_id',
         'text_color' => 'text_color',
-        'background_color' => 'background_color'
+        'background_color' => 'background_color',
     ];
 
     /**
@@ -189,7 +189,7 @@ class CreateFolder implements ModelInterface, ArrayAccess, JsonSerializable
         'name' => 'setName',
         'parent_id' => 'setParentId',
         'text_color' => 'setTextColor',
-        'background_color' => 'setBackgroundColor'
+        'background_color' => 'setBackgroundColor',
     ];
 
     /**
@@ -201,7 +201,7 @@ class CreateFolder implements ModelInterface, ArrayAccess, JsonSerializable
         'name' => 'getName',
         'parent_id' => 'getParentId',
         'text_color' => 'getTextColor',
-        'background_color' => 'getBackgroundColor'
+        'background_color' => 'getBackgroundColor',
     ];
 
     /**
@@ -318,7 +318,6 @@ class CreateFolder implements ModelInterface, ArrayAccess, JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets name
      *
@@ -433,12 +432,13 @@ class CreateFolder implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -448,7 +448,7 @@ class CreateFolder implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -478,7 +478,7 @@ class CreateFolder implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -497,7 +497,7 @@ class CreateFolder implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -523,5 +523,3 @@ class CreateFolder implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

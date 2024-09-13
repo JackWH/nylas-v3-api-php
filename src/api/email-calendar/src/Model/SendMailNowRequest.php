@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * SendMailNowRequest Class Doc Comment
@@ -70,7 +70,7 @@ class SendMailNowRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         'reply_to_message_id' => 'string',
         'use_draft' => 'bool',
         'attachments' => '\JackWH\NylasV3\EmailCalendar\Model\SendMailNowRequestAttachmentsInner[]',
-        'custom_headers' => '\JackWH\NylasV3\EmailCalendar\Model\SendMailNowRequestCustomHeadersInner[]'
+        'custom_headers' => '\JackWH\NylasV3\EmailCalendar\Model\SendMailNowRequestCustomHeadersInner[]',
     ];
 
     /**
@@ -91,7 +91,7 @@ class SendMailNowRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         'reply_to_message_id' => null,
         'use_draft' => null,
         'attachments' => null,
-        'custom_headers' => null
+        'custom_headers' => null,
     ];
 
     /**
@@ -112,7 +112,7 @@ class SendMailNowRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         'reply_to_message_id' => false,
         'use_draft' => false,
         'attachments' => false,
-        'custom_headers' => false
+        'custom_headers' => false,
     ];
 
     /**
@@ -213,7 +213,7 @@ class SendMailNowRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         'reply_to_message_id' => 'reply_to_message_id',
         'use_draft' => 'use_draft',
         'attachments' => 'attachments',
-        'custom_headers' => 'custom_headers'
+        'custom_headers' => 'custom_headers',
     ];
 
     /**
@@ -234,7 +234,7 @@ class SendMailNowRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         'reply_to_message_id' => 'setReplyToMessageId',
         'use_draft' => 'setUseDraft',
         'attachments' => 'setAttachments',
-        'custom_headers' => 'setCustomHeaders'
+        'custom_headers' => 'setCustomHeaders',
     ];
 
     /**
@@ -255,7 +255,7 @@ class SendMailNowRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         'reply_to_message_id' => 'getReplyToMessageId',
         'use_draft' => 'getUseDraft',
         'attachments' => 'getAttachments',
-        'custom_headers' => 'getCustomHeaders'
+        'custom_headers' => 'getCustomHeaders',
     ];
 
     /**
@@ -365,6 +365,7 @@ class SendMailNowRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         if ($this->container['to'] === null) {
             $invalidProperties[] = "'to' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -378,7 +379,6 @@ class SendMailNowRequest implements ModelInterface, ArrayAccess, JsonSerializabl
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets subject
@@ -730,12 +730,13 @@ class SendMailNowRequest implements ModelInterface, ArrayAccess, JsonSerializabl
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -745,7 +746,7 @@ class SendMailNowRequest implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -775,7 +776,7 @@ class SendMailNowRequest implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -794,7 +795,7 @@ class SendMailNowRequest implements ModelInterface, ArrayAccess, JsonSerializabl
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -820,5 +821,3 @@ class SendMailNowRequest implements ModelInterface, ArrayAccess, JsonSerializabl
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

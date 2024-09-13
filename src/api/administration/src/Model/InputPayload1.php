@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * InputPayload1 Class Doc Comment
@@ -59,7 +59,7 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPITypes = [
         'trigger_type' => 'string',
-        'webhook_url' => 'string'
+        'webhook_url' => 'string',
     ];
 
     /**
@@ -69,7 +69,7 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPIFormats = [
         'trigger_type' => null,
-        'webhook_url' => null
+        'webhook_url' => null,
     ];
 
     /**
@@ -79,7 +79,7 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
       */
     protected static array $openAPINullables = [
         'trigger_type' => false,
-        'webhook_url' => false
+        'webhook_url' => false,
     ];
 
     /**
@@ -169,7 +169,7 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $attributeMap = [
         'trigger_type' => 'trigger_type',
-        'webhook_url' => 'webhook_url'
+        'webhook_url' => 'webhook_url',
     ];
 
     /**
@@ -179,7 +179,7 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $setters = [
         'trigger_type' => 'setTriggerType',
-        'webhook_url' => 'setWebhookUrl'
+        'webhook_url' => 'setWebhookUrl',
     ];
 
     /**
@@ -189,7 +189,7 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
      */
     protected static array $getters = [
         'trigger_type' => 'getTriggerType',
-        'webhook_url' => 'getWebhookUrl'
+        'webhook_url' => 'getWebhookUrl',
     ];
 
     /**
@@ -338,7 +338,7 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
             $invalidProperties[] = "'trigger_type' can't be null";
         }
         $allowedValues = $this->getTriggerTypeAllowableValues();
-        if (!is_null($this->container['trigger_type']) && !in_array($this->container['trigger_type'], $allowedValues, true)) {
+        if (! is_null($this->container['trigger_type']) && ! in_array($this->container['trigger_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'trigger_type', must be one of '%s'",
                 $this->container['trigger_type'],
@@ -349,6 +349,7 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
         if ($this->container['webhook_url'] === null) {
             $invalidProperties[] = "'webhook_url' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -362,7 +363,6 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets trigger_type
@@ -387,7 +387,7 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
             throw new InvalidArgumentException('non-nullable trigger_type cannot be null');
         }
         $allowedValues = $this->getTriggerTypeAllowableValues();
-        if (!in_array($trigger_type, $allowedValues, true)) {
+        if (! in_array($trigger_type, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'trigger_type', must be one of '%s'",
@@ -427,12 +427,13 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -442,7 +443,7 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -472,7 +473,7 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -491,7 +492,7 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -517,5 +518,3 @@ class InputPayload1 implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

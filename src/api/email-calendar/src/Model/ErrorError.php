@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ErrorError Class Doc Comment
@@ -61,7 +61,7 @@ class ErrorError implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPITypes = [
         'type' => 'string',
         'message' => 'string',
-        'provider_error' => 'string'
+        'provider_error' => 'string',
     ];
 
     /**
@@ -72,7 +72,7 @@ class ErrorError implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPIFormats = [
         'type' => null,
         'message' => null,
-        'provider_error' => null
+        'provider_error' => null,
     ];
 
     /**
@@ -83,7 +83,7 @@ class ErrorError implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $openAPINullables = [
         'type' => false,
         'message' => false,
-        'provider_error' => false
+        'provider_error' => false,
     ];
 
     /**
@@ -174,7 +174,7 @@ class ErrorError implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $attributeMap = [
         'type' => 'type',
         'message' => 'message',
-        'provider_error' => 'provider_error'
+        'provider_error' => 'provider_error',
     ];
 
     /**
@@ -185,7 +185,7 @@ class ErrorError implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $setters = [
         'type' => 'setType',
         'message' => 'setMessage',
-        'provider_error' => 'setProviderError'
+        'provider_error' => 'setProviderError',
     ];
 
     /**
@@ -196,7 +196,7 @@ class ErrorError implements ModelInterface, ArrayAccess, JsonSerializable
     protected static array $getters = [
         'type' => 'getType',
         'message' => 'getMessage',
-        'provider_error' => 'getProviderError'
+        'provider_error' => 'getProviderError',
     ];
 
     /**
@@ -301,7 +301,6 @@ class ErrorError implements ModelInterface, ArrayAccess, JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
     /**
      * Gets type
      *
@@ -382,12 +381,13 @@ class ErrorError implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -397,7 +397,7 @@ class ErrorError implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -427,7 +427,7 @@ class ErrorError implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -446,7 +446,7 @@ class ErrorError implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -472,5 +472,3 @@ class ErrorError implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

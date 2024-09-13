@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * RefreshAccessToken Class Doc Comment
@@ -61,7 +61,7 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
         'client_id' => 'string',
         'client_secret' => 'string',
         'grant_type' => 'string',
-        'refresh_token' => 'string'
+        'refresh_token' => 'string',
     ];
 
     /**
@@ -73,7 +73,7 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
         'client_id' => null,
         'client_secret' => null,
         'grant_type' => null,
-        'refresh_token' => null
+        'refresh_token' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
         'client_id' => false,
         'client_secret' => false,
         'grant_type' => false,
-        'refresh_token' => false
+        'refresh_token' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
         'client_id' => 'client_id',
         'client_secret' => 'client_secret',
         'grant_type' => 'grant_type',
-        'refresh_token' => 'refresh_token'
+        'refresh_token' => 'refresh_token',
     ];
 
     /**
@@ -189,7 +189,7 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
         'client_id' => 'setClientId',
         'client_secret' => 'setClientSecret',
         'grant_type' => 'setGrantType',
-        'refresh_token' => 'setRefreshToken'
+        'refresh_token' => 'setRefreshToken',
     ];
 
     /**
@@ -201,7 +201,7 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
         'client_id' => 'getClientId',
         'client_secret' => 'getClientSecret',
         'grant_type' => 'getGrantType',
-        'refresh_token' => 'getRefreshToken'
+        'refresh_token' => 'getRefreshToken',
     ];
 
     /**
@@ -316,7 +316,7 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
             $invalidProperties[] = "'grant_type' can't be null";
         }
         $allowedValues = $this->getGrantTypeAllowableValues();
-        if (!is_null($this->container['grant_type']) && !in_array($this->container['grant_type'], $allowedValues, true)) {
+        if (! is_null($this->container['grant_type']) && ! in_array($this->container['grant_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'grant_type', must be one of '%s'",
                 $this->container['grant_type'],
@@ -327,6 +327,7 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
         if ($this->container['refresh_token'] === null) {
             $invalidProperties[] = "'refresh_token' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -340,7 +341,6 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets client_id
@@ -419,7 +419,7 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
             throw new InvalidArgumentException('non-nullable grant_type cannot be null');
         }
         $allowedValues = $this->getGrantTypeAllowableValues();
-        if (!in_array($grant_type, $allowedValues, true)) {
+        if (! in_array($grant_type, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'grant_type', must be one of '%s'",
@@ -459,12 +459,13 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -474,7 +475,7 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -504,7 +505,7 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -523,7 +524,7 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -549,5 +550,3 @@ class RefreshAccessToken implements ModelInterface, ArrayAccess, JsonSerializabl
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

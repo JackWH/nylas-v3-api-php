@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CleanMessagesRequest Class Doc Comment
@@ -63,7 +63,7 @@ class CleanMessagesRequest implements ModelInterface, ArrayAccess, JsonSerializa
         'ignore_images' => 'bool',
         'images_as_markdown' => 'bool',
         'ignore_tables' => 'bool',
-        'remove_conclusion_phrases' => 'bool'
+        'remove_conclusion_phrases' => 'bool',
     ];
 
     /**
@@ -77,7 +77,7 @@ class CleanMessagesRequest implements ModelInterface, ArrayAccess, JsonSerializa
         'ignore_images' => null,
         'images_as_markdown' => null,
         'ignore_tables' => null,
-        'remove_conclusion_phrases' => null
+        'remove_conclusion_phrases' => null,
     ];
 
     /**
@@ -91,7 +91,7 @@ class CleanMessagesRequest implements ModelInterface, ArrayAccess, JsonSerializa
         'ignore_images' => false,
         'images_as_markdown' => false,
         'ignore_tables' => false,
-        'remove_conclusion_phrases' => false
+        'remove_conclusion_phrases' => false,
     ];
 
     /**
@@ -185,7 +185,7 @@ class CleanMessagesRequest implements ModelInterface, ArrayAccess, JsonSerializa
         'ignore_images' => 'ignore_images',
         'images_as_markdown' => 'images_as_markdown',
         'ignore_tables' => 'ignore_tables',
-        'remove_conclusion_phrases' => 'remove_conclusion_phrases'
+        'remove_conclusion_phrases' => 'remove_conclusion_phrases',
     ];
 
     /**
@@ -199,7 +199,7 @@ class CleanMessagesRequest implements ModelInterface, ArrayAccess, JsonSerializa
         'ignore_images' => 'setIgnoreImages',
         'images_as_markdown' => 'setImagesAsMarkdown',
         'ignore_tables' => 'setIgnoreTables',
-        'remove_conclusion_phrases' => 'setRemoveConclusionPhrases'
+        'remove_conclusion_phrases' => 'setRemoveConclusionPhrases',
     ];
 
     /**
@@ -213,7 +213,7 @@ class CleanMessagesRequest implements ModelInterface, ArrayAccess, JsonSerializa
         'ignore_images' => 'getIgnoreImages',
         'images_as_markdown' => 'getImagesAsMarkdown',
         'ignore_tables' => 'getIgnoreTables',
-        'remove_conclusion_phrases' => 'getRemoveConclusionPhrases'
+        'remove_conclusion_phrases' => 'getRemoveConclusionPhrases',
     ];
 
     /**
@@ -307,7 +307,7 @@ class CleanMessagesRequest implements ModelInterface, ArrayAccess, JsonSerializa
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['message_id']) && (count($this->container['message_id']) > 20)) {
+        if (! is_null($this->container['message_id']) && (count($this->container['message_id']) > 20)) {
             $invalidProperties[] = "invalid value for 'message_id', number of items must be less than or equal to 20.";
         }
 
@@ -324,7 +324,6 @@ class CleanMessagesRequest implements ModelInterface, ArrayAccess, JsonSerializa
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets message_id
@@ -491,12 +490,13 @@ class CleanMessagesRequest implements ModelInterface, ArrayAccess, JsonSerializa
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -506,7 +506,7 @@ class CleanMessagesRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -536,7 +536,7 @@ class CleanMessagesRequest implements ModelInterface, ArrayAccess, JsonSerializa
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -555,7 +555,7 @@ class CleanMessagesRequest implements ModelInterface, ArrayAccess, JsonSerializa
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -581,5 +581,3 @@ class CleanMessagesRequest implements ModelInterface, ArrayAccess, JsonSerializa
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

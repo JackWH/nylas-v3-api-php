@@ -26,15 +26,15 @@
 
 namespace JackWH\NylasV3\Scheduler\Api;
 
-use InvalidArgumentException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Promise\PromiseInterface;
+use InvalidArgumentException;
 use JackWH\NylasV3\Scheduler\ApiException;
 use JackWH\NylasV3\Scheduler\Configuration;
 use JackWH\NylasV3\Scheduler\HeaderSelector;
@@ -69,7 +69,7 @@ class ConfigurationsApi
      */
     protected int $hostIndex;
 
-    /** @var string[] $contentTypes **/
+    /** @var string[] * */
     public const contentTypes = [
         'deleteConfigurationsId' => [
             'application/json',
@@ -151,9 +151,9 @@ class ConfigurationsApi
         string $grant_id,
         string $configuration_id,
         string $contentType = self::contentTypes['deleteConfigurationsId'][0]
-    ): \JackWH\NylasV3\Scheduler\Model\DeleteConfigurationsId200Response
-    {
+    ): \JackWH\NylasV3\Scheduler\Model\DeleteConfigurationsId200Response {
         list($response) = $this->deleteConfigurationsIdWithHttpInfo($grant_id, $configuration_id, $contentType);
+
         return $response;
     }
 
@@ -174,12 +174,12 @@ class ConfigurationsApi
         string $grant_id,
         string $configuration_id,
         string $contentType = self::contentTypes['deleteConfigurationsId'][0]
-    ): array
-    {
+    ): array {
         $request = $this->deleteConfigurationsIdRequest($grant_id, $configuration_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -213,7 +213,7 @@ class ConfigurationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\DeleteConfigurationsId200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -239,7 +239,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\DeleteConfigurationsId200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -266,7 +266,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -293,7 +293,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -320,7 +320,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -347,7 +347,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -374,7 +374,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -403,7 +403,7 @@ class ConfigurationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -415,6 +415,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -423,6 +424,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -431,6 +433,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -439,6 +442,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -447,6 +451,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -455,8 +460,10 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -477,8 +484,7 @@ class ConfigurationsApi
         string $grant_id,
         string $configuration_id,
         string $contentType = self::contentTypes['deleteConfigurationsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->deleteConfigurationsIdAsyncWithHttpInfo($grant_id, $configuration_id, $contentType)
             ->then(
                 function ($response) {
@@ -503,8 +509,7 @@ class ConfigurationsApi
         $grant_id,
         $configuration_id,
         string $contentType = self::contentTypes['deleteConfigurationsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Scheduler\Model\DeleteConfigurationsId200Response';
         $request = $this->deleteConfigurationsIdRequest($grant_id, $configuration_id, $contentType);
 
@@ -524,12 +529,13 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -558,8 +564,7 @@ class ConfigurationsApi
         $grant_id,
         $configuration_id,
         string $contentType = self::contentTypes['deleteConfigurationsId'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -618,7 +623,7 @@ class ConfigurationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -635,7 +640,7 @@ class ConfigurationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -652,6 +657,7 @@ class ConfigurationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'DELETE',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -679,9 +685,9 @@ class ConfigurationsApi
         ?int $limit = 50,
         ?string $page_token = null,
         string $contentType = self::contentTypes['getConfigurations'][0]
-    ): \JackWH\NylasV3\Scheduler\Model\GetConfigurations200Response
-    {
+    ): \JackWH\NylasV3\Scheduler\Model\GetConfigurations200Response {
         list($response) = $this->getConfigurationsWithHttpInfo($grant_id, $limit, $page_token, $contentType);
+
         return $response;
     }
 
@@ -704,12 +710,12 @@ class ConfigurationsApi
         ?int $limit = 50,
         ?string $page_token = null,
         string $contentType = self::contentTypes['getConfigurations'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getConfigurationsRequest($grant_id, $limit, $page_token, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -743,7 +749,7 @@ class ConfigurationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\GetConfigurations200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -769,7 +775,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -796,7 +802,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -823,7 +829,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -850,7 +856,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -877,7 +883,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -906,7 +912,7 @@ class ConfigurationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -918,6 +924,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -926,6 +933,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -934,6 +942,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -942,6 +951,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -950,8 +960,10 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -974,8 +986,7 @@ class ConfigurationsApi
         ?int $limit = 50,
         ?string $page_token = null,
         string $contentType = self::contentTypes['getConfigurations'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getConfigurationsAsyncWithHttpInfo($grant_id, $limit, $page_token, $contentType)
             ->then(
                 function ($response) {
@@ -1002,8 +1013,7 @@ class ConfigurationsApi
         $limit = 50,
         $page_token = null,
         string $contentType = self::contentTypes['getConfigurations'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Scheduler\Model\GetConfigurations200Response';
         $request = $this->getConfigurationsRequest($grant_id, $limit, $page_token, $contentType);
 
@@ -1023,12 +1033,13 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1059,8 +1070,7 @@ class ConfigurationsApi
         $limit = 50,
         $page_token = null,
         string $contentType = self::contentTypes['getConfigurations'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -1072,7 +1082,7 @@ class ConfigurationsApi
         if ($limit !== null && $limit > 200) {
             throw new InvalidArgumentException('invalid value for "$limit" when calling ConfigurationsApi.getConfigurations, must be smaller than or equal to 200.');
         }
-        
+
 
 
         $resourcePath = '/v3/grants/{grant_id}/scheduling/configurations';
@@ -1127,7 +1137,7 @@ class ConfigurationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1144,7 +1154,7 @@ class ConfigurationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1161,6 +1171,7 @@ class ConfigurationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1186,9 +1197,9 @@ class ConfigurationsApi
         string $grant_id,
         string $configuration_id,
         string $contentType = self::contentTypes['getConfigurationsId'][0]
-    ): \JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response
-    {
+    ): \JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response {
         list($response) = $this->getConfigurationsIdWithHttpInfo($grant_id, $configuration_id, $contentType);
+
         return $response;
     }
 
@@ -1209,12 +1220,12 @@ class ConfigurationsApi
         string $grant_id,
         string $configuration_id,
         string $contentType = self::contentTypes['getConfigurationsId'][0]
-    ): array
-    {
+    ): array {
         $request = $this->getConfigurationsIdRequest($grant_id, $configuration_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1248,7 +1259,7 @@ class ConfigurationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1274,7 +1285,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1301,7 +1312,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1328,7 +1339,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1355,7 +1366,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1382,7 +1393,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1409,7 +1420,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1438,7 +1449,7 @@ class ConfigurationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1450,6 +1461,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1458,6 +1470,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1466,6 +1479,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -1474,6 +1488,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -1482,6 +1497,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -1490,8 +1506,10 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -1512,8 +1530,7 @@ class ConfigurationsApi
         string $grant_id,
         string $configuration_id,
         string $contentType = self::contentTypes['getConfigurationsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->getConfigurationsIdAsyncWithHttpInfo($grant_id, $configuration_id, $contentType)
             ->then(
                 function ($response) {
@@ -1538,8 +1555,7 @@ class ConfigurationsApi
         $grant_id,
         $configuration_id,
         string $contentType = self::contentTypes['getConfigurationsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response';
         $request = $this->getConfigurationsIdRequest($grant_id, $configuration_id, $contentType);
 
@@ -1559,12 +1575,13 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -1593,8 +1610,7 @@ class ConfigurationsApi
         $grant_id,
         $configuration_id,
         string $contentType = self::contentTypes['getConfigurationsId'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -1653,7 +1669,7 @@ class ConfigurationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -1670,7 +1686,7 @@ class ConfigurationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -1687,6 +1703,7 @@ class ConfigurationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'GET',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -1712,9 +1729,9 @@ class ConfigurationsApi
         string $grant_id,
         ?\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInner $get_configurations200_response_all_of_data_inner = null,
         string $contentType = self::contentTypes['postConfigurations'][0]
-    ): \JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response
-    {
+    ): \JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response {
         list($response) = $this->postConfigurationsWithHttpInfo($grant_id, $get_configurations200_response_all_of_data_inner, $contentType);
+
         return $response;
     }
 
@@ -1735,12 +1752,12 @@ class ConfigurationsApi
         string $grant_id,
         ?\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInner $get_configurations200_response_all_of_data_inner = null,
         string $contentType = self::contentTypes['postConfigurations'][0]
-    ): array
-    {
+    ): array {
         $request = $this->postConfigurationsRequest($grant_id, $get_configurations200_response_all_of_data_inner, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -1774,7 +1791,7 @@ class ConfigurationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1800,7 +1817,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1827,7 +1844,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1854,7 +1871,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1881,7 +1898,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -1908,7 +1925,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -1937,7 +1954,7 @@ class ConfigurationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -1949,6 +1966,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -1957,6 +1975,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -1965,6 +1984,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -1973,6 +1993,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -1981,8 +2002,10 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2003,8 +2026,7 @@ class ConfigurationsApi
         string $grant_id,
         ?\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInner $get_configurations200_response_all_of_data_inner = null,
         string $contentType = self::contentTypes['postConfigurations'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->postConfigurationsAsyncWithHttpInfo($grant_id, $get_configurations200_response_all_of_data_inner, $contentType)
             ->then(
                 function ($response) {
@@ -2029,8 +2051,7 @@ class ConfigurationsApi
         $grant_id,
         $get_configurations200_response_all_of_data_inner = null,
         string $contentType = self::contentTypes['postConfigurations'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response';
         $request = $this->postConfigurationsRequest($grant_id, $get_configurations200_response_all_of_data_inner, $contentType);
 
@@ -2050,12 +2071,13 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2084,8 +2106,7 @@ class ConfigurationsApi
         $grant_id,
         $get_configurations200_response_all_of_data_inner = null,
         string $contentType = self::contentTypes['postConfigurations'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -2137,7 +2158,7 @@ class ConfigurationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2154,7 +2175,7 @@ class ConfigurationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2171,6 +2192,7 @@ class ConfigurationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2198,9 +2220,9 @@ class ConfigurationsApi
         string $configuration_id,
         ?\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInner $get_configurations200_response_all_of_data_inner = null,
         string $contentType = self::contentTypes['putConfigurationsId'][0]
-    ): \JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response
-    {
+    ): \JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response {
         list($response) = $this->putConfigurationsIdWithHttpInfo($grant_id, $configuration_id, $get_configurations200_response_all_of_data_inner, $contentType);
+
         return $response;
     }
 
@@ -2223,12 +2245,12 @@ class ConfigurationsApi
         string $configuration_id,
         ?\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInner $get_configurations200_response_all_of_data_inner = null,
         string $contentType = self::contentTypes['putConfigurationsId'][0]
-    ): array
-    {
+    ): array {
         $request = $this->putConfigurationsIdRequest($grant_id, $configuration_id, $get_configurations200_response_all_of_data_inner, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
+
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
@@ -2262,7 +2284,7 @@ class ConfigurationsApi
                 );
             }
 
-            switch($statusCode) {
+            switch ($statusCode) {
                 case 200:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
                         $content = $response->getBody(); //stream goes to serializer
@@ -2288,7 +2310,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 400:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2315,7 +2337,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 401:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2342,7 +2364,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 404:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2369,7 +2391,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 429:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2396,7 +2418,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 case 504:
                     if (in_array('\JackWH\NylasV3\Scheduler\Model\Error1', ['\SplFileObject', '\Psr\Http\Message\StreamInterface'])) {
@@ -2423,7 +2445,7 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, '\JackWH\NylasV3\Scheduler\Model\Error1', []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
             }
 
@@ -2452,7 +2474,7 @@ class ConfigurationsApi
             return [
                 ObjectSerializer::deserialize($content, $returnType, []),
                 $response->getStatusCode(),
-                $response->getHeaders()
+                $response->getHeaders(),
             ];
 
         } catch (ApiException $e) {
@@ -2464,6 +2486,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 400:
                     $data = ObjectSerializer::deserialize(
@@ -2472,6 +2495,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
@@ -2480,6 +2504,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
@@ -2488,6 +2513,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
@@ -2496,6 +2522,7 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
                 case 504:
                     $data = ObjectSerializer::deserialize(
@@ -2504,8 +2531,10 @@ class ConfigurationsApi
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
+
                     break;
             }
+
             throw $e;
         }
     }
@@ -2528,8 +2557,7 @@ class ConfigurationsApi
         string $configuration_id,
         ?\JackWH\NylasV3\Scheduler\Model\GetConfigurations200ResponseAllOfDataInner $get_configurations200_response_all_of_data_inner = null,
         string $contentType = self::contentTypes['putConfigurationsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         return $this->putConfigurationsIdAsyncWithHttpInfo($grant_id, $configuration_id, $get_configurations200_response_all_of_data_inner, $contentType)
             ->then(
                 function ($response) {
@@ -2556,8 +2584,7 @@ class ConfigurationsApi
         $configuration_id,
         $get_configurations200_response_all_of_data_inner = null,
         string $contentType = self::contentTypes['putConfigurationsId'][0]
-    ): PromiseInterface
-    {
+    ): PromiseInterface {
         $returnType = '\JackWH\NylasV3\Scheduler\Model\PostConfigurations200Response';
         $request = $this->putConfigurationsIdRequest($grant_id, $configuration_id, $get_configurations200_response_all_of_data_inner, $contentType);
 
@@ -2577,12 +2604,13 @@ class ConfigurationsApi
                     return [
                         ObjectSerializer::deserialize($content, $returnType, []),
                         $response->getStatusCode(),
-                        $response->getHeaders()
+                        $response->getHeaders(),
                     ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -2613,8 +2641,7 @@ class ConfigurationsApi
         $configuration_id,
         $get_configurations200_response_all_of_data_inner = null,
         string $contentType = self::contentTypes['putConfigurationsId'][0]
-    ): Request
-    {
+    ): Request {
 
         // verify the required parameter 'grant_id' is set
         if ($grant_id === null || (is_array($grant_id) && count($grant_id) === 0)) {
@@ -2681,7 +2708,7 @@ class ConfigurationsApi
                     foreach ($formParamValueItems as $formParamValueItem) {
                         $multipartContents[] = [
                             'name' => $formParamName,
-                            'contents' => $formParamValueItem
+                            'contents' => $formParamValueItem,
                         ];
                     }
                 }
@@ -2698,7 +2725,7 @@ class ConfigurationsApi
         }
 
         // this endpoint requires Bearer (API key) authentication (access token)
-        if (!empty($this->config->getAccessToken())) {
+        if (! empty($this->config->getAccessToken())) {
             $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
@@ -2715,6 +2742,7 @@ class ConfigurationsApi
 
         $operationHost = $this->config->getHost();
         $query = ObjectSerializer::buildQuery($queryParams);
+
         return new Request(
             'PUT',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
@@ -2734,7 +2762,7 @@ class ConfigurationsApi
         $options = [];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
-            if (!$options[RequestOptions::DEBUG]) {
+            if (! $options[RequestOptions::DEBUG]) {
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }

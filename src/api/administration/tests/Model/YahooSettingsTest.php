@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class YahooSettingsTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

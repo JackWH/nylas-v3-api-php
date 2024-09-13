@@ -39,7 +39,6 @@ use PHPUnit\Framework\TestCase;
  */
 class When1AnyOfTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

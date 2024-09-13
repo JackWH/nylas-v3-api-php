@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CreatePubsubChannel200ResponseData Class Doc Comment
@@ -63,7 +63,7 @@ class CreatePubsubChannel200ResponseData implements ModelInterface, ArrayAccess,
         'trigger_types' => 'string[]',
         'topic' => 'string',
         'status' => 'string',
-        'notification_email_addresses' => 'string[]'
+        'notification_email_addresses' => 'string[]',
     ];
 
     /**
@@ -77,7 +77,7 @@ class CreatePubsubChannel200ResponseData implements ModelInterface, ArrayAccess,
         'trigger_types' => null,
         'topic' => null,
         'status' => null,
-        'notification_email_addresses' => null
+        'notification_email_addresses' => null,
     ];
 
     /**
@@ -91,7 +91,7 @@ class CreatePubsubChannel200ResponseData implements ModelInterface, ArrayAccess,
         'trigger_types' => false,
         'topic' => false,
         'status' => false,
-        'notification_email_addresses' => false
+        'notification_email_addresses' => false,
     ];
 
     /**
@@ -185,7 +185,7 @@ class CreatePubsubChannel200ResponseData implements ModelInterface, ArrayAccess,
         'trigger_types' => 'trigger_types',
         'topic' => 'topic',
         'status' => 'status',
-        'notification_email_addresses' => 'notification_email_addresses'
+        'notification_email_addresses' => 'notification_email_addresses',
     ];
 
     /**
@@ -199,7 +199,7 @@ class CreatePubsubChannel200ResponseData implements ModelInterface, ArrayAccess,
         'trigger_types' => 'setTriggerTypes',
         'topic' => 'setTopic',
         'status' => 'setStatus',
-        'notification_email_addresses' => 'setNotificationEmailAddresses'
+        'notification_email_addresses' => 'setNotificationEmailAddresses',
     ];
 
     /**
@@ -213,7 +213,7 @@ class CreatePubsubChannel200ResponseData implements ModelInterface, ArrayAccess,
         'trigger_types' => 'getTriggerTypes',
         'topic' => 'getTopic',
         'status' => 'getStatus',
-        'notification_email_addresses' => 'getNotificationEmailAddresses'
+        'notification_email_addresses' => 'getNotificationEmailAddresses',
     ];
 
     /**
@@ -374,7 +374,7 @@ class CreatePubsubChannel200ResponseData implements ModelInterface, ArrayAccess,
         $invalidProperties = [];
 
         $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+        if (! is_null($this->container['status']) && ! in_array($this->container['status'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'status', must be one of '%s'",
                 $this->container['status'],
@@ -395,7 +395,6 @@ class CreatePubsubChannel200ResponseData implements ModelInterface, ArrayAccess,
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets id
@@ -537,7 +536,7 @@ class CreatePubsubChannel200ResponseData implements ModelInterface, ArrayAccess,
             throw new InvalidArgumentException('non-nullable status cannot be null');
         }
         $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues, true)) {
+        if (! in_array($status, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'status', must be one of '%s'",
@@ -577,12 +576,13 @@ class CreatePubsubChannel200ResponseData implements ModelInterface, ArrayAccess,
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -592,7 +592,7 @@ class CreatePubsubChannel200ResponseData implements ModelInterface, ArrayAccess,
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -622,7 +622,7 @@ class CreatePubsubChannel200ResponseData implements ModelInterface, ArrayAccess,
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -641,7 +641,7 @@ class CreatePubsubChannel200ResponseData implements ModelInterface, ArrayAccess,
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -667,5 +667,3 @@ class CreatePubsubChannel200ResponseData implements ModelInterface, ArrayAccess,
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

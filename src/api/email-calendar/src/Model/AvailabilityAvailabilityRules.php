@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * AvailabilityAvailabilityRules Class Doc Comment
@@ -61,7 +61,7 @@ class AvailabilityAvailabilityRules implements ModelInterface, ArrayAccess, Json
         'availability_method' => 'string',
         'buffer' => '\JackWH\NylasV3\EmailCalendar\Model\Buffer',
         'default_open_hours' => '\JackWH\NylasV3\EmailCalendar\Model\OpenHours[]',
-        'round_robin_group_id' => 'string'
+        'round_robin_group_id' => 'string',
     ];
 
     /**
@@ -73,7 +73,7 @@ class AvailabilityAvailabilityRules implements ModelInterface, ArrayAccess, Json
         'availability_method' => null,
         'buffer' => null,
         'default_open_hours' => null,
-        'round_robin_group_id' => null
+        'round_robin_group_id' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class AvailabilityAvailabilityRules implements ModelInterface, ArrayAccess, Json
         'availability_method' => false,
         'buffer' => false,
         'default_open_hours' => false,
-        'round_robin_group_id' => false
+        'round_robin_group_id' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class AvailabilityAvailabilityRules implements ModelInterface, ArrayAccess, Json
         'availability_method' => 'availability_method',
         'buffer' => 'buffer',
         'default_open_hours' => 'default_open_hours',
-        'round_robin_group_id' => 'round_robin_group_id'
+        'round_robin_group_id' => 'round_robin_group_id',
     ];
 
     /**
@@ -189,7 +189,7 @@ class AvailabilityAvailabilityRules implements ModelInterface, ArrayAccess, Json
         'availability_method' => 'setAvailabilityMethod',
         'buffer' => 'setBuffer',
         'default_open_hours' => 'setDefaultOpenHours',
-        'round_robin_group_id' => 'setRoundRobinGroupId'
+        'round_robin_group_id' => 'setRoundRobinGroupId',
     ];
 
     /**
@@ -201,7 +201,7 @@ class AvailabilityAvailabilityRules implements ModelInterface, ArrayAccess, Json
         'availability_method' => 'getAvailabilityMethod',
         'buffer' => 'getBuffer',
         'default_open_hours' => 'getDefaultOpenHours',
-        'round_robin_group_id' => 'getRoundRobinGroupId'
+        'round_robin_group_id' => 'getRoundRobinGroupId',
     ];
 
     /**
@@ -311,7 +311,7 @@ class AvailabilityAvailabilityRules implements ModelInterface, ArrayAccess, Json
         $invalidProperties = [];
 
         $allowedValues = $this->getAvailabilityMethodAllowableValues();
-        if (!is_null($this->container['availability_method']) && !in_array($this->container['availability_method'], $allowedValues, true)) {
+        if (! is_null($this->container['availability_method']) && ! in_array($this->container['availability_method'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'availability_method', must be one of '%s'",
                 $this->container['availability_method'],
@@ -332,7 +332,6 @@ class AvailabilityAvailabilityRules implements ModelInterface, ArrayAccess, Json
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets availability_method
@@ -357,7 +356,7 @@ class AvailabilityAvailabilityRules implements ModelInterface, ArrayAccess, Json
             throw new InvalidArgumentException('non-nullable availability_method cannot be null');
         }
         $allowedValues = $this->getAvailabilityMethodAllowableValues();
-        if (!in_array($availability_method, $allowedValues, true)) {
+        if (! in_array($availability_method, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'availability_method', must be one of '%s'",
@@ -451,12 +450,13 @@ class AvailabilityAvailabilityRules implements ModelInterface, ArrayAccess, Json
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -466,7 +466,7 @@ class AvailabilityAvailabilityRules implements ModelInterface, ArrayAccess, Json
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -496,7 +496,7 @@ class AvailabilityAvailabilityRules implements ModelInterface, ArrayAccess, Json
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -515,7 +515,7 @@ class AvailabilityAvailabilityRules implements ModelInterface, ArrayAccess, Json
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -541,5 +541,3 @@ class AvailabilityAvailabilityRules implements ModelInterface, ArrayAccess, Json
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

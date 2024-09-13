@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * Shipment Class Doc Comment
@@ -64,7 +64,7 @@ class Shipment implements ModelInterface, ArrayAccess, JsonSerializable
         'tracking_number' => 'string',
         'tracking_link' => 'string',
         'carrier_enrichment' => '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200ResponseAllOfDataAllOfCarrierEnrichment',
-        'order' => '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200ResponseAllOfDataAllOfOrder'
+        'order' => '\JackWH\NylasV3\EmailCalendar\Model\GetConsolidatedShipment200ResponseAllOfDataAllOfOrder',
     ];
 
     /**
@@ -78,7 +78,7 @@ class Shipment implements ModelInterface, ArrayAccess, JsonSerializable
         'tracking_number' => null,
         'tracking_link' => null,
         'carrier_enrichment' => null,
-        'order' => null
+        'order' => null,
     ];
 
     /**
@@ -92,7 +92,7 @@ class Shipment implements ModelInterface, ArrayAccess, JsonSerializable
         'tracking_number' => false,
         'tracking_link' => false,
         'carrier_enrichment' => false,
-        'order' => false
+        'order' => false,
     ];
 
     /**
@@ -186,7 +186,7 @@ class Shipment implements ModelInterface, ArrayAccess, JsonSerializable
         'tracking_number' => 'tracking_number',
         'tracking_link' => 'tracking_link',
         'carrier_enrichment' => 'carrier_enrichment',
-        'order' => 'order'
+        'order' => 'order',
     ];
 
     /**
@@ -200,7 +200,7 @@ class Shipment implements ModelInterface, ArrayAccess, JsonSerializable
         'tracking_number' => 'setTrackingNumber',
         'tracking_link' => 'setTrackingLink',
         'carrier_enrichment' => 'setCarrierEnrichment',
-        'order' => 'setOrder'
+        'order' => 'setOrder',
     ];
 
     /**
@@ -214,7 +214,7 @@ class Shipment implements ModelInterface, ArrayAccess, JsonSerializable
         'tracking_number' => 'getTrackingNumber',
         'tracking_link' => 'getTrackingLink',
         'carrier_enrichment' => 'getCarrierEnrichment',
-        'order' => 'getOrder'
+        'order' => 'getOrder',
     ];
 
     /**
@@ -321,7 +321,6 @@ class Shipment implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets tracking_provider_message_ids
@@ -484,12 +483,13 @@ class Shipment implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -499,7 +499,7 @@ class Shipment implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -529,7 +529,7 @@ class Shipment implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -548,7 +548,7 @@ class Shipment implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -574,5 +574,3 @@ class Shipment implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

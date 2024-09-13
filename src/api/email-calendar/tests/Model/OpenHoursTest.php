@@ -32,14 +32,13 @@ use PHPUnit\Framework\TestCase;
 /**
  * OpenHoursTest Class Doc Comment
  *
- * @description 
+ * @description
  * @package     JackWH\NylasV3\EmailCalendar
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
 class OpenHoursTest extends TestCase
 {
-
     /**
      * Setup before running any test case
      */

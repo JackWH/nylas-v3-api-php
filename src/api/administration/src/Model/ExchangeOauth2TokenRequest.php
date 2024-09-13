@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\Administration\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\Administration\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * ExchangeOauth2TokenRequest Class Doc Comment
@@ -64,7 +64,7 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
         'code' => 'string',
         'redirect_uri' => 'string',
         'code_verifier' => 'string',
-        'refresh_token' => 'string'
+        'refresh_token' => 'string',
     ];
 
     /**
@@ -79,7 +79,7 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
         'code' => null,
         'redirect_uri' => 'url',
         'code_verifier' => null,
-        'refresh_token' => null
+        'refresh_token' => null,
     ];
 
     /**
@@ -94,7 +94,7 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
         'code' => false,
         'redirect_uri' => false,
         'code_verifier' => false,
-        'refresh_token' => false
+        'refresh_token' => false,
     ];
 
     /**
@@ -189,7 +189,7 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
         'code' => 'code',
         'redirect_uri' => 'redirect_uri',
         'code_verifier' => 'code_verifier',
-        'refresh_token' => 'refresh_token'
+        'refresh_token' => 'refresh_token',
     ];
 
     /**
@@ -204,7 +204,7 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
         'code' => 'setCode',
         'redirect_uri' => 'setRedirectUri',
         'code_verifier' => 'setCodeVerifier',
-        'refresh_token' => 'setRefreshToken'
+        'refresh_token' => 'setRefreshToken',
     ];
 
     /**
@@ -219,7 +219,7 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
         'code' => 'getCode',
         'redirect_uri' => 'getRedirectUri',
         'code_verifier' => 'getCodeVerifier',
-        'refresh_token' => 'getRefreshToken'
+        'refresh_token' => 'getRefreshToken',
     ];
 
     /**
@@ -337,7 +337,7 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
             $invalidProperties[] = "'grant_type' can't be null";
         }
         $allowedValues = $this->getGrantTypeAllowableValues();
-        if (!is_null($this->container['grant_type']) && !in_array($this->container['grant_type'], $allowedValues, true)) {
+        if (! is_null($this->container['grant_type']) && ! in_array($this->container['grant_type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'grant_type', must be one of '%s'",
                 $this->container['grant_type'],
@@ -354,6 +354,7 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
         if ($this->container['refresh_token'] === null) {
             $invalidProperties[] = "'refresh_token' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -367,7 +368,6 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets client_id
@@ -446,7 +446,7 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
             throw new InvalidArgumentException('non-nullable grant_type cannot be null');
         }
         $allowedValues = $this->getGrantTypeAllowableValues();
-        if (!in_array($grant_type, $allowedValues, true)) {
+        if (! in_array($grant_type, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'grant_type', must be one of '%s'",
@@ -567,12 +567,13 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -582,7 +583,7 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -612,7 +613,7 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -631,7 +632,7 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -657,5 +658,3 @@ class ExchangeOauth2TokenRequest implements ModelInterface, ArrayAccess, JsonSer
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

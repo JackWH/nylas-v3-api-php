@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * CalendarMetadata Class Doc Comment
@@ -59,7 +59,7 @@ class CalendarMetadata implements ModelInterface, ArrayAccess, JsonSerializable
       * @var array<string, string>
       */
     protected static array $openAPITypes = [
-        'your_key' => 'string'
+        'your_key' => 'string',
     ];
 
     /**
@@ -68,7 +68,7 @@ class CalendarMetadata implements ModelInterface, ArrayAccess, JsonSerializable
       * @var array<string, string|null>
       */
     protected static array $openAPIFormats = [
-        'your_key' => null
+        'your_key' => null,
     ];
 
     /**
@@ -77,7 +77,7 @@ class CalendarMetadata implements ModelInterface, ArrayAccess, JsonSerializable
       * @var array<string, bool>
       */
     protected static array $openAPINullables = [
-        'your_key' => false
+        'your_key' => false,
     ];
 
     /**
@@ -166,7 +166,7 @@ class CalendarMetadata implements ModelInterface, ArrayAccess, JsonSerializable
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'your_key' => 'your-key'
+        'your_key' => 'your-key',
     ];
 
     /**
@@ -175,7 +175,7 @@ class CalendarMetadata implements ModelInterface, ArrayAccess, JsonSerializable
      * @var array<string, string>
      */
     protected static array $setters = [
-        'your_key' => 'setYourKey'
+        'your_key' => 'setYourKey',
     ];
 
     /**
@@ -184,7 +184,7 @@ class CalendarMetadata implements ModelInterface, ArrayAccess, JsonSerializable
      * @var array<string, string>
      */
     protected static array $getters = [
-        'your_key' => 'getYourKey'
+        'your_key' => 'getYourKey',
     ];
 
     /**
@@ -273,7 +273,7 @@ class CalendarMetadata implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['your_key']) && (mb_strlen($this->container['your_key']) > 550)) {
+        if (! is_null($this->container['your_key']) && (mb_strlen($this->container['your_key']) > 550)) {
             $invalidProperties[] = "invalid value for 'your_key', the character length must be smaller than or equal to 550.";
         }
 
@@ -290,7 +290,6 @@ class CalendarMetadata implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets your_key
@@ -322,12 +321,13 @@ class CalendarMetadata implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -337,7 +337,7 @@ class CalendarMetadata implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -367,7 +367,7 @@ class CalendarMetadata implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -386,7 +386,7 @@ class CalendarMetadata implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -412,5 +412,3 @@ class CalendarMetadata implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

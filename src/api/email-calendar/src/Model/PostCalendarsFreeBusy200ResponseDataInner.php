@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * PostCalendarsFreeBusy200ResponseDataInner Class Doc Comment
@@ -61,7 +61,7 @@ class PostCalendarsFreeBusy200ResponseDataInner implements ModelInterface, Array
         'email' => 'string',
         'time_slots' => '\JackWH\NylasV3\EmailCalendar\Model\PostCalendarsFreeBusy200ResponseDataInnerTimeSlotsInner[]',
         'error' => 'string',
-        'object' => 'string'
+        'object' => 'string',
     ];
 
     /**
@@ -73,7 +73,7 @@ class PostCalendarsFreeBusy200ResponseDataInner implements ModelInterface, Array
         'email' => null,
         'time_slots' => null,
         'error' => null,
-        'object' => null
+        'object' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class PostCalendarsFreeBusy200ResponseDataInner implements ModelInterface, Array
         'email' => false,
         'time_slots' => false,
         'error' => false,
-        'object' => false
+        'object' => false,
     ];
 
     /**
@@ -177,7 +177,7 @@ class PostCalendarsFreeBusy200ResponseDataInner implements ModelInterface, Array
         'email' => 'email',
         'time_slots' => 'time_slots',
         'error' => 'error',
-        'object' => 'object'
+        'object' => 'object',
     ];
 
     /**
@@ -189,7 +189,7 @@ class PostCalendarsFreeBusy200ResponseDataInner implements ModelInterface, Array
         'email' => 'setEmail',
         'time_slots' => 'setTimeSlots',
         'error' => 'setError',
-        'object' => 'setObject'
+        'object' => 'setObject',
     ];
 
     /**
@@ -201,7 +201,7 @@ class PostCalendarsFreeBusy200ResponseDataInner implements ModelInterface, Array
         'email' => 'getEmail',
         'time_slots' => 'getTimeSlots',
         'error' => 'getError',
-        'object' => 'getObject'
+        'object' => 'getObject',
     ];
 
     /**
@@ -309,7 +309,7 @@ class PostCalendarsFreeBusy200ResponseDataInner implements ModelInterface, Array
         $invalidProperties = [];
 
         $allowedValues = $this->getObjectAllowableValues();
-        if (!is_null($this->container['object']) && !in_array($this->container['object'], $allowedValues, true)) {
+        if (! is_null($this->container['object']) && ! in_array($this->container['object'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'object', must be one of '%s'",
                 $this->container['object'],
@@ -330,7 +330,6 @@ class PostCalendarsFreeBusy200ResponseDataInner implements ModelInterface, Array
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets email
@@ -436,7 +435,7 @@ class PostCalendarsFreeBusy200ResponseDataInner implements ModelInterface, Array
             throw new InvalidArgumentException('non-nullable object cannot be null');
         }
         $allowedValues = $this->getObjectAllowableValues();
-        if (!in_array($object, $allowedValues, true)) {
+        if (! in_array($object, $allowedValues, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Invalid value '%s' for 'object', must be one of '%s'",
@@ -449,12 +448,13 @@ class PostCalendarsFreeBusy200ResponseDataInner implements ModelInterface, Array
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -464,7 +464,7 @@ class PostCalendarsFreeBusy200ResponseDataInner implements ModelInterface, Array
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -494,7 +494,7 @@ class PostCalendarsFreeBusy200ResponseDataInner implements ModelInterface, Array
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -513,7 +513,7 @@ class PostCalendarsFreeBusy200ResponseDataInner implements ModelInterface, Array
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -539,5 +539,3 @@ class PostCalendarsFreeBusy200ResponseDataInner implements ModelInterface, Array
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-

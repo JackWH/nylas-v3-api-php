@@ -28,10 +28,10 @@
 namespace JackWH\NylasV3\EmailCalendar\Model;
 
 use ArrayAccess;
-use JsonSerializable;
 use InvalidArgumentException;
-use ReturnTypeWillChange;
 use JackWH\NylasV3\EmailCalendar\ObjectSerializer;
+use JsonSerializable;
+use ReturnTypeWillChange;
 
 /**
  * When1AnyOf1 Class Doc Comment
@@ -61,7 +61,7 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
         'start_time' => 'int',
         'end_time' => 'int',
         'start_timezone' => 'string',
-        'end_timezone' => 'string'
+        'end_timezone' => 'string',
     ];
 
     /**
@@ -73,7 +73,7 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
         'start_time' => null,
         'end_time' => null,
         'start_timezone' => null,
-        'end_timezone' => null
+        'end_timezone' => null,
     ];
 
     /**
@@ -85,7 +85,7 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
         'start_time' => false,
         'end_time' => false,
         'start_timezone' => true,
-        'end_timezone' => true
+        'end_timezone' => true,
     ];
 
     /**
@@ -177,7 +177,7 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
         'start_time' => 'start_time',
         'end_time' => 'end_time',
         'start_timezone' => 'start_timezone',
-        'end_timezone' => 'end_timezone'
+        'end_timezone' => 'end_timezone',
     ];
 
     /**
@@ -189,7 +189,7 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
         'start_time' => 'setStartTime',
         'end_time' => 'setEndTime',
         'start_timezone' => 'setStartTimezone',
-        'end_timezone' => 'setEndTimezone'
+        'end_timezone' => 'setEndTimezone',
     ];
 
     /**
@@ -201,7 +201,7 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
         'start_time' => 'getStartTime',
         'end_time' => 'getEndTime',
         'start_timezone' => 'getStartTimezone',
-        'end_timezone' => 'getEndTimezone'
+        'end_timezone' => 'getEndTimezone',
     ];
 
     /**
@@ -293,11 +293,11 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['start_timezone']) && (mb_strlen($this->container['start_timezone']) < 1)) {
+        if (! is_null($this->container['start_timezone']) && (mb_strlen($this->container['start_timezone']) < 1)) {
             $invalidProperties[] = "invalid value for 'start_timezone', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['end_timezone']) && (mb_strlen($this->container['end_timezone']) < 1)) {
+        if (! is_null($this->container['end_timezone']) && (mb_strlen($this->container['end_timezone']) < 1)) {
             $invalidProperties[] = "invalid value for 'end_timezone', the character length must be bigger than or equal to 1.";
         }
 
@@ -314,7 +314,6 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
     {
         return count($this->listInvalidProperties()) === 0;
     }
-
 
     /**
      * Gets start_time
@@ -394,13 +393,13 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('start_timezone', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        if (!is_null($start_timezone) && (mb_strlen($start_timezone) < 1)) {
+        if (! is_null($start_timezone) && (mb_strlen($start_timezone) < 1)) {
             throw new InvalidArgumentException('invalid length for $start_timezone when calling When1AnyOf1., must be bigger than or equal to 1.');
         }
 
@@ -433,13 +432,13 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
             $index = array_search('end_timezone', $nullablesSetToNull);
-            if ($index !== FALSE) {
+            if ($index !== false) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
 
-        if (!is_null($end_timezone) && (mb_strlen($end_timezone) < 1)) {
+        if (! is_null($end_timezone) && (mb_strlen($end_timezone) < 1)) {
             throw new InvalidArgumentException('invalid length for $end_timezone when calling When1AnyOf1., must be bigger than or equal to 1.');
         }
 
@@ -447,12 +446,13 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -462,7 +462,7 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -492,7 +492,7 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */
@@ -511,7 +511,7 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
     #[ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
-       return ObjectSerializer::sanitizeForSerialization($this);
+        return ObjectSerializer::sanitizeForSerialization($this);
     }
 
     /**
@@ -537,5 +537,3 @@ class When1AnyOf1 implements ModelInterface, ArrayAccess, JsonSerializable
         return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
-
-
