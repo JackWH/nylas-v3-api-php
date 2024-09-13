@@ -104,7 +104,7 @@ file_put_contents('administration.json', $specWithOperationIds);
 ```bash
 openapi-generator generate -g php-nextgen \
   -o src/api/administration/ \
-  -i api_specs/openapi/administration.json \
+  -i api_specs/administration.yaml \
   --invoker-package="JackWH\\NylasV3\\Administration" \
   --additional-properties=composerPackageName="jackwh/nylas-v3-api-php",variableNamingConvention="snake_case"
 ```
@@ -112,7 +112,8 @@ openapi-generator generate -g php-nextgen \
 ```bash
 openapi-generator generate -g php-nextgen \
   -o src/api/email-calendar/ \
-  -i api_specs/openapi/email-calendar.json \
+  -i api_specs/email-calendar.yaml \
+  --openapi-normalizer REF_AS_PARENT_IN_ALLOF=true,REFACTOR_ALLOF_WITH_PROPERTIES_ONLY=true,REMOVE_ANYOF_ONEOF_AND_KEEP_PROPERTIES_ONLY=true \
   --invoker-package="JackWH\\NylasV3\\EmailCalendar" \
   --additional-properties=composerPackageName="jackwh/nylas-v3-api-php",variableNamingConvention="snake_case"
 ```
@@ -120,7 +121,7 @@ openapi-generator generate -g php-nextgen \
 ```bash
 openapi-generator generate -g php-nextgen \
   -o src/api/scheduler/ \
-  -i api_specs/openapi/scheduler.json \
+  -i api_specs/scheduler.yaml \
   --invoker-package="JackWH\\NylasV3\\Scheduler" \
   --additional-properties=composerPackageName="jackwh/nylas-v3-api-php",variableNamingConvention="snake_case"
 ```
