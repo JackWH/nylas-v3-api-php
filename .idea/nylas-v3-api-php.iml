@@ -10,9 +10,9 @@
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="JackWH\NylasV3\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/src/api/administration/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/api/administration/tests" isTestSource="true" packagePrefix="JackWH\NylasV3\Administration\Test\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/api/email-calendar/lib" isTestSource="false" packagePrefix="JackWH\NylasV3\EmailCalendar\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/api/email-calendar/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/api/email-calendar/tests" isTestSource="true" packagePrefix="JackWH\NylasV3\EmailCalendar\Test\" />
       <sourceFolder url="file://$MODULE_DIR$/src/api/email-calendar/test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/api/email-calendar/test" isTestSource="true" packagePrefix="JackWH\NylasV3\EmailCalendar\Test\" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/instantiator" />

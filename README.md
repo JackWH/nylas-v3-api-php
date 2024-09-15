@@ -104,3 +104,10 @@ openapi-generator generate -g php-nextgen \
   --invoker-package="JackWH\\NylasV3\\Scheduler" \
   --additional-properties=composerPackageName="jackwh/nylas-v3-api-php",variableNamingConvention="snake_case"
 ```
+
+## Changes to the OpenAPI spec
+
+Any small changes I've made to the OpenAPI specs since first generating the clients are detailed below:
+
+- `email-calendar.yaml`:
+  - Remove `"minItems": *"` constraints from Event `participants` and Draft `to` arrays, as the generated client was throwing `InvalidArgumentException`s when trying to serialize these objects. (I assume this was an error from the original spec.)

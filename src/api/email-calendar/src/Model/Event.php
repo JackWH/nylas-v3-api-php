@@ -484,10 +484,6 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
             $invalidProperties[] = "invalid value for 'id', the character length must be bigger than or equal to 1.";
         }
 
-        if (! is_null($this->container['participants']) && (count($this->container['participants']) < 1)) {
-            $invalidProperties[] = "invalid value for 'participants', number of items must be greater than or equal to 1.";
-        }
-
         $allowedValues = $this->getStatusAllowableValues();
         if (! is_null($this->container['status']) && ! in_array($this->container['status'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -1004,9 +1000,6 @@ class Event implements ModelInterface, ArrayAccess, JsonSerializable
         }
 
 
-        if ((count($participants) < 1)) {
-            throw new InvalidArgumentException('invalid length for $participants when calling Event., number of items must be greater than or equal to 1.');
-        }
         $this->container['participants'] = $participants;
 
         return $this;

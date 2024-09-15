@@ -3514,7 +3514,6 @@
                               "participants": {
                                 "type": "array",
                                 "uniqueItems": true,
-                                "minItems": 1,
                                 "title": "Participants",
                                 "description": "An array of participants invited to the event. The organizer doesn't need to be explicitly\nincluded in this list.",
                                 "items": {
@@ -4971,7 +4970,6 @@
                             "participants": {
                               "type": "array",
                               "uniqueItems": true,
-                              "minItems": 1,
                               "title": "Participants",
                               "description": "An array of participants invited to the event. The organizer doesn't need to be explicitly\nincluded in this list.",
                               "items": {
@@ -5830,7 +5828,6 @@
                             "participants": {
                               "type": "array",
                               "uniqueItems": true,
-                              "minItems": 1,
                               "title": "Participants",
                               "description": "An array of participants invited to the event. The organizer doesn't need to be explicitly\nincluded in this list.",
                               "items": {
@@ -7147,7 +7144,6 @@
                             "participants": {
                               "type": "array",
                               "uniqueItems": true,
-                              "minItems": 1,
                               "title": "Participants",
                               "description": "An array of participants invited to the event. The organizer doesn't need to be explicitly\nincluded in this list.",
                               "items": {
@@ -18979,7 +18975,6 @@
                               "to": {
                                 "type": "array",
                                 "description": "The name/email address pairs of the recipients.",
-                                "minItems": 1,
                                 "items": {
                                   "title": "Message participant",
                                   "type": "object",
@@ -19669,7 +19664,6 @@
                             "to": {
                               "type": "array",
                               "description": "The name/email address pairs of the recipients.",
-                              "minItems": 1,
                               "items": {
                                 "title": "Message participant",
                                 "type": "object",
@@ -20685,7 +20679,6 @@
                             "to": {
                               "type": "array",
                               "description": "The name/email address pairs of the recipients.",
-                              "minItems": 1,
                               "items": {
                                 "title": "Message participant",
                                 "type": "object",
@@ -21335,7 +21328,6 @@
                             "to": {
                               "type": "array",
                               "description": "The name/email address pairs of the recipients.",
-                              "minItems": 1,
                               "items": {
                                 "title": "Message participant",
                                 "type": "object",
@@ -22643,7 +22635,6 @@
                             "to": {
                               "type": "array",
                               "description": "The name/email address pairs of the recipients.",
-                              "minItems": 1,
                               "items": {
                                 "title": "Message participant",
                                 "type": "object",
@@ -23022,8 +23013,7 @@
                                 "type": "array",
                                 "description": "An array of attribute descriptors shared by system folders across providers. For example, folders\nthat contain sent messages (\"Sent Items\" on Microsoft, or \"SENT\" on other providers) have the\n`[\"\\\\Sent\"]` attribute. For more information, see\n[Common folder attributes](/docs/v3/email/folders/#common-folder-attributes). If a folder does not have one of the standard system folders, Nylas returns the `attributes` array empty.\n\nYou can't query for folders using attributes, but you _can_ manually filter through folders to\nfind any that match the attributes you're looking for.",
                                 "items": {
-                                  "type": "string",
-                                  "minItems": 0
+                                  "type": "string"
                                 }
                               }
                             }
@@ -23481,8 +23471,7 @@
                               "type": "array",
                               "description": "An array of attribute descriptors shared by system folders across providers. For example, folders\nthat contain sent messages (\"Sent Items\" on Microsoft, or \"SENT\" on other providers) have the\n`[\"\\\\Sent\"]` attribute. For more information, see\n[Common folder attributes](/docs/v3/email/folders/#common-folder-attributes). If a folder does not have one of the standard system folders, Nylas returns the `attributes` array empty.\n\nYou can't query for folders using attributes, but you _can_ manually filter through folders to\nfind any that match the attributes you're looking for.",
                               "items": {
-                                "type": "string",
-                                "minItems": 0
+                                "type": "string"
                               }
                             }
                           }
@@ -23875,8 +23864,7 @@
                               "type": "array",
                               "description": "An array of attribute descriptors shared by system folders across providers. For example, folders\nthat contain sent messages (\"Sent Items\" on Microsoft, or \"SENT\" on other providers) have the\n`[\"\\\\Sent\"]` attribute. For more information, see\n[Common folder attributes](/docs/v3/email/folders/#common-folder-attributes). If a folder does not have one of the standard system folders, Nylas returns the `attributes` array empty.\n\nYou can't query for folders using attributes, but you _can_ manually filter through folders to\nfind any that match the attributes you're looking for.",
                               "items": {
-                                "type": "string",
-                                "minItems": 0
+                                "type": "string"
                               }
                             }
                           }
@@ -24291,8 +24279,7 @@
                               "type": "array",
                               "description": "An array of attribute descriptors shared by system folders across providers. For example, folders\nthat contain sent messages (\"Sent Items\" on Microsoft, or \"SENT\" on other providers) have the\n`[\"\\\\Sent\"]` attribute. For more information, see\n[Common folder attributes](/docs/v3/email/folders/#common-folder-attributes). If a folder does not have one of the standard system folders, Nylas returns the `attributes` array empty.\n\nYou can't query for folders using attributes, but you _can_ manually filter through folders to\nfind any that match the attributes you're looking for.",
                               "items": {
-                                "type": "string",
-                                "minItems": 0
+                                "type": "string"
                               }
                             }
                           }
@@ -31337,7 +31324,6 @@
           "participants": {
             "type": "array",
             "uniqueItems": true,
-            "minItems": 1,
             "title": "Participants",
             "description": "An array of participants invited to the event. The organizer doesn't need to be explicitly\nincluded in this list.",
             "items": {
@@ -34417,7 +34403,6 @@
           "to": {
             "type": "array",
             "description": "The name/email address pairs of the recipients.",
-            "minItems": 1,
             "items": {
               "title": "Message participant",
               "type": "object",
@@ -34516,8 +34501,7 @@
             "type": "array",
             "description": "An array of attribute descriptors shared by system folders across providers. For example, folders\nthat contain sent messages (\"Sent Items\" on Microsoft, or \"SENT\" on other providers) have the\n`[\"\\\\Sent\"]` attribute. For more information, see\n[Common folder attributes](/docs/v3/email/folders/#common-folder-attributes). If a folder does not have one of the standard system folders, Nylas returns the `attributes` array empty.\n\nYou can't query for folders using attributes, but you _can_ manually filter through folders to\nfind any that match the attributes you're looking for.",
             "items": {
-              "type": "string",
-              "minItems": 0
+              "type": "string"
             }
           }
         }
@@ -40081,7 +40065,6 @@
                           "participants": {
                             "type": "array",
                             "uniqueItems": true,
-                            "minItems": 1,
                             "title": "Participants",
                             "description": "An array of participants invited to the event. The organizer doesn't need to be explicitly\nincluded in this list.",
                             "items": {
@@ -40644,7 +40627,6 @@
                         "participants": {
                           "type": "array",
                           "uniqueItems": true,
-                          "minItems": 1,
                           "title": "Participants",
                           "description": "An array of participants invited to the event. The organizer doesn't need to be explicitly\nincluded in this list.",
                           "items": {
@@ -44979,7 +44961,6 @@
                           "to": {
                             "type": "array",
                             "description": "The name/email address pairs of the recipients.",
-                            "minItems": 1,
                             "items": {
                               "title": "Message participant",
                               "type": "object",
@@ -45329,7 +45310,6 @@
                         "to": {
                           "type": "array",
                           "description": "The name/email address pairs of the recipients.",
-                          "minItems": 1,
                           "items": {
                             "title": "Message participant",
                             "type": "object",
@@ -45520,8 +45500,7 @@
                             "type": "array",
                             "description": "An array of attribute descriptors shared by system folders across providers. For example, folders\nthat contain sent messages (\"Sent Items\" on Microsoft, or \"SENT\" on other providers) have the\n`[\"\\\\Sent\"]` attribute. For more information, see\n[Common folder attributes](/docs/v3/email/folders/#common-folder-attributes). If a folder does not have one of the standard system folders, Nylas returns the `attributes` array empty.\n\nYou can't query for folders using attributes, but you _can_ manually filter through folders to\nfind any that match the attributes you're looking for.",
                             "items": {
-                              "type": "string",
-                              "minItems": 0
+                              "type": "string"
                             }
                           }
                         }
@@ -45646,8 +45625,7 @@
                           "type": "array",
                           "description": "An array of attribute descriptors shared by system folders across providers. For example, folders\nthat contain sent messages (\"Sent Items\" on Microsoft, or \"SENT\" on other providers) have the\n`[\"\\\\Sent\"]` attribute. For more information, see\n[Common folder attributes](/docs/v3/email/folders/#common-folder-attributes). If a folder does not have one of the standard system folders, Nylas returns the `attributes` array empty.\n\nYou can't query for folders using attributes, but you _can_ manually filter through folders to\nfind any that match the attributes you're looking for.",
                           "items": {
-                            "type": "string",
-                            "minItems": 0
+                            "type": "string"
                           }
                         }
                       }

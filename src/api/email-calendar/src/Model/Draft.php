@@ -379,10 +379,6 @@ class Draft implements ModelInterface, ArrayAccess, JsonSerializable
             $invalidProperties[] = "invalid value for 'snippet', the character length must be bigger than or equal to 1.";
         }
 
-        if (! is_null($this->container['to']) && (count($this->container['to']) < 1)) {
-            $invalidProperties[] = "invalid value for 'to', number of items must be greater than or equal to 1.";
-        }
-
         return $invalidProperties;
     }
 
@@ -815,9 +811,6 @@ class Draft implements ModelInterface, ArrayAccess, JsonSerializable
         }
 
 
-        if ((count($to) < 1)) {
-            throw new InvalidArgumentException('invalid length for $to when calling Draft., number of items must be greater than or equal to 1.');
-        }
         $this->container['to'] = $to;
 
         return $this;

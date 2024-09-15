@@ -9222,7 +9222,6 @@ components:
         participants:
           type: array
           uniqueItems: true
-          minItems: 1
           title: Participants
           description: |-
             An array of participants invited to the event. The organizer doesn't need to be explicitly
@@ -10210,7 +10209,6 @@ components:
         to:
           type: array
           description: The name/email address pairs of the recipients.
-          minItems: 1
           items:
             $ref: '#/components/schemas/message-participant'
           uniqueItems: true
@@ -10281,7 +10279,6 @@ components:
             find any that match the attributes you're looking for.
           items:
             type: string
-            minItems: 0
     create_folder:
       title: create_folder
       type: object
